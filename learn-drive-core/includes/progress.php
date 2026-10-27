@@ -105,7 +105,7 @@ function record_answer( $user_id, $question_id, $correct ) {
 function apply_answer( array $data, $question_id, $correct ) {
 	$topic = \LearnDrive\Core\primary_term( $question_id, \LearnDrive\Core\TAX_TOPIC );
 	if ( $topic ) {
-		$key                   = (string) $topic->term_id;
+		$key                    = (string) $topic->term_id;
 		$data['topics'][ $key ] = array(
 			'seen'    => ( $data['topics'][ $key ]['seen'] ?? 0 ) + 1,
 			'correct' => ( $data['topics'][ $key ]['correct'] ?? 0 ) + ( $correct ? 1 : 0 ),
@@ -166,7 +166,7 @@ function record_quiz( $user_id, array $result, $elapsed ) {
 			'time'    => (int) $elapsed,
 			'date'    => time(),
 		);
-		$data['exams'] = array_slice( $data['exams'], -50 );
+		$data['exams']   = array_slice( $data['exams'], -50 );
 	}
 
 	$data = touch_streak( $data );

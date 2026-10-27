@@ -10,6 +10,10 @@
 
 namespace LearnDrive\Core\Admin\Meta_Boxes;
 
+use LearnDrive\Core\Questions;
+use LearnDrive\Core\Quizzes;
+use function LearnDrive\Core\content_types;
+use function LearnDrive\Core\format_label;
 use const LearnDrive\Core\PT_COURSE;
 use const LearnDrive\Core\PT_LESSON;
 use const LearnDrive\Core\PT_QUESTION;
@@ -19,10 +23,6 @@ use const LearnDrive\Core\PT_GUIDE;
 use const LearnDrive\Core\PT_GLOSSARY;
 use const LearnDrive\Core\TAX_TRACK;
 use const LearnDrive\Core\TAX_COUNTRY;
-use LearnDrive\Core\Questions;
-use LearnDrive\Core\Quizzes;
-use function LearnDrive\Core\content_types;
-use function LearnDrive\Core\format_label;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -70,7 +70,14 @@ function question_box( $post ) {
 	wp_nonce_field( 'ld_save_meta', 'ld_meta_nonce' );
 	$q = Questions\get( $post );
 	if ( ! get_post_meta( $post->ID, '_ld_answers', true ) && 'auto-draft' === $post->post_status ) {
-		$q['answers'] = array_fill( 0, 3, array( 'text' => '', 'correct' => false ) );
+		$q['answers'] = array_fill(
+			0,
+			3,
+			array(
+				'text'    => '',
+				'correct' => false,
+			)
+		);
 	}
 	$words = (int) get_post_meta( $post->ID, '_ld_words', true );
 	?>
@@ -437,8 +444,14 @@ function save( $post_id, $post ) {
 		}
 		if ( 'tf' === $format && count( $answers ) !== 2 ) {
 			$answers = array(
-				array( 'text' => __( 'Vrai', 'learn-drive-core' ), 'correct' => ! empty( $answers[0]['correct'] ) || ! $answers ),
-				array( 'text' => __( 'Faux', 'learn-drive-core' ), 'correct' => ! empty( $answers[1]['correct'] ) ),
+				array(
+					'text'    => __( 'Vrai', 'learn-drive-core' ),
+					'correct' => ! empty( $answers[0]['correct'] ) || ! $answers,
+				),
+				array(
+					'text'    => __( 'Faux', 'learn-drive-core' ),
+					'correct' => ! empty( $answers[1]['correct'] ),
+				),
 			);
 		}
 		update_post_meta( $post_id, '_ld_answers', array_slice( $answers, 0, 6 ) );
@@ -526,9 +539,9 @@ function save( $post_id, $post ) {
 }
 add_action( 'save_post', __NAMESPACE__ . '\\save', 10, 2 );
 
-/* -------------------------------------------------------------------------
+/*
  * Champs des taxonomies : couleur, accès, règles d'examen, page pilier.
- * ---------------------------------------------------------------------- */
+ */
 
 /**
  * Champs d'édition d'un terme « Catégorie » ou « Pays ».
@@ -545,7 +558,7 @@ function term_fields( $term ) {
 		?>
 		<tr class="form-field">
 			<th><label for="ld_color"><?php esc_html_e( 'Couleur', 'learn-drive-core' ); ?></label></th>
-			<td><input type="color" id="ld_color" name="ld_color" value="<?php echo esc_attr( get_term_meta( $term->term_id, 'ld_color', true ) ?: '#1F4FD8' ); ?>"></td>
+			<td><input type="color" id="ld_color" name="ld_color" value="<?php echo esc_attr( ( get_term_meta( $term->term_id, 'ld_color', true ) ? get_term_meta( $term->term_id, 'ld_color', true ) : '#1F4FD8' ) ); ?>"></td>
 		</tr>
 		<tr class="form-field">
 			<th><label for="ld_term_access"><?php esc_html_e( 'Accès par défaut', 'learn-drive-core' ); ?></label></th>

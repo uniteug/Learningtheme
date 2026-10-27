@@ -9,10 +9,10 @@
 
 namespace LearnDrive\Core\SEO\OG;
 
-use const LearnDrive\Core\TAX_TRACK;
-use const LearnDrive\Core\TAX_TOPIC;
 use function LearnDrive\Core\primary_term;
 use function LearnDrive\Core\setting;
+use const LearnDrive\Core\TAX_TRACK;
+use const LearnDrive\Core\TAX_TOPIC;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -117,9 +117,9 @@ function generate( $post_id ) {
 	$regular = LEARN_DRIVE_CORE_DIR . 'assets/fonts/atkinson-hyperlegible-400.ttf';
 	$image   = imagecreatetruecolor( 1200, 630 );
 
-	$hex   = ltrim( color(), '#' );
-	$track = $post_id ? primary_term( $post_id, TAX_TRACK ) : null;
-	$term  = $track ? $track : ( $post_id ? primary_term( $post_id, TAX_TOPIC ) : null );
+	$hex        = ltrim( color(), '#' );
+	$track      = $post_id ? primary_term( $post_id, TAX_TRACK ) : null;
+	$term       = $track ? $track : ( $post_id ? primary_term( $post_id, TAX_TOPIC ) : null );
 	$term_color = $track ? sanitize_hex_color( get_term_meta( $track->term_id, 'ld_color', true ) ) : '';
 	if ( $term_color ) {
 		$hex = ltrim( $term_color, '#' );

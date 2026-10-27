@@ -41,13 +41,14 @@ if ( 'related' === $attributes['source'] ) {
 	if ( ! $learn_drive_quiz_id || 'publish' !== get_post_status( $learn_drive_quiz_id ) ) {
 		return;
 	}
-	$learn_drive_session = ( $learn_drive_quiz_id === get_queried_object_id() && isset( $_GET['ld_session'] ) ) ? sanitize_text_field( wp_unslash( $_GET['ld_session'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- jeton signé vérifié par le moteur.
+	$learn_drive_session = ( get_queried_object_id() === $learn_drive_quiz_id && isset( $_GET['ld_session'] ) ) ? sanitize_text_field( wp_unslash( $_GET['ld_session'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- jeton signé vérifié par le moteur.
 	$learn_drive_html    = Render\quiz(
 		array(
-			'quiz_id' => $learn_drive_quiz_id,
-			'session' => $learn_drive_session,
-			'compact' => (bool) $attributes['compact'],
-			'heading' => $attributes['heading'],
+			'quiz_id'       => $learn_drive_quiz_id,
+			'session'       => $learn_drive_session,
+			'compact'       => (bool) $attributes['compact'],
+			'heading'       => $attributes['heading'],
+			'heading_level' => $attributes['heading'] ? 3 : 2,
 		)
 	);
 }

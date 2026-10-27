@@ -13,17 +13,17 @@
 
 namespace LearnDrive\Core\REST;
 
-use const LearnDrive\Core\PT_QUESTION;
-use const LearnDrive\Core\PT_QUIZ;
-use const LearnDrive\Core\TAX_TRACK;
-use const LearnDrive\Core\TAX_TOPIC;
-use const LearnDrive\Core\TAX_COUNTRY;
 use LearnDrive\Core\Questions;
 use LearnDrive\Core\Quizzes;
 use LearnDrive\Core\Access;
 use LearnDrive\Core\Progress;
 use function LearnDrive\Core\setting;
 use function LearnDrive\Core\client_fingerprint;
+use const LearnDrive\Core\PT_QUESTION;
+use const LearnDrive\Core\PT_QUIZ;
+use const LearnDrive\Core\TAX_TRACK;
+use const LearnDrive\Core\TAX_TOPIC;
+use const LearnDrive\Core\TAX_COUNTRY;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -541,7 +541,10 @@ function list_questions( $request ) {
 			'posts_per_page' => $full ? (int) $request['per_page'] : min( 50, (int) $request['per_page'] ),
 			'paged'          => $page,
 			's'              => $request['search'] ? sanitize_text_field( $request['search'] ) : '',
-			'orderby'        => array( 'menu_order' => 'ASC', 'ID' => 'ASC' ),
+			'orderby'        => array(
+				'menu_order' => 'ASC',
+				'ID'         => 'ASC',
+			),
 			'tax_query'      => $tax_query, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 		)
 	);

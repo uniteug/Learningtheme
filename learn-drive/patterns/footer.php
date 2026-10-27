@@ -11,13 +11,13 @@
  */
 
 $learn_drive_columns = array(
-	__( 'Apprendre', 'learn-drive' )   => array(
+	__( 'Apprendre', 'learn-drive' )    => array(
 		array( __( 'Tous les cours', 'learn-drive' ), '/cours/' ),
 		array( __( 'Quiz par thème', 'learn-drive' ), '/quiz/' ),
 		array( __( 'Panneaux de signalisation', 'learn-drive' ), '/panneaux/' ),
 		array( __( 'Lexique', 'learn-drive' ), '/lexique/' ),
 	),
-	__( "S'informer", 'learn-drive' )  => array(
+	__( "S'informer", 'learn-drive' )   => array(
 		array( __( 'Actualités', 'learn-drive' ), '/actualites/' ),
 		array( __( 'Infos & démarches', 'learn-drive' ), '/infos/' ),
 		array( __( 'Qui sommes-nous', 'learn-drive' ), '/qui-sommes-nous/' ),

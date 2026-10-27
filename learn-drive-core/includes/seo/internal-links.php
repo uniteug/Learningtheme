@@ -9,12 +9,12 @@
 
 namespace LearnDrive\Core\SEO\Links;
 
+use function LearnDrive\Core\setting;
 use const LearnDrive\Core\PT_GLOSSARY;
 use const LearnDrive\Core\PT_LESSON;
 use const LearnDrive\Core\PT_GUIDE;
 use const LearnDrive\Core\PT_QUESTION;
 use const LearnDrive\Core\PT_COURSE;
-use function LearnDrive\Core\setting;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -31,7 +31,8 @@ function anchor_id( $text, array &$used ) {
 	$id   = $base;
 	$i    = 2;
 	while ( isset( $used[ $id ] ) ) {
-		$id = $base . '-' . $i++;
+		$id = $base . '-' . $i;
+		++$i;
 	}
 	$used[ $id ] = true;
 	return $id;
@@ -50,14 +51,14 @@ function headings( $content ) {
 
 	if ( preg_match_all( '#<h([23])([^>]*)>(.*?)</h\1>#is', $html, $matches, PREG_SET_ORDER ) ) {
 		foreach ( $matches as $match ) {
-			$text = trim( wp_strip_all_tags( $match[3] ) );
-			if ( preg_match( '/\sid=["\']([^"\']+)["\']/', $match[2], $id_match ) ) {
+			$text = trim( wp_strip_all_tags( $found[3] ) );
+			if ( preg_match( '/\sid=["\']([^"\']+)["\']/', $found[2], $id_match ) ) {
 				$id          = $id_match[1];
 				$used[ $id ] = true;
 			} else {
 				$id = anchor_id( $text, $used );
 			}
-			if ( '2' === $match[1] && '' !== $text ) {
+			if ( '2' === $found[1] && '' !== $text ) {
 				$out[] = array(
 					'id'   => $id,
 					'text' => $text,
@@ -94,9 +95,9 @@ function add_heading_ids( $content ) {
 	// Seconde passe : les titres sans identifiant reçoivent une ancre.
 	return preg_replace_callback(
 		'#<h([23])((?:(?!\sid=)[^>])*)>(.*?)</h\1>#is',
-		static function ( $match ) use ( &$used ) {
-			$id = anchor_id( $match[3], $used );
-			return sprintf( '<h%1$s%2$s id="%3$s">%4$s</h%1$s>', $match[1], $match[2], esc_attr( $id ), $match[3] );
+		static function ( $found ) use ( &$used ) {
+			$id = anchor_id( $found[3], $used );
+			return sprintf( '<h%1$s%2$s id="%3$s">%4$s</h%1$s>', $found[1], $found[2], esc_attr( $id ), $found[3] );
 		},
 		$content
 	);
@@ -194,15 +195,15 @@ function glossary_links( $content ) {
 
 		$parts[ $index ] = preg_replace_callback(
 			$pattern,
-			static function ( $match ) use ( $map, &$done, &$count, $max, $current ) {
-				$key   = mb_strtolower( $match[1] );
+			static function ( $found ) use ( $map, &$done, &$count, $max, $current ) {
+				$key   = mb_strtolower( $found[1] );
 				$entry = $map[ $key ] ?? null;
 				if ( ! $entry || isset( $done[ $entry['id'] ] ) || $entry['id'] === $current || $count >= $max ) {
-					return $match[1];
+					return $found[1];
 				}
 				$done[ $entry['id'] ] = true;
 				++$count;
-				return sprintf( '<a class="ld-glossary-link" href="%s">%s</a>', esc_url( $entry['url'] ), $match[1] );
+				return sprintf( '<a class="ld-glossary-link" href="%s">%s</a>', esc_url( $entry['url'] ), $found[1] );
 			},
 			$part
 		);

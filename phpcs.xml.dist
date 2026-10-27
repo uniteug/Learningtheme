@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<ruleset name="Learn and Drive">
+	<description>WordPress Coding Standards pour le thème et le plugin compagnon.</description>
+
+	<file>learn-drive</file>
+	<file>learn-drive-core</file>
+
+	<exclude-pattern>*/node_modules/*</exclude-pattern>
+	<exclude-pattern>*/vendor/*</exclude-pattern>
+	<exclude-pattern>*\.min\.(js|css)$</exclude-pattern>
+	<exclude-pattern>*\.(js|css)$</exclude-pattern>
+
+	<arg name="extensions" value="php"/>
+	<arg name="colors"/>
+	<arg value="sp"/>
+
+	<config name="testVersion" value="8.1-"/>
+	<config name="minimum_wp_version" value="7.0"/>
+
+	<rule ref="WordPress">
+		
+		<exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
+	</rule>
+	<rule ref="PHPCompatibilityWP"/>
+
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="learn-drive"/>
+				<element value="learn-drive-core"/>
+			</property>
+		</properties>
+	</rule>
+
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array">
+				<element value="learn_drive"/>
+				<element value="LearnDrive"/>
+				<element value="LEARN_DRIVE"/>
+			</property>
+		</properties>
+	</rule>
+</ruleset>

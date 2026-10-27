@@ -14,13 +14,13 @@
 
 namespace LearnDrive\Core\Access;
 
+use function LearnDrive\Core\setting;
+use function LearnDrive\Core\setting_url;
 use const LearnDrive\Core\PT_COURSE;
 use const LearnDrive\Core\PT_LESSON;
 use const LearnDrive\Core\PT_QUIZ;
 use const LearnDrive\Core\PT_QUESTION;
 use const LearnDrive\Core\TAX_TRACK;
-use function LearnDrive\Core\setting;
-use function LearnDrive\Core\setting_url;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -365,7 +365,8 @@ function generate_codes( $count, $offer, $days, $max_uses = 1, $group = '' ) {
 	global $wpdb;
 
 	$codes = array();
-	for ( $i = 0; $i < min( 500, (int) $count ); $i++ ) {
+	$count = min( 500, (int) $count );
+	for ( $i = 0; $i < $count; $i++ ) {
 		$code = strtoupper( implode( '-', str_split( wp_generate_password( 12, false, false ), 4 ) ) );
 		$ok   = $wpdb->insert( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
 			codes_table(),
@@ -495,11 +496,11 @@ function paywall_html( $post_id, $context = 'lesson' ) {
 function filter_content( $content ) {
 	$post_id = get_the_ID();
 
-	if ( is_admin() || ! is_singular() || $post_id !== get_queried_object_id() ) {
+	if ( is_admin() || ! is_singular() || get_queried_object_id() !== $post_id ) {
 		return $content;
 	}
 
-	$type    = get_post_type( $post_id );
+	$type = get_post_type( $post_id );
 
 	// Les questions et quiz gèrent leur propre verrouillage dans leurs blocs.
 	if ( ! in_array( $type, array( PT_LESSON, PT_COURSE ), true ) || can_access( $post_id ) ) {

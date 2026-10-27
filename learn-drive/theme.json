@@ -260,6 +260,7 @@
 				"body": "1.65"
 			},
 			"tap-target": "48px",
+			"on-accent": "#111827",
 			"dark": {
 				"base": "#0B1220",
 				"surface": "#131C2E",
@@ -272,6 +273,7 @@
 				"success": "#4ADE80",
 				"error": "#F87171",
 				"warning": "#FBBF24",
+				"on-accent": "#111827",
 				"premium": "#B794F6"
 			}
 		},

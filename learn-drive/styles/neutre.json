@@ -33,6 +33,7 @@
 				"success": "#4ADE80",
 				"error": "#F87171",
 				"warning": "#FBBF24",
+				"on-accent": "#111827",
 				"premium": "#C4B5FD"
 			}
 		}

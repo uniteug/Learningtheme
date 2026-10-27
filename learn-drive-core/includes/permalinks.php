@@ -18,14 +18,14 @@
 
 namespace LearnDrive\Core\Permalinks;
 
+use function LearnDrive\Core\setting;
+use function LearnDrive\Core\primary_term;
 use const LearnDrive\Core\PT_COURSE;
 use const LearnDrive\Core\PT_LESSON;
 use const LearnDrive\Core\PT_QUESTION;
 use const LearnDrive\Core\PT_QUIZ;
 use const LearnDrive\Core\TAX_TRACK;
 use const LearnDrive\Core\TAX_TOPIC;
-use function LearnDrive\Core\setting;
-use function LearnDrive\Core\primary_term;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -71,6 +71,11 @@ function track_slugs() {
  */
 function add_rules() {
 	add_rewrite_tag( '%ld_exam_track%', '([^/]+)' );
+
+	// Familles de fiches (/panneaux/famille/danger/) avant les règles des fiches elles-mêmes.
+	$family = preg_quote( setting( 'slug_sheet' ) . '/' . setting( 'slug_family' ), '#' );
+	add_rewrite_rule( "^{$family}/([^/]+)/?$", 'index.php?' . \LearnDrive\Core\TAX_FAMILY . '=$matches[1]', 'top' );
+	add_rewrite_rule( "^{$family}/([^/]+)/page/([0-9]{1,})/?$", 'index.php?' . \LearnDrive\Core\TAX_FAMILY . '=$matches[1]&paged=$matches[2]', 'top' );
 
 	$slugs = track_slugs();
 	if ( ! $slugs ) {
@@ -139,7 +144,10 @@ function exam_for_track( $track ) {
 			'post_status'      => 'publish',
 			'posts_per_page'   => 1,
 			'fields'           => 'ids',
-			'orderby'          => array( 'menu_order' => 'ASC', 'ID' => 'ASC' ),
+			'orderby'          => array(
+			'menu_order' => 'ASC',
+			'ID'         => 'ASC',
+			),
 			'no_found_rows'    => true,
 			'suppress_filters' => false,
 			'meta_key'         => '_ld_mode', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key

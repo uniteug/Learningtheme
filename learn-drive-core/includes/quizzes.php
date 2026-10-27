@@ -12,14 +12,14 @@
 
 namespace LearnDrive\Core\Quizzes;
 
+use LearnDrive\Core\Questions;
+use function LearnDrive\Core\primary_term;
 use const LearnDrive\Core\PT_QUIZ;
 use const LearnDrive\Core\PT_QUESTION;
 use const LearnDrive\Core\PT_LESSON;
 use const LearnDrive\Core\TAX_COUNTRY;
 use const LearnDrive\Core\TAX_TRACK;
 use const LearnDrive\Core\TAX_TOPIC;
-use LearnDrive\Core\Questions;
-use function LearnDrive\Core\primary_term;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -317,13 +317,15 @@ function question_ids( $quiz_id, $seed = null ) {
 	ksort( $by_topic );
 	$by_topic = seeded_shuffle_groups( $by_topic, $seed );
 
-	$picked = array();
-	while ( count( $picked ) < $count && $by_topic ) {
+	$picked       = array();
+	$picked_count = 0;
+	while ( $picked_count < $count && $by_topic ) {
 		foreach ( array_keys( $by_topic ) as $key ) {
-			if ( count( $picked ) >= $count ) {
+			if ( $picked_count >= $count ) {
 				break;
 			}
 			$picked[] = array_shift( $by_topic[ $key ] );
+			++$picked_count;
 			if ( ! $by_topic[ $key ] ) {
 				unset( $by_topic[ $key ] );
 			}
@@ -469,7 +471,7 @@ function grade_quiz( $quiz_id, array $answers, $seed, $user_id, $record = true )
 		$correct  = $answered && Questions\grade( $question, $given );
 
 		if ( $correct ) {
-			$points += 1;
+			++$points;
 		} else {
 			++$errors;
 			if ( $answered ) {
@@ -499,7 +501,7 @@ function grade_quiz( $quiz_id, array $answers, $seed, $user_id, $record = true )
 			++$by_topic[ $topic_key ]['errors'];
 		}
 
-		$can_see       = \LearnDrive\Core\Access\can_access( $id, $user_id );
+		$can_see        = \LearnDrive\Core\Access\can_access( $id, $user_id );
 		$details[ $id ] = array(
 			'correct'  => $correct,
 			'answered' => $answered,

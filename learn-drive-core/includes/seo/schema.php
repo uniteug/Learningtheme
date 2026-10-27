@@ -16,6 +16,14 @@
 
 namespace LearnDrive\Core\SEO\Schema;
 
+use LearnDrive\Core\SEO;
+use LearnDrive\Core\Questions;
+use LearnDrive\Core\Quizzes;
+use LearnDrive\Core\Access;
+use LearnDrive\Core\SEO\Breadcrumbs;
+use function LearnDrive\Core\setting;
+use function LearnDrive\Core\primary_term;
+use function LearnDrive\Core\seo_plugin_active;
 use const LearnDrive\Core\PT_COURSE;
 use const LearnDrive\Core\PT_LESSON;
 use const LearnDrive\Core\PT_QUESTION;
@@ -26,14 +34,6 @@ use const LearnDrive\Core\PT_GLOSSARY;
 use const LearnDrive\Core\TAX_TRACK;
 use const LearnDrive\Core\TAX_TOPIC;
 use const LearnDrive\Core\TAX_LEVEL;
-use LearnDrive\Core\SEO;
-use LearnDrive\Core\Questions;
-use LearnDrive\Core\Quizzes;
-use LearnDrive\Core\Access;
-use LearnDrive\Core\SEO\Breadcrumbs;
-use function LearnDrive\Core\setting;
-use function LearnDrive\Core\primary_term;
-use function LearnDrive\Core\seo_plugin_active;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -119,7 +119,7 @@ function breadcrumb( $url ) {
 
 	$items = array();
 	foreach ( array_values( $trail ) as $index => $item ) {
-		$element = array(
+		$element  = array(
 			'@type'    => 'ListItem',
 			'position' => $index + 1,
 			'name'     => wp_strip_all_tags( $item['label'] ),
@@ -242,10 +242,10 @@ function question_nodes( array $ids, $with_answer ) {
 		}
 
 		$node = array(
-			'@type'          => 'Question',
-			'name'           => $question['title'],
-			'text'           => $question['title'],
-			'url'            => $question['url'],
+			'@type'           => 'Question',
+			'name'            => $question['title'],
+			'text'            => $question['title'],
+			'url'             => $question['url'],
 			'eduQuestionType' => 'tf' === $question['format'] ? 'True/False' : ( 'numeric' === $question['format'] ? 'Short answer' : 'Multiple choice' ),
 		);
 
@@ -358,12 +358,12 @@ function main_nodes( $url ) {
 	$nodes = array();
 
 	if ( is_singular() ) {
-		$post    = get_queried_object();
-		$id      = $post->ID;
-		$type    = $post->post_type;
-		$author  = person( (int) $post->post_author );
-		$image   = SEO\post_image( $id );
-		$base    = array(
+		$post   = get_queried_object();
+		$id     = $post->ID;
+		$type   = $post->post_type;
+		$author = person( (int) $post->post_author );
+		$image  = SEO\post_image( $id );
+		$base   = array(
 			'@id'              => $url . '#main',
 			'mainEntityOfPage' => array( '@id' => $url . '#webpage' ),
 			'headline'         => wp_strip_all_tags( get_the_title( $id ) ),
@@ -382,7 +382,7 @@ function main_nodes( $url ) {
 
 		switch ( $type ) {
 			case 'post':
-				$node = array_merge(
+				$node     = array_merge(
 					array( '@type' => 'NewsArticle' ),
 					$base,
 					array( 'image' => article_images( $id ) )
@@ -403,11 +403,11 @@ function main_nodes( $url ) {
 				break;
 
 			case PT_LESSON:
-				$node                          = array_merge( array( '@type' => array( 'Article', 'LearningResource' ) ), $base );
-				$node['learningResourceType']  = 'Lesson';
-				$node['educationalAlignment']  = alignment( $id );
-				$node['isAccessibleForFree']   = 'free' === Access\rule( $id );
-				$level                         = primary_term( $id, TAX_LEVEL );
+				$node                         = array_merge( array( '@type' => array( 'Article', 'LearningResource' ) ), $base );
+				$node['learningResourceType'] = 'Lesson';
+				$node['educationalAlignment'] = alignment( $id );
+				$node['isAccessibleForFree']  = 'free' === Access\rule( $id );
+				$level                        = primary_term( $id, TAX_LEVEL );
 				if ( $level ) {
 					$node['educationalLevel'] = $level->name;
 				}
@@ -426,7 +426,7 @@ function main_nodes( $url ) {
 				break;
 
 			case PT_COURSE:
-				$node = array(
+				$node    = array(
 					'@type'                => 'Course',
 					'@id'                  => $url . '#main',
 					'name'                 => $base['name'],
@@ -454,8 +454,8 @@ function main_nodes( $url ) {
 				break;
 
 			case PT_QUIZ:
-				$ids  = Quizzes\question_ids( $id );
-				$node = array(
+				$ids     = Quizzes\question_ids( $id );
+				$node    = array(
 					'@type'                => 'Quiz',
 					'@id'                  => $url . '#main',
 					'name'                 => $base['name'],
@@ -479,7 +479,7 @@ function main_nodes( $url ) {
 				break;
 
 			case PT_QUESTION:
-				$node = array(
+				$node    = array(
 					'@type'                => 'Quiz',
 					'@id'                  => $url . '#main',
 					'name'                 => $base['name'],
@@ -508,7 +508,7 @@ function main_nodes( $url ) {
 						'url'   => $set_url,
 					),
 				);
-				$code = (string) get_post_meta( $id, '_ld_code', true );
+				$code    = (string) get_post_meta( $id, '_ld_code', true );
 				if ( $code ) {
 					$node['termCode'] = $code;
 				}
@@ -601,7 +601,7 @@ function main_nodes( $url ) {
  * @param array  $nodes Nœuds principaux.
  * @return array
  */
-function webpage( $url, array $nodes ) {
+function webpage( $url, array $nodes ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed -- signature stable pour les filtres.
 	$type = 'WebPage';
 	if ( is_search() ) {
 		$type = 'SearchResultsPage';

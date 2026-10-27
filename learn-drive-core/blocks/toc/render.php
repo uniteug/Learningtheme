@@ -14,7 +14,7 @@ use LearnDrive\Core\SEO\Links;
 defined( 'ABSPATH' ) || exit;
 
 $learn_drive_post_id = Blocks\current_post_id( $block );
-if ( ! $learn_drive_post_id || ! \LearnDrive\Core\Access\can_access( $learn_drive_post_id ) && \LearnDrive\Core\PT_LESSON === get_post_type( $learn_drive_post_id ) ) {
+if ( ! $learn_drive_post_id || ( ! \LearnDrive\Core\Access\can_access( $learn_drive_post_id ) && \LearnDrive\Core\PT_LESSON === get_post_type( $learn_drive_post_id ) ) ) {
 	return;
 }
 

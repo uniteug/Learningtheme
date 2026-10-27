@@ -11,13 +11,13 @@
 
 namespace LearnDrive\Core\Questions;
 
+use function LearnDrive\Core\setting;
+use function LearnDrive\Core\word_count;
+use function LearnDrive\Core\primary_term;
 use const LearnDrive\Core\PT_QUESTION;
 use const LearnDrive\Core\TAX_TOPIC;
 use const LearnDrive\Core\TAX_TRACK;
 use const LearnDrive\Core\TAX_COUNTRY;
-use function LearnDrive\Core\setting;
-use function LearnDrive\Core\word_count;
-use function LearnDrive\Core\primary_term;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -32,14 +32,38 @@ function register_meta() {
 	};
 
 	$fields = array(
-		'_ld_format'      => array( 'type' => 'string', 'default' => 'multiple' ),
-		'_ld_source'      => array( 'type' => 'string', 'default' => '' ),
-		'_ld_official_id' => array( 'type' => 'string', 'default' => '' ),
-		'_ld_verified'    => array( 'type' => 'string', 'default' => '' ),
-		'_ld_difficulty'  => array( 'type' => 'integer', 'default' => 1 ),
-		'_ld_eliminatory' => array( 'type' => 'boolean', 'default' => false ),
-		'_ld_sheet'       => array( 'type' => 'integer', 'default' => 0 ),
-		'_ld_lesson'      => array( 'type' => 'integer', 'default' => 0 ),
+		'_ld_format'      => array(
+			'type'    => 'string',
+			'default' => 'multiple',
+		),
+		'_ld_source'      => array(
+			'type'    => 'string',
+			'default' => '',
+		),
+		'_ld_official_id' => array(
+			'type'    => 'string',
+			'default' => '',
+		),
+		'_ld_verified'    => array(
+			'type'    => 'string',
+			'default' => '',
+		),
+		'_ld_difficulty'  => array(
+			'type'    => 'integer',
+			'default' => 1,
+		),
+		'_ld_eliminatory' => array(
+			'type'    => 'boolean',
+			'default' => false,
+		),
+		'_ld_sheet'       => array(
+			'type'    => 'integer',
+			'default' => 0,
+		),
+		'_ld_lesson'      => array(
+			'type'    => 'integer',
+			'default' => 0,
+		),
 	);
 
 	foreach ( $fields as $key => $args ) {
@@ -147,8 +171,14 @@ function get( $post ) {
 
 	if ( 'tf' === $format && count( $answers ) !== 2 ) {
 		$answers = array(
-			array( 'text' => __( 'Vrai', 'learn-drive-core' ), 'correct' => true ),
-			array( 'text' => __( 'Faux', 'learn-drive-core' ), 'correct' => false ),
+			array(
+				'text'    => __( 'Vrai', 'learn-drive-core' ),
+				'correct' => true,
+			),
+			array(
+				'text'    => __( 'Faux', 'learn-drive-core' ),
+				'correct' => false,
+			),
 		);
 	}
 

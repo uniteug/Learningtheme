@@ -9,10 +9,10 @@
 
 namespace LearnDrive\Core\Admin\Health;
 
-use const LearnDrive\Core\PT_QUESTION;
-use const LearnDrive\Core\PT_SHEET;
 use LearnDrive\Core\SEO\Redirects;
 use function LearnDrive\Core\content_types;
+use const LearnDrive\Core\PT_QUESTION;
+use const LearnDrive\Core\PT_SHEET;
 
 defined( 'ABSPATH' ) || exit;
 

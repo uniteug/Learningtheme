@@ -21,6 +21,7 @@
 		},
 		"custom": {
 			"radius": { "card": "2px", "control": "2px" },
+			"on-accent": "#FFFFFF",
 			"dark": {
 				"base": "#0E0E10",
 				"surface": "#1A1A1D",
@@ -33,6 +34,7 @@
 				"success": "#4ADE80",
 				"error": "#F87171",
 				"warning": "#FBBF24",
+				"on-accent": "#111827",
 				"premium": "#FDBA74"
 			}
 		}

@@ -8,10 +8,10 @@
 
 namespace LearnDrive\Core\SEO\AI;
 
+use function LearnDrive\Core\setting;
 use const LearnDrive\Core\TAX_TRACK;
 use const LearnDrive\Core\PT_GUIDE;
 use const LearnDrive\Core\PT_QUIZ;
-use function LearnDrive\Core\setting;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -38,11 +38,11 @@ function bots() {
  * Ajoute les blocages choisis dans robots.txt.
  *
  * @param string $output Contenu.
- * @param bool   $public Site public.
+ * @param bool   $is_public Site public.
  * @return string
  */
-function robots_txt( $output, $public ) {
-	if ( ! $public ) {
+function robots_txt( $output, $is_public ) {
+	if ( ! $is_public ) {
 		return $output;
 	}
 	$blocked = array_intersect( (array) setting( 'ai_block' ), array_keys( bots() ) );

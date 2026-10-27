@@ -36,21 +36,22 @@ function quiz_config() {
 			'restUrl' => esc_url_raw( rest_url( 'learn/v1/' ) ),
 			'nonce'   => is_user_logged_in() ? wp_create_nonce( 'wp_rest' ) : '',
 			'i18n'    => array(
-				'correct'     => __( 'Bonne réponse', 'learn-drive-core' ),
-				'wrong'       => __( 'Mauvaise réponse', 'learn-drive-core' ),
-				'answer'      => __( 'Réponse attendue :', 'learn-drive-core' ),
-				'locked'      => __( 'La correction détaillée est réservée aux abonnés.', 'learn-drive-core' ),
-				'unlock'      => __( 'Débloquer', 'learn-drive-core' ),
-				'passed'      => __( 'Réussi ! Vous avez atteint le seuil de réussite.', 'learn-drive-core' ),
-				'failed'      => __( 'Pas encore : continuez à réviser les thèmes ci-dessous.', 'learn-drive-core' ),
-				'error'       => __( 'Connexion impossible. Vos réponses sont conservées : réessayez.', 'learn-drive-core' ),
-				'reportSent'  => __( 'Merci, votre signalement a été transmis.', 'learn-drive-core' ),
-				'copied'      => __( 'Lien copié : envoyez-le pour lancer le défi !', 'learn-drive-core' ),
-				'challenge'   => __( 'Score à battre :', 'learn-drive-core' ),
-				'reviewLink'  => __( 'Revoir la leçon', 'learn-drive-core' ),
-				'timeUp'      => __( 'Temps écoulé', 'learn-drive-core' ),
-				'errorsOf'    => __( 'erreur(s) sur', 'learn-drive-core' ),
-				'shareText'   => __( 'J’ai obtenu %s. Ferez-vous mieux ?', 'learn-drive-core' ),
+				'correct'    => __( 'Bonne réponse', 'learn-drive-core' ),
+				'wrong'      => __( 'Mauvaise réponse', 'learn-drive-core' ),
+				'answer'     => __( 'Réponse attendue :', 'learn-drive-core' ),
+				'locked'     => __( 'La correction détaillée est réservée aux abonnés.', 'learn-drive-core' ),
+				'unlock'     => __( 'Débloquer', 'learn-drive-core' ),
+				'passed'     => __( 'Réussi ! Vous avez atteint le seuil de réussite.', 'learn-drive-core' ),
+				'failed'     => __( 'Pas encore : continuez à réviser les thèmes ci-dessous.', 'learn-drive-core' ),
+				'error'      => __( 'Connexion impossible. Vos réponses sont conservées : réessayez.', 'learn-drive-core' ),
+				'reportSent' => __( 'Merci, votre signalement a été transmis.', 'learn-drive-core' ),
+				'copied'     => __( 'Lien copié : envoyez-le pour lancer le défi !', 'learn-drive-core' ),
+				'challenge'  => __( 'Score à battre :', 'learn-drive-core' ),
+				'reviewLink' => __( 'Revoir la leçon', 'learn-drive-core' ),
+				'timeUp'     => __( 'Temps écoulé', 'learn-drive-core' ),
+				'errorsOf'   => __( 'erreur(s) sur', 'learn-drive-core' ),
+				/* translators: %s: score, e.g. 32/40 */
+				'shareText'  => __( 'J’ai obtenu %s. Ferez-vous mieux ?', 'learn-drive-core' ),
 			),
 		)
 	);
@@ -242,6 +243,8 @@ function next_uid() {
  * Rend un quiz complet.
  *
  * @param array $args {
+ *     Options du quiz.
+ *
  *     @type int    $quiz_id      Quiz (0 pour une série libre).
  *     @type int[]  $question_ids Questions (défaut : celles du quiz).
  *     @type string $layout       player (une question par écran) ou stack.

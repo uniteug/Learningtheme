@@ -7,6 +7,7 @@
 
 namespace LearnDrive\Core\Post_Types;
 
+use function LearnDrive\Core\setting;
 use const LearnDrive\Core\PT_COURSE;
 use const LearnDrive\Core\PT_LESSON;
 use const LearnDrive\Core\PT_QUESTION;
@@ -21,7 +22,6 @@ use const LearnDrive\Core\TAX_EXAM;
 use const LearnDrive\Core\TAX_LEVEL;
 use const LearnDrive\Core\TAX_SUBJECT;
 use const LearnDrive\Core\TAX_FAMILY;
-use function LearnDrive\Core\setting;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -64,12 +64,12 @@ function labels( $singular, $plural, $feminine = false ) {
  */
 function register() {
 	$common = array(
-		'public'             => true,
-		'show_in_rest'       => true,
-		'menu_position'      => 21,
-		'supports'           => array( 'title', 'editor', 'excerpt', 'thumbnail', 'author', 'revisions', 'custom-fields', 'page-attributes' ),
-		'show_in_nav_menus'  => true,
-		'delete_with_user'   => false,
+		'public'            => true,
+		'show_in_rest'      => true,
+		'menu_position'     => 21,
+		'supports'          => array( 'title', 'editor', 'excerpt', 'thumbnail', 'author', 'revisions', 'custom-fields', 'page-attributes' ),
+		'show_in_nav_menus' => true,
+		'delete_with_user'  => false,
 	);
 
 	register_post_type(
@@ -81,7 +81,10 @@ function register() {
 				'description' => __( 'Parcours complet par catégorie ou matière.', 'learn-drive-core' ),
 				'menu_icon'   => 'dashicons-welcome-learn-more',
 				'has_archive' => setting( 'slug_course' ),
-				'rewrite'     => array( 'slug' => setting( 'slug_course' ), 'with_front' => false ),
+				'rewrite'     => array(
+					'slug'       => setting( 'slug_course' ),
+					'with_front' => false,
+				),
 			)
 		)
 	);
@@ -95,7 +98,10 @@ function register() {
 				'description'  => __( 'Unité de cours, théorique ou pratique.', 'learn-drive-core' ),
 				'menu_icon'    => 'dashicons-book-alt',
 				'has_archive'  => setting( 'slug_lesson' ),
-				'rewrite'      => array( 'slug' => setting( 'slug_lesson' ), 'with_front' => false ),
+				'rewrite'      => array(
+					'slug'       => setting( 'slug_lesson' ),
+					'with_front' => false,
+				),
 				'show_in_menu' => 'edit.php?post_type=' . PT_COURSE,
 			)
 		)
@@ -110,7 +116,10 @@ function register() {
 				'description' => __( 'Question avec propositions, correction et explication.', 'learn-drive-core' ),
 				'menu_icon'   => 'dashicons-editor-help',
 				'has_archive' => setting( 'slug_question' ),
-				'rewrite'     => array( 'slug' => setting( 'slug_question' ), 'with_front' => false ),
+				'rewrite'     => array(
+					'slug'       => setting( 'slug_question' ),
+					'with_front' => false,
+				),
 				'supports'    => array( 'title', 'editor', 'excerpt', 'thumbnail', 'author', 'revisions', 'custom-fields', 'page-attributes', 'comments' ),
 			)
 		)
@@ -125,7 +134,10 @@ function register() {
 				'description' => __( 'Série de questions : thématique, entraînement ou examen blanc.', 'learn-drive-core' ),
 				'menu_icon'   => 'dashicons-forms',
 				'has_archive' => setting( 'slug_quiz' ),
-				'rewrite'     => array( 'slug' => setting( 'slug_quiz' ), 'with_front' => false ),
+				'rewrite'     => array(
+					'slug'       => setting( 'slug_quiz' ),
+					'with_front' => false,
+				),
 			)
 		)
 	);
@@ -139,7 +151,10 @@ function register() {
 				'description' => __( 'Fiche : panneau, manœuvre, notion, formule.', 'learn-drive-core' ),
 				'menu_icon'   => 'dashicons-warning',
 				'has_archive' => setting( 'slug_sheet' ),
-				'rewrite'     => array( 'slug' => setting( 'slug_sheet' ), 'with_front' => false ),
+				'rewrite'     => array(
+					'slug'       => setting( 'slug_sheet' ),
+					'with_front' => false,
+				),
 			)
 		)
 	);
@@ -153,7 +168,10 @@ function register() {
 				'description' => __( 'Contenu pratique mis à jour : coûts, documents, délais.', 'learn-drive-core' ),
 				'menu_icon'   => 'dashicons-clipboard',
 				'has_archive' => setting( 'slug_guide' ),
-				'rewrite'     => array( 'slug' => setting( 'slug_guide' ), 'with_front' => false ),
+				'rewrite'     => array(
+					'slug'       => setting( 'slug_guide' ),
+					'with_front' => false,
+				),
 			)
 		)
 	);
@@ -167,7 +185,10 @@ function register() {
 				'description' => __( 'Définitions courtes, liées automatiquement dans les textes.', 'learn-drive-core' ),
 				'menu_icon'   => 'dashicons-editor-spellcheck',
 				'has_archive' => setting( 'slug_glossary' ),
-				'rewrite'     => array( 'slug' => setting( 'slug_glossary' ), 'with_front' => false ),
+				'rewrite'     => array(
+					'slug'       => setting( 'slug_glossary' ),
+					'with_front' => false,
+				),
 			)
 		)
 	);
@@ -184,7 +205,10 @@ function register() {
 			'public'            => true,
 			'show_in_rest'      => true,
 			'show_admin_column' => true,
-			'rewrite'           => array( 'slug' => setting( 'slug_country' ), 'with_front' => false ),
+			'rewrite'           => array(
+				'slug'       => setting( 'slug_country' ),
+				'with_front' => false,
+			),
 		)
 	);
 
@@ -198,7 +222,10 @@ function register() {
 			'public'            => true,
 			'show_in_rest'      => true,
 			'show_admin_column' => true,
-			'rewrite'           => array( 'slug' => setting( 'slug_track' ), 'with_front' => false ),
+			'rewrite'           => array(
+				'slug'       => setting( 'slug_track' ),
+				'with_front' => false,
+			),
 		)
 	);
 
@@ -212,7 +239,10 @@ function register() {
 			'public'            => true,
 			'show_in_rest'      => true,
 			'show_admin_column' => true,
-			'rewrite'           => array( 'slug' => setting( 'slug_topic' ), 'with_front' => false ),
+			'rewrite'           => array(
+				'slug'       => setting( 'slug_topic' ),
+				'with_front' => false,
+			),
 		)
 	);
 
@@ -252,7 +282,10 @@ function register() {
 			'public'            => true,
 			'show_in_rest'      => true,
 			'show_admin_column' => false,
-			'rewrite'           => array( 'slug' => 'matiere', 'with_front' => false ),
+			'rewrite'           => array(
+				'slug'       => 'matiere',
+				'with_front' => false,
+			),
 		)
 	);
 
@@ -265,7 +298,10 @@ function register() {
 			'public'            => true,
 			'show_in_rest'      => true,
 			'show_admin_column' => true,
-			'rewrite'           => array( 'slug' => setting( 'slug_sheet' ) . '/' . setting( 'slug_family' ), 'with_front' => false ),
+			'rewrite'           => array(
+				'slug'       => setting( 'slug_sheet' ) . '/' . setting( 'slug_family' ),
+				'with_front' => false,
+			),
 		)
 	);
 
@@ -400,7 +436,13 @@ function archive_order( $query ) {
 		$query->set( 'order', 'ASC' );
 		$query->set( 'posts_per_page', $query->is_post_type_archive( PT_GLOSSARY ) ? 60 : 36 );
 	} elseif ( $query->is_post_type_archive( array( PT_LESSON, PT_COURSE, PT_QUIZ, PT_GUIDE ) ) ) {
-		$query->set( 'orderby', array( 'menu_order' => 'ASC', 'date' => 'DESC' ) );
+		$query->set(
+			'orderby',
+			array(
+				'menu_order' => 'ASC',
+				'date'       => 'DESC',
+			)
+		);
 	} elseif ( $query->is_tax( array( TAX_TRACK, TAX_TOPIC ) ) ) {
 		// Les pages piliers composent leurs sections avec le bloc « Contenus liés ».
 		$query->set( 'posts_per_page', 1 );

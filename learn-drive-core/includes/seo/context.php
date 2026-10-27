@@ -8,6 +8,9 @@
 
 namespace LearnDrive\Core\SEO;
 
+use LearnDrive\Core\Questions;
+use function LearnDrive\Core\setting;
+use function LearnDrive\Core\primary_term;
 use const LearnDrive\Core\PT_COURSE;
 use const LearnDrive\Core\PT_LESSON;
 use const LearnDrive\Core\PT_QUESTION;
@@ -18,9 +21,6 @@ use const LearnDrive\Core\PT_GLOSSARY;
 use const LearnDrive\Core\TAX_TRACK;
 use const LearnDrive\Core\TAX_TOPIC;
 use const LearnDrive\Core\TAX_COUNTRY;
-use LearnDrive\Core\Questions;
-use function LearnDrive\Core\setting;
-use function LearnDrive\Core\primary_term;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -88,7 +88,7 @@ function post_title( $post_id ) {
 		return fill_template( $custom, template_vars( $post_id ) );
 	}
 
-	$map = array(
+	$map  = array(
 		PT_QUESTION => 'tpl_question',
 		PT_QUIZ     => 'tpl_quiz',
 		PT_LESSON   => 'tpl_lesson',

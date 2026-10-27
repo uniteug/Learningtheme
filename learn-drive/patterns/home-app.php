@@ -34,7 +34,7 @@
 		<!-- wp:column {"verticalAlignment":"center"} -->
 		<div class="wp-block-column is-vertically-aligned-center">
 			<!-- wp:image {"width":"160px","height":"160px","sizeSlug":"full","linkDestination":"none","align":"center","className":"is-style-framed"} -->
-			<figure class="wp-block-image aligncenter size-full is-resized is-style-framed"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/images/qr-placeholder.svg' ) ); ?>" alt="<?php esc_attr_e( 'QR code vers l’application (à remplacer)', 'learn-drive' ); ?>" width="160" height="160" style="width:160px;height:160px"/></figure>
+			<figure class="wp-block-image aligncenter size-full is-resized is-style-framed"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/images/qr-placeholder.svg' ) ); ?>" alt="<?php esc_attr_e( 'QR code vers l’application (à remplacer)', 'learn-drive' ); ?>" style="width:160px;height:160px"/></figure>
 			<!-- /wp:image -->
 		</div>
 		<!-- /wp:column -->

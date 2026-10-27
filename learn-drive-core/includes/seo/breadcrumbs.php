@@ -10,6 +10,9 @@
 
 namespace LearnDrive\Core\SEO\Breadcrumbs;
 
+use LearnDrive\Core\Permalinks;
+use function LearnDrive\Core\primary_term;
+use function LearnDrive\Core\setting;
 use const LearnDrive\Core\PT_COURSE;
 use const LearnDrive\Core\PT_LESSON;
 use const LearnDrive\Core\PT_QUESTION;
@@ -19,9 +22,6 @@ use const LearnDrive\Core\PT_GUIDE;
 use const LearnDrive\Core\PT_GLOSSARY;
 use const LearnDrive\Core\TAX_TRACK;
 use const LearnDrive\Core\TAX_FAMILY;
-use LearnDrive\Core\Permalinks;
-use function LearnDrive\Core\primary_term;
-use function LearnDrive\Core\setting;
 
 defined( 'ABSPATH' ) || exit;
 

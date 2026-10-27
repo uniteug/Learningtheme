@@ -12,6 +12,7 @@
 
 namespace LearnDrive\Core\Demo;
 
+use LearnDrive\Core\Import;
 use const LearnDrive\Core\PT_COURSE;
 use const LearnDrive\Core\PT_LESSON;
 use const LearnDrive\Core\PT_QUESTION;
@@ -25,7 +26,6 @@ use const LearnDrive\Core\TAX_TOPIC;
 use const LearnDrive\Core\TAX_FAMILY;
 use const LearnDrive\Core\TAX_LEVEL;
 use const LearnDrive\Core\OPTION;
-use LearnDrive\Core\Import;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -111,11 +111,11 @@ function terms( $slugs, $taxonomy ) {
  * @param \GdImage $image   Image GD.
  * @param string   $name    Nom de fichier (sans extension).
  * @param string   $alt     Texte alternatif.
- * @param int      $parent  Contenu parent.
+ * @param int      $parent_id Contenu parent.
  * @param string   $format  png|jpg.
  * @return int
  */
-function save_image( $image, $name, $alt, $parent, $format = 'png' ) {
+function save_image( $image, $name, $alt, $parent_id, $format = 'png' ) {
 	require_once ABSPATH . 'wp-admin/includes/image.php';
 
 	ob_start();
@@ -139,7 +139,7 @@ function save_image( $image, $name, $alt, $parent, $format = 'png' ) {
 			'post_status'    => 'inherit',
 		),
 		$upload['file'],
-		$parent
+		$parent_id
 	);
 	if ( is_wp_error( $id ) || ! $id ) {
 		return 0;
@@ -147,8 +147,8 @@ function save_image( $image, $name, $alt, $parent, $format = 'png' ) {
 
 	wp_update_attachment_metadata( $id, wp_generate_attachment_metadata( $id, $upload['file'] ) );
 	update_post_meta( $id, '_wp_attachment_image_alt', $alt );
-	if ( $parent ) {
-		set_post_thumbnail( $parent, $id );
+	if ( $parent_id ) {
+		set_post_thumbnail( $parent_id, $id );
 	}
 	return (int) $id;
 }
@@ -383,7 +383,11 @@ function import( $log = null ) {
 	foreach ( $data['sheet_families'] as $family ) {
 		term_upsert( $family['name'], $family['slug'], TAX_FAMILY );
 	}
-	foreach ( array( 'debutant' => 'Débutant', 'intermediaire' => 'Intermédiaire', 'examen' => 'Niveau examen' ) as $slug => $name ) {
+	foreach ( array(
+		'debutant'      => 'Débutant',
+		'intermediaire' => 'Intermédiaire',
+		'examen'        => 'Niveau examen',
+	) as $slug => $name ) {
 		term_upsert( $name, $slug, TAX_LEVEL );
 	}
 	$say( 'Taxonomies' );
@@ -563,7 +567,7 @@ function import( $log = null ) {
 		);
 	}
 
-	$home    = upsert(
+	$home = upsert(
 		'page',
 		array(
 			'post_name'    => 'accueil',
@@ -571,7 +575,7 @@ function import( $log = null ) {
 			'post_content' => '',
 		)
 	);
-	$news    = upsert(
+	$news = upsert(
 		'page',
 		array(
 			'post_name'    => 'actualites',

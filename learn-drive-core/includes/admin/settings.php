@@ -8,10 +8,10 @@
 
 namespace LearnDrive\Core\Admin\Settings;
 
-use const LearnDrive\Core\OPTION;
 use LearnDrive\Core\SEO\AI;
 use function LearnDrive\Core\settings;
 use function LearnDrive\Core\defaults;
+use const LearnDrive\Core\OPTION;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -103,18 +103,26 @@ function tabs() {
 		'access' => array(
 			'label'  => __( 'Accès et libellés', 'learn-drive-core' ),
 			'fields' => array(
-				'access_mode'    => array( 'select', __( 'Mode global', 'learn-drive-core' ), array( 'free' => __( 'Tout gratuit', 'learn-drive-core' ), 'paid' => __( 'Tout payant (actualités et infos restent publiques)', 'learn-drive-core' ), 'mixed' => __( 'Mixte (freemium)', 'learn-drive-core' ) ) ),
-				'mixed_default'  => array( 'select', __( 'Mode mixte : règle par défaut des contenus', 'learn-drive-core' ), $access_choices ),
-				'mixed_exam'     => array( 'select', __( 'Mode mixte : examens blancs', 'learn-drive-core' ), $access_choices ),
+				'access_mode'     => array(
+					'select',
+					__( 'Mode global', 'learn-drive-core' ),
+					array(
+						'free'  => __( 'Tout gratuit', 'learn-drive-core' ),
+						'paid'  => __( 'Tout payant (actualités et infos restent publiques)', 'learn-drive-core' ),
+						'mixed' => __( 'Mixte (freemium)', 'learn-drive-core' ),
+					),
+				),
+				'mixed_default'   => array( 'select', __( 'Mode mixte : règle par défaut des contenus', 'learn-drive-core' ), $access_choices ),
+				'mixed_exam'      => array( 'select', __( 'Mode mixte : examens blancs', 'learn-drive-core' ), $access_choices ),
 				'default_country' => array( 'text', __( 'Pays principal (slug)', 'learn-drive-core' ), __( 'Sur l’accueil, n’affiche que les catégories et thèmes de ce pays. Vide = tous.', 'learn-drive-core' ) ),
-				'premium_url'    => array( 'text', __( 'Page de l’offre premium', 'learn-drive-core' ) ),
-				'account_url'    => array( 'text', __( 'Page « Mon espace »', 'learn-drive-core' ) ),
-				'label_track'    => array( 'text', __( 'Libellé « Catégorie » (singulier)', 'learn-drive-core' ), __( 'Ex. : Catégorie de permis, Classe, Niveau scolaire.', 'learn-drive-core' ) ),
-				'label_track_pl' => array( 'text', __( 'Libellé « Catégorie » (pluriel)', 'learn-drive-core' ) ),
-				'label_topic'    => array( 'text', __( 'Libellé « Thème » (singulier)', 'learn-drive-core' ) ),
-				'label_topic_pl' => array( 'text', __( 'Libellé « Thème » (pluriel)', 'learn-drive-core' ) ),
-				'label_sheet'    => array( 'text', __( 'Libellé « Fiche » (singulier)', 'learn-drive-core' ), __( 'Ex. : Panneau, Formule, Notion.', 'learn-drive-core' ) ),
-				'label_sheet_pl' => array( 'text', __( 'Libellé « Fiche » (pluriel)', 'learn-drive-core' ) ),
+				'premium_url'     => array( 'text', __( 'Page de l’offre premium', 'learn-drive-core' ) ),
+				'account_url'     => array( 'text', __( 'Page « Mon espace »', 'learn-drive-core' ) ),
+				'label_track'     => array( 'text', __( 'Libellé « Catégorie » (singulier)', 'learn-drive-core' ), __( 'Ex. : Catégorie de permis, Classe, Niveau scolaire.', 'learn-drive-core' ) ),
+				'label_track_pl'  => array( 'text', __( 'Libellé « Catégorie » (pluriel)', 'learn-drive-core' ) ),
+				'label_topic'     => array( 'text', __( 'Libellé « Thème » (singulier)', 'learn-drive-core' ) ),
+				'label_topic_pl'  => array( 'text', __( 'Libellé « Thème » (pluriel)', 'learn-drive-core' ) ),
+				'label_sheet'     => array( 'text', __( 'Libellé « Fiche » (singulier)', 'learn-drive-core' ), __( 'Ex. : Panneau, Formule, Notion.', 'learn-drive-core' ) ),
+				'label_sheet_pl'  => array( 'text', __( 'Libellé « Fiche » (pluriel)', 'learn-drive-core' ) ),
 			),
 		),
 		'urls'   => array(
@@ -146,7 +154,16 @@ function tabs() {
 				'tpl_post'       => array( 'text', __( 'Modèle de titre — actualité', 'learn-drive-core' ) ),
 				'tpl_glossary'   => array( 'text', __( 'Modèle de titre — lexique', 'learn-drive-core' ) ),
 				'tpl_track'      => array( 'text', __( 'Modèle de titre — page pilier', 'learn-drive-core' ) ),
-				'org_type'       => array( 'select', __( 'Type d’organisation', 'learn-drive-core' ), array( 'EducationalOrganization' => 'EducationalOrganization', 'DrivingSchool' => 'DrivingSchool', 'Organization' => 'Organization', 'NewsMediaOrganization' => 'NewsMediaOrganization' ) ),
+				'org_type'       => array(
+					'select',
+					__( 'Type d’organisation', 'learn-drive-core' ),
+					array(
+						'EducationalOrganization' => 'EducationalOrganization',
+						'DrivingSchool'           => 'DrivingSchool',
+						'Organization'            => 'Organization',
+						'NewsMediaOrganization'   => 'NewsMediaOrganization',
+					),
+				),
 				'org_name'       => array( 'text', __( 'Nom de l’organisation', 'learn-drive-core' ) ),
 				'org_logo'       => array( 'number', __( 'Logo (ID du média, sinon logo du site)', 'learn-drive-core' ) ),
 				'org_same_as'    => array( 'textarea', __( 'Profils officiels (sameAs)', 'learn-drive-core' ), __( 'Une URL par ligne.', 'learn-drive-core' ) ),
@@ -164,7 +181,15 @@ function tabs() {
 		'media'  => array(
 			'label'  => __( 'Performance et médias', 'learn-drive-core' ),
 			'fields' => array(
-				'image_format'     => array( 'select', __( 'Format des images générées', 'learn-drive-core' ), array( 'avif' => 'AVIF (repli WebP)', 'webp' => 'WebP', 'original' => __( 'Format d’origine', 'learn-drive-core' ) ) ),
+				'image_format'     => array(
+					'select',
+					__( 'Format des images générées', 'learn-drive-core' ),
+					array(
+						'avif'     => 'AVIF (repli WebP)',
+						'webp'     => 'WebP',
+						'original' => __( 'Format d’origine', 'learn-drive-core' ),
+					),
+				),
 				'image_quality'    => array( 'number', __( 'Qualité (40 à 95)', 'learn-drive-core' ) ),
 				'trim_image_sizes' => array( 'checkbox', __( 'Ne générer que les tailles utiles', 'learn-drive-core' ) ),
 				'rename_uploads'   => array( 'checkbox', __( 'Renommer les fichiers envoyés (minuscules, sans accents, titre du contenu)', 'learn-drive-core' ) ),

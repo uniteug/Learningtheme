@@ -25,7 +25,7 @@ add_action( 'wp_head', 'learn_drive_dark_mode_head_script', 1 );
 function learn_drive_dark_mode_toggle_script() {
 	wp_enqueue_script(
 		'learn-drive-theme-toggle',
-		get_template_directory_uri() . '/assets/js/theme-toggle.js',
+		get_template_directory_uri() . '/assets/js/theme-toggle' . ( ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '.js' : '.min.js' ),
 		array(),
 		LEARN_DRIVE_VERSION,
 		array(

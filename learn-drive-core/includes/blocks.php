@@ -10,6 +10,9 @@
 
 namespace LearnDrive\Core\Blocks;
 
+use LearnDrive\Core\Questions;
+use LearnDrive\Core\Quizzes;
+use function LearnDrive\Core\primary_term;
 use const LearnDrive\Core\VERSION;
 use const LearnDrive\Core\PT_COURSE;
 use const LearnDrive\Core\PT_LESSON;
@@ -21,9 +24,6 @@ use const LearnDrive\Core\PT_GLOSSARY;
 use const LearnDrive\Core\TAX_TRACK;
 use const LearnDrive\Core\TAX_TOPIC;
 use const LearnDrive\Core\TAX_FAMILY;
-use LearnDrive\Core\Questions;
-use LearnDrive\Core\Quizzes;
-use function LearnDrive\Core\primary_term;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -34,11 +34,14 @@ function register_assets() {
 	$url = LEARN_DRIVE_CORE_URL . 'assets/';
 	$dir = LEARN_DRIVE_CORE_DIR . 'assets/';
 
-	wp_register_script_module( 'learn-drive-quiz', $url . 'js/quiz.js', array( '@wordpress/interactivity' ), VERSION );
-	wp_register_script_module( 'learn-drive-account', $url . 'js/account.js', array( '@wordpress/interactivity' ), VERSION );
-	wp_register_script_module( 'learn-drive-video', $url . 'js/video.js', array( '@wordpress/interactivity' ), VERSION );
+	$debug  = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG;
+	$js     = $debug || ! file_exists( $dir . 'js/quiz.min.js' ) ? '.js' : '.min.js';
+	$suffix = $debug || ! file_exists( $dir . 'css/quiz.min.css' ) ? '.css' : '.min.css';
 
-	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) || ! file_exists( $dir . 'css/quiz.min.css' ) ? '.css' : '.min.css';
+	wp_register_script_module( 'learn-drive-quiz', $url . 'js/quiz' . $js, array( '@wordpress/interactivity' ), VERSION );
+	wp_register_script_module( 'learn-drive-account', $url . 'js/account' . $js, array( '@wordpress/interactivity' ), VERSION );
+	wp_register_script_module( 'learn-drive-video', $url . 'js/video' . $js, array( '@wordpress/interactivity' ), VERSION );
+
 	foreach ( array( 'quiz', 'blocks', 'account' ) as $name ) {
 		wp_register_style( 'learn-drive-core-' . $name, $url . 'css/' . $name . $suffix, array(), VERSION );
 		wp_style_add_data( 'learn-drive-core-' . $name, 'path', $dir . 'css/' . $name . $suffix );
@@ -237,7 +240,7 @@ function related_ids( $post_type, $variant, $count, $block = null ) {
 	}
 
 	if ( PT_SHEET === $current_type && PT_QUESTION === $post_type ) {
-		$args['meta_query'] = array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+		$args['meta_query']   = array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 			array(
 				'key'   => '_ld_sheet',
 				'value' => $post_id,

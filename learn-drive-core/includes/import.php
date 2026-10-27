@@ -16,12 +16,12 @@
 
 namespace LearnDrive\Core\Import;
 
+use LearnDrive\Core\Questions;
 use const LearnDrive\Core\PT_QUESTION;
 use const LearnDrive\Core\PT_SHEET;
 use const LearnDrive\Core\TAX_TRACK;
 use const LearnDrive\Core\TAX_TOPIC;
 use const LearnDrive\Core\TAX_COUNTRY;
-use LearnDrive\Core\Questions;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -145,7 +145,7 @@ function import_question( array $row, $base_dir = '', $dry_run = false ) {
 		return new \WP_Error( 'ld_import', __( 'Titre (énoncé) manquant.', 'learn-drive-core' ) );
 	}
 
-	$format = in_array( $row['format'] ?? '', Questions\FORMATS, true ) ? $row['format'] : 'single';
+	$format  = in_array( $row['format'] ?? '', Questions\FORMATS, true ) ? $row['format'] : 'single';
 	$answers = parse_answers( $row['answers'] ?? array(), $format );
 
 	if ( in_array( $format, array( 'tf', 'single', 'multiple' ), true ) && ( count( $answers ) < 2 || ! array_filter( wp_list_pluck( $answers, 'correct' ) ) ) ) {
@@ -455,7 +455,8 @@ function export_file( $file, $format = 'jsonl' ) {
 		}
 		++$page;
 		wp_cache_flush_runtime();
-	} while ( count( $ids ) === 200 );
+		$batch = count( $ids );
+	} while ( 200 === $batch );
 
 	fclose( $fh ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
 	return $count;

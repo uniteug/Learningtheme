@@ -47,7 +47,7 @@ function all() {
  * @param string $to   URL cible.
  */
 function add( $from, $to ) {
-	$redirects                     = all();
+	$redirects                       = all();
 	$redirects[ normalize( $from ) ] = esc_url_raw( $to );
 	update_option( OPTION_REDIRECTS, $redirects, false );
 
@@ -93,9 +93,9 @@ function handle() {
 	$log = get_option( OPTION_LOG, array() );
 	$log = is_array( $log ) ? $log : array();
 
-	$referer       = isset( $_SERVER['HTTP_REFERER'] ) ? esc_url_raw( wp_unslash( $_SERVER['HTTP_REFERER'] ) ) : '';
-	$entry         = $log[ $path ] ?? array( 'count' => 0 );
-	$entry['count']++;
+	$referer = isset( $_SERVER['HTTP_REFERER'] ) ? esc_url_raw( wp_unslash( $_SERVER['HTTP_REFERER'] ) ) : '';
+	$entry   = $log[ $path ] ?? array( 'count' => 0 );
+	++$entry['count'];
 	$entry['last'] = time();
 	if ( $referer ) {
 		$entry['referer'] = $referer;

@@ -10,10 +10,10 @@
 
 namespace LearnDrive\Core\SEO\Sitemaps;
 
-use const LearnDrive\Core\TAX_EXAM;
-use const LearnDrive\Core\TAX_LEVEL;
 use function LearnDrive\Core\setting;
 use function LearnDrive\Core\seo_plugin_active;
+use const LearnDrive\Core\TAX_EXAM;
+use const LearnDrive\Core\TAX_LEVEL;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -140,11 +140,11 @@ add_action( 'template_redirect', __NAMESPACE__ . '\\render_news_sitemap', 0 );
  * Déclare le sitemap News dans robots.txt.
  *
  * @param string $output Contenu de robots.txt.
- * @param bool   $public Site public.
+ * @param bool   $is_public Site public.
  * @return string
  */
-function robots_txt( $output, $public ) {
-	if ( $public && ! seo_plugin_active() ) {
+function robots_txt( $output, $is_public ) {
+	if ( $is_public && ! seo_plugin_active() ) {
 		$output .= "\nSitemap: " . home_url( '/news-sitemap.xml' ) . "\n";
 	}
 	return $output;

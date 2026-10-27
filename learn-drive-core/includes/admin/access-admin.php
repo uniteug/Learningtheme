@@ -8,10 +8,10 @@
 
 namespace LearnDrive\Core\Admin\Access_Admin;
 
+use LearnDrive\Core\Access;
 use const LearnDrive\Core\TAX_TRACK;
 use const LearnDrive\Core\PT_COURSE;
 use const LearnDrive\Core\PT_QUIZ;
-use LearnDrive\Core\Access;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -61,7 +61,7 @@ function render() {
 		}
 	}
 	if ( isset( $_POST['ld_codes_count'] ) && check_admin_referer( 'ld_access' ) ) {
-		$codes  = Access\generate_codes( absint( $_POST['ld_codes_count'] ), sanitize_text_field( wp_unslash( $_POST['ld_offer'] ?? 'all' ) ), absint( $_POST['ld_days'] ?? 0 ), absint( $_POST['ld_uses'] ?? 1 ), sanitize_text_field( wp_unslash( $_POST['ld_group'] ?? '' ) ) );
+		$codes = Access\generate_codes( absint( $_POST['ld_codes_count'] ), sanitize_text_field( wp_unslash( $_POST['ld_offer'] ?? 'all' ) ), absint( $_POST['ld_days'] ?? 0 ), absint( $_POST['ld_uses'] ?? 1 ), sanitize_text_field( wp_unslash( $_POST['ld_group'] ?? '' ) ) );
 		/* translators: %d: number of codes */
 		$notice = sprintf( __( '%d codes générés.', 'learn-drive-core' ), count( $codes ) );
 	}

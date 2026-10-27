@@ -13,9 +13,9 @@ use function LearnDrive\Core\setting;
 
 defined( 'ABSPATH' ) || exit;
 
-/* -------------------------------------------------------------------------
+/*
  * WooCommerce : chaque produit peut ouvrir une offre d'accès.
- * ---------------------------------------------------------------------- */
+ */
 
 /**
  * Champs « Offre d'accès » dans l'onglet Général du produit.
@@ -110,9 +110,9 @@ function order_revoked( $order_id ) {
 add_action( 'woocommerce_order_status_refunded', __NAMESPACE__ . '\\order_revoked' );
 add_action( 'woocommerce_order_status_cancelled', __NAMESPACE__ . '\\order_revoked' );
 
-/* -------------------------------------------------------------------------
+/*
  * Webhooks : inscription, achat (accès ouvert), quiz terminé.
- * ---------------------------------------------------------------------- */
+ */
 
 /**
  * Envoie un webhook signé (HMAC SHA-256), sans bloquer la page.
@@ -141,9 +141,9 @@ function send_webhook( $event, array $payload ) {
 			'blocking' => false,
 			'timeout'  => 3,
 			'headers'  => array(
-				'Content-Type'       => 'application/json',
-				'X-Learn-Event'      => $event,
-				'X-Learn-Signature'  => hash_hmac( 'sha256', $body, (string) setting( 'webhook_secret' ) ),
+				'Content-Type'      => 'application/json',
+				'X-Learn-Event'     => $event,
+				'X-Learn-Signature' => hash_hmac( 'sha256', $body, (string) setting( 'webhook_secret' ) ),
 			),
 			'body'     => $body,
 		)
@@ -175,7 +175,7 @@ add_action( 'user_register', __NAMESPACE__ . '\\on_register' );
  * @param int    $days    Durée.
  * @param string $source  Origine.
  */
-function on_access( $user_id, $offer, $days, $source ) {
+function on_access( $user_id, $offer, $days, $source ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed -- utilisés par compact().
 	send_webhook( 'access.granted', compact( 'user_id', 'offer', 'days', 'source' ) );
 }
 add_action( 'learn_drive_access_granted', __NAMESPACE__ . '\\on_access', 10, 4 );
@@ -203,9 +203,9 @@ function on_quiz( $result, $user_id ) {
 }
 add_action( 'learn_drive_quiz_completed', __NAMESPACE__ . '\\on_quiz', 10, 2 );
 
-/* -------------------------------------------------------------------------
+/*
  * Profil auteur : fonction, compétences, profils publics (sameAs).
- * ---------------------------------------------------------------------- */
+ */
 
 /**
  * Champs du profil.
@@ -255,9 +255,9 @@ function save_profile( $user_id ) {
 add_action( 'personal_options_update', __NAMESPACE__ . '\\save_profile' );
 add_action( 'edit_user_profile_update', __NAMESPACE__ . '\\save_profile' );
 
-/* -------------------------------------------------------------------------
+/*
  * Avatars locaux : aucune requête vers Gravatar (domaine tiers).
- * ---------------------------------------------------------------------- */
+ */
 
 /**
  * Remplace Gravatar par la photo envoyée dans la médiathèque (méta
@@ -293,7 +293,7 @@ function local_avatar( $args, $id_or_email ) {
 		}
 	}
 
-	$name = $user ? $user->display_name : ( $id_or_email instanceof \WP_Comment ? $id_or_email->comment_author : 'Invité' );
+	$name                 = $user ? $user->display_name : ( $id_or_email instanceof \WP_Comment ? $id_or_email->comment_author : __( 'Invité', 'learn-drive-core' ) );
 	$args['url']          = home_url( '/ld-avatar/' . rawurlencode( initials( $name ) ) . '-' . substr( md5( $name ), 0, 6 ) . '.svg' );
 	$args['found_avatar'] = true;
 	return $args;

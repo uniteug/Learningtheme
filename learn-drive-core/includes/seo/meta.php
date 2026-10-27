@@ -123,7 +123,12 @@ function head() {
 	tag( 'property', 'og:locale', str_replace( '-', '_', get_bloginfo( 'language' ) ) );
 	tag( 'property', 'og:type', $type );
 	tag( 'property', 'og:site_name', get_bloginfo( 'name' ) );
-	tag( 'property', 'og:title', is_singular() ? wp_strip_all_tags( (string) get_post_meta( get_queried_object_id(), '_ld_og_title', true ) ?: get_the_title( get_queried_object_id() ) ) : $title );
+	$og_title = $title;
+	if ( is_singular() ) {
+		$og_title = (string) get_post_meta( get_queried_object_id(), '_ld_og_title', true );
+		$og_title = wp_strip_all_tags( '' !== $og_title ? $og_title : get_the_title( get_queried_object_id() ) );
+	}
+	tag( 'property', 'og:title', $og_title );
 	tag( 'property', 'og:description', $description );
 	tag( 'property', 'og:url', $canonical ? $canonical : home_url( add_query_arg( array() ) ) );
 
