@@ -1,0 +1,63 @@
+{
+	"$schema": "https://playground.wordpress.net/blueprint-schema.json",
+	"meta": {
+		"title": "Learn & Drive — démo",
+		"description": "Thème bloc Learn & Drive + plugin Learn & Drive Core, avec le contenu de démonstration (120 questions, quiz, examens blancs, leçons, panneaux, actualités, guides).",
+		"author": "uniteug",
+		"categories": [ "Education", "Theme" ]
+	},
+	"landingPage": "/",
+	"preferredVersions": {
+		"php": "8.3",
+		"wp": "latest"
+	},
+	"features": {
+		"networking": true
+	},
+	"login": true,
+	"steps": [
+		{
+			"step": "installTheme",
+			"themeData": {
+				"resource": "git:directory",
+				"url": "https://github.com/uniteug/Learningtheme",
+				"ref": "claude/gifted-faraday-xppqru",
+				"refType": "branch",
+				"path": "learn-drive"
+			},
+			"options": {
+				"activate": true,
+				"targetFolderName": "learn-drive"
+			}
+		},
+		{
+			"step": "installPlugin",
+			"pluginData": {
+				"resource": "git:directory",
+				"url": "https://github.com/uniteug/Learningtheme",
+				"ref": "claude/gifted-faraday-xppqru",
+				"refType": "branch",
+				"path": "learn-drive-core"
+			},
+			"options": {
+				"activate": true,
+				"targetFolderName": "learn-drive-core"
+			}
+		},
+		{
+			"step": "setSiteOptions",
+			"options": {
+				"blogname": "Learn & Drive",
+				"blogdescription": "Cours, quiz et examens blancs du permis de conduire",
+				"permalink_structure": "/actualites/%postname%/",
+				"category_base": "rubrique",
+				"tag_base": "mot-cle",
+				"users_can_register": 1
+			}
+		},
+		{
+			"step": "runPHP",
+			"code": "<?php require '/wordpress/wp-load.php'; wp_set_current_user( 1 ); LearnDrive\\Core\\Demo\\import(); update_option( 'ld_flush_rewrite', 1 ); flush_rewrite_rules( false );"
+		}
+	]
+}

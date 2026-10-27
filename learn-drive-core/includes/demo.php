@@ -197,6 +197,22 @@ function polygon( $cx, $cy, $radius, $sides, $angle ) {
  * @param int      $size  Taille de départ.
  */
 function centered_text( $image, $text, $cx, $cy, $max, $color, $size = 150 ) {
+	if ( ! function_exists( 'imagettftext' ) ) {
+		// Sans FreeType (ex. WordPress Playground) : police GD agrandie.
+		$w     = imagefontwidth( 5 ) * strlen( $text );
+		$h     = imagefontheight( 5 );
+		$small = imagecreatetruecolor( $w, $h );
+		imagesavealpha( $small, true );
+		imagealphablending( $small, false );
+		imagefill( $small, 0, 0, imagecolorallocatealpha( $small, 0, 0, 0, 127 ) );
+		imagealphablending( $small, true );
+		$rgb = imagecolorsforindex( $image, $color );
+		imagestring( $small, 5, 0, 0, $text, imagecolorallocate( $small, $rgb['red'], $rgb['green'], $rgb['blue'] ) );
+		$scale = min( $max / max( 1, $w ), 14 );
+		imagecopyresampled( $image, $small, (int) ( $cx - $w * $scale / 2 ), (int) ( $cy - $h * $scale / 2 ), 0, 0, (int) ( $w * $scale ), (int) ( $h * $scale ), $w, $h );
+		imagedestroy( $small );
+		return;
+	}
 	$font = LEARN_DRIVE_CORE_DIR . 'assets/fonts/atkinson-hyperlegible-700.ttf';
 	do {
 		$box    = imagettfbbox( $size, 0, $font, $text );
@@ -406,7 +422,7 @@ function import( $log = null ) {
 		);
 		wp_set_object_terms( $id, terms( $sheet['family'], TAX_FAMILY ), TAX_FAMILY );
 		update_post_meta( $id, '_ld_code', $sheet['code'] );
-		if ( ! get_post_thumbnail_id( $id ) && function_exists( 'imagettftext' ) ) {
+		if ( ! get_post_thumbnail_id( $id ) && function_exists( 'imagecreatetruecolor' ) ) {
 			/* translators: %s: road sign name */
 			save_image( draw_sign( $sheet['shape'], $sheet['symbol'] ), 'panneau-' . $sheet['slug'], sprintf( __( 'Panneau « %s »', 'learn-drive-core' ), $sheet['title'] ), $id );
 		}
@@ -430,7 +446,7 @@ function import( $log = null ) {
 		wp_set_object_terms( $id, terms( $course['tracks'], TAX_TRACK ), TAX_TRACK );
 		wp_set_object_terms( $id, terms( $course['level'] ?? '', TAX_LEVEL ), TAX_LEVEL );
 		wp_set_object_terms( $id, terms( 'france', TAX_COUNTRY ), TAX_COUNTRY );
-		if ( ! get_post_thumbnail_id( $id ) && function_exists( 'imagettftext' ) ) {
+		if ( ! get_post_thumbnail_id( $id ) && function_exists( 'imagecreatetruecolor' ) ) {
 			save_image( draw_cover( $index + 2 ), 'cours-' . $course['slug'], $course['title'], $id, 'jpg' );
 		}
 		$course_ids[ $course['slug'] ] = $id;
@@ -548,7 +564,7 @@ function import( $log = null ) {
 		wp_set_object_terms( $id, terms( $news['tracks'] ?? array(), TAX_TRACK ), TAX_TRACK );
 		wp_set_object_terms( $id, terms( $news['topic'] ?? '', TAX_TOPIC ), TAX_TOPIC );
 		wp_set_object_terms( $id, terms( 'france', TAX_COUNTRY ), TAX_COUNTRY );
-		if ( ! get_post_thumbnail_id( $id ) && function_exists( 'imagettftext' ) ) {
+		if ( ! get_post_thumbnail_id( $id ) && function_exists( 'imagecreatetruecolor' ) ) {
 			save_image( draw_cover( $index ), 'actualite-' . $news['slug'], $news['title'], $id, 'jpg' );
 		}
 	}

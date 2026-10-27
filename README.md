@@ -13,6 +13,10 @@ Architecture conforme au cahier des charges : *le thème affiche, le plugin port
 
 ---
 
+## Tester en ligne (sans installation)
+
+[**Ouvrir la démo dans WordPress Playground**](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/uniteug/Learningtheme/claude/gifted-faraday-xppqru/blueprint.json) — WordPress complet dans le navigateur : le thème, le plugin et la démo s'installent automatiquement (compter 1 à 2 minutes au premier chargement). Connecté en administrateur ; rien n'est conservé à la fermeture de l'onglet.
+
 ## Installation
 
 1. Copier `learn-drive/` dans `wp-content/themes/` et `learn-drive-core/` dans `wp-content/plugins/` (ou téléverser les zips).
