@@ -37,6 +37,8 @@ update_option( 'category_base', 'rubrique' );
 update_option( 'tag_base', 'mot-cle' );
 
 $count = LearnDrive\Core\Demo\import();
+update_option( 'ld_setup_done', time() ); // Installation scriptée : pas d'assistant.
+delete_option( 'ld_setup_redirect' );
 delete_option( 'ld_track_slugs' );
 update_option( 'ld_flush_rewrite', 1 );
 echo 'Démo : ' . wp_json_encode( $count ) . "\n";

@@ -8,7 +8,7 @@ Thème bloc (Full Site Editing) pour les sites de formation et d'exercices — p
 |---|---|
 | [`learn-drive/`](learn-drive/) | **Thème bloc** : affichage uniquement (theme.json v3, gabarits, parties, patterns, 5 variations de style, mode sombre). Fonctionne seul. |
 | [`learn-drive-core/`](learn-drive-core/) | **Plugin compagnon** : contenus d'apprentissage, moteur de quiz, accès gratuit / premium, API REST, SEO (JSON-LD, sitemaps, maillage), import / export, démo. Si l'on change de thème, on garde quiz, comptes et URL. |
-| [`tests/`](tests/) | Tests d'intégration PHP (87 vérifications), tests navigateur Playwright (`tests/e2e/`), installation de test (`tests/bin/`). |
+| [`tests/`](tests/) | Tests d'intégration PHP (96 vérifications), tests navigateur Playwright (`tests/e2e/`), installation de test (`tests/bin/`). |
 | [`bin/`](bin/) | Minification CSS / JS. |
 
 Architecture conforme au cahier des charges : *le thème affiche, le plugin porte les données* (règle d'or des thèmes du répertoire WordPress.org : pas de types de contenus dans le thème).
@@ -23,9 +23,8 @@ Architecture conforme au cahier des charges : *le thème affiche, le plugin port
 
 1. Copier `learn-drive/` dans `wp-content/themes/` et `learn-drive-core/` dans `wp-content/plugins/` (ou téléverser les zips).
 2. Activer le thème puis le plugin (WordPress ≥ 7.0, PHP ≥ 8.1).
-3. **Réglages › Permaliens** : structure `/actualites/%postname%/`, base des catégories `rubrique`.
-4. **Learn & Drive › Import, export, démo › Importer la démo** — ou `wp learn demo`.
-5. **Apparence › Éditeur › Styles** : choisir l'ambiance (Route claire, Coach, Magazine, Neutre, Route de nuit), les couleurs et les polices.
+3. L'**assistant de démarrage** s'ouvre (ou **Learn & Drive › Démarrage**) : secteur (permis, soutien scolaire, langues, certifications → libellés et adresses adaptés), pays principal, ambiance (Route claire, Coach, Magazine, Neutre, Route de nuit, avec aperçu des couleurs), modèle d'accès, import de la démo, pages « Mon espace » / « Plan du site » et adresses lisibles (`/actualites/%postname%/`, `/rubrique/…`). En ligne de commande : `wp learn demo`.
+4. Affiner ensuite dans **Apparence › Éditeur › Styles** et **Learn & Drive › Réglages**.
 
 Contenu de démonstration : 2 pays (France QCM, Italie vrai/faux) avec leurs règles d'examen, 5 catégories, 14 thèmes officiels, **125 questions** (dont ordre, association et image cliquable) expliquées (≥ 45 mots, source citée), 14 quiz dont 2 examens blancs, 2 cours, 8 leçons, 14 panneaux dessinés localement, 15 définitions, 10 actualités, 10 guides et les pages éditoriales. Les actualités de démo sont des sujets « evergreen » (aucune réforme ni chiffre inventé) ; les prix des guides sont indicatifs et à vérifier.
 
@@ -74,8 +73,8 @@ Environnement : WordPress 7.1.3, PHP 8.3, SQLite, serveur PHP intégré, Chromiu
 |---|---|
 | `php -l` sur tous les fichiers | OK |
 | PHPCS — WordPress Coding Standards 3 + PHPCompatibilityWP (`phpcs.xml.dist`) | **0 erreur** (8 avertissements volontaires : requêtes à `posts_per_page` élevé pour les sitemaps / imports) |
-| Tests d'intégration `php tests/integration.php <wp>` | **87 / 87** (espace auto-école : rôles, codes, places, devoirs, suivi, CSV, API, RGPD ; correction des 8 formats dont ordre, association et image cliquable, règles FR / IT, tirage reproductible et réparti, sessions signées, seuils 35/40 et 3 erreurs, accès / codes / héritage / révocation, révision espacée, noindex des questions minces, explication obligatoire, modèles de titre, URL en silo, import CSV `;` + réimport sans doublon, export) |
-| Parcours navigateur (mobile 390 px) | question isolée (correction serveur, solution marquée par icône + texte), quiz thématique complet, examen blanc (session `noindex` + canonique, chrono 20 s, aucun corrigé pendant l'épreuve, résultat avec seuil « 35 bonnes réponses sur 40 », erreurs par thème, revue de la correction) ; formats ordre (clavier), association et image cliquable ; auto-école de bout en bout (le moniteur crée la classe et assigne un quiz, l'élève la rejoint avec le code, le moniteur voit l'élève et exporte le CSV, l'élève quitte la classe) ; hors ligne (manifeste, service worker, question consultée lisible sans réseau, page « hors ligne » avec la liste, page personnelle non gardée) — **aucune erreur JavaScript** |
+| Tests d'intégration `php tests/integration.php <wp>` | **96 / 96** (assistant de démarrage : secteur, pays créé, variation appliquée aux styles globaux, retour arrière ; espace auto-école : rôles, codes, places, devoirs, suivi, CSV, API, RGPD ; correction des 8 formats dont ordre, association et image cliquable, règles FR / IT, tirage reproductible et réparti, sessions signées, seuils 35/40 et 3 erreurs, accès / codes / héritage / révocation, révision espacée, noindex des questions minces, explication obligatoire, modèles de titre, URL en silo, import CSV `;` + réimport sans doublon, export) |
+| Parcours navigateur (mobile 390 px) | question isolée (correction serveur, solution marquée par icône + texte), quiz thématique complet, examen blanc (session `noindex` + canonique, chrono 20 s, aucun corrigé pendant l'épreuve, résultat avec seuil « 35 bonnes réponses sur 40 », erreurs par thème, revue de la correction) ; formats ordre (clavier), association et image cliquable ; auto-école de bout en bout (le moniteur crée la classe et assigne un quiz, l'élève la rejoint avec le code, le moniteur voit l'élève et exporte le CSV, l'élève quitte la classe) ; hors ligne (manifeste, service worker, question consultée lisible sans réseau, page « hors ligne » avec la liste, page personnelle non gardée) ; assistant de démarrage (choix présélectionnés, envoi, récapitulatif) — **aucune erreur JavaScript** |
 | Validation des blocs (comme l'éditeur) | **210 / 210** patterns, gabarits, parties et contenus valides |
 | Back-office | réglages, santé SEO, accès et codes, outils, éditeur de questions, éditeur de site : aucune erreur |
 | Question premium | ni la solution ni l'explication dans le HTML, l'API ou le JSON-LD ; `isAccessibleForFree: false` |
@@ -106,7 +105,7 @@ Compte de test : `admin` / `admin-password-123`.
 - Format « question à tiroirs ».
 - Classement hebdomadaire et badges ; messages du moniteur à sa classe.
 - Connexion Google / Apple / lien magique, module de paiement Stripe direct, adaptateurs Paid Memberships Pro / MemberPress.
-- Intégration Search Console dans la santé SEO, assistant de démarrage, licence Pro.
+- Intégration Search Console dans la santé SEO, licence Pro.
 - Lighthouse CI dans l'intégration continue.
 
 ## Développement

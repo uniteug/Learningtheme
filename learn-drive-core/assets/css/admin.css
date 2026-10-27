@@ -173,3 +173,98 @@
 .ld-class-delete {
 	margin-top: 2rem;
 }
+
+/* Assistant de démarrage */
+.ld-setup {
+	max-width: 960px;
+}
+
+.ld-setup__intro {
+	font-size: 15px;
+}
+
+.ld-setup__step {
+	margin: 1.5rem 0;
+	padding: 1.25rem 1.5rem;
+	border: 1px solid #dcdcde;
+	border-radius: 8px;
+	background: #fff;
+}
+
+.ld-setup__step legend {
+	padding: 0 0.5rem;
+	font-size: 1.15em;
+	font-weight: 600;
+}
+
+.ld-setup__num {
+	display: inline-grid;
+	width: 1.6em;
+	height: 1.6em;
+	margin-right: 0.25rem;
+	border-radius: 50%;
+	background: #2271b1;
+	color: #fff;
+	font-size: 0.85em;
+	place-items: center;
+}
+
+.ld-setup__choices {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	gap: 0.75rem;
+}
+
+.ld-setup__choice {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 0.35rem;
+	padding: 0.9rem 1rem 0.9rem 2.4rem;
+	border: 2px solid #dcdcde;
+	border-radius: 8px;
+	cursor: pointer;
+}
+
+.ld-setup__choice input {
+	position: absolute;
+	top: 1.05rem;
+	left: 0.9rem;
+	margin: 0;
+}
+
+.ld-setup__choice span {
+	color: #50575e;
+}
+
+.ld-setup__choice:has(input:checked) {
+	border-color: #2271b1;
+	background: #f0f6fc;
+}
+
+.ld-setup__choice:has(input:focus-visible) {
+	outline: 2px solid #2271b1;
+	outline-offset: 2px;
+}
+
+.ld-setup__swatches {
+	display: flex;
+	height: 2rem;
+	overflow: hidden;
+	border: 1px solid #dcdcde;
+	border-radius: 6px;
+}
+
+.ld-setup__swatches span {
+	flex: 1;
+}
+
+.ld-setup__report {
+	font-size: 15px;
+}
+
+.ld-setup__next {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+}

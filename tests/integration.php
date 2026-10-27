@@ -26,6 +26,7 @@ use LearnDrive\Core\Progress;
 use LearnDrive\Core\Import;
 use LearnDrive\Core\SEO;
 use LearnDrive\Core\Classes;
+use LearnDrive\Core\Admin\Setup;
 
 $passed = 0;
 $failed = array();
@@ -368,6 +369,37 @@ update_post_meta( $class_id, '_ld_class_open', 1 );
 Classes\join( $class['code'], $other );
 wp_delete_post( $class_id, true );
 check( 'Classe supprimée : inscriptions nettoyées', ! Classes\classes_of( $other ) );
+
+/* ------------------------------------------------------------------ */
+section( 'Assistant de démarrage' );
+
+wp_set_current_user( 1 );
+$settings_backup = get_option( 'learn_drive_core' );
+$styles_id       = WP_Theme_JSON_Resolver::get_user_global_styles_post_id();
+$styles_backup   = get_post_field( 'post_content', $styles_id );
+$cleanup[]       = static function () use ( $settings_backup, $styles_id, $styles_backup ) {
+	update_option( 'learn_drive_core', $settings_backup );
+	wp_update_post( wp_slash( array( 'ID' => $styles_id, 'post_content' => $styles_backup ) ) );
+	$term = get_term_by( 'slug', 'luxembourg', 'ld_country' );
+	if ( $term ) {
+		wp_delete_term( $term->term_id, 'ld_country' );
+	}
+};
+
+check( 'Variations du thème proposées (+ origine)', count( Setup\variations() ) >= 5 && isset( Setup\variations()['default'] ) );
+$done = Setup\apply( array( 'sector' => 'school', 'country' => 'luxembourg', 'variation' => 'coach', 'access' => 'paid', 'demo' => false, 'pages' => true ) );
+$opts = get_option( 'learn_drive_core' );
+check( 'Secteur « soutien scolaire » : libellés et adresse des fiches', 'Niveau' === $opts['label_track'] && 'Chapitres' === $opts['label_topic_pl'] && 'fiches' === $opts['slug_sheet'] );
+check( 'Pays absent créé et choisi', 'luxembourg' === $opts['default_country'] && term_exists( 'luxembourg', 'ld_country' ) );
+check( 'Modèle d’accès appliqué', 'paid' === $opts['access_mode'] );
+check( 'Variation « Coach » appliquée aux styles globaux', str_contains( get_post_field( 'post_content', $styles_id ), '#6D28D9' ) );
+check( 'Page « Mon espace » présente', (bool) get_page_by_path( 'mon-compte' ) );
+check( 'Récapitulatif rédigé', count( $done ) >= 5 && get_option( 'ld_setup_done' ) );
+check( 'Réglages déjà en place conservés', $settings_backup['org_name'] === $opts['org_name'] );
+Setup\apply( array( 'sector' => 'driving', 'country' => 'france', 'variation' => 'default', 'access' => 'mixed' ) );
+$opts = get_option( 'learn_drive_core' );
+check( 'Retour au permis : libellés et variation d’origine', 'Catégorie de permis' === $opts['label_track'] && 'panneaux' === $opts['slug_sheet'] && ! str_contains( get_post_field( 'post_content', $styles_id ), '#6D28D9' ) );
+wp_set_current_user( 0 );
 
 /* ------------------------------------------------------------------ */
 foreach ( array_reverse( $cleanup ) as $fn ) {

@@ -58,6 +58,7 @@ $learn_drive_core_files = array(
 	'includes/admin/seo-health.php',
 	'includes/admin/access-admin.php',
 	'includes/admin/classes-admin.php',
+	'includes/admin/setup.php',
 );
 
 foreach ( $learn_drive_core_files as $learn_drive_core_file ) {
@@ -78,6 +79,9 @@ function activate() {
 	Post_Types\register();
 	Permalinks\add_rules();
 	flush_rewrite_rules();
+	if ( ! get_option( 'ld_setup_done' ) ) {
+		update_option( 'ld_setup_redirect', 1, false );
+	}
 }
 register_activation_hook( __FILE__, __NAMESPACE__ . '\\activate' );
 

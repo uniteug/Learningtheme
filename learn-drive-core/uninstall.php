@@ -10,7 +10,7 @@
 
 defined( 'WP_UNINSTALL_PLUGIN' ) || exit;
 
-foreach ( array( 'learn_drive_core', 'ld_track_slugs', 'ld_flush_rewrite', 'ld_indexnow_key', 'ld_db_version', 'ld_demo_imported', 'ld_404_log', 'ld_redirects' ) as $learn_drive_option ) {
+foreach ( array( 'learn_drive_core', 'ld_track_slugs', 'ld_flush_rewrite', 'ld_indexnow_key', 'ld_db_version', 'ld_demo_imported', 'ld_404_log', 'ld_redirects', 'ld_setup_done', 'ld_setup_redirect' ) as $learn_drive_option ) {
 	delete_option( $learn_drive_option );
 }
 

@@ -2,7 +2,7 @@
 	"$schema": "https://playground.wordpress.net/blueprint-schema.json",
 	"meta": {
 		"title": "Learn & Drive — démo",
-		"description": "Thème bloc Learn & Drive + plugin Learn & Drive Core, avec le contenu de démonstration (120 questions, quiz, examens blancs, leçons, panneaux, actualités, guides).",
+		"description": "Thème bloc Learn & Drive + plugin Learn & Drive Core, avec le contenu de démonstration (125 questions, auto-école, mode hors ligne, quiz, examens blancs, leçons, panneaux, actualités, guides).",
 		"author": "uniteug",
 		"categories": [ "Education", "Theme" ]
 	},
@@ -57,7 +57,7 @@
 		},
 		{
 			"step": "runPHP",
-			"code": "<?php require '/wordpress/wp-load.php'; wp_set_current_user( 1 ); LearnDrive\\Core\\Demo\\import(); update_option( 'ld_flush_rewrite', 1 ); flush_rewrite_rules( false );"
+			"code": "<?php require '/wordpress/wp-load.php'; wp_set_current_user( 1 ); LearnDrive\\Core\\Demo\\import(); update_option( 'ld_setup_done', time() ); delete_option( 'ld_setup_redirect' ); update_option( 'ld_flush_rewrite', 1 ); flush_rewrite_rules( false );"
 		}
 	]
 }

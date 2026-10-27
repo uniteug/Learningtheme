@@ -57,6 +57,11 @@ function sanitize( $input ) {
 	$defaults = defaults();
 	$clean    = $current;
 
+	// Écriture par le code (démo, assistant) : tableau complet déjà nettoyé.
+	if ( ! isset( $input['_fields'] ) ) {
+		return $input;
+	}
+
 	$checkboxes = array( 'seo_titles', 'legacy_schema', 'indexnow', 'llms_txt', 'glossary_links', 'og_images', 'log_404', 'trim_image_sizes', 'rename_uploads', 'video_facade', 'disable_emojis', 'local_avatars', 'offline' );
 	$tab_fields = isset( $input['_fields'] ) ? array_map( 'sanitize_key', explode( ',', (string) $input['_fields'] ) ) : array();
 
