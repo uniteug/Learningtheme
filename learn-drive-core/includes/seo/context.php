@@ -270,8 +270,20 @@ function page_description() {
 		return post_description( get_queried_object_id() );
 	}
 
+	if ( is_home() ) {
+		$posts_page = (int) get_option( 'page_for_posts' );
+		$desc       = $posts_page ? post_description( $posts_page ) : '';
+		/* translators: 1: site name, 2: tagline */
+		return $desc ? $desc : truncate( sprintf( __( 'Actualités de %1$s : %2$s.', 'learn-drive-core' ), get_bloginfo( 'name' ), get_bloginfo( 'description' ) ) );
+	}
+
 	if ( is_category() || is_tag() || is_tax() ) {
-		return truncate( term_description() );
+		$desc = truncate( term_description() );
+		if ( '' === $desc && ( is_category() || is_tag() ) ) {
+			/* translators: 1: section name, 2: site name */
+			$desc = truncate( sprintf( __( 'Actualités « %1$s » sur %2$s : les dernières informations, expliquées et reliées aux cours et quiz.', 'learn-drive-core' ), single_term_title( '', false ), get_bloginfo( 'name' ) ) );
+		}
+		return $desc;
 	}
 
 	if ( is_post_type_archive() ) {

@@ -8,38 +8,43 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Précharge la police des titres pour éviter un saut de mise en page tardif.
+ * Précharge les polices des titres et du texte pour éviter un saut de mise en
+ * page tardif (texte long des leçons réaffiché à l'arrivée de la police).
  *
- * La police réellement utilisée est lue dans les styles globaux, de sorte que
- * le préchargement suit la variation de style ou le choix fait dans l'éditeur.
+ * Les polices réellement utilisées sont lues dans les styles globaux, de sorte
+ * que le préchargement suit la variation de style ou le choix fait dans l'éditeur.
  */
 function learn_drive_preload_heading_font() {
+	// Fichier par police : [texte, titres] (un seul fichier pour les polices variables).
 	$files = array(
-		'atkinson'          => 'assets/fonts/atkinson-hyperlegible/atkinson-hyperlegible-latin-700-normal.woff2',
-		'inter'             => 'assets/fonts/inter/inter-latin-wght-normal.woff2',
-		'plus-jakarta-sans' => 'assets/fonts/plus-jakarta-sans/plus-jakarta-sans-latin-wght-normal.woff2',
-		'source-serif'      => 'assets/fonts/source-serif-4/source-serif-4-latin-wght-normal.woff2',
-		'lexend'            => 'assets/fonts/lexend/lexend-latin-wght-normal.woff2',
+		'atkinson'          => array( 'assets/fonts/atkinson-hyperlegible/atkinson-hyperlegible-latin-400-normal.woff2', 'assets/fonts/atkinson-hyperlegible/atkinson-hyperlegible-latin-700-normal.woff2' ),
+		'inter'             => array( 'assets/fonts/inter/inter-latin-wght-normal.woff2' ),
+		'plus-jakarta-sans' => array( 'assets/fonts/plus-jakarta-sans/plus-jakarta-sans-latin-wght-normal.woff2' ),
+		'source-serif'      => array( 'assets/fonts/source-serif-4/source-serif-4-latin-wght-normal.woff2' ),
+		'lexend'            => array( 'assets/fonts/lexend/lexend-latin-wght-normal.woff2' ),
 	);
 
-	$family = wp_get_global_styles( array( 'elements', 'heading', 'typography', 'fontFamily' ) );
+	$slug_of = static function ( $family ) {
+		return is_string( $family ) && preg_match( '/font-family--([a-z0-9-]+)/', $family, $matches ) ? $matches[1] : '';
+	};
+	$body    = $slug_of( wp_get_global_styles( array( 'typography', 'fontFamily' ) ) );
+	$heading = $slug_of( wp_get_global_styles( array( 'elements', 'heading', 'typography', 'fontFamily' ) ) );
+	$heading = $heading ? $heading : $body;
 
-	if ( ! is_string( $family ) || ! preg_match( '/font-family--([a-z0-9-]+)/', $family, $matches ) ) {
-		$family = wp_get_global_styles( array( 'typography', 'fontFamily' ) );
-		if ( ! is_string( $family ) || ! preg_match( '/font-family--([a-z0-9-]+)/', $family, $matches ) ) {
-			return;
-		}
+	$urls = array();
+	if ( isset( $files[ $heading ] ) ) {
+		$urls[] = end( $files[ $heading ] );
+	}
+	if ( isset( $files[ $body ] ) ) {
+		$urls[] = $files[ $body ][0];
 	}
 
-	$slug = $matches[1];
-	if ( empty( $files[ $slug ] ) ) {
-		return;
+	foreach ( array_unique( $urls ) as $file ) {
+		printf(
+			'<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>' . "\n",
+			esc_url( get_theme_file_uri( $file ) )
+		);
 	}
-
-	printf(
-		'<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>' . "\n",
-		esc_url( get_theme_file_uri( $files[ $slug ] ) )
-	);
 }
 add_action( 'wp_head', 'learn_drive_preload_heading_font', 2 );
 

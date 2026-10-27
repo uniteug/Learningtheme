@@ -3,7 +3,7 @@ Contributors: uniteug
 Requires at least: 7.0
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,10 @@ Non. Polices, icônes et scripts sont servis par votre site.
 Apparence › Éditeur › Styles › Parcourir les styles.
 
 == Changelog ==
+
+= 1.1.0 =
+* Polices du texte et des titres préchargées : plus de saut de mise en page sur les leçons longues.
+* Listes d'articles : hiérarchie de titres continue (H1, H2, H3).
 
 = 1.0.0 =
 * Première version.
