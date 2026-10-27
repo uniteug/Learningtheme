@@ -57,7 +57,7 @@ function sanitize( $input ) {
 	$defaults = defaults();
 	$clean    = $current;
 
-	$checkboxes = array( 'seo_titles', 'legacy_schema', 'indexnow', 'llms_txt', 'glossary_links', 'og_images', 'log_404', 'trim_image_sizes', 'rename_uploads', 'video_facade', 'disable_emojis', 'local_avatars' );
+	$checkboxes = array( 'seo_titles', 'legacy_schema', 'indexnow', 'llms_txt', 'glossary_links', 'og_images', 'log_404', 'trim_image_sizes', 'rename_uploads', 'video_facade', 'disable_emojis', 'local_avatars', 'offline' );
 	$tab_fields = isset( $input['_fields'] ) ? array_map( 'sanitize_key', explode( ',', (string) $input['_fields'] ) ) : array();
 
 	foreach ( $tab_fields as $key ) {
@@ -196,6 +196,7 @@ function tabs() {
 				'video_facade'     => array( 'checkbox', __( 'Façade vidéo (YouTube / Vimeo chargés au clic)', 'learn-drive-core' ) ),
 				'disable_emojis'   => array( 'checkbox', __( 'Supprimer le script des émojis', 'learn-drive-core' ) ),
 				'local_avatars'    => array( 'checkbox', __( 'Avatars locaux (aucune requête vers Gravatar)', 'learn-drive-core' ) ),
+				'offline'          => array( 'checkbox', __( 'Révision hors ligne (application installable, pages consultées gardées sur l’appareil)', 'learn-drive-core' ) ),
 				'cdn_url'          => array( 'text', __( 'URL du CDN d’images', 'learn-drive-core' ), 'https://cdn.example.com' ),
 			),
 		),

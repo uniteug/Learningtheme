@@ -94,6 +94,7 @@ function defaults() {
 		'video_facade'     => 1,
 		'disable_emojis'   => 1,
 		'local_avatars'    => 1,
+		'offline'          => 1,
 		'cdn_url'          => '',
 		// API & intégrations.
 		'api_keys'         => '',

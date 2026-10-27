@@ -35,6 +35,7 @@ Cours, quiz et examens blancs par pays, accès gratuit / premium, API REST et SE
 
 = 1.1.0 =
 * Espace auto-école : rôle Moniteur, classes avec code d'invitation, devoirs, suivi des élèves, export CSV.
+* Révision hors ligne : application installable, service worker, page « hors ligne ».
 * Formats de question : remettre dans l'ordre, association, image cliquable.
 * Les apprenants arrivent sur « Mon compte » après connexion.
 * Limitation de débit par compte pour les codes (une classe partage souvent la même adresse IP).

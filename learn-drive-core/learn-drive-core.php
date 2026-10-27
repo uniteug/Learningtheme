@@ -39,6 +39,7 @@ $learn_drive_core_files = array(
 	'includes/blocks.php',
 	'includes/rest.php',
 	'includes/media.php',
+	'includes/pwa.php',
 	'includes/integrations.php',
 	'includes/import.php',
 	'includes/demo.php',
