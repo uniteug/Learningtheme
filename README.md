@@ -1,12 +1,14 @@
 # Learn & Drive — thème WordPress d'apprentissage + plugin compagnon
 
+[![CI](https://github.com/uniteug/Learningtheme/actions/workflows/ci.yml/badge.svg?branch=claude/gifted-faraday-xppqru)](https://github.com/uniteug/Learningtheme/actions/workflows/ci.yml)
+
 Thème bloc (Full Site Editing) pour les sites de formation et d'exercices — permis de conduire d'abord, toute matière ensuite — avec rubriques **Actualités** et **Infos & démarches**, et un SEO intégré au produit.
 
 | Dossier | Rôle |
 |---|---|
 | [`learn-drive/`](learn-drive/) | **Thème bloc** : affichage uniquement (theme.json v3, gabarits, parties, patterns, 5 variations de style, mode sombre). Fonctionne seul. |
 | [`learn-drive-core/`](learn-drive-core/) | **Plugin compagnon** : contenus d'apprentissage, moteur de quiz, accès gratuit / premium, API REST, SEO (JSON-LD, sitemaps, maillage), import / export, démo. Si l'on change de thème, on garde quiz, comptes et URL. |
-| [`tests/`](tests/) | Tests d'intégration PHP (55 vérifications). |
+| [`tests/`](tests/) | Tests d'intégration PHP (65 vérifications), tests navigateur Playwright (`tests/e2e/`), installation de test (`tests/bin/`). |
 | [`bin/`](bin/) | Minification CSS / JS. |
 
 Architecture conforme au cahier des charges : *le thème affiche, le plugin porte les données* (règle d'or des thèmes du répertoire WordPress.org : pas de types de contenus dans le thème).
@@ -70,14 +72,24 @@ Environnement : WordPress 7.1.3, PHP 8.3, SQLite, serveur PHP intégré, Chromiu
 |---|---|
 | `php -l` sur tous les fichiers | OK |
 | PHPCS — WordPress Coding Standards 3 + PHPCompatibilityWP (`phpcs.xml.dist`) | **0 erreur** (8 avertissements volontaires : requêtes à `posts_per_page` élevé pour les sitemaps / imports) |
-| Tests d'intégration `php tests/integration.php <wp>` | **55 / 55** (correction des 4 formats, règles FR / IT, tirage reproductible et réparti, sessions signées, seuils 35/40 et 3 erreurs, accès / codes / héritage / révocation, révision espacée, noindex des questions minces, explication obligatoire, modèles de titre, URL en silo, import CSV `;` + réimport sans doublon, export) |
-| Parcours navigateur (mobile 390 px) | question isolée (correction serveur, solution marquée par icône + texte), quiz thématique complet, examen blanc (session `noindex` + canonique, chrono 20 s, aucun corrigé pendant l'épreuve, résultat avec seuil « 35 bonnes réponses sur 40 », erreurs par thème, revue de la correction) — **aucune erreur JavaScript** |
+| Tests d'intégration `php tests/integration.php <wp>` | **65 / 65** (correction des 8 formats dont ordre, association et image cliquable, règles FR / IT, tirage reproductible et réparti, sessions signées, seuils 35/40 et 3 erreurs, accès / codes / héritage / révocation, révision espacée, noindex des questions minces, explication obligatoire, modèles de titre, URL en silo, import CSV `;` + réimport sans doublon, export) |
+| Parcours navigateur (mobile 390 px) | question isolée (correction serveur, solution marquée par icône + texte), quiz thématique complet, examen blanc (session `noindex` + canonique, chrono 20 s, aucun corrigé pendant l'épreuve, résultat avec seuil « 35 bonnes réponses sur 40 », erreurs par thème, revue de la correction) ; formats ordre (clavier), association et image cliquable — **aucune erreur JavaScript** |
 | Validation des blocs (comme l'éditeur) | **210 / 210** patterns, gabarits, parties et contenus valides |
 | Back-office | réglages, santé SEO, accès et codes, outils, éditeur de questions, éditeur de site : aucune erreur |
 | Question premium | ni la solution ni l'explication dans le HTML, l'API ou le JSON-LD ; `isAccessibleForFree: false` |
 | Lighthouse mobile (6 gabarits clés, HTML compressé) | Performance **97–100**, Accessibilité **100**, Bonnes pratiques **100**, SEO **100** ; LCP 1,7–2,3 s, CLS ≤ 0,036, TBT 0 ms |
 
-Reproduire : installer un WordPress de test avec le thème et le plugin, `wp learn demo`, puis `php tests/integration.php /chemin/wordpress`, `vendor/bin/phpcs`.
+Reproduire (les mêmes étapes tournent dans GitHub Actions à chaque push, `.github/workflows/ci.yml`) :
+
+```sh
+composer install && vendor/bin/phpcs                       # normes WordPress
+bash tests/bin/setup-wordpress.sh /tmp/wp                  # WordPress 7.1.3 + SQLite + démo
+php tests/integration.php /tmp/wp                          # tests d'intégration
+(cd /tmp/wp && php -S 127.0.0.1:8080 router.php &)         # serveur de test
+cd tests/e2e && npm install && npx playwright install chromium && npm test
+```
+
+Compte de test : `admin` / `admin-password-123`.
 
 ## Choix et écarts par rapport au cahier des charges
 

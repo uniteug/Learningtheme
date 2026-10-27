@@ -1,5 +1,5 @@
-node_modules/
-vendor/
 *.log
 .DS_Store
+node_modules/
 shots/
+vendor/

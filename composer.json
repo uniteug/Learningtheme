@@ -1,0 +1,19 @@
+{
+	"name": "uniteug/learn-drive",
+	"description": "Thème bloc Learn & Drive et plugin compagnon Learn & Drive Core.",
+	"type": "project",
+	"license": "GPL-2.0-or-later",
+	"require-dev": {
+		"wp-coding-standards/wpcs": "^3.1",
+		"phpcompatibility/phpcompatibility-wp": "^2.1"
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	},
+	"scripts": {
+		"lint": "phpcs",
+		"fix": "phpcbf"
+	}
+}
