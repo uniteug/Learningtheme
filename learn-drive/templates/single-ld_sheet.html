@@ -1,0 +1,35 @@
+<!-- wp:template-part {"slug":"header","tagName":"header"} /-->
+
+<!-- wp:group {"tagName":"main","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|60"}}},"layout":{"type":"constrained","contentSize":"1080px"}} -->
+<main class="wp-block-group" style="padding-top:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--60)">
+	<!-- wp:breadcrumbs /-->
+	<!-- wp:columns {"verticalAlignment":"center","style":{"spacing":{"margin":{"top":"var:preset|spacing|40"},"blockGap":{"left":"var:preset|spacing|50"}}}} -->
+	<div class="wp-block-columns are-vertically-aligned-center" style="margin-top:var(--wp--preset--spacing--40)">
+		<!-- wp:column {"verticalAlignment":"center","width":"34%"} -->
+		<div class="wp-block-column is-vertically-aligned-center" style="flex-basis:34%">
+			<!-- wp:post-featured-image {"aspectRatio":"1","scale":"contain","sizeSlug":"learn-drive-400","className":"ld-sheet-image"} /-->
+		</div>
+		<!-- /wp:column -->
+		<!-- wp:column {"verticalAlignment":"center"} -->
+		<div class="wp-block-column is-vertically-aligned-center">
+			<!-- wp:post-terms {"term":"ld_sheet_family","className":"is-style-pill"} /-->
+			<!-- wp:post-title {"level":1} /-->
+			<!-- wp:post-excerpt {"className":"ld-standfirst"} /-->
+			<!-- wp:learn-drive/sheet-meta /-->
+		</div>
+		<!-- /wp:column -->
+	</div>
+	<!-- /wp:columns -->
+
+	<!-- wp:group {"layout":{"type":"constrained","contentSize":"760px","justifyContent":"left"},"style":{"spacing":{"margin":{"top":"var:preset|spacing|50"}}}} -->
+	<div class="wp-block-group" style="margin-top:var(--wp--preset--spacing--50)">
+		<!-- wp:post-content {"layout":{"type":"default"}} /-->
+		<!-- wp:learn-drive/related {"postType":"ld_question","count":5,"variant":"sheet-questions","layout":"list"} /-->
+	</div>
+	<!-- /wp:group -->
+
+	<!-- wp:learn-drive/related {"postType":"ld_sheet","count":6,"variant":"same-family","layout":"tiles"} /-->
+</main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->

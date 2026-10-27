@@ -1,0 +1,63 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Coach",
+	"settings": {
+		"color": {
+			"palette": [
+				{ "slug": "base", "name": "Fond", "color": "#FCFBFF" },
+				{ "slug": "surface", "name": "Surface", "color": "#F2EEFD" },
+				{ "slug": "contrast", "name": "Texte", "color": "#1A1033" },
+				{ "slug": "muted", "name": "Texte discret", "color": "#574F6B" },
+				{ "slug": "border", "name": "Bordure", "color": "#DDD5F3" },
+				{ "slug": "primary", "name": "Primaire", "color": "#6D28D9" },
+				{ "slug": "secondary", "name": "Secondaire", "color": "#0F172A" },
+				{ "slug": "accent", "name": "Accent", "color": "#FACC15" },
+				{ "slug": "success", "name": "Réussite", "color": "#15803D" },
+				{ "slug": "error", "name": "Erreur", "color": "#DC2626" },
+				{ "slug": "warning", "name": "Avertissement", "color": "#B45309" },
+				{ "slug": "premium", "name": "Premium", "color": "#C026D3" }
+			]
+		},
+		"custom": {
+			"radius": { "card": "16px", "control": "999px" },
+			"dark": {
+				"base": "#0F172A",
+				"surface": "#1A2238",
+				"contrast": "#F1EEFF",
+				"muted": "#B4ACCF",
+				"border": "#2F3653",
+				"primary": "#B59CFF",
+				"secondary": "#E2E8F0",
+				"accent": "#FACC15",
+				"success": "#22C55E",
+				"error": "#F87171",
+				"warning": "#FBBF24",
+				"premium": "#F0ABFC"
+			}
+		}
+	},
+	"styles": {
+		"typography": {
+			"fontFamily": "var(--wp--preset--font-family--inter)"
+		},
+		"elements": {
+			"heading": {
+				"typography": {
+					"fontFamily": "var(--wp--preset--font-family--plus-jakarta-sans)",
+					"fontWeight": "800",
+					"letterSpacing": "-0.025em"
+				}
+			},
+			"button": {
+				"border": { "radius": "999px" },
+				"typography": { "fontWeight": "700" }
+			}
+		},
+		"blocks": {
+			"core/site-title": {
+				"typography": { "fontFamily": "var(--wp--preset--font-family--plus-jakarta-sans)", "fontWeight": "800" }
+			}
+		}
+	}
+}

@@ -1,0 +1,5 @@
+/* Images à la une : ratio réservé pour éviter tout décalage de mise en page. */
+.wp-block-post-featured-image img {
+	height: auto;
+	background: var(--wp--preset--color--surface);
+}

@@ -1,0 +1,55 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "learn-drive/quiz",
+	"title": "Quiz",
+	"category": "learn-drive",
+	"icon": "forms",
+	"description": "Lecteur de quiz : thématique, entraînement ou examen blanc. Questions lisibles par Google, correction côté serveur.",
+	"textdomain": "learn-drive-core",
+	"attributes": {
+		"quizId": {
+			"type": "integer",
+			"default": 0
+		},
+		"source": {
+			"type": "string",
+			"enum": [
+				"quiz",
+				"related"
+			],
+			"default": "quiz"
+		},
+		"count": {
+			"type": "integer",
+			"default": 5
+		},
+		"compact": {
+			"type": "boolean",
+			"default": false
+		},
+		"heading": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": [
+			"wide",
+			"full"
+		],
+		"spacing": {
+			"margin": true
+		},
+		"interactivity": true
+	},
+	"usesContext": [
+		"postId",
+		"postType"
+	],
+	"editorScript": "learn-drive-core-editor",
+	"style": "learn-drive-core-quiz",
+	"render": "file:./render.php",
+	"viewScriptModule": "learn-drive-quiz"
+}

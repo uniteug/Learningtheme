@@ -1,0 +1,40 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "learn-drive/question",
+	"title": "Question",
+	"category": "learn-drive",
+	"icon": "editor-help",
+	"description": "Énoncé, propositions, réponse et explication d'une question (page question).",
+	"textdomain": "learn-drive-core",
+	"attributes": {
+		"questionId": {
+			"type": "integer",
+			"default": 0
+		},
+		"layout": {
+			"type": "string",
+			"enum": [
+				"stack",
+				"media-left"
+			],
+			"default": "stack"
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": false,
+		"spacing": {
+			"margin": true
+		},
+		"interactivity": true
+	},
+	"usesContext": [
+		"postId",
+		"postType"
+	],
+	"editorScript": "learn-drive-core-editor",
+	"style": "learn-drive-core-quiz",
+	"render": "file:./render.php",
+	"viewScriptModule": "learn-drive-quiz"
+}

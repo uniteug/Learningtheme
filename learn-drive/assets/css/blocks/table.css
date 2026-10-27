@@ -1,0 +1,41 @@
+/* Tableaux lisibles sur mobile. */
+.wp-block-table {
+	overflow-x: auto;
+}
+
+.wp-block-table table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.wp-block-table :where(th, td) {
+	border: 0;
+	border-bottom: 1px solid var(--wp--preset--color--border);
+	padding: 0.7rem 0.85rem;
+	text-align: left;
+	vertical-align: top;
+}
+
+.wp-block-table thead th {
+	background: var(--wp--preset--color--surface);
+	border-bottom: 2px solid var(--wp--preset--color--contrast);
+	font-weight: 700;
+}
+
+.wp-block-table figcaption {
+	font-size: var(--wp--preset--font-size--x-small);
+	color: var(--wp--preset--color--muted);
+}
+
+/* Tableau de coûts : dernière colonne en chiffres alignés. */
+.wp-block-table.is-style-costs td:last-child,
+.wp-block-table.is-style-costs th:last-child {
+	text-align: right;
+	font-variant-numeric: tabular-nums;
+	white-space: nowrap;
+}
+
+.wp-block-table.is-style-costs tfoot td {
+	font-weight: 700;
+	border-top: 2px solid var(--wp--preset--color--contrast);
+}

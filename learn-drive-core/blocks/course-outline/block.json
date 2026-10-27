@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "learn-drive/course-outline",
+	"title": "Programme du cours",
+	"category": "learn-drive",
+	"icon": "editor-ol",
+	"description": "Liste ordonnée des leçons d'un cours avec leur statut d'accès.",
+	"textdomain": "learn-drive-core",
+	"attributes": {},
+	"supports": {
+		"html": false,
+		"align": false,
+		"spacing": {
+			"margin": true
+		},
+		"interactivity": false
+	},
+	"usesContext": [
+		"postId",
+		"postType"
+	],
+	"editorScript": "learn-drive-core-editor",
+	"style": "learn-drive-core-blocks",
+	"render": "file:./render.php"
+}

@@ -1,0 +1,25 @@
+<!-- wp:template-part {"slug":"header","tagName":"header"} /-->
+
+<!-- wp:group {"tagName":"main","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|60"}}},"layout":{"type":"constrained","contentSize":"860px"}} -->
+<main class="wp-block-group" style="padding-top:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--60)">
+	<!-- wp:breadcrumbs /-->
+	<!-- wp:group {"style":{"spacing":{"blockGap":"0.5rem","margin":{"top":"var:preset|spacing|30"}}},"layout":{"type":"flex","flexWrap":"wrap"}} -->
+	<div class="wp-block-group" style="margin-top:var(--wp--preset--spacing--30)">
+		<!-- wp:post-terms {"term":"ld_track","className":"is-style-pill"} /-->
+		<!-- wp:post-terms {"term":"ld_topic","className":"is-style-pill"} /-->
+		<!-- wp:learn-drive/access-badge /-->
+	</div>
+	<!-- /wp:group -->
+	<!-- wp:post-title {"level":1} /-->
+	<!-- wp:post-excerpt {"className":"ld-standfirst"} /-->
+
+	<!-- wp:learn-drive/quiz /-->
+
+	<!-- wp:post-content {"layout":{"type":"constrained"},"style":{"spacing":{"margin":{"top":"var:preset|spacing|60"}}}} /-->
+
+	<!-- wp:learn-drive/related {"postType":"ld_lesson","count":4,"variant":"revise","layout":"list"} /-->
+	<!-- wp:learn-drive/related {"postType":"ld_quiz","count":4,"variant":"more-quizzes","layout":"list"} /-->
+</main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->

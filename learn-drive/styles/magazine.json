@@ -1,0 +1,72 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Magazine",
+	"settings": {
+		"color": {
+			"palette": [
+				{ "slug": "base", "name": "Fond", "color": "#FAFAF7" },
+				{ "slug": "surface", "name": "Surface", "color": "#F0EFE9" },
+				{ "slug": "contrast", "name": "Texte", "color": "#111827" },
+				{ "slug": "muted", "name": "Texte discret", "color": "#4B5563" },
+				{ "slug": "border", "name": "Bordure", "color": "#DAD8CF" },
+				{ "slug": "primary", "name": "Primaire", "color": "#111827" },
+				{ "slug": "secondary", "name": "Secondaire", "color": "#374151" },
+				{ "slug": "accent", "name": "Accent", "color": "#C2410C" },
+				{ "slug": "success", "name": "Réussite", "color": "#15803D" },
+				{ "slug": "error", "name": "Erreur", "color": "#B91C1C" },
+				{ "slug": "warning", "name": "Avertissement", "color": "#B45309" },
+				{ "slug": "premium", "name": "Premium", "color": "#9A3412" }
+			]
+		},
+		"custom": {
+			"radius": { "card": "2px", "control": "2px" },
+			"dark": {
+				"base": "#0E0E10",
+				"surface": "#1A1A1D",
+				"contrast": "#F4F3EE",
+				"muted": "#B3B1A8",
+				"border": "#33332F",
+				"primary": "#F4F3EE",
+				"secondary": "#D6D3CB",
+				"accent": "#FB923C",
+				"success": "#4ADE80",
+				"error": "#F87171",
+				"warning": "#FBBF24",
+				"premium": "#FDBA74"
+			}
+		}
+	},
+	"styles": {
+		"typography": {
+			"fontFamily": "var(--wp--preset--font-family--inter)"
+		},
+		"elements": {
+			"link": {
+				"color": { "text": "var(--wp--preset--color--accent)" }
+			},
+			"heading": {
+				"typography": {
+					"fontFamily": "var(--wp--preset--font-family--source-serif)",
+					"fontWeight": "700",
+					"letterSpacing": "-0.015em"
+				}
+			},
+			"button": {
+				"border": { "radius": "2px" },
+				"typography": { "textTransform": "uppercase", "letterSpacing": "0.06em", "fontSize": "var(--wp--preset--font-size--small)" }
+			}
+		},
+		"blocks": {
+			"core/site-title": {
+				"typography": { "fontFamily": "var(--wp--preset--font-family--source-serif)", "fontSize": "var(--wp--preset--font-size--x-large)" }
+			},
+			"core/post-terms": {
+				"elements": { "link": { "color": { "text": "var(--wp--preset--color--accent)" } } }
+			},
+			"core/separator": {
+				"color": { "text": "var(--wp--preset--color--contrast)" }
+			}
+		}
+	}
+}

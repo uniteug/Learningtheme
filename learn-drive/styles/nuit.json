@@ -1,0 +1,32 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Route de nuit",
+	"settings": {
+		"color": {
+			"palette": [
+				{ "slug": "base", "name": "Fond", "color": "#0B1220" },
+				{ "slug": "surface", "name": "Surface", "color": "#131C2E" },
+				{ "slug": "contrast", "name": "Texte", "color": "#E8EDF5" },
+				{ "slug": "muted", "name": "Texte discret", "color": "#A3B0C4" },
+				{ "slug": "border", "name": "Bordure", "color": "#28354C" },
+				{ "slug": "primary", "name": "Primaire", "color": "#7EA3FF" },
+				{ "slug": "secondary", "name": "Secondaire", "color": "#C3CEDF" },
+				{ "slug": "accent", "name": "Accent", "color": "#FFC531" },
+				{ "slug": "success", "name": "Réussite", "color": "#4ADE80" },
+				{ "slug": "error", "name": "Erreur", "color": "#F87171" },
+				{ "slug": "warning", "name": "Avertissement", "color": "#FBBF24" },
+				{ "slug": "premium", "name": "Premium", "color": "#B794F6" }
+			]
+		}
+	},
+	"styles": {
+		"elements": {
+			"button": {
+				"color": { "text": "#0B1220" },
+				":hover": { "color": { "text": "#0B1220" } },
+				":focus": { "color": { "text": "#0B1220" } }
+			}
+		}
+	}
+}

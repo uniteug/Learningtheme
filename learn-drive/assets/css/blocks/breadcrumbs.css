@@ -1,0 +1,17 @@
+/* Fil d'Ariane. */
+.wp-block-breadcrumbs ol {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.25rem 0;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.wp-block-breadcrumbs a {
+	text-underline-offset: 0.2em;
+}
+
+.wp-block-breadcrumbs li:last-child span {
+	color: var(--wp--preset--color--contrast);
+}

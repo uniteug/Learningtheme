@@ -1,0 +1,87 @@
+/* Administration Learn & Drive. */
+.ld-answers__list {
+	margin-left: 1.5em;
+}
+
+.ld-answer-row {
+	display: flex;
+	gap: 0.75rem;
+	align-items: center;
+	margin-bottom: 0.5rem;
+}
+
+.ld-answer-row .widefat {
+	flex: 1;
+}
+
+.ld-answer-row label {
+	white-space: nowrap;
+}
+
+.ld-numeric label {
+	margin-right: 1rem;
+}
+
+.ld-help {
+	color: #50575e;
+}
+
+.ld-warning {
+	padding: 0.5rem 0.75rem;
+	border-left: 4px solid #dba617;
+	background: #fcf9e8;
+}
+
+.ld-reports li {
+	padding: 0.25rem 0;
+	border-bottom: 1px solid #f0f0f1;
+}
+
+.ld-rules th {
+	width: 220px;
+}
+
+.ld-health-table td,
+.ld-health-table th {
+	vertical-align: top;
+}
+
+.ld-health-score {
+	font-size: 2.5rem;
+	font-weight: 700;
+	line-height: 1;
+}
+
+.ld-cards {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+	gap: 1rem;
+	margin: 1rem 0 2rem;
+}
+
+.ld-cards .card {
+	margin: 0;
+	max-width: none;
+}
+
+.ld-tree li {
+	margin: 0.25rem 0 0.25rem 1.25rem;
+}
+
+.ld-tag {
+	display: inline-block;
+	padding: 0 0.4rem;
+	border-radius: 3px;
+	background: #f0f0f1;
+	font-size: 12px;
+}
+
+.ld-tag--premium {
+	background: #7c3aed;
+	color: #fff;
+}
+
+.ld-tag--registered {
+	background: #2271b1;
+	color: #fff;
+}

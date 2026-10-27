@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "learn-drive/track-facts",
+	"title": "Règles de l'examen",
+	"category": "learn-drive",
+	"icon": "clipboard",
+	"description": "Âge minimum, nombre de questions, durée et seuil de réussite de la catégorie.",
+	"textdomain": "learn-drive-core",
+	"attributes": {},
+	"supports": {
+		"html": false,
+		"align": false,
+		"spacing": {
+			"margin": true
+		},
+		"interactivity": false
+	},
+	"usesContext": [
+		"postId",
+		"postType"
+	],
+	"editorScript": "learn-drive-core-editor",
+	"style": "learn-drive-core-blocks",
+	"render": "file:./render.php"
+}

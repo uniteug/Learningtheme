@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "learn-drive/lesson-nav",
+	"title": "Leçon précédente / suivante",
+	"category": "learn-drive",
+	"icon": "leftright",
+	"description": "Navigation dans l'ordre du cours.",
+	"textdomain": "learn-drive-core",
+	"attributes": {},
+	"supports": {
+		"html": false,
+		"align": false,
+		"spacing": {
+			"margin": true
+		},
+		"interactivity": false
+	},
+	"usesContext": [
+		"postId",
+		"postType"
+	],
+	"editorScript": "learn-drive-core-editor",
+	"style": "learn-drive-core-blocks",
+	"render": "file:./render.php"
+}

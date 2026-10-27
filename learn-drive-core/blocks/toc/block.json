@@ -1,0 +1,31 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "learn-drive/toc",
+	"title": "Sommaire",
+	"category": "learn-drive",
+	"icon": "list-view",
+	"description": "Sommaire collant généré depuis les titres du contenu.",
+	"textdomain": "learn-drive-core",
+	"attributes": {
+		"title": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": false,
+		"spacing": {
+			"margin": true
+		},
+		"interactivity": false
+	},
+	"usesContext": [
+		"postId",
+		"postType"
+	],
+	"editorScript": "learn-drive-core-editor",
+	"style": "learn-drive-core-blocks",
+	"render": "file:./render.php"
+}

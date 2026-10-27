@@ -1,0 +1,21 @@
+/*
+Theme Name: Learn & Drive
+Theme URI: https://github.com/uniteug/Learningtheme
+Author: uniteug
+Author URI: https://github.com/uniteug
+Description: Thème bloc (Full Site Editing) pour les sites d'apprentissage : cours, leçons, quiz, examens blancs, fiches, actualités par rubrique et guides pratiques. Pensé d'abord pour le permis de conduire mais utilisable pour toute matière. Ultra léger (aucun constructeur, aucune police distante, aucun jQuery), accessible (WCAG 2.2 AA) et optimisé pour le référencement naturel. Associé au plugin compagnon « Learn & Drive Core » il gère les quiz, les données structurées, les sitemaps et le maillage interne.
+Requires at least: 7.0
+Tested up to: 7.1
+Requires PHP: 8.1
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: learn-drive
+Tags: blog, education, news, one-column, two-columns, grid-layout, block-patterns, block-styles, custom-colors, custom-logo, custom-menu, editor-style, featured-images, full-site-editing, style-variations, rtl-language-support, threaded-comments, translation-ready, wide-blocks, accessibility-ready
+
+Learn & Drive WordPress Theme, (C) 2026 uniteug.
+Learn & Drive is distributed under the terms of the GNU GPL v2 or later.
+
+Les styles du thème sont déclarés dans theme.json et dans assets/css/ :
+ce fichier ne contient volontairement que l'en-tête du thème.
+*/

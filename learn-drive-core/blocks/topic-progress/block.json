@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "learn-drive/topic-progress",
+	"title": "Progression par thème",
+	"category": "learn-drive",
+	"icon": "chart-line",
+	"description": "Jauges de progression de l'apprenant connecté.",
+	"textdomain": "learn-drive-core",
+	"attributes": {},
+	"supports": {
+		"html": false,
+		"align": false,
+		"spacing": {
+			"margin": true
+		},
+		"interactivity": false
+	},
+	"usesContext": [
+		"postId",
+		"postType"
+	],
+	"editorScript": "learn-drive-core-editor",
+	"style": "learn-drive-core-blocks",
+	"render": "file:./render.php"
+}

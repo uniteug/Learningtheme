@@ -1,0 +1,65 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "learn-drive/related",
+	"title": "Contenus liés",
+	"category": "learn-drive",
+	"icon": "networking",
+	"description": "Maillage interne automatique : leçons, quiz, questions, fiches, actualités ou guides liés par thème et catégorie.",
+	"textdomain": "learn-drive-core",
+	"attributes": {
+		"postType": {
+			"type": "string",
+			"enum": [
+				"post",
+				"ld_course",
+				"ld_lesson",
+				"ld_question",
+				"ld_quiz",
+				"ld_sheet",
+				"ld_guide",
+				"ld_glossary"
+			],
+			"default": "ld_lesson"
+		},
+		"count": {
+			"type": "integer",
+			"default": 4
+		},
+		"variant": {
+			"type": "string",
+			"default": ""
+		},
+		"heading": {
+			"type": "string",
+			"default": ""
+		},
+		"layout": {
+			"type": "string",
+			"enum": [
+				"list",
+				"cards",
+				"tiles"
+			],
+			"default": "list"
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": [
+			"wide",
+			"full"
+		],
+		"spacing": {
+			"margin": true
+		},
+		"interactivity": false
+	},
+	"usesContext": [
+		"postId",
+		"postType"
+	],
+	"editorScript": "learn-drive-core-editor",
+	"style": "learn-drive-core-blocks",
+	"render": "file:./render.php"
+}

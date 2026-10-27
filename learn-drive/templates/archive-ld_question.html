@@ -1,0 +1,35 @@
+<!-- wp:template-part {"slug":"header","tagName":"header"} /-->
+
+<!-- wp:group {"tagName":"main","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|60"}}},"layout":{"type":"constrained","contentSize":"1240px"}} -->
+<main class="wp-block-group" style="padding-top:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--60)">
+	<!-- wp:breadcrumbs /-->
+	<!-- wp:query-title {"type":"archive","showPrefix":false} /-->
+	<!-- wp:learn-drive/archive-intro /-->
+
+	<!-- wp:query {"queryId":20,"query":{"perPage":24,"pages":0,"offset":0,"postType":"ld_question","order":"asc","orderBy":"menu_order","author":"","search":"","exclude":[],"sticky":"","inherit":true},"style":{"spacing":{"margin":{"top":"var:preset|spacing|50"}}}} -->
+	<div class="wp-block-query" style="margin-top:var(--wp--preset--spacing--50)">
+		<!-- wp:post-template {"layout":{"type":"grid","columnCount":2,"minimumColumnWidth":"12rem"}} -->
+			<!-- wp:group {"className":"ld-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|40","bottom":"var:preset|spacing|40","left":"var:preset|spacing|40","right":"var:preset|spacing|40"},"blockGap":"0.5rem"}},"layout":{"type":"flex","orientation":"vertical"}} -->
+			<div class="wp-block-group ld-card" style="padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40)">
+				<!-- wp:post-terms {"term":"ld_track","className":"is-style-pill"} /-->
+				<!-- wp:post-title {"level":2,"isLink":true,"fontSize":"medium"} /-->
+				<!-- wp:post-excerpt {"excerptLength":20,"fontSize":"small"} /-->
+			</div>
+			<!-- /wp:group -->
+		<!-- /wp:post-template -->
+
+		<!-- wp:query-pagination {"paginationArrow":"arrow","layout":{"type":"flex","justifyContent":"center"},"style":{"spacing":{"margin":{"top":"var:preset|spacing|50"}}}} -->
+			<!-- wp:query-pagination-previous /-->
+			<!-- wp:query-pagination-numbers /-->
+			<!-- wp:query-pagination-next /-->
+		<!-- /wp:query-pagination -->
+
+		<!-- wp:query-no-results -->
+			<!-- wp:pattern {"slug":"learn-drive/no-results"} /-->
+		<!-- /wp:query-no-results -->
+	</div>
+	<!-- /wp:query -->
+</main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->
