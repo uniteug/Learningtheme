@@ -1,5 +1,6 @@
 /**
- * Espace apprenant : code d'accès, objectif, export et suppression des données.
+ * Espace apprenant : code d'accès, classe d'auto-école, objectif, export et
+ * suppression des données.
  */
 import { store, getContext, getConfig } from '@wordpress/interactivity';
 
@@ -23,6 +24,12 @@ async function api( path, { method = 'POST', body } = {} ) {
 const t = ( key ) => ( getConfig( NS ).i18n || {} )[ key ] || '';
 
 store( NS, {
+	callbacks: {
+		// Marque l'espace comme interactif (boutons JS prêts).
+		ready() {
+			getContext().ready = true;
+		},
+	},
 	actions: {
 		*redeem( event ) {
 			event.preventDefault();
@@ -37,6 +44,38 @@ store( NS, {
 				ctx.message = e.message;
 			} finally {
 				ctx.busy = false;
+			}
+		},
+		*joinClass( event ) {
+			event.preventDefault();
+			const ctx = getContext();
+			ctx.busy = true;
+			try {
+				const data = yield api( 'classes/join', {
+					body: { code: event.target.elements.code.value.trim() },
+				} );
+				ctx.message = data.message;
+				window.setTimeout( () => window.location.reload(), 1200 );
+			} catch ( e ) {
+				ctx.message = e.message || t( 'error' );
+			} finally {
+				ctx.busy = false;
+			}
+		},
+		*leaveClass() {
+			const ctx = getContext();
+			// eslint-disable-next-line no-alert
+			if ( ! window.confirm( t( 'confirmLeave' ) ) ) {
+				return;
+			}
+			try {
+				const data = yield api( `classes/${ ctx.classId }/membership`, {
+					method: 'DELETE',
+				} );
+				ctx.message = data.message;
+				window.setTimeout( () => window.location.reload(), 1200 );
+			} catch ( e ) {
+				ctx.message = e.message || t( 'error' );
 			}
 		},
 		*saveGoal( event ) {

@@ -4,7 +4,7 @@ Tags: lms, quiz, education, permis, seo
 Requires at least: 7.0
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -32,6 +32,12 @@ Cours, quiz et examens blancs par pays, accès gratuit / premium, API REST et SE
 3. Réglages › Permaliens : structure recommandée `/actualites/%postname%/`.
 
 == Changelog ==
+
+= 1.1.0 =
+* Espace auto-école : rôle Moniteur, classes avec code d'invitation, devoirs, suivi des élèves, export CSV.
+* Formats de question : remettre dans l'ordre, association, image cliquable.
+* Les apprenants arrivent sur « Mon compte » après connexion.
+* Limitation de débit par compte pour les codes (une classe partage souvent la même adresse IP).
 
 = 1.0.0 =
 * Première version.

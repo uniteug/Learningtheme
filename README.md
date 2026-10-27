@@ -8,7 +8,7 @@ Thème bloc (Full Site Editing) pour les sites de formation et d'exercices — p
 |---|---|
 | [`learn-drive/`](learn-drive/) | **Thème bloc** : affichage uniquement (theme.json v3, gabarits, parties, patterns, 5 variations de style, mode sombre). Fonctionne seul. |
 | [`learn-drive-core/`](learn-drive-core/) | **Plugin compagnon** : contenus d'apprentissage, moteur de quiz, accès gratuit / premium, API REST, SEO (JSON-LD, sitemaps, maillage), import / export, démo. Si l'on change de thème, on garde quiz, comptes et URL. |
-| [`tests/`](tests/) | Tests d'intégration PHP (65 vérifications), tests navigateur Playwright (`tests/e2e/`), installation de test (`tests/bin/`). |
+| [`tests/`](tests/) | Tests d'intégration PHP (87 vérifications), tests navigateur Playwright (`tests/e2e/`), installation de test (`tests/bin/`). |
 | [`bin/`](bin/) | Minification CSS / JS. |
 
 Architecture conforme au cahier des charges : *le thème affiche, le plugin porte les données* (règle d'or des thèmes du répertoire WordPress.org : pas de types de contenus dans le thème).
@@ -51,6 +51,7 @@ Contenu de démonstration : 2 pays (France QCM, Italie vrai/faux) avec leurs rè
   - **correction toujours côté serveur** : aucune bonne réponse d'examen ou premium n'est envoyée au navigateur.
 - **Accès** : tout gratuit / tout payant / mixte, héritage site › catégorie › cours › leçon › contenu, règles gratuit / inscription / premium, début de leçon gratuit (bloc « Lire la suite »), vitrine des énoncés pour Google. Table d'accès indépendante du paiement : **WooCommerce** (produit → offre, remboursement → fermeture), **codes d'accès** générés par lot (auto-écoles), ouverture manuelle. Écran récapitulatif en arbre.
 - **Comptes** : tableau de bord (taux de réussite aux examens blancs, prédiction « prêt pour l'examen », série de jours, erreurs à revoir, progression par thème, historique), objectif et date d'examen, **révision espacée** J+1 / J+3 / J+7, export et suppression en un clic, exportateur / effaceur RGPD de WordPress.
+- **Espace auto-école (B2B)** : rôle **Moniteur** (accès limité à son espace), classes avec **code d'invitation** (ABCD-EFGH, places limitées, inscriptions ouvertes / fermées, code renouvelable), l'élève rejoint la classe depuis « Mon compte » et peut la quitter à tout moment ; **devoirs** (quiz ou examen blanc, date limite, « à faire / fait / en retard ») ; **suivi** par élève (dernière activité, questions répondues, taux de réussite, examens blancs, prêt pour l'examen, thème le plus faible, erreurs à revoir, score par devoir) ; **export CSV** (Excel, formules neutralisées) ; chaque moniteur ne voit que ses classes ; exportateur / effaceur RGPD.
 - **SEO intégré** (cède les balises à Yoast / Rank Math / SEOPress / AIOSEO et **fusionne** son JSON-LD dans leur graphe) :
   - titres et descriptions par modèles (`{title} – Quiz {track} {country} | {site}`), un seul H1, canonique auto-référente, pagination en vraies URL ;
   - `noindex` : recherche, 404, paramètres de session d'examen (canonique vers l'examen), comptes, questions dont l'explication fait moins de 40 mots (alerte dans la santé SEO), quasi-doublons avec choix d'une canonique ;
@@ -61,7 +62,7 @@ Contenu de démonstration : 2 pays (France QCM, Italie vrai/faux) avec leurs rè
   - maillage automatique : pages piliers, leçon / quiz / fiche / questions proches sur chaque question, actualités liées sur chaque leçon, « Testez-vous » et « À réviser » sur chaque actualité, liens du lexique (1re occurrence), ancres de titres et sommaire ;
   - écran **Santé SEO** : questions trop minces, images sans texte alternatif, titres trop longs, doublons, pages orphelines, signalements, journal des 404 et gestionnaire de redirections 301.
 - **Médias** : AVIF / WebP (original conservé), qualité 75, tailles utiles uniquement (400 / 800 / 1200 / 1600 + 1200×675), noms de fichiers lisibles, façade vidéo YouTube / Vimeo (rien chargé avant le clic), CDN d'images, avatars locaux (aucune requête Gravatar).
-- **API REST** `/wp-json/learn/v1/` : `check`, `quiz/{id}`, `quiz/{id}/session`, `quiz/{id}/submit`, `questions`, `questions/{id}`, `report`, `me/progress`, `me/goal`, `me/access`, `access/redeem` ; clés d'API (`X-Learn-Key`) pour l'application, limitation de débit, pagination bornée anti-aspiration ; webhooks signés HMAC (inscription, accès ouvert, quiz terminé).
+- **API REST** `/wp-json/learn/v1/` : `check`, `quiz/{id}`, `quiz/{id}/session`, `quiz/{id}/submit`, `questions`, `questions/{id}`, `report`, `me/progress`, `me/goal`, `me/access`, `me/classes`, `access/redeem`, `classes/join`, `classes/{id}/membership` ; clés d'API (`X-Learn-Key`) pour l'application, limitation de débit, pagination bornée anti-aspiration ; webhooks signés HMAC (inscription, accès ouvert, quiz terminé).
 - **Import / export** CSV (`,` ou `;`), JSON, JSON Lines en continu ; WP-CLI : `wp learn import fichier.csv [--dry-run]`, `wp learn export fichier.jsonl`, `wp learn demo`, `wp learn og`.
 
 ## Tests réalisés en local
@@ -72,8 +73,8 @@ Environnement : WordPress 7.1.3, PHP 8.3, SQLite, serveur PHP intégré, Chromiu
 |---|---|
 | `php -l` sur tous les fichiers | OK |
 | PHPCS — WordPress Coding Standards 3 + PHPCompatibilityWP (`phpcs.xml.dist`) | **0 erreur** (8 avertissements volontaires : requêtes à `posts_per_page` élevé pour les sitemaps / imports) |
-| Tests d'intégration `php tests/integration.php <wp>` | **65 / 65** (correction des 8 formats dont ordre, association et image cliquable, règles FR / IT, tirage reproductible et réparti, sessions signées, seuils 35/40 et 3 erreurs, accès / codes / héritage / révocation, révision espacée, noindex des questions minces, explication obligatoire, modèles de titre, URL en silo, import CSV `;` + réimport sans doublon, export) |
-| Parcours navigateur (mobile 390 px) | question isolée (correction serveur, solution marquée par icône + texte), quiz thématique complet, examen blanc (session `noindex` + canonique, chrono 20 s, aucun corrigé pendant l'épreuve, résultat avec seuil « 35 bonnes réponses sur 40 », erreurs par thème, revue de la correction) ; formats ordre (clavier), association et image cliquable — **aucune erreur JavaScript** |
+| Tests d'intégration `php tests/integration.php <wp>` | **87 / 87** (espace auto-école : rôles, codes, places, devoirs, suivi, CSV, API, RGPD ; correction des 8 formats dont ordre, association et image cliquable, règles FR / IT, tirage reproductible et réparti, sessions signées, seuils 35/40 et 3 erreurs, accès / codes / héritage / révocation, révision espacée, noindex des questions minces, explication obligatoire, modèles de titre, URL en silo, import CSV `;` + réimport sans doublon, export) |
+| Parcours navigateur (mobile 390 px) | question isolée (correction serveur, solution marquée par icône + texte), quiz thématique complet, examen blanc (session `noindex` + canonique, chrono 20 s, aucun corrigé pendant l'épreuve, résultat avec seuil « 35 bonnes réponses sur 40 », erreurs par thème, revue de la correction) ; formats ordre (clavier), association et image cliquable ; auto-école de bout en bout (le moniteur crée la classe et assigne un quiz, l'élève la rejoint avec le code, le moniteur voit l'élève et exporte le CSV, l'élève quitte la classe) — **aucune erreur JavaScript** |
 | Validation des blocs (comme l'éditeur) | **210 / 210** patterns, gabarits, parties et contenus valides |
 | Back-office | réglages, santé SEO, accès et codes, outils, éditeur de questions, éditeur de site : aucune erreur |
 | Question premium | ni la solution ni l'explication dans le HTML, l'API ou le JSON-LD ; `isAccessibleForFree: false` |
@@ -102,7 +103,7 @@ Compte de test : `admin` / `admin-password-123`.
 ## Prochains lots (hors de cette livraison)
 
 - Format « question à tiroirs ».
-- Espace auto-école B2B (classes, assignation de quiz, export des statistiques), classement hebdomadaire et badges.
+- Classement hebdomadaire et badges ; messages du moniteur à sa classe.
 - Connexion Google / Apple / lien magique, module de paiement Stripe direct, adaptateurs Paid Memberships Pro / MemberPress.
 - Mode hors ligne (service worker), intégration Search Console dans la santé SEO, assistant de démarrage, licence Pro.
 - Lighthouse CI dans l'intégration continue.

@@ -31,15 +31,16 @@ function get( $user_id ) {
 	return wp_parse_args(
 		is_array( $data ) ? $data : array(),
 		array(
-			'topics' => array(),
-			'exams'  => array(),
-			'review' => array(),
-			'streak' => array(
+			'topics'  => array(),
+			'exams'   => array(),
+			'review'  => array(),
+			'quizzes' => array(),
+			'streak'  => array(
 				'last'  => '',
 				'count' => 0,
 				'best'  => 0,
 			),
-			'goal'   => array(
+			'goal'    => array(
 				'date' => '',
 			),
 		)
@@ -172,6 +173,39 @@ function record_quiz( $user_id, array $result, $elapsed ) {
 	$data = touch_streak( $data );
 	save( $user_id, $data );
 }
+
+/**
+ * Mémorise le meilleur et le dernier résultat de chaque quiz terminé
+ * (suivi des devoirs de l'auto-école).
+ *
+ * @param array $result  Résultat de Quizzes\grade_quiz().
+ * @param int   $user_id Utilisateur.
+ */
+function record_result( $result, $user_id ) {
+	if ( ! $user_id || empty( $result['quiz'] ) ) {
+		return;
+	}
+
+	$data     = get( $user_id );
+	$key      = (string) $result['quiz'];
+	$previous = $data['quizzes'][ $key ] ?? array();
+
+	$data['quizzes'][ $key ] = array(
+		'last'     => (int) $result['percent'],
+		'best'     => max( (int) $result['percent'], (int) ( $previous['best'] ?? 0 ) ),
+		'passed'   => ! empty( $result['passed'] ) || ! empty( $previous['passed'] ),
+		'attempts' => (int) ( $previous['attempts'] ?? 0 ) + 1,
+		'first'    => (int) ( $previous['first'] ?? time() ),
+		'date'     => time(),
+	);
+
+	if ( count( $data['quizzes'] ) > 300 ) {
+		$data['quizzes'] = array_slice( $data['quizzes'], -300, null, true );
+	}
+
+	save( $user_id, $data );
+}
+add_action( 'learn_drive_quiz_completed', __NAMESPACE__ . '\\record_result', 20, 2 );
 
 /**
  * Questions à revoir aujourd'hui.

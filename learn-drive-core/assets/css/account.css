@@ -112,3 +112,63 @@
 .ld-access-code__message {
 	font-weight: 700;
 }
+
+/* Mon auto-école */
+.ld-class {
+	margin: 1rem 0;
+	padding: 1.25rem;
+	border: 1px solid var(--wp--preset--color--border, #d5dde8);
+	border-radius: var(--wp--custom--radius--card, 8px);
+	background: var(--wp--preset--color--base, #fff);
+}
+
+.ld-class__head h4 {
+	margin: 0;
+}
+
+.ld-class__head p {
+	margin: 0.25rem 0 0;
+	color: var(--wp--preset--color--muted, #475569);
+	font-size: var(--wp--preset--font-size--small, 0.95rem);
+}
+
+.ld-class__todo {
+	margin: 1rem 0;
+	padding: 0;
+	list-style: none;
+}
+
+.ld-class__todo li {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	gap: 0.25rem 1rem;
+	padding: 0.6rem 0;
+	border-top: 1px solid var(--wp--preset--color--border, #d5dde8);
+}
+
+.ld-class__state {
+	font-size: var(--wp--preset--font-size--small, 0.95rem);
+	font-weight: 600;
+}
+
+.ld-class__todo .is-done .ld-class__state {
+	color: var(--wp--preset--color--success, #15803d);
+}
+
+.ld-class__todo .is-late .ld-class__state {
+	color: var(--wp--preset--color--error, #dc2626);
+}
+
+.ld-btn--link {
+	padding: 0;
+	border: 0;
+	background: none;
+	color: var(--wp--preset--color--muted, #475569);
+	text-decoration: underline;
+}
+
+.ld-dashboard__hint {
+	color: var(--wp--preset--color--muted, #475569);
+	font-size: var(--wp--preset--font-size--small, 0.95rem);
+}

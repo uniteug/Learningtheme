@@ -97,6 +97,7 @@ function install_tables() {
 function maybe_upgrade() {
 	if ( get_option( 'ld_db_version' ) !== \LearnDrive\Core\VERSION ) {
 		install_tables();
+		\LearnDrive\Core\Classes\install();
 	}
 }
 add_action( 'admin_init', __NAMESPACE__ . '\\maybe_upgrade' );

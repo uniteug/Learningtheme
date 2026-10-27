@@ -25,6 +25,7 @@ use LearnDrive\Core\Access;
 use LearnDrive\Core\Progress;
 use LearnDrive\Core\Import;
 use LearnDrive\Core\SEO;
+use LearnDrive\Core\Classes;
 
 $passed = 0;
 $failed = array();
@@ -292,6 +293,81 @@ $export = wp_tempnam( 'ld-export' );
 $count  = Import\export_file( $export, 'jsonl' );
 check( 'Export JSON Lines', $count >= 125 && $count === count( file( $export ) ) );
 @unlink( $export );
+
+/* ------------------------------------------------------------------ */
+section( 'Espace auto-école' );
+
+$new_user = static function ( $role ) use ( &$cleanup ) {
+	$id        = wp_insert_user( array( 'user_login' => 'ld_' . $role . '_' . wp_generate_password( 6, false ), 'user_pass' => wp_generate_password(), 'user_email' => 'ld-' . wp_generate_password( 8, false ) . '@example.com', 'display_name' => '=HYPERLINK("x")', 'role' => $role ) );
+	$cleanup[] = static function () use ( $id ) {
+		require_once ABSPATH . 'wp-admin/includes/user.php';
+		wp_delete_user( $id );
+	};
+	return $id;
+};
+$coach   = $new_user( 'ld_instructor' );
+$coach2  = $new_user( 'ld_instructor' );
+$student = $new_user( 'subscriber' );
+$other   = $new_user( 'subscriber' );
+
+check( 'Rôle Moniteur : peut gérer des classes', user_can( $coach, Classes\CAP ) && ! user_can( $coach, 'edit_posts' ) );
+check( 'Élève : ne peut pas gérer de classe', ! user_can( $student, Classes\CAP ) );
+
+$class_id  = Classes\create( 'Classe test', $coach, 1 );
+$cleanup[] = static function () use ( $class_id ) {
+	wp_delete_post( $class_id, true );
+};
+$class = Classes\get( $class_id );
+check( 'Classe créée avec un code ABCD-EFGH', (bool) preg_match( '/^[A-HJKMNP-Z2-9]{4}-[A-HJKMNP-Z2-9]{4}$/', $class['code'] ) );
+check( 'Classe privée, hors sitemap et hors recherche', 'private' === get_post_status( $class_id ) && ! is_post_type_viewable( Classes\PT ) );
+check( 'Seul le propriétaire (ou un administrateur) gère la classe', Classes\can_manage( $class_id, $coach ) && ! Classes\can_manage( $class_id, $coach2 ) && ! Classes\can_manage( $class_id, $student ) && Classes\can_manage( $class_id, 1 ) );
+check( 'Code saisi en minuscules sans tiret accepté', $class_id === Classes\join( strtolower( str_replace( '-', ' ', $class['code'] ) ), $student ) );
+check( 'Double inscription refusée', is_wp_error( Classes\join( $class['code'], $student ) ) );
+check( 'Classe complète : inscription refusée', 'ld_class_full' === Classes\join( $class['code'], $other )->get_error_code() );
+update_post_meta( $class_id, '_ld_class_seats', 0 );
+update_post_meta( $class_id, '_ld_class_open', 0 );
+check( 'Inscriptions fermées : refusée', 'ld_class_closed' === Classes\join( $class['code'], $other )->get_error_code() );
+check( 'Code inconnu refusé', 'ld_class_code' === Classes\join( 'ZZZZ-ZZZZ', $other )->get_error_code() );
+
+$quiz      = get_posts( array( 'post_type' => 'ld_quiz', 'posts_per_page' => 1, 'meta_key' => '_ld_mode', 'meta_value' => 'training' ) );
+$quiz      = $quiz ? $quiz[0] : get_posts( array( 'post_type' => 'ld_quiz', 'posts_per_page' => 1 ) )[0];
+$item      = Classes\assign( $class_id, $quiz->ID, wp_date( 'Y-m-d', time() + WEEK_IN_SECONDS ) );
+check( 'Devoir assigné', is_string( $item ) && 1 === count( Classes\get( $class_id )['assignments'] ) );
+check( 'Devoir refusé pour un contenu qui n’est pas un quiz', is_wp_error( Classes\assign( $class_id, $class_id ) ) );
+
+$mine = Classes\for_student( $student );
+check( 'L’élève voit sa classe et le devoir à faire', 1 === count( $mine ) && ! $mine[0]['assignments'][0]['done'] && ! $mine[0]['assignments'][0]['late'] );
+
+$result = Quizzes\grade_quiz( $quiz->ID, array(), '', $student, false );
+do_action( 'learn_drive_quiz_completed', $result, $student );
+Progress\record_answer( $student, (int) array_key_first( $result['details'] ), true );
+$mine = Classes\for_student( $student );
+check( 'Quiz terminé → devoir fait', $mine[0]['assignments'][0]['done'] );
+
+$report = Classes\report( $class_id );
+check( 'Suivi : une ligne par élève, une colonne par devoir', 1 === count( $report['rows'] ) && count( $report['columns'] ) === 12 && 1 === $report['rows'][0]['cells'][4] );
+$csv = Classes\report_csv( $class_id );
+check( 'Export CSV : BOM, séparateur ;, formule neutralisée', str_starts_with( $csv, "\xEF\xBB\xBF" ) && str_contains( $csv, ';' ) && str_contains( $csv, "'=HYPERLINK" ) );
+
+$export = Classes\export_personal_data( get_userdata( $student )->user_email );
+check( 'Export RGPD : classe rejointe listée', 1 === count( $export['data'] ) );
+
+wp_set_current_user( $coach2 );
+$request  = new WP_REST_Request( 'DELETE', '/learn/v1/classes/' . $class_id . '/membership' );
+$response = rest_do_request( $request );
+check( 'API : quitter une classe dont on n’est pas membre → 404', 404 === $response->get_status() );
+wp_set_current_user( $student );
+$response = rest_do_request( new WP_REST_Request( 'GET', '/learn/v1/me/classes' ) );
+check( 'API : /me/classes', 200 === $response->get_status() && 1 === count( $response->get_data() ) );
+$response = rest_do_request( $request );
+check( 'API : l’élève quitte la classe', 200 === $response->get_status() && ! Classes\classes_of( $student ) );
+wp_set_current_user( 0 );
+check( 'API : /me/classes refusé aux visiteurs', 401 === rest_do_request( new WP_REST_Request( 'GET', '/learn/v1/me/classes' ) )->get_status() );
+
+update_post_meta( $class_id, '_ld_class_open', 1 );
+Classes\join( $class['code'], $other );
+wp_delete_post( $class_id, true );
+check( 'Classe supprimée : inscriptions nettoyées', ! Classes\classes_of( $other ) );
 
 /* ------------------------------------------------------------------ */
 foreach ( array_reverse( $cleanup ) as $fn ) {

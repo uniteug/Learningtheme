@@ -6,7 +6,7 @@ const base = process.env.LD_HOME || 'http://127.0.0.1:8080';
   const page = await browser.newPage();
   await page.goto(base + '/wp-login.php');
   await page.fill('#user_login', 'admin'); await page.fill('#user_pass', 'admin-password-123');
-  await page.click('#wp-submit'); await page.waitForURL(/wp-admin/);
+  await page.click('#wp-submit'); await page.waitForURL(/wp-admin/, { waitUntil: 'domcontentloaded' });
   await page.goto(base + '/wp-admin/post-new.php');
   await page.waitForFunction(() => window.wp && wp.blocks && wp.blocks.getBlockTypes().length > 50, null, { timeout: 60000 });
   await page.waitForTimeout(2000);

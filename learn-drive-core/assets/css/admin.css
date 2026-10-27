@@ -127,3 +127,49 @@
 	border: 2px solid #00a32a;
 	background: rgb(0 163 42 / 0.25);
 }
+
+/* Auto-école */
+.ld-classes .ld-cards {
+	grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+}
+
+.ld-classes .ld-cards .card {
+	max-width: none;
+}
+
+.ld-class-code code {
+	font-size: 1.05em;
+	letter-spacing: 0.08em;
+}
+
+.ld-class-code--big code {
+	display: inline-block;
+	padding: 0.4em 0.7em;
+	font-size: 1.6em;
+	font-weight: 600;
+}
+
+.ld-link-danger {
+	color: #b32d2e;
+}
+
+.ld-table-scroll {
+	overflow-x: auto;
+}
+
+.ld-class-report td.is-passed {
+	background: #edfaef;
+}
+
+.ld-class-report td.is-done {
+	background: #fcf9e8;
+}
+
+.ld-class-report td.is-late {
+	background: #fcf0f1;
+	color: #8a2424;
+}
+
+.ld-class-delete {
+	margin-top: 2rem;
+}

@@ -10,6 +10,7 @@
 use LearnDrive\Core\Progress;
 use LearnDrive\Core\Access;
 use LearnDrive\Core\Quizzes;
+use LearnDrive\Core\Classes;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -37,6 +38,7 @@ $learn_drive_ready     = Progress\readiness( $learn_drive_user->ID );
 $learn_drive_due       = Progress\due_reviews( $learn_drive_user->ID, 10 );
 $learn_drive_offers    = Access\active_offers( $learn_drive_user->ID );
 $learn_drive_goal_date = (string) get_user_meta( $learn_drive_user->ID, 'ld_goal_date', true );
+$learn_drive_classes   = Classes\for_student( $learn_drive_user->ID );
 
 wp_interactivity_config(
 	'learn-drive/account',
@@ -48,13 +50,14 @@ wp_interactivity_config(
 			'deleted'       => __( 'Votre progression a été supprimée.', 'learn-drive-core' ),
 			'error'         => __( 'Une erreur est survenue, réessayez.', 'learn-drive-core' ),
 			'saved'         => __( 'Objectif enregistré.', 'learn-drive-core' ),
+			'confirmLeave'  => __( 'Quitter cette classe ? Votre moniteur ne verra plus votre progression.', 'learn-drive-core' ),
 		),
 	)
 );
 
 ob_start();
 ?>
-<section <?php echo get_block_wrapper_attributes( array( 'class' => 'ld-dashboard' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> data-wp-interactive="learn-drive/account" data-wp-context='{"message":"","busy":false}'>
+<section <?php echo get_block_wrapper_attributes( array( 'class' => 'ld-dashboard' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> data-wp-interactive="learn-drive/account" data-wp-context='{"message":"","busy":false,"ready":false}' data-wp-init="callbacks.ready" data-wp-class--is-ready="context.ready">
 	<header class="ld-dashboard__head">
 		<?php /* translators: %s: user display name */ ?>
 		<h2><?php echo esc_html( sprintf( __( 'Bonjour %s', 'learn-drive-core' ), $learn_drive_user->display_name ) ); ?></h2>
@@ -107,6 +110,55 @@ ob_start();
 			</ul>
 		</section>
 	<?php endif; ?>
+
+	<section class="ld-dashboard__section ld-dashboard__classes" aria-labelledby="ld-classes-title">
+		<h3 id="ld-classes-title"><?php esc_html_e( 'Mon auto-école', 'learn-drive-core' ); ?></h3>
+		<?php foreach ( $learn_drive_classes as $learn_drive_class ) : ?>
+			<article class="ld-class is-style-card" data-wp-context='<?php echo esc_attr( wp_json_encode( array( 'classId' => $learn_drive_class['id'] ) ) ); ?>'>
+				<header class="ld-class__head">
+					<h4><?php echo esc_html( $learn_drive_class['name'] ); ?></h4>
+					<?php if ( $learn_drive_class['instructor'] ) : ?>
+						<?php /* translators: %s: instructor name */ ?>
+						<p><?php echo esc_html( sprintf( __( 'Moniteur : %s', 'learn-drive-core' ), $learn_drive_class['instructor'] ) ); ?></p>
+					<?php endif; ?>
+				</header>
+				<?php if ( $learn_drive_class['assignments'] ) : ?>
+					<ul class="ld-class__todo">
+						<?php foreach ( $learn_drive_class['assignments'] as $learn_drive_item ) : ?>
+							<?php $learn_drive_state = $learn_drive_item['done'] ? 'done' : ( $learn_drive_item['late'] ? 'late' : 'todo' ); ?>
+							<li class="is-<?php echo esc_attr( $learn_drive_state ); ?>">
+								<a href="<?php echo esc_url( $learn_drive_item['url'] ); ?>"><?php echo esc_html( $learn_drive_item['title'] ); ?></a>
+								<span class="ld-class__state">
+									<?php
+									if ( $learn_drive_item['done'] ) {
+										/* translators: %d: best score in percent */
+										echo esc_html( '✓ ' . sprintf( __( 'Fait — meilleur score %d %%', 'learn-drive-core' ), $learn_drive_item['best'] ) );
+									} elseif ( $learn_drive_item['late'] ) {
+										echo esc_html( '! ' . __( 'En retard', 'learn-drive-core' ) );
+									} elseif ( $learn_drive_item['due'] ) {
+										/* translators: %s: date */
+										echo esc_html( sprintf( __( 'À faire avant le %s', 'learn-drive-core' ), wp_date( get_option( 'date_format' ), strtotime( $learn_drive_item['due'] ) ) ) );
+									} else {
+										esc_html_e( 'À faire', 'learn-drive-core' );
+									}
+									?>
+								</span>
+							</li>
+						<?php endforeach; ?>
+					</ul>
+				<?php else : ?>
+					<p><?php esc_html_e( 'Aucun devoir pour le moment.', 'learn-drive-core' ); ?></p>
+				<?php endif; ?>
+				<p><button type="button" class="ld-btn ld-btn--link" data-wp-on--click="actions.leaveClass"><?php esc_html_e( 'Quitter la classe', 'learn-drive-core' ); ?></button></p>
+			</article>
+		<?php endforeach; ?>
+		<form class="ld-inline-form" data-wp-on--submit="actions.joinClass">
+			<label for="ld-class-code"><?php esc_html_e( 'Code donné par votre auto-école', 'learn-drive-core' ); ?></label>
+			<input id="ld-class-code" name="code" type="text" required maxlength="20" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="ABCD-EFGH">
+			<button type="submit" class="ld-btn" data-wp-bind--disabled="context.busy"><?php esc_html_e( 'Rejoindre la classe', 'learn-drive-core' ); ?></button>
+		</form>
+		<p class="ld-dashboard__hint"><?php esc_html_e( 'En rejoignant une classe, votre moniteur voit votre progression (thèmes, examens blancs, devoirs). Vous pouvez la quitter à tout moment.', 'learn-drive-core' ); ?></p>
+	</section>
 
 	<?php echo do_blocks( '<!-- wp:learn-drive/topic-progress /-->' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 

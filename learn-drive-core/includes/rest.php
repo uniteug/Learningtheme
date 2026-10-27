@@ -17,6 +17,7 @@ use LearnDrive\Core\Questions;
 use LearnDrive\Core\Quizzes;
 use LearnDrive\Core\Access;
 use LearnDrive\Core\Progress;
+use LearnDrive\Core\Classes;
 use function LearnDrive\Core\setting;
 use function LearnDrive\Core\client_fingerprint;
 use const LearnDrive\Core\PT_QUESTION;
@@ -282,7 +283,7 @@ function register_routes() {
 			'callback'            => __NAMESPACE__ . '\\redeem',
 			'permission_callback' => static function () {
 				$logged = logged_in_permission();
-				return true === $logged ? rate_limit( 'redeem', 10 ) : $logged;
+				return true === $logged ? rate_limit( 'redeem' . get_current_user_id(), 10 ) : $logged;
 			},
 			'args'                => array(
 				'code' => array(
@@ -290,6 +291,47 @@ function register_routes() {
 					'required' => true,
 				),
 			),
+		)
+	);
+
+	register_rest_route(
+		NS,
+		'/me/classes',
+		array(
+			'methods'             => \WP_REST_Server::READABLE,
+			'callback'            => __NAMESPACE__ . '\\my_classes',
+			'permission_callback' => __NAMESPACE__ . '\\logged_in_permission',
+		)
+	);
+
+	register_rest_route(
+		NS,
+		'/classes/join',
+		array(
+			'methods'             => \WP_REST_Server::CREATABLE,
+			'callback'            => __NAMESPACE__ . '\\join_class',
+			'permission_callback' => static function () {
+				$logged = logged_in_permission();
+				// Par compte : toute une classe peut partager l'adresse IP de l'auto-école.
+				return true === $logged ? rate_limit( 'join' . get_current_user_id(), 10 ) : $logged;
+			},
+			'args'                => array(
+				'code' => array(
+					'type'      => 'string',
+					'required'  => true,
+					'maxLength' => 20,
+				),
+			),
+		)
+	);
+
+	register_rest_route(
+		NS,
+		'/classes/(?P<id>\d+)/membership',
+		array(
+			'methods'             => \WP_REST_Server::DELETABLE,
+			'callback'            => __NAMESPACE__ . '\\leave_class',
+			'permission_callback' => __NAMESPACE__ . '\\logged_in_permission',
 		)
 	);
 }
@@ -742,6 +784,54 @@ function redeem( $request ) {
 		array(
 			'ok'      => true,
 			'message' => __( 'Code validé : votre accès est ouvert.', 'learn-drive-core' ),
+		)
+	);
+}
+
+/**
+ * GET /me/classes — classes rejointes et devoirs.
+ *
+ * @return \WP_REST_Response
+ */
+function my_classes() {
+	return rest_ensure_response( Classes\for_student( get_current_user_id() ) );
+}
+
+/**
+ * POST /classes/join — rejoindre une classe avec son code d'invitation.
+ *
+ * @param \WP_REST_Request $request Requête.
+ * @return \WP_REST_Response|\WP_Error
+ */
+function join_class( $request ) {
+	$class_id = Classes\join( (string) $request['code'], get_current_user_id() );
+	if ( is_wp_error( $class_id ) ) {
+		return $class_id;
+	}
+	return rest_ensure_response(
+		array(
+			'ok'      => true,
+			'class'   => $class_id,
+			/* translators: %s: class name */
+			'message' => sprintf( __( 'Bienvenue dans la classe « %s ».', 'learn-drive-core' ), Classes\get( $class_id )['name'] ),
+		)
+	);
+}
+
+/**
+ * DELETE /classes/{id}/membership — quitter une classe.
+ *
+ * @param \WP_REST_Request $request Requête.
+ * @return \WP_REST_Response|\WP_Error
+ */
+function leave_class( $request ) {
+	if ( ! Classes\leave( (int) $request['id'], get_current_user_id() ) ) {
+		return new \WP_Error( 'ld_class_member', __( 'Vous ne faites pas partie de cette classe.', 'learn-drive-core' ), array( 'status' => 404 ) );
+	}
+	return rest_ensure_response(
+		array(
+			'ok'      => true,
+			'message' => __( 'Vous avez quitté la classe.', 'learn-drive-core' ),
 		)
 	);
 }
