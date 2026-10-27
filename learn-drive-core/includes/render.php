@@ -120,6 +120,18 @@ function options_html( array $question, array $args ) {
 		return $html;
 	}
 
+	if ( 'order' === $question['format'] ) {
+		return order_html( $question );
+	}
+
+	if ( 'match' === $question['format'] ) {
+		return match_html( $question, $name );
+	}
+
+	if ( 'hotspot' === $question['format'] ) {
+		return hotspot_html( $question, $args );
+	}
+
 	if ( 'flashcard' === $question['format'] ) {
 		return sprintf(
 			'<div class="ld-q__flash"><button type="button" class="ld-btn" data-wp-on--click="actions.flipCard">%s</button></div>',
@@ -167,13 +179,15 @@ function options_html( array $question, array $args ) {
  * @return string
  */
 function question_item( array $question, $index, array $args ) {
-	$context = wp_json_encode(
-		array(
-			'qid'    => $question['id'],
-			'i'      => $index,
-			'format' => $question['format'],
-		)
+	$context = array(
+		'qid'    => $question['id'],
+		'i'      => $index,
+		'format' => $question['format'],
 	);
+	if ( in_array( $question['format'], array( 'order', 'match' ), true ) ) {
+		$context['size'] = count( $question['answers'] );
+	}
+	$context = wp_json_encode( $context );
 
 	$stem = esc_html( $question['title'] );
 	if ( $args['link_stems'] ) {
@@ -192,13 +206,15 @@ function question_item( array $question, $index, array $args ) {
 		$stem
 	);
 	$html .= '<div class="ld-q__body">';
-	$html .= media_html( $question, $args['lcp'] && 0 === $index );
+	if ( 'hotspot' !== $question['format'] ) {
+		$html .= media_html( $question, $args['lcp'] && 0 === $index );
+	}
 	$html .= options_html( $question, $args );
 	$html .= '</div></fieldset>';
 
 	if ( $args['feedback'] ) {
 		$html .= '<div class="ld-q__actions">';
-		if ( ! in_array( $question['format'], array( 'tf', 'single', 'flashcard' ), true ) ) {
+		if ( ! in_array( $question['format'], array( 'tf', 'single', 'flashcard', 'hotspot' ), true ) ) {
 			$html .= sprintf( '<button type="button" class="ld-btn ld-btn--primary" data-wp-on--click="actions.check" data-wp-bind--disabled="!state.canCheck" data-wp-bind--hidden="state.isChecked">%s</button>', esc_html__( 'Valider', 'learn-drive-core' ) );
 		}
 		if ( 'flashcard' === $question['format'] ) {
@@ -560,4 +576,115 @@ function single_question( $question_id, $layout = 'stack' ) {
 	$html .= '</details>';
 
 	return '<div class="ld-question-page">' . $html . '</div>';
+}
+
+/**
+ * « Remettre dans l'ordre » : les éléments sont affichés mélangés et déplacés
+ * avec des boutons (clavier et lecteur d'écran), sans glisser-déposer.
+ *
+ * Les identifiants (opt) sont les positions d'affichage : l'ordre juste ne se
+ * lit pas dans le code source.
+ *
+ * @param array $question Question normalisée.
+ * @return string
+ */
+function order_html( array $question ) {
+	$html  = '<p class="ld-q__hint">' . esc_html__( 'Remettez les éléments dans le bon ordre avec les flèches.', 'learn-drive-core' ) . '</p>';
+	$html .= '<ol class="ld-order">';
+	foreach ( Questions\shuffled_indexes( $question ) as $display => $original ) {
+		$text  = $question['answers'][ $original ]['text'];
+		$html .= sprintf(
+			'<li class="ld-order__item" data-wp-context=\'%1$s\' data-wp-style--order="state.orderPos" data-wp-class--is-solution="state.isOrderRight" data-wp-class--is-missed="state.isOrderWrong">'
+			. '<span class="ld-order__pos" data-wp-text="state.orderLabel">%2$d</span><span class="ld-order__text">%3$s</span>'
+			. '<span class="ld-order__moves"><button type="button" class="ld-icon-btn" data-wp-on--click="actions.moveUp" data-wp-bind--disabled="state.isLocked" aria-label="%4$s"><span aria-hidden="true">↑</span></button>'
+			. '<button type="button" class="ld-icon-btn" data-wp-on--click="actions.moveDown" data-wp-bind--disabled="state.isLocked" aria-label="%5$s"><span aria-hidden="true">↓</span></button></span></li>',
+			esc_attr( wp_json_encode( array( 'opt' => $display ) ) ),
+			$display + 1,
+			esc_html( $text ),
+			/* translators: %s: item text */
+			esc_attr( sprintf( __( 'Monter : %s', 'learn-drive-core' ), $text ) ),
+			/* translators: %s: item text */
+			esc_attr( sprintf( __( 'Descendre : %s', 'learn-drive-core' ), $text ) )
+		);
+	}
+	$html .= '</ol>';
+	$html .= '<p class="ld-sr-only" aria-live="polite" data-ld-announce></p>';
+	return $html;
+}
+
+/**
+ * « Association » : chaque élément de gauche reçoit une liste déroulante des
+ * correspondances (mélangées).
+ *
+ * @param array  $question Question normalisée.
+ * @param string $name     Préfixe des champs.
+ * @return string
+ */
+function match_html( array $question, $name ) {
+	$shuffled = Questions\shuffled_indexes( $question );
+	$options  = '<option value="">' . esc_html__( '— Choisir —', 'learn-drive-core' ) . '</option>';
+	foreach ( $shuffled as $display => $original ) {
+		$options .= sprintf( '<option value="%d">%s</option>', (int) $display, esc_html( $question['answers'][ $original ]['match'] ) );
+	}
+
+	$html = '<p class="ld-q__hint">' . esc_html__( 'Associez chaque élément à sa correspondance.', 'learn-drive-core' ) . '</p><ul class="ld-match">';
+	foreach ( $question['answers'] as $index => $answer ) {
+		$id    = $name . '-m' . $index;
+		$html .= sprintf(
+			'<li class="ld-match__row" data-wp-context=\'%1$s\' data-wp-class--is-solution="state.isMatchRight" data-wp-class--is-missed="state.isMatchWrong"><label class="ld-match__left" for="%2$s">%3$s</label><select id="%2$s" data-wp-on--change="actions.selectMatch" data-wp-bind--disabled="state.isLocked">%4$s</select><span class="ld-opt__mark" aria-hidden="true"></span></li>',
+			esc_attr( wp_json_encode( array( 'opt' => $index ) ) ),
+			esc_attr( $id ),
+			esc_html( $answer['text'] ),
+			$options
+		);
+	}
+	return $html . '</ul>';
+}
+
+/**
+ * « Image cliquable » : une grille de vrais boutons posée sur l'image.
+ *
+ * @param array $question Question normalisée.
+ * @param array $args     Options du quiz.
+ * @return string
+ */
+function hotspot_html( array $question, array $args ) {
+	if ( ! $question['image_id'] ) {
+		return '<p class="ld-q__hint">' . esc_html__( 'Image manquante pour cette question.', 'learn-drive-core' ) . '</p>';
+	}
+
+	$image = wp_get_attachment_image(
+		$question['image_id'],
+		'learn-drive-800',
+		false,
+		array(
+			'class'    => 'ld-hotspot__img',
+			'sizes'    => '(max-width: 860px) 100vw, 760px',
+			'loading'  => $args['lcp'] ? false : 'lazy',
+			'decoding' => 'async',
+		)
+	);
+
+	$cells = '';
+	for ( $row = 0; $row < Questions\HOTSPOT_ROWS; $row++ ) {
+		for ( $col = 0; $col < Questions\HOTSPOT_COLS; $col++ ) {
+			$cell   = $row * Questions\HOTSPOT_COLS + $col;
+			$cells .= sprintf(
+				'<button type="button" class="ld-hotspot__cell" data-wp-context=\'%1$s\' data-wp-on--click="actions.pickCell" data-wp-bind--aria-pressed="state.isChosen" data-wp-bind--disabled="state.isLocked" data-wp-class--is-chosen="state.isChosen" data-wp-class--is-solution="state.isSolution" data-wp-class--is-missed="state.isChosenWrong" aria-label="%2$s"></button>',
+				esc_attr( wp_json_encode( array( 'opt' => $cell ) ) ),
+				/* translators: 1: row, 2: column */
+				esc_attr( sprintf( __( 'Zone ligne %1$d, colonne %2$d', 'learn-drive-core' ), $row + 1, $col + 1 ) )
+			);
+		}
+	}
+
+	return sprintf(
+		'<p class="ld-q__hint">%1$s</p><div class="ld-hotspot">%2$s<div class="ld-hotspot__grid" role="group" aria-label="%3$s" style="grid-template-columns:repeat(%4$d,1fr);grid-template-rows:repeat(%5$d,1fr)">%6$s</div></div>',
+		esc_html__( 'Touchez la zone de l’image qui répond à la question.', 'learn-drive-core' ),
+		$image,
+		esc_attr__( 'Zones de l’image', 'learn-drive-core' ),
+		Questions\HOTSPOT_COLS,
+		Questions\HOTSPOT_ROWS,
+		$cells
+	);
 }

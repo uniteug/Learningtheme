@@ -88,6 +88,12 @@ const formatTime = ( seconds ) => {
 
 const rootOf = ( element ) => element?.closest?.( '.ld-quiz' );
 
+/** Ordre courant d'une question « remettre dans l'ordre » (identifiants d'affichage). */
+const currentOrder = ( ctx ) =>
+	Array.isArray( ctx.answers[ ctx.qid ] )
+		? ctx.answers[ ctx.qid ]
+		: [ ...Array( ctx.size || 0 ).keys() ];
+
 /** Donne le focus à la question courante (après mise à jour du DOM). */
 const focusCurrent = ( root ) => {
 	window.requestAnimationFrame( () => {
@@ -162,7 +168,55 @@ const { state, actions } = store( NS, {
 		},
 		get canCheck() {
 			const ctx = getContext();
-			return hasValue( ctx.answers[ ctx.qid ] ) && ! state.isLocked;
+			if ( state.isLocked ) {
+				return false;
+			}
+			const answer = ctx.answers[ ctx.qid ];
+			if ( ctx.format === 'order' ) {
+				return true;
+			}
+			if ( ctx.format === 'match' ) {
+				return (
+					Array.isArray( answer ) &&
+					answer.length === ctx.size &&
+					answer.every( ( value ) => value >= 0 )
+				);
+			}
+			return hasValue( answer );
+		},
+		get orderPos() {
+			const ctx = getContext();
+			return String( currentOrder( ctx ).indexOf( ctx.opt ) );
+		},
+		get orderLabel() {
+			const ctx = getContext();
+			return String( currentOrder( ctx ).indexOf( ctx.opt ) + 1 );
+		},
+		get isOrderRight() {
+			const ctx = getContext();
+			const solution = state.feedback?.solution;
+			return (
+				state.isChecked &&
+				Array.isArray( solution ) &&
+				currentOrder( ctx ).indexOf( ctx.opt ) === solution.indexOf( ctx.opt )
+			);
+		},
+		get isOrderWrong() {
+			return state.isChecked && Array.isArray( state.feedback?.solution ) && ! state.isOrderRight;
+		},
+		get isMatchRight() {
+			const ctx = getContext();
+			const solution = state.feedback?.solution;
+			const answer = ctx.answers[ ctx.qid ];
+			return (
+				state.isChecked &&
+				Array.isArray( solution ) &&
+				Array.isArray( answer ) &&
+				answer[ ctx.opt ] === solution[ ctx.opt ]
+			);
+		},
+		get isMatchWrong() {
+			return state.isChecked && Array.isArray( state.feedback?.solution ) && ! state.isMatchRight;
 		},
 		get isFlipped() {
 			const ctx = getContext();
@@ -344,9 +398,65 @@ const { state, actions } = store( NS, {
 			}
 		},
 
+		move( delta ) {
+			const ctx = getContext();
+			if ( state.isLocked ) {
+				return;
+			}
+			const order = [ ...currentOrder( ctx ) ];
+			const from = order.indexOf( ctx.opt );
+			const to = from + delta;
+			if ( from < 0 || to < 0 || to >= order.length ) {
+				return;
+			}
+			[ order[ from ], order[ to ] ] = [ order[ to ], order[ from ] ];
+			ctx.answers[ ctx.qid ] = order;
+			const { ref } = getElement();
+			const item = ref.closest( '.ld-order__item' );
+			const live = ref.closest( '.ld-q' )?.querySelector( '[data-ld-announce]' );
+			if ( live && item ) {
+				live.textContent = `${ item.querySelector( '.ld-order__text' ).textContent } : ${ to + 1 }/${ order.length }`;
+			}
+		},
+
+		moveUp() {
+			actions.move( -1 );
+		},
+
+		moveDown() {
+			actions.move( 1 );
+		},
+
+		selectMatch( event ) {
+			const ctx = getContext();
+			if ( state.isLocked ) {
+				return;
+			}
+			const answer = Array.isArray( ctx.answers[ ctx.qid ] )
+				? [ ...ctx.answers[ ctx.qid ] ]
+				: Array( ctx.size ).fill( -1 );
+			answer[ ctx.opt ] =
+				event.target.value === '' ? -1 : parseInt( event.target.value, 10 );
+			ctx.answers[ ctx.qid ] = answer;
+		},
+
+		pickCell() {
+			const ctx = getContext();
+			if ( state.isLocked ) {
+				return;
+			}
+			ctx.answers[ ctx.qid ] = ctx.opt;
+			if ( ctx.mode !== 'exam' ) {
+				return actions.check();
+			}
+		},
+
 		*check() {
 			const ctx = getContext();
 			const qid = ctx.qid;
+			if ( ctx.format === 'order' && ! Array.isArray( ctx.answers[ qid ] ) ) {
+				ctx.answers[ qid ] = currentOrder( ctx );
+			}
 			const answer = ctx.answers[ qid ];
 			if ( ! hasValue( answer ) || state.isChecked ) {
 				return;

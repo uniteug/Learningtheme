@@ -244,6 +244,9 @@ function format_label( $format ) {
 		'single'    => __( 'Choix unique', 'learn-drive-core' ),
 		'multiple'  => __( 'Choix multiple', 'learn-drive-core' ),
 		'numeric'   => __( 'Réponse numérique', 'learn-drive-core' ),
+		'order'     => __( 'Remettre dans l’ordre', 'learn-drive-core' ),
+		'match'     => __( 'Association', 'learn-drive-core' ),
+		'hotspot'   => __( 'Image cliquable', 'learn-drive-core' ),
 		'flashcard' => __( 'Carte mémoire', 'learn-drive-core' ),
 	);
 	return $labels[ $format ] ?? $format;

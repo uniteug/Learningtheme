@@ -479,8 +479,12 @@ function question_payload( array $question, $full = false ) {
 		'url'         => $question['url'],
 		'statement'   => $question['title'],
 		'format'      => $question['format'],
-		'answers'     => 'numeric' === $question['format'] ? array() : wp_list_pluck( $question['answers'], 'text' ),
+		'answers'     => answers_payload( $question ),
 		'unit'        => 'numeric' === $question['format'] ? $question['numeric']['unit'] : '',
+		'grid'        => 'hotspot' === $question['format'] ? array(
+			'columns' => Questions\HOTSPOT_COLS,
+			'rows'    => Questions\HOTSPOT_ROWS,
+		) : null,
 		'image'       => $image ? array(
 			'url'    => $image[0],
 			'width'  => $image[1],
@@ -503,6 +507,45 @@ function question_payload( array $question, $full = false ) {
 	}
 
 	return $payload;
+}
+
+/**
+ * Propositions publiques d'une question, sans révéler la solution : l'ordre
+ * et les correspondances sont mélangés et identifiés par leur position
+ * d'affichage (les mêmes identifiants que /check attend).
+ *
+ * @param array $question Question normalisée.
+ * @return array
+ */
+function answers_payload( array $question ) {
+	switch ( $question['format'] ) {
+		case 'numeric':
+		case 'hotspot':
+			return array();
+		case 'order':
+			$items = array();
+			foreach ( Questions\shuffled_indexes( $question ) as $display => $original ) {
+				$items[] = array(
+					'id'   => $display,
+					'text' => $question['answers'][ $original ]['text'],
+				);
+			}
+			return $items;
+		case 'match':
+			$matches = array();
+			foreach ( Questions\shuffled_indexes( $question ) as $display => $original ) {
+				$matches[] = array(
+					'id'   => $display,
+					'text' => $question['answers'][ $original ]['match'],
+				);
+			}
+			return array(
+				'items'   => wp_list_pluck( $question['answers'], 'text' ),
+				'matches' => $matches,
+			);
+		default:
+			return wp_list_pluck( $question['answers'], 'text' );
+	}
 }
 
 /**

@@ -301,6 +301,40 @@ function draw_sign( $shape, $symbol ) {
 }
 
 /**
+ * Scène de l'image cliquable de démonstration : cédez le passage, stop et
+ * sens interdit côte à côte (1200 × 600).
+ *
+ * @return \GdImage
+ */
+function draw_scene() {
+	$scene = imagecreatetruecolor( 1200, 600 );
+	imagefill( $scene, 0, 0, color( $scene, '#9DB7C9' ) );
+	imagefilledrectangle( $scene, 0, 430, 1200, 600, color( $scene, '#5B6770' ) );
+	imagefilledrectangle( $scene, 0, 505, 1200, 515, color( $scene, '#F4F4F4' ) );
+	$signs = array(
+		array( 'triangle-inverted', '' ),
+		array( 'octagon', 'STOP' ),
+		array( 'circle-red-bar', '' ),
+	);
+	foreach ( $signs as $index => $sign ) {
+		$cx = 200 + $index * 400;
+		imagefilledrectangle( $scene, $cx - 8, 300, $cx + 8, 560, color( $scene, '#7A7F85' ) );
+		if ( 'circle-red-bar' === $sign[0] ) {
+			$image = imagecreatetruecolor( 600, 600 );
+			imagesavealpha( $image, true );
+			imagefill( $image, 0, 0, imagecolorallocatealpha( $image, 0, 0, 0, 127 ) );
+			imagefilledellipse( $image, 300, 300, 590, 590, color( $image, '#C8102E' ) );
+			imagefilledrectangle( $image, 90, 245, 510, 355, color( $image, '#FFFFFF' ) );
+		} else {
+			$image = draw_sign( $sign[0], $sign[1] );
+		}
+		imagecopyresampled( $scene, $image, $cx - 140, 80, 0, 0, 280, 280, 600, 600 );
+		imagedestroy( $image );
+	}
+	return $scene;
+}
+
+/**
  * Illustration abstraite d'article (16:9, sans texte incrusté).
  *
  * @param int $seed Variation.
@@ -477,6 +511,9 @@ function import( $log = null ) {
 	foreach ( $data['questions'] as $index => $question ) {
 		$question['order'] = $index;
 		$id                = Import\import_question( $question );
+		if ( is_int( $id ) && $id && ! empty( $question['scene'] ) && ! get_post_thumbnail_id( $id ) && function_exists( 'imagecreatetruecolor' ) ) {
+			save_image( draw_scene(), 'scene-' . $question['slug'], __( 'Trois panneaux côte à côte : cédez le passage, stop et sens interdit', 'learn-drive-core' ), $id, 'png' );
+		}
 		if ( is_int( $id ) && $id && ! empty( $question['sheet'] ) && ! get_post_thumbnail_id( $id ) ) {
 			$sheet = get_page_by_path( $question['sheet'], OBJECT, PT_SHEET );
 			$thumb = $sheet ? get_post_thumbnail_id( $sheet ) : 0;

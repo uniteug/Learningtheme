@@ -55,6 +55,7 @@ function assets( $hook ) {
 		array(
 			'answer'  => __( 'Proposition', 'learn-drive-core' ),
 			'correct' => __( 'Bonne réponse', 'learn-drive-core' ),
+			'match'   => __( 'Correspondance', 'learn-drive-core' ),
 			'remove'  => __( 'Retirer', 'learn-drive-core' ),
 		)
 	);
@@ -100,17 +101,27 @@ function question_box( $post ) {
 	</p>
 
 	<div class="ld-answers" data-ld-answers>
-		<p><strong><?php esc_html_e( 'Propositions', 'learn-drive-core' ); ?></strong> <span class="description"><?php esc_html_e( '(2 à 6, cochez la ou les bonnes réponses)', 'learn-drive-core' ); ?></span></p>
+		<p><strong><?php esc_html_e( 'Propositions', 'learn-drive-core' ); ?></strong> <span class="description ld-hint-choice"><?php esc_html_e( '(2 à 6, cochez la ou les bonnes réponses)', 'learn-drive-core' ); ?></span><span class="description ld-hint-order"><?php esc_html_e( '(saisissez les éléments dans l’ordre juste : ils seront mélangés à l’affichage)', 'learn-drive-core' ); ?></span><span class="description ld-hint-match"><?php esc_html_e( '(chaque ligne : un élément et sa correspondance)', 'learn-drive-core' ); ?></span></p>
 		<ol class="ld-answers__list" data-ld-list>
 			<?php foreach ( $q['answers'] as $index => $answer ) : ?>
 				<li class="ld-answer-row">
 					<input type="text" class="widefat" name="ld_answers[<?php echo (int) $index; ?>][text]" value="<?php echo esc_attr( $answer['text'] ); ?>" aria-label="<?php esc_attr_e( 'Proposition', 'learn-drive-core' ); ?>">
-					<label><input type="checkbox" name="ld_answers[<?php echo (int) $index; ?>][correct]" value="1" <?php checked( $answer['correct'] ); ?>> <?php esc_html_e( 'Bonne réponse', 'learn-drive-core' ); ?></label>
+					<input type="text" class="widefat ld-answer-row__match" name="ld_answers[<?php echo (int) $index; ?>][match]" value="<?php echo esc_attr( $answer['match'] ?? '' ); ?>" aria-label="<?php esc_attr_e( 'Correspondance', 'learn-drive-core' ); ?>" placeholder="<?php esc_attr_e( 'Correspondance', 'learn-drive-core' ); ?>">
+					<label class="ld-answer-row__correct"><input type="checkbox" name="ld_answers[<?php echo (int) $index; ?>][correct]" value="1" <?php checked( $answer['correct'] ); ?>> <?php esc_html_e( 'Bonne réponse', 'learn-drive-core' ); ?></label>
 					<button type="button" class="button-link-delete" data-ld-remove><?php esc_html_e( 'Retirer', 'learn-drive-core' ); ?></button>
 				</li>
 			<?php endforeach; ?>
 		</ol>
 		<p><button type="button" class="button" data-ld-add><?php esc_html_e( 'Ajouter une proposition', 'learn-drive-core' ); ?></button></p>
+	</div>
+
+	<div class="ld-hotspots" data-ld-hotspot>
+		<p><strong><?php esc_html_e( 'Zones justes de l’image', 'learn-drive-core' ); ?></strong> <span class="description"><?php esc_html_e( 'Dessinez la zone en faisant glisser sur l’image principale (enregistrez d’abord l’image principale). Valeurs en % de l’image.', 'learn-drive-core' ); ?></span></p>
+		<?php $learn_drive_preview = $q['image_id'] ? wp_get_attachment_image_url( $q['image_id'], 'learn-drive-800' ) : ''; ?>
+		<?php if ( $learn_drive_preview ) : ?>
+			<div class="ld-hotspot-editor" data-ld-hotspot-canvas><img src="<?php echo esc_url( $learn_drive_preview ); ?>" alt=""></div>
+		<?php endif; ?>
+		<textarea class="widefat code" rows="3" name="ld_hotspots" data-ld-hotspot-field placeholder='[{"x":10,"y":20,"w":25,"h":30}]'><?php echo esc_textarea( $q['hotspots'] ? wp_json_encode( $q['hotspots'] ) : '' ); ?></textarea>
 	</div>
 
 	<div class="ld-numeric" data-ld-numeric>
@@ -439,6 +450,7 @@ function save( $post_id, $post ) {
 				$answers[] = array(
 					'text'    => $value,
 					'correct' => ! empty( $answer['correct'] ),
+					'match'   => sanitize_text_field( $answer['match'] ?? '' ),
 				);
 			}
 		}
@@ -454,7 +466,10 @@ function save( $post_id, $post ) {
 				),
 			);
 		}
-		update_post_meta( $post_id, '_ld_answers', array_slice( $answers, 0, 6 ) );
+		update_post_meta( $post_id, '_ld_answers', array_slice( $answers, 0, 'order' === $format ? 8 : 6 ) );
+
+		$zones = json_decode( (string) wp_unslash( $_POST['ld_hotspots'] ?? '' ), true ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- nettoyé par sanitize_zone().
+		update_post_meta( $post_id, '_ld_hotspots', is_array( $zones ) ? array_values( array_filter( array_map( 'LearnDrive\\Core\\Questions\\sanitize_zone', $zones ) ) ) : array() );
 
 		$numeric = (array) wp_unslash( $_POST['ld_numeric'] ?? array() ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- nettoyé ci-dessous.
 		update_post_meta(

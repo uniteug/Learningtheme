@@ -77,6 +77,41 @@ check( 'Numérique dans la tolérance', Questions\grade( $q, 26.5 ) );
 check( 'Numérique hors tolérance', ! Questions\grade( $q, 28 ) );
 check( 'Texte de solution numérique', '25 m' === Questions\solution_text( $q ) );
 
+// Formats structurés : réponses en identifiants d'affichage (mélangés).
+$order = array(
+	'id'       => 999001,
+	'format'   => 'order',
+	'answers'  => array( array( 'text' => 'Un', 'correct' => false, 'match' => '' ), array( 'text' => 'Deux', 'correct' => false, 'match' => '' ), array( 'text' => 'Trois', 'correct' => false, 'match' => '' ) ),
+	'hotspots' => array(),
+	'numeric'  => array( 'value' => 0, 'tolerance' => 0, 'unit' => '' ),
+);
+$shuffled = Questions\shuffled_indexes( $order );
+check( 'Ordre : affichage mélangé, jamais l’ordre juste', array( 0, 1, 2 ) !== $shuffled && count( $shuffled ) === 3 );
+check( 'Ordre : la solution (identifiants d’affichage) est juste', Questions\grade( $order, Questions\solution( $order ) ) );
+check( 'Ordre : l’ordre d’affichage initial est faux', ! Questions\grade( $order, array( 0, 1, 2 ) ) );
+check( 'Ordre : réponse incomplète refusée', ! Questions\grade( $order, array( 0, 1 ) ) );
+
+$match           = $order;
+$match['format'] = 'match';
+foreach ( $match['answers'] as $k => $a ) {
+	$match['answers'][ $k ]['match'] = 'M' . $k;
+}
+check( 'Association : solution juste', Questions\grade( $match, Questions\solution( $match ) ) );
+$wrong = Questions\solution( $match );
+list( $wrong[0], $wrong[1] ) = array( $wrong[1], $wrong[0] );
+check( 'Association : deux correspondances inversées = faux', ! Questions\grade( $match, $wrong ) );
+
+$hot = array(
+	'id'       => 999002,
+	'format'   => 'hotspot',
+	'answers'  => array(),
+	'hotspots' => array( array( 'x' => 38, 'y' => 12, 'w' => 24, 'h' => 76 ) ),
+	'numeric'  => array( 'value' => 0, 'tolerance' => 0, 'unit' => '' ),
+);
+check( 'Image cliquable : colonne centrale juste (cases 2, 7, 12, 17)', array( 2, 7, 12, 17 ) === Questions\hotspot_cells( $hot ) );
+check( 'Image cliquable : case 7 juste, case 0 fausse', Questions\grade( $hot, 7 ) && ! Questions\grade( $hot, 0 ) );
+check( 'Zone hors image ramenée dans l’image', 100.0 >= Questions\sanitize_zone( array( 'x' => 90, 'y' => 0, 'w' => 50, 'h' => 10 ) )['x'] + Questions\sanitize_zone( array( 'x' => 90, 'y' => 0, 'w' => 50, 'h' => 10 ) )['w'] );
+
 /* ------------------------------------------------------------------ */
 section( 'Règles d’examen par pays (aucun code par pays)' );
 
@@ -102,6 +137,7 @@ if ( $fr_exam && $it_exam ) {
 	check( 'Tirage reproductible pour une même session', $a === $b );
 	check( 'Tirage différent pour une autre session', $a !== $c );
 	check( 'Tirage sans doublon', count( array_unique( $a ) ) === count( $a ) );
+	check( 'Examen France : uniquement des QCM (pas d’ordre, d’association ni d’image cliquable)', ! array_diff( array_map( static fn( $id ) => get_post_meta( $id, '_ld_format', true ), $a ), array( 'single', 'multiple' ) ) );
 	$topics = array();
 	foreach ( $a as $id ) {
 		$t = LearnDrive\Core\primary_term( $id, 'ld_topic' );
@@ -254,7 +290,7 @@ check( 'Réimport : mise à jour sans doublon', 1 === $report2['updated'] && 0 =
 
 $export = wp_tempnam( 'ld-export' );
 $count  = Import\export_file( $export, 'jsonl' );
-check( 'Export JSON Lines', $count >= 120 && $count === count( file( $export ) ) );
+check( 'Export JSON Lines', $count >= 125 && $count === count( file( $export ) ) );
 @unlink( $export );
 
 /* ------------------------------------------------------------------ */

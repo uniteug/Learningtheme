@@ -61,9 +61,15 @@ function parse_answers( $answers, $format ) {
 			static function ( $text ) {
 				$text    = trim( $text );
 				$correct = str_ends_with( $text, '*' ) || str_starts_with( $text, '*' );
+				$match   = '';
+				// Association : « élément = correspondance ».
+				if ( str_contains( $text, '=' ) ) {
+					list( $text, $match ) = array_map( 'trim', explode( '=', $text, 2 ) );
+				}
 				return array(
 					'text'    => trim( $text, '* ' ),
 					'correct' => $correct,
+					'match'   => $match,
 				);
 			},
 			array_filter( explode( '|', $answers ), 'strlen' )
@@ -76,11 +82,12 @@ function parse_answers( $answers, $format ) {
 			$clean[] = array(
 				'text'    => sanitize_text_field( $answer['text'] ),
 				'correct' => ! empty( $answer['correct'] ),
+				'match'   => sanitize_text_field( $answer['match'] ?? '' ),
 			);
 		}
 	}
 
-	return 'numeric' === $format ? array() : array_slice( $clean, 0, 6 );
+	return in_array( $format, array( 'numeric', 'hotspot' ), true ) ? array() : array_slice( $clean, 0, 'order' === $format ? 8 : 6 );
 }
 
 /**
@@ -153,6 +160,17 @@ function import_question( array $row, $base_dir = '', $dry_run = false ) {
 		return new \WP_Error( 'ld_import', sprintf( __( 'Propositions invalides : %s', 'learn-drive-core' ), $title ) );
 	}
 
+	$zones = $row['hotspots'] ?? array();
+	if ( is_string( $zones ) ) {
+		$zones = json_decode( $zones, true );
+	}
+	$zones = is_array( $zones ) ? array_values( array_filter( array_map( 'LearnDrive\\Core\\Questions\\sanitize_zone', $zones ) ) ) : array();
+
+	if ( ( in_array( $format, array( 'order', 'match' ), true ) && count( $answers ) < 2 ) || ( 'match' === $format && in_array( '', wp_list_pluck( $answers, 'match' ), true ) ) || ( 'hotspot' === $format && ! $zones ) ) {
+		/* translators: %s: question */
+		return new \WP_Error( 'ld_import', sprintf( __( 'Propositions invalides : %s', 'learn-drive-core' ), $title ) );
+	}
+
 	if ( $dry_run ) {
 		return 0;
 	}
@@ -210,6 +228,7 @@ function import_question( array $row, $base_dir = '', $dry_run = false ) {
 
 	update_post_meta( $id, '_ld_format', $format );
 	update_post_meta( $id, '_ld_answers', $answers );
+	update_post_meta( $id, '_ld_hotspots', $zones );
 	if ( 'numeric' === $format ) {
 		$numeric = $row['numeric'] ?? array(
 			'value'     => $row['numeric_value'] ?? 0,
@@ -398,7 +417,7 @@ function export_file( $file, $format = 'jsonl' ) {
 	$page  = 1;
 	$count = 0;
 
-	$columns = array( 'title', 'slug', 'format', 'answers', 'explanation', 'tracks', 'topic', 'country', 'difficulty', 'access', 'source', 'official_id', 'sheet', 'numeric_value', 'numeric_tolerance', 'numeric_unit', 'image', 'image_alt' );
+	$columns = array( 'title', 'slug', 'format', 'answers', 'explanation', 'tracks', 'topic', 'country', 'difficulty', 'access', 'source', 'official_id', 'sheet', 'numeric_value', 'numeric_tolerance', 'numeric_unit', 'image', 'image_alt', 'hotspots' );
 	if ( 'csv' === $format ) {
 		fputcsv( $fh, $columns, ',', '"', '\\' );
 	}
@@ -437,16 +456,18 @@ function export_file( $file, $format = 'jsonl' ) {
 				'numeric_unit'      => 'numeric' === $q['format'] ? $q['numeric']['unit'] : '',
 				'image'             => $image,
 				'image_alt'         => $q['image_id'] ? get_post_meta( $q['image_id'], '_wp_attachment_image_alt', true ) : '',
+				'hotspots'          => $q['hotspots'],
 			);
 			if ( 'csv' === $format ) {
-				$row['answers'] = implode(
+				$row['answers']  = implode(
 					'|',
 					array_map(
-						static fn( $a ) => $a['text'] . ( $a['correct'] ? '*' : '' ),
+						static fn( $a ) => $a['text'] . ( '' !== $a['match'] ? '=' . $a['match'] : '' ) . ( $a['correct'] ? '*' : '' ),
 						$q['answers']
 					)
 				);
-				$row['tracks']  = implode( ',', $row['tracks'] );
+				$row['tracks']   = implode( ',', $row['tracks'] );
+				$row['hotspots'] = $row['hotspots'] ? wp_json_encode( $row['hotspots'] ) : '';
 				fputcsv( $fh, array_values( $row ), ',', '"', '\\' );
 			} else {
 				fwrite( $fh, wp_json_encode( $row, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . "\n" ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fwrite

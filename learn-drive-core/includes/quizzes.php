@@ -300,6 +300,12 @@ function pool( $quiz_id ) {
 function question_ids( $quiz_id, $seed = null ) {
 	$rules = rules( $quiz_id );
 	$pool  = pool( $quiz_id );
+
+	// Examen blanc : seulement les formats de l'épreuve officielle du pays.
+	if ( 'exam' === mode( $quiz_id ) && ! empty( $rules['format'] ) ) {
+		$pool = filter_formats( $pool, $rules['format'] );
+	}
+
 	$count = $rules['count'] > 0 ? $rules['count'] : count( $pool );
 
 	if ( null === $seed || '' === $seed ) {
@@ -333,6 +339,43 @@ function question_ids( $quiz_id, $seed = null ) {
 	}
 
 	return seeded_shuffle( $picked, $seed . 'order' );
+}
+
+/**
+ * Formats acceptés par une épreuve : un examen « choix multiple » (France)
+ * accepte aussi les questions à réponse unique ; les autres sont exacts.
+ *
+ * @param string $format Format de l'épreuve.
+ * @return string[]
+ */
+function compatible_formats( $format ) {
+	$map = array(
+		'multiple' => array( 'multiple', 'single' ),
+		'single'   => array( 'single' ),
+		'tf'       => array( 'tf' ),
+	);
+	return $map[ $format ] ?? array( $format );
+}
+
+/**
+ * Garde les questions d'un format compatible avec l'épreuve.
+ *
+ * @param int[]  $ids    Questions.
+ * @param string $format Format de l'épreuve.
+ * @return int[]
+ */
+function filter_formats( array $ids, $format ) {
+	update_meta_cache( 'post', $ids );
+	$allowed = compatible_formats( $format );
+	return array_values(
+		array_filter(
+			$ids,
+			static function ( $id ) use ( $allowed ) {
+				$own = (string) get_post_meta( $id, '_ld_format', true );
+				return in_array( '' === $own ? 'multiple' : $own, $allowed, true );
+			}
+		)
+	);
 }
 
 /**

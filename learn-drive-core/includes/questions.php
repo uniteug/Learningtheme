@@ -21,7 +21,14 @@ use const LearnDrive\Core\TAX_COUNTRY;
 
 defined( 'ABSPATH' ) || exit;
 
-const FORMATS = array( 'tf', 'single', 'multiple', 'numeric', 'flashcard' );
+const FORMATS = array( 'tf', 'single', 'multiple', 'numeric', 'order', 'match', 'hotspot', 'flashcard' );
+
+/**
+ * Grille des images cliquables : chaque case est un vrai bouton (clavier,
+ * lecteur d'écran, cible tactile), la zone attendue couvre une ou plusieurs cases.
+ */
+const HOTSPOT_COLS = 5;
+const HOTSPOT_ROWS = 4;
 
 /**
  * Déclare les métadonnées (lisibles par l'éditeur et l'API REST interne).
@@ -96,6 +103,32 @@ function register_meta() {
 						'properties' => array(
 							'text'    => array( 'type' => 'string' ),
 							'correct' => array( 'type' => 'boolean' ),
+							'match'   => array( 'type' => 'string' ),
+						),
+					),
+				),
+			),
+		)
+	);
+
+	register_post_meta(
+		PT_QUESTION,
+		'_ld_hotspots',
+		array(
+			'type'          => 'array',
+			'single'        => true,
+			'default'       => array(),
+			'auth_callback' => $auth,
+			'show_in_rest'  => array(
+				'schema' => array(
+					'type'  => 'array',
+					'items' => array(
+						'type'       => 'object',
+						'properties' => array(
+							'x' => array( 'type' => 'number' ),
+							'y' => array( 'type' => 'number' ),
+							'w' => array( 'type' => 'number' ),
+							'h' => array( 'type' => 'number' ),
 						),
 					),
 				),
@@ -164,6 +197,7 @@ function get( $post ) {
 			return array(
 				'text'    => (string) ( $answer['text'] ?? '' ),
 				'correct' => ! empty( $answer['correct'] ),
+				'match'   => (string) ( $answer['match'] ?? '' ),
 			);
 		},
 		$answers
@@ -196,6 +230,9 @@ function get( $post ) {
 		'unit'      => '',
 	);
 
+	$hotspots = get_post_meta( $post->ID, '_ld_hotspots', true );
+	$hotspots = is_array( $hotspots ) ? array_values( array_filter( array_map( __NAMESPACE__ . '\\sanitize_zone', $hotspots ) ) ) : array();
+
 	$topic   = primary_term( $post->ID, TAX_TOPIC );
 	$track   = primary_term( $post->ID, TAX_TRACK );
 	$country = primary_term( $post->ID, TAX_COUNTRY );
@@ -205,6 +242,7 @@ function get( $post ) {
 		'title'       => get_the_title( $post ),
 		'format'      => $format,
 		'answers'     => $answers,
+		'hotspots'    => $hotspots,
 		'numeric'     => array(
 			'value'     => (float) $numeric['value'],
 			'tolerance' => (float) $numeric['tolerance'],
@@ -235,6 +273,18 @@ function get( $post ) {
 function solution( array $question ) {
 	if ( 'numeric' === $question['format'] ) {
 		return $question['numeric']['value'];
+	}
+
+	if ( 'order' === $question['format'] || 'match' === $question['format'] ) {
+		// Identifiants d'affichage (mélangés) de chaque position d'origine :
+		// ordre juste pour « ordre », correspondance de chaque ligne pour « association ».
+		$flip = array_flip( shuffled_indexes( $question ) );
+		ksort( $flip );
+		return array_values( array_map( 'intval', $flip ) );
+	}
+
+	if ( 'hotspot' === $question['format'] ) {
+		return hotspot_cells( $question );
 	}
 
 	$correct = array();
@@ -271,6 +321,26 @@ function solution_text( array $question ) {
 		return '';
 	}
 
+	if ( 'order' === $question['format'] ) {
+		$parts = array();
+		foreach ( $question['answers'] as $index => $answer ) {
+			$parts[] = ( $index + 1 ) . '. ' . $answer['text'];
+		}
+		return implode( ' → ', $parts );
+	}
+
+	if ( 'match' === $question['format'] ) {
+		$parts = array();
+		foreach ( $question['answers'] as $answer ) {
+			$parts[] = $answer['text'] . ' ↔ ' . $answer['match'];
+		}
+		return implode( ' · ', $parts );
+	}
+
+	if ( 'hotspot' === $question['format'] ) {
+		return __( 'la zone surlignée sur l’image', 'learn-drive-core' );
+	}
+
 	$parts = array();
 	foreach ( solution( $question ) as $index ) {
 		$text    = $question['answers'][ $index ]['text'];
@@ -296,6 +366,31 @@ function grade( array $question, $answer ) {
 
 		case 'flashcard':
 			return 'known' === $answer;
+
+		case 'order':
+		case 'match':
+			// Les réponses utilisent les identifiants d'affichage (mélangés) :
+			// on les ramène aux positions d'origine avant de comparer.
+			$shuffled = shuffled_indexes( $question );
+			if ( ! is_array( $answer ) || count( $answer ) !== count( $shuffled ) || count( $shuffled ) < 2 ) {
+				return false;
+			}
+			$original = array();
+			foreach ( array_values( $answer ) as $display ) {
+				$display = (int) $display;
+				if ( ! isset( $shuffled[ $display ] ) ) {
+					return false;
+				}
+				$original[] = $shuffled[ $display ];
+			}
+			// Ordre : séquence 0, 1, 2… ; association : la ligne i pointe vers la correspondance i.
+			return array_keys( $shuffled ) === $original;
+
+		case 'hotspot':
+			if ( is_array( $answer ) ) {
+				$answer = count( $answer ) === 1 ? reset( $answer ) : -1;
+			}
+			return is_numeric( $answer ) && in_array( (int) $answer, hotspot_cells( $question ), true );
 
 		case 'multiple':
 			$given = array_map( 'intval', (array) $answer );
@@ -516,4 +611,85 @@ function related_ids( $question_id, $count = 5 ) {
 			'tax_query'      => $tax_query, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 		)
 	);
+}
+
+/**
+ * Nettoie une zone d'image cliquable (pourcentages).
+ *
+ * @param mixed $zone Zone { x, y, w, h }.
+ * @return array|null
+ */
+function sanitize_zone( $zone ) {
+	if ( ! is_array( $zone ) ) {
+		return null;
+	}
+	$clean = array();
+	foreach ( array( 'x', 'y', 'w', 'h' ) as $key ) {
+		$clean[ $key ] = max( 0, min( 100, round( (float) ( $zone[ $key ] ?? 0 ), 2 ) ) );
+	}
+	if ( $clean['w'] <= 0 || $clean['h'] <= 0 ) {
+		return null;
+	}
+	$clean['w'] = min( $clean['w'], 100 - $clean['x'] );
+	$clean['h'] = min( $clean['h'], 100 - $clean['y'] );
+	return $clean;
+}
+
+/**
+ * Cases de la grille couvertes par les zones attendues.
+ *
+ * Une case est juste si une zone recouvre au moins 30 % de sa surface, ou si
+ * elle contient le centre d'une zone (petites cibles).
+ *
+ * @param array $question Question normalisée.
+ * @return int[]
+ */
+function hotspot_cells( array $question ) {
+	$cells  = array();
+	$cell_w = 100 / HOTSPOT_COLS;
+	$cell_h = 100 / HOTSPOT_ROWS;
+
+	foreach ( $question['hotspots'] as $zone ) {
+		for ( $row = 0; $row < HOTSPOT_ROWS; $row++ ) {
+			for ( $col = 0; $col < HOTSPOT_COLS; $col++ ) {
+				$x0      = $col * $cell_w;
+				$y0      = $row * $cell_h;
+				$overlap = max( 0, min( $x0 + $cell_w, $zone['x'] + $zone['w'] ) - max( $x0, $zone['x'] ) ) * max( 0, min( $y0 + $cell_h, $zone['y'] + $zone['h'] ) - max( $y0, $zone['y'] ) );
+				$cx      = $zone['x'] + $zone['w'] / 2;
+				$cy      = $zone['y'] + $zone['h'] / 2;
+				$center  = $cx >= $x0 && $cx < $x0 + $cell_w && $cy >= $y0 && $cy < $y0 + $cell_h;
+				if ( $center || $overlap >= 0.3 * $cell_w * $cell_h ) {
+					$cells[] = $row * HOTSPOT_COLS + $col;
+				}
+			}
+		}
+	}
+
+	$cells = array_values( array_unique( $cells ) );
+	sort( $cells );
+	return $cells;
+}
+
+/**
+ * Ordre d'affichage mélangé (stable pour une question donnée, jamais l'ordre juste).
+ *
+ * @param array $question Question normalisée.
+ * @return int[]
+ */
+function shuffled_indexes( array $question ) {
+	$indexes = array_keys( $question['answers'] );
+	if ( count( $indexes ) < 2 ) {
+		return $indexes;
+	}
+	$seed = 'ld-' . $question['id'];
+	usort(
+		$indexes,
+		static function ( $a, $b ) use ( $seed ) {
+			return strcmp( md5( $seed . $a ), md5( $seed . $b ) );
+		}
+	);
+	if ( array_keys( $question['answers'] ) === $indexes ) {
+		$indexes = array_reverse( $indexes );
+	}
+	return $indexes;
 }

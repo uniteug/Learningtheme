@@ -3742,6 +3742,166 @@
    "access": "premium",
    "source": "Codice della strada, art. 172",
    "sheet": ""
+  },
+  {
+   "slug": "ordre-gestes-premiers-secours",
+   "title": "Face à un accident, dans quel ordre devez-vous agir ?",
+   "format": "order",
+   "answers": [
+    {
+     "text": "Protéger : baliser et sécuriser la zone pour éviter un suraccident",
+     "correct": false
+    },
+    {
+     "text": "Alerter : appeler les secours (15, 18 ou 112)",
+     "correct": false
+    },
+    {
+     "text": "Secourir : porter les premiers gestes aux victimes",
+     "correct": false
+    }
+   ],
+   "numeric": null,
+   "explanation": "<!-- wp:paragraph -->\n<p>L'ordre à retenir est : protéger, alerter, secourir. Protéger d'abord, en balisant la zone (gilet, triangle, feux de détresse), évite qu'un autre véhicule ne percute les victimes ou les témoins. Alerter ensuite permet aux secours professionnels d'intervenir au plus vite, en précisant le lieu, le nombre de victimes et leur état. Secourir vient en dernier : on effectue seulement les gestes que l'on maîtrise, sans déplacer une victime sauf danger immédiat.</p>\n<!-- /wp:paragraph -->",
+   "tracks": [
+    "permis-b",
+    "permis-a"
+   ],
+   "topic": "premiers-secours",
+   "country": "france",
+   "difficulty": 1,
+   "access": "free",
+   "source": "Programme de l'épreuve théorique générale, thème premiers secours (PAS)",
+   "sheet": ""
+  },
+  {
+   "slug": "ordre-distances-90-kmh",
+   "title": "À 90 km/h sur route sèche, classez ces distances de la plus courte à la plus longue.",
+   "format": "order",
+   "answers": [
+    {
+     "text": "Distance parcourue pendant le temps de réaction",
+     "correct": false
+    },
+    {
+     "text": "Distance de freinage",
+     "correct": false
+    },
+    {
+     "text": "Distance d'arrêt",
+     "correct": false
+    }
+   ],
+   "numeric": null,
+   "explanation": "<!-- wp:paragraph -->\n<p>La distance d'arrêt est toujours la plus longue, car elle additionne la distance parcourue pendant le temps de réaction et la distance de freinage. À 90 km/h, avec une seconde de réaction, le véhicule parcourt environ 25 mètres avant même de freiner. Sur route sèche, la distance de freinage est ensuite plus longue que cette distance de réaction, et elle augmente fortement avec la vitesse puisqu'elle dépend du carré de la vitesse.</p>\n<!-- /wp:paragraph -->",
+   "tracks": [
+    "permis-b"
+   ],
+   "topic": "route",
+   "country": "france",
+   "difficulty": 2,
+   "access": "free",
+   "source": "Programme de l'épreuve théorique générale, thème la route",
+   "sheet": ""
+  },
+  {
+   "slug": "associer-formes-panneaux",
+   "title": "Associez chaque forme de panneau à sa signification.",
+   "format": "match",
+   "answers": [
+    {
+     "text": "Triangle à bord rouge",
+     "match": "Danger",
+     "correct": false
+    },
+    {
+     "text": "Cercle à bord rouge",
+     "match": "Interdiction",
+     "correct": false
+    },
+    {
+     "text": "Cercle à fond bleu",
+     "match": "Obligation",
+     "correct": false
+    },
+    {
+     "text": "Carré ou rectangle à fond bleu",
+     "match": "Indication",
+     "correct": false
+    }
+   ],
+   "numeric": null,
+   "explanation": "<!-- wp:paragraph -->\n<p>La forme et la couleur d'un panneau donnent sa famille avant même de lire le symbole. Le triangle à bord rouge annonce un danger, le cercle à bord rouge une interdiction, le cercle à fond bleu une obligation et le carré ou le rectangle à fond bleu une indication. Reconnaître la famille d'un coup d'œil permet d'anticiper le comportement attendu, même de loin ou par mauvaise visibilité.</p>\n<!-- /wp:paragraph -->",
+   "tracks": [
+    "permis-b",
+    "permis-a",
+    "permis-am"
+   ],
+   "topic": "route",
+   "country": "france",
+   "difficulty": 1,
+   "access": "free",
+   "source": "Instruction interministérielle sur la signalisation routière",
+   "sheet": ""
+  },
+  {
+   "slug": "associer-panneaux-signification",
+   "title": "Associez chaque panneau à la règle qu'il impose.",
+   "format": "match",
+   "answers": [
+    {
+     "text": "Stop",
+     "match": "Arrêt obligatoire puis céder le passage",
+     "correct": false
+    },
+    {
+     "text": "Cédez le passage",
+     "match": "Céder le passage sans arrêt obligatoire",
+     "correct": false
+    },
+    {
+     "text": "Sens interdit",
+     "match": "Accès interdit à tous les véhicules dans ce sens",
+     "correct": false
+    }
+   ],
+   "numeric": null,
+   "explanation": "<!-- wp:paragraph -->\n<p>Le panneau stop impose un arrêt complet à la limite de la chaussée abordée, puis de céder le passage. Le panneau cédez le passage impose seulement de laisser passer les usagers de la route abordée : on ne s'arrête que si c'est nécessaire. Le sens interdit indique qu'aucun véhicule ne peut s'engager dans la voie dans ce sens de circulation. Confondre stop et cédez le passage est l'une des erreurs les plus fréquentes.</p>\n<!-- /wp:paragraph -->",
+   "tracks": [
+    "permis-b"
+   ],
+   "topic": "circulation",
+   "country": "france",
+   "difficulty": 1,
+   "access": "free",
+   "source": "Code de la route, articles R415-6 et R415-7",
+   "sheet": "stop"
+  },
+  {
+   "slug": "image-panneau-arret-obligatoire",
+   "title": "Touchez le panneau qui impose de marquer un arrêt complet.",
+   "format": "hotspot",
+   "scene": "signs-row",
+   "hotspots": [
+    {
+     "x": 38,
+     "y": 12,
+     "w": 24,
+     "h": 76
+    }
+   ],
+   "answers": [],
+   "numeric": null,
+   "explanation": "<!-- wp:paragraph -->\n<p>Le panneau octogonal rouge marqué STOP est le seul des trois qui impose un arrêt complet, roues immobilisées, à la limite de la chaussée abordée. Le triangle pointe en bas, cédez le passage, demande seulement de laisser passer les autres usagers. Le cercle rouge barré de blanc, sens interdit, interdit l'accès à la voie. Sa forme octogonale unique permet de reconnaître le stop même lorsqu'il est enneigé ou vu de dos.</p>\n<!-- /wp:paragraph -->",
+   "tracks": [
+    "permis-b"
+   ],
+   "topic": "circulation",
+   "country": "france",
+   "difficulty": 1,
+   "access": "free",
+   "source": "Code de la route, article R415-6",
+   "sheet": "stop"
   }
  ],
  "quizzes": [

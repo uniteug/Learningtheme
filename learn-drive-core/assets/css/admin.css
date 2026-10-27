@@ -85,3 +85,45 @@
 	background: #2271b1;
 	color: #fff;
 }
+
+.ld-answers .ld-hint-order,
+.ld-answers .ld-hint-match,
+.ld-answer-row__match {
+	display: none;
+}
+
+.ld-answers[data-format="order"] .ld-hint-choice,
+.ld-answers[data-format="match"] .ld-hint-choice,
+.ld-answers[data-format="order"] .ld-answer-row__correct,
+.ld-answers[data-format="match"] .ld-answer-row__correct {
+	display: none;
+}
+
+.ld-answers[data-format="order"] .ld-hint-order,
+.ld-answers[data-format="match"] .ld-hint-match,
+.ld-answers[data-format="match"] .ld-answer-row__match {
+	display: inline-block;
+}
+
+.ld-hotspot-editor {
+	position: relative;
+	display: inline-block;
+	max-width: 480px;
+	margin-bottom: 0.5rem;
+	cursor: crosshair;
+	user-select: none;
+	touch-action: none;
+}
+
+.ld-hotspot-editor img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+	pointer-events: none;
+}
+
+.ld-hotspot-editor .ld-zone {
+	position: absolute;
+	border: 2px solid #00a32a;
+	background: rgb(0 163 42 / 0.25);
+}

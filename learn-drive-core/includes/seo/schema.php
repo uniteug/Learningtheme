@@ -249,8 +249,13 @@ function question_nodes( array $ids, $with_answer ) {
 			'eduQuestionType' => 'tf' === $question['format'] ? 'True/False' : ( 'numeric' === $question['format'] ? 'Short answer' : 'Multiple choice' ),
 		);
 
+		$structured = in_array( $question['format'], array( 'order', 'match', 'hotspot' ), true );
+		if ( $structured ) {
+			unset( $node['eduQuestionType'] );
+		}
+
 		$suggested = array();
-		foreach ( $question['answers'] as $index => $answer ) {
+		foreach ( $structured ? array() : $question['answers'] as $index => $answer ) {
 			if ( $with_answer && $answer['correct'] ) {
 				continue;
 			}
@@ -267,7 +272,7 @@ function question_nodes( array $ids, $with_answer ) {
 		if ( $with_answer && Access\can_access( $id, 0 ) ) {
 			$explanation = SEO\truncate( wp_strip_all_tags( excerpt_remove_blocks( $question['content'] ) ), 600 );
 			$accepted    = array();
-			if ( 'numeric' === $question['format'] ) {
+			if ( 'numeric' === $question['format'] || $structured ) {
 				$accepted[] = array(
 					'@type' => 'Answer',
 					'text'  => Questions\solution_text( $question ),

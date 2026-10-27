@@ -25,7 +25,7 @@ Architecture conforme au cahier des charges : *le thème affiche, le plugin port
 4. **Learn & Drive › Import, export, démo › Importer la démo** — ou `wp learn demo`.
 5. **Apparence › Éditeur › Styles** : choisir l'ambiance (Route claire, Coach, Magazine, Neutre, Route de nuit), les couleurs et les polices.
 
-Contenu de démonstration : 2 pays (France QCM, Italie vrai/faux) avec leurs règles d'examen, 5 catégories, 14 thèmes officiels, **120 questions** expliquées (≥ 45 mots, source citée), 14 quiz dont 2 examens blancs, 2 cours, 8 leçons, 14 panneaux dessinés localement, 15 définitions, 10 actualités, 10 guides et les pages éditoriales. Les actualités de démo sont des sujets « evergreen » (aucune réforme ni chiffre inventé) ; les prix des guides sont indicatifs et à vérifier.
+Contenu de démonstration : 2 pays (France QCM, Italie vrai/faux) avec leurs règles d'examen, 5 catégories, 14 thèmes officiels, **125 questions** (dont ordre, association et image cliquable) expliquées (≥ 45 mots, source citée), 14 quiz dont 2 examens blancs, 2 cours, 8 leçons, 14 panneaux dessinés localement, 15 définitions, 10 actualités, 10 guides et les pages éditoriales. Les actualités de démo sont des sujets « evergreen » (aucune réforme ni chiffre inventé) ; les prix des guides sont indicatifs et à vérifier.
 
 ## Ce que fait le produit
 
@@ -42,7 +42,7 @@ Contenu de démonstration : 2 pays (France QCM, Italie vrai/faux) avec leurs rè
 - **Contenus** : cours, leçons, questions, quiz, fiches, infos & démarches, lexique ; actualités = articles avec rubriques. Taxonomies : pays, catégorie, thème officiel, type d'épreuve, niveau, matière, famille de fiches — **libellés renommables** (« Catégorie de permis » → « Classe », « Niveau scolaire »…).
 - **URL en silos** : `/permis-b/`, `/permis-b/cours/{leçon}/`, `/permis-b/formation/{cours}/`, `/permis-b/quiz/{thème}/`, `/permis-b/examen-blanc/` (une seule URL), `/permis-b/questions/{slug}/`, `/panneaux/{slug}/`, `/infos/{slug}/`, `/lexique/{slug}/`, `/actualites/{slug}/`. Slugs traduisibles, 301 automatique vers l'URL canonique.
 - **Moteur de quiz** (Interactivity API, aucun React / jQuery côté visiteur, ~9 Ko minifié) :
-  - formats vrai/faux, choix unique, choix multiple (juste seulement si toutes les bonnes cases), numérique avec tolérance et unité, carte mémoire ;
+  - formats vrai/faux, choix unique, choix multiple (juste seulement si toutes les bonnes cases), numérique avec tolérance et unité, **remettre dans l'ordre** (flèches, accessible au clavier), **association** (listes déroulantes), **image cliquable** (grille de zones-boutons posée sur l'image, zones dessinées à la souris dans l'admin), carte mémoire — l'ordre juste et les correspondances ne figurent jamais dans le code source ; un examen blanc ne tire que les formats de l'épreuve officielle du pays ;
   - modes entraînement / thématique (correction immédiate + explication + lien vers la leçon) et **examen blanc** (tirage aléatoire réparti par thème, jeton de session signé, chrono total ou par question, retour arrière paramétrable, seuil, points négatifs, questions éliminatoires) ;
   - **règles par pays et par catégorie** en métadonnées : France 40 questions / 20 s / 35 bonnes réponses / pas de retour ; Italie 30 vrai-faux / 20 min / 3 erreurs — ajouter un pays ne demande aucun code ;
   - une question par écran, plein écran sans distraction, grandes zones tactiles, reprise automatique d'un quiz interrompu (sauvegarde dans le navigateur), temps majoré, texte agrandi, police dys, signalement d'erreur, défi par lien, résultat détaillé avec erreurs par thème ;
@@ -89,7 +89,7 @@ Reproduire : installer un WordPress de test avec le thème et le plugin, `wp lea
 
 ## Prochains lots (hors de cette livraison)
 
-- Formats « image cliquable », « ordre / association » et « question à tiroirs ».
+- Format « question à tiroirs ».
 - Espace auto-école B2B (classes, assignation de quiz, export des statistiques), classement hebdomadaire et badges.
 - Connexion Google / Apple / lien magique, module de paiement Stripe direct, adaptateurs Paid Memberships Pro / MemberPress.
 - Mode hors ligne (service worker), intégration Search Console dans la santé SEO, assistant de démarrage, licence Pro.

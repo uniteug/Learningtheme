@@ -930,3 +930,205 @@
 		transition: none !important;
 	}
 }
+
+/* ---------------------------------------------------------------------
+ * Remettre dans l'ordre
+ * ------------------------------------------------------------------ */
+.ld-order {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.ld-order__item {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	min-height: 56px;
+	padding: 0.4rem 0.4rem 0.4rem 0.75rem;
+	border: 2px solid var(--ldq-border);
+	border-radius: var(--ldq-radius-control);
+	background: var(--ldq-base);
+	transition: border-color 0.15s ease;
+}
+
+.ld-order__pos {
+	flex: 0 0 auto;
+	display: grid;
+	place-items: center;
+	width: 2rem;
+	height: 2rem;
+	border-radius: 50%;
+	background: var(--ldq-surface);
+	font-weight: 700;
+	font-variant-numeric: tabular-nums;
+}
+
+.ld-order__text {
+	flex: 1;
+	line-height: 1.4;
+}
+
+.ld-order__moves {
+	display: flex;
+	gap: 0.25rem;
+}
+
+.ld-order__moves .ld-icon-btn {
+	border: 1px solid var(--ldq-border);
+	border-radius: 10px;
+	font-size: 1.1em;
+}
+
+.ld-order__moves .ld-icon-btn[disabled] {
+	opacity: 0.4;
+}
+
+.ld-order__item.is-solution,
+.ld-match__row.is-solution {
+	border-color: var(--ldq-success);
+	background: color-mix(in srgb, var(--ldq-success) 10%, var(--ldq-base));
+}
+
+.ld-order__item.is-missed,
+.ld-match__row.is-missed {
+	border-color: var(--ldq-error);
+	background: color-mix(in srgb, var(--ldq-error) 8%, var(--ldq-base));
+}
+
+.ld-order__item.is-solution .ld-order__pos::after,
+.ld-match__row.is-solution .ld-opt__mark::before {
+	content: "✓";
+	color: var(--ldq-success);
+}
+
+.ld-order__item.is-missed .ld-order__pos {
+	background: color-mix(in srgb, var(--ldq-error) 15%, var(--ldq-base));
+}
+
+.ld-match__row.is-missed .ld-opt__mark::before {
+	content: "✗";
+	color: var(--ldq-error);
+}
+
+/* ---------------------------------------------------------------------
+ * Association
+ * ------------------------------------------------------------------ */
+.ld-match {
+	display: grid;
+	gap: 0.5rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.ld-match__row {
+	position: relative;
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+	align-items: center;
+	gap: 0.75rem;
+	padding: 0.5rem 2.5rem 0.5rem 0.85rem;
+	border: 2px solid var(--ldq-border);
+	border-radius: var(--ldq-radius-control);
+	background: var(--ldq-base);
+}
+
+.ld-match__left {
+	font-weight: 700;
+}
+
+.ld-match__row select {
+	width: 100%;
+	min-height: 48px;
+	padding: 0 0.6rem;
+	border: 1px solid var(--ldq-border);
+	border-radius: 8px;
+	background: var(--ldq-surface);
+	color: var(--ldq-text);
+	font: inherit;
+}
+
+.ld-match__row .ld-opt__mark {
+	right: 0.85rem;
+}
+
+@media (max-width: 520px) {
+	.ld-match__row {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* ---------------------------------------------------------------------
+ * Image cliquable
+ * ------------------------------------------------------------------ */
+.ld-hotspot {
+	position: relative;
+	border-radius: var(--ldq-radius);
+	overflow: hidden;
+	background: var(--ldq-border);
+}
+
+.ld-hotspot__img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.ld-hotspot__grid {
+	position: absolute;
+	inset: 0;
+	display: grid;
+}
+
+.ld-hotspot__cell {
+	border: 1px dashed rgb(255 255 255 / 0.35);
+	background: transparent;
+	cursor: crosshair;
+	padding: 0;
+	min-height: 0;
+}
+
+.ld-hotspot__cell:hover {
+	background: rgb(255 255 255 / 0.18);
+}
+
+.ld-hotspot__cell:focus-visible {
+	outline: 3px solid var(--ldq-accent);
+	outline-offset: -3px;
+}
+
+.ld-hotspot__cell.is-chosen {
+	background: color-mix(in srgb, var(--ldq-primary) 35%, transparent);
+	box-shadow: inset 0 0 0 3px var(--ldq-primary);
+}
+
+.ld-hotspot__cell.is-solution {
+	background: color-mix(in srgb, var(--ldq-success) 35%, transparent);
+	box-shadow: inset 0 0 0 3px var(--ldq-success);
+}
+
+.ld-hotspot__cell.is-missed {
+	background: color-mix(in srgb, var(--ldq-error) 35%, transparent);
+	box-shadow: inset 0 0 0 3px var(--ldq-error);
+}
+
+.ld-hotspot__cell.is-solution::after,
+.ld-hotspot__cell.is-missed::after {
+	display: block;
+	font-size: 1.4rem;
+	font-weight: 700;
+	color: #fff;
+	text-shadow: 0 1px 3px rgb(0 0 0 / 0.6);
+}
+
+.ld-hotspot__cell.is-solution::after {
+	content: "✓";
+}
+
+.ld-hotspot__cell.is-missed::after {
+	content: "✗";
+}
