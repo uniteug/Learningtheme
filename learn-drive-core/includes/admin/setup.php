@@ -99,7 +99,7 @@ function countries() {
 		'senegal'       => __( 'Sénégal', 'learn-drive-core' ),
 		'cote-d-ivoire' => __( 'Côte d’Ivoire', 'learn-drive-core' ),
 		'cameroun'      => __( 'Cameroun', 'learn-drive-core' ),
-		'italia'        => __( 'Italie', 'learn-drive-core' ),
+		'italie'        => __( 'Italie', 'learn-drive-core' ),
 	);
 	$terms = get_terms(
 		array(

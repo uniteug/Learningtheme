@@ -1,0 +1,29 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "learn-drive/countries",
+	"title": "Pays",
+	"category": "learn-drive",
+	"icon": "admin-site-alt3",
+	"description": "Cartes des pays couverts (drapeau, catégories, nombre de questions), pour une section « Le permis en Europe ».",
+	"textdomain": "learn-drive-core",
+	"attributes": {
+		"count": {
+			"type": "integer",
+			"default": 12
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": [
+			"wide",
+			"full"
+		],
+		"spacing": {
+			"margin": true
+		}
+	},
+	"editorScript": "learn-drive-core-editor",
+	"style": "learn-drive-core-blocks",
+	"render": "file:./render.php"
+}

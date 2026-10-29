@@ -15,6 +15,7 @@ define( 'LEARN_DRIVE_VERSION', wp_get_theme( get_template() )->get( 'Version' ) 
 require_once get_template_directory() . '/inc/block-styles.php';
 require_once get_template_directory() . '/inc/performance.php';
 require_once get_template_directory() . '/inc/dark-mode.php';
+require_once get_template_directory() . '/inc/presentation.php';
 
 if ( ! function_exists( 'learn_drive_setup' ) ) :
 	/**

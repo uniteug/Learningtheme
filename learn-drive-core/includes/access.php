@@ -98,6 +98,7 @@ function maybe_upgrade() {
 	if ( get_option( 'ld_db_version' ) !== \LearnDrive\Core\VERSION ) {
 		install_tables();
 		\LearnDrive\Core\Classes\install();
+		\LearnDrive\Core\SEO\Index\schedule_recompute();
 	}
 }
 add_action( 'admin_init', __NAMESPACE__ . '\\maybe_upgrade' );

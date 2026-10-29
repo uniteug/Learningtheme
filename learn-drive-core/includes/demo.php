@@ -403,8 +403,11 @@ function import( $log = null ) {
 		is_array( $settings ) ? $settings : array(),
 		array(
 			'org_name'        => get_bloginfo( 'name' ),
-			'default_country' => 'france',
+			'default_country' => $data['settings']['default_country'] ?? 'france',
 			'news_name'       => get_bloginfo( 'name' ),
+			'home_eyebrow'    => $data['settings']['home_eyebrow'] ?? '',
+			'home_title'      => $data['settings']['home_title'] ?? '',
+			'home_lead'       => $data['settings']['home_lead'] ?? '',
 		)
 	);
 	update_option( OPTION, $settings );
@@ -413,6 +416,7 @@ function import( $log = null ) {
 	foreach ( $data['countries'] as $country ) {
 		$term = term_upsert( $country['name'], $country['slug'], TAX_COUNTRY );
 		update_term_meta( $term, 'ld_rules', $country['rules'] );
+		update_term_meta( $term, 'ld_flag', $country['flag'] ?? '' );
 	}
 
 	// Catégories (pages piliers).
@@ -422,6 +426,7 @@ function import( $log = null ) {
 		update_term_meta( $term, 'ld_color', $track['color'] );
 		update_term_meta( $term, 'ld_content', $track['content'] );
 		update_term_meta( $term, 'ld_country', $track['country'] );
+		update_term_meta( $term, 'ld_min_age', $track['min_age'] ?? '' );
 		$country_of[ $track['slug'] ] = $track['country'];
 	}
 	$count['tracks'] = count( $data['tracks'] );
@@ -479,7 +484,7 @@ function import( $log = null ) {
 		);
 		wp_set_object_terms( $id, terms( $course['tracks'], TAX_TRACK ), TAX_TRACK );
 		wp_set_object_terms( $id, terms( $course['level'] ?? '', TAX_LEVEL ), TAX_LEVEL );
-		wp_set_object_terms( $id, terms( 'france', TAX_COUNTRY ), TAX_COUNTRY );
+		wp_set_object_terms( $id, terms( $course['country'] ?? ( $country_of[ $course['tracks'][0] ?? '' ] ?? 'france' ), TAX_COUNTRY ), TAX_COUNTRY );
 		if ( ! get_post_thumbnail_id( $id ) && function_exists( 'imagecreatetruecolor' ) ) {
 			save_image( draw_cover( $index + 2 ), 'cours-' . $course['slug'], $course['title'], $id, 'jpg' );
 		}
@@ -500,7 +505,7 @@ function import( $log = null ) {
 		);
 		wp_set_object_terms( $id, terms( $lesson['tracks'], TAX_TRACK ), TAX_TRACK );
 		wp_set_object_terms( $id, terms( $lesson['topic'], TAX_TOPIC ), TAX_TOPIC );
-		wp_set_object_terms( $id, terms( 'france', TAX_COUNTRY ), TAX_COUNTRY );
+		wp_set_object_terms( $id, terms( $lesson['country'] ?? ( $country_of[ $lesson['tracks'][0] ?? '' ] ?? 'france' ), TAX_COUNTRY ), TAX_COUNTRY );
 		update_post_meta( $id, '_ld_course', $course_ids[ $lesson['course'] ] ?? 0 );
 		update_post_meta( $id, '_ld_access', $lesson['access'] ?? 'inherit' );
 	}
@@ -600,7 +605,7 @@ function import( $log = null ) {
 		);
 		wp_set_object_terms( $id, terms( $news['tracks'] ?? array(), TAX_TRACK ), TAX_TRACK );
 		wp_set_object_terms( $id, terms( $news['topic'] ?? '', TAX_TOPIC ), TAX_TOPIC );
-		wp_set_object_terms( $id, terms( 'france', TAX_COUNTRY ), TAX_COUNTRY );
+		wp_set_object_terms( $id, terms( $news['country'] ?? 'france', TAX_COUNTRY ), TAX_COUNTRY );
 		if ( ! get_post_thumbnail_id( $id ) && function_exists( 'imagecreatetruecolor' ) ) {
 			save_image( draw_cover( $index ), 'actualite-' . $news['slug'], $news['title'], $id, 'jpg' );
 		}

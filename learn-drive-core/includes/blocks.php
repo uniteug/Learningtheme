@@ -294,7 +294,7 @@ function related_ids( $post_type, $variant, $count, $block = null ) {
  * Rend une liste de contenus.
  *
  * @param int[]  $ids     Contenus.
- * @param string $layout  list|cards|tiles.
+ * @param string $layout  list|cards|tiles|carousel.
  * @param string $heading Titre.
  * @param string $classes Classes supplémentaires.
  * @return string
@@ -324,6 +324,21 @@ function render_list( array $ids, $layout, $heading, $classes = '' ) {
 			continue;
 		}
 
+		$badge = '';
+		if ( 'carousel' === $layout ) {
+			$type = get_post_type( $id );
+			if ( PT_QUIZ === $type ) {
+				$count = count( Quizzes\question_ids( $id ) );
+				/* translators: %d: number of questions */
+				$badge = sprintf( _n( '%d question', '%d questions', $count, 'learn-drive-core' ), $count );
+			} elseif ( 'post' === $type ) {
+				$badge = get_the_date( 'j M Y', $id );
+			} else {
+				$badge = type_label( $type );
+			}
+			$badge = '<span class="ld-related__badge">' . esc_html( $badge ) . '</span>';
+		}
+
 		$image_size = 'tiles' === $layout ? 'learn-drive-400' : 'learn-drive-800';
 		$image      = get_the_post_thumbnail(
 			$id,
@@ -336,24 +351,28 @@ function render_list( array $ids, $layout, $heading, $classes = '' ) {
 			)
 		);
 
-		$excerpt = 'cards' === $layout ? '<p class="ld-related__excerpt">' . esc_html( wp_trim_words( get_the_excerpt( $id ), 20 ) ) . '</p>' : '';
+		$excerpt = in_array( $layout, array( 'cards', 'carousel' ), true ) ? '<p class="ld-related__excerpt">' . esc_html( wp_trim_words( get_the_excerpt( $id ), 'carousel' === $layout ? 16 : 20 ) ) . '</p>' : '';
 
 		$items .= sprintf(
-			'<li class="ld-related__item"><a class="ld-related__link" href="%1$s">%2$s<span class="ld-related__title">%3$s</span></a>%4$s</li>',
+			'<li class="ld-related__item"><a class="ld-related__link" href="%1$s">%2$s%5$s<span class="ld-related__title">%3$s</span></a>%4$s</li>',
 			esc_url( $url ),
 			$image ? '<span class="ld-related__media">' . $image . '</span>' : '',
 			esc_html( $title ),
-			$excerpt
+			$excerpt,
+			$badge
 		);
 	}
 
 	$heading_html = $heading ? '<h2 class="ld-related__heading">' . esc_html( $heading ) . '</h2>' : '';
 
+	$list_class = 'carousel' === $layout ? 'ld-related__list ld-carousel' : 'ld-related__list';
+
 	return sprintf(
-		'<section %1$s>%2$s<ul class="ld-related__list">%3$s</ul></section>',
+		'<section %1$s>%2$s<ul class="%4$s">%3$s</ul></section>',
 		get_block_wrapper_attributes( array( 'class' => trim( 'ld-related is-' . $layout . ' ' . $classes ) ) ),
 		$heading_html,
-		$items
+		$items,
+		esc_attr( $list_class )
 	);
 }
 
@@ -523,3 +542,121 @@ function type_label( $post_type ) {
 	);
 	return $labels[ $post_type ] ?? '';
 }
+
+/**
+ * Pictogramme d'une catégorie, déduit de son adresse (am → cyclomoteur,
+ * a → moto, c → poids lourd, d → autocar, sinon voiture).
+ *
+ * @param string $slug Adresse de la catégorie.
+ * @return string SVG décoratif.
+ */
+function track_icon( $slug ) {
+	$paths = array(
+		'scooter' => 'M5 17a2.5 2.5 0 1 0 0 .01M19 17a2.5 2.5 0 1 0 0 .01M7.5 17h7l2-5h-4l-1-4H9M14 6h3l2 6M7.5 17 6 12h4',
+		'moto'    => 'M5 17a3 3 0 1 0 0 .01M19 17a3 3 0 1 0 0 .01M5 17l4-6h5l3 6M13 6h3l3 5M9 11l-2-3H4',
+		'truck'   => 'M2 6h12v10H2zM14 9h4l4 4v3h-8M6 18.5a1.5 1.5 0 1 0 0 .01M17 18.5a1.5 1.5 0 1 0 0 .01',
+		'bus'     => 'M4 4h16v13H4zM4 10h16M8 20v-3M16 20v-3M7 14h.01M17 14h.01',
+		'car'     => 'M3 13l2-5a2 2 0 0 1 1.9-1.3h10.2A2 2 0 0 1 19 8l2 5v4H3zM3 13h18M7 17v2M17 17v2M7 13.5h.01M17 13.5h.01',
+	);
+	$slug  = strtolower( (string) $slug );
+	if ( preg_match( '/(^|-)am($|-)/', $slug ) ) {
+		$key = 'scooter';
+	} elseif ( preg_match( '/(^|-)a[12]?($|-)|moto/', $slug ) ) {
+		$key = 'moto';
+	} elseif ( preg_match( '/(^|-)c[1e]?($|-)|poids/', $slug ) ) {
+		$key = 'truck';
+	} elseif ( preg_match( '/(^|-)d[1e]?($|-)|bus|car$/', $slug ) ) {
+		$key = 'bus';
+	} else {
+		$key = 'car';
+	}
+	return '<svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" focusable="false"><path d="' . esc_attr( $paths[ $key ] ) . '" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+}
+
+/**
+ * Résumé d'une catégorie pour les cartes : règles d'examen et nombre de contenus.
+ *
+ * @param \WP_Term $term Catégorie.
+ * @return array{facts:string[],lessons:int,quizzes:int,exam:int}
+ */
+function track_summary( $term ) {
+	$key    = 'ld_track_summary_' . $term->term_id;
+	$cached = get_transient( $key );
+	if ( is_array( $cached ) ) {
+		return $cached;
+	}
+
+	$count = static function ( $post_type ) use ( $term ) {
+		$query = new \WP_Query(
+			array(
+				'post_type'              => $post_type,
+				'post_status'            => 'publish',
+				'posts_per_page'         => 1,
+				'fields'                 => 'ids',
+				'update_post_meta_cache' => false,
+				'update_post_term_cache' => false,
+				'tax_query'              => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
+					array(
+						'taxonomy' => TAX_TRACK,
+						'terms'    => $term->term_id,
+					),
+				),
+			)
+		);
+		return (int) $query->found_posts;
+	};
+
+	$exam  = \LearnDrive\Core\Permalinks\exam_for_track( $term );
+	$facts = array();
+	if ( $exam ) {
+		$rules = Quizzes\rules( $exam );
+		/* translators: %d: number of questions */
+		$facts[] = sprintf( _n( '%d question', '%d questions', $rules['count'], 'learn-drive-core' ), $rules['count'] );
+		if ( $rules['duration'] ) {
+			/* translators: %d: minutes */
+			$facts[] = sprintf( __( '%d min', 'learn-drive-core' ), (int) round( $rules['duration'] / 60 ) );
+		} elseif ( $rules['per_question'] ) {
+			/* translators: %d: seconds */
+			$facts[] = sprintf( __( '%d s / question', 'learn-drive-core' ), $rules['per_question'] );
+		}
+		if ( 'max_errors' === $rules['pass_type'] ) {
+			/* translators: %d: errors */
+			$facts[] = sprintf( _n( '%d erreur max', '%d erreurs max', $rules['pass_value'], 'learn-drive-core' ), $rules['pass_value'] );
+		} elseif ( 'min_correct' === $rules['pass_type'] ) {
+			/* translators: 1: minimum correct answers, 2: total */
+			$facts[] = sprintf( __( '%1$d/%2$d pour réussir', 'learn-drive-core' ), $rules['pass_value'], $rules['count'] );
+		}
+	}
+	$age = (string) get_term_meta( $term->term_id, 'ld_min_age', true );
+	if ( $age ) {
+		/* translators: %s: minimum age */
+		array_unshift( $facts, sprintf( __( 'dès %s ans', 'learn-drive-core' ), $age ) );
+	}
+
+	$summary = array(
+		'facts'   => $facts,
+		'lessons' => $count( PT_LESSON ),
+		'quizzes' => $count( PT_QUIZ ),
+		'exam'    => (int) $exam,
+	);
+	set_transient( $key, $summary, 12 * HOUR_IN_SECONDS );
+	return $summary;
+}
+
+/**
+ * Vide les résumés de catégories quand un contenu ou une catégorie change.
+ */
+function flush_track_summaries() {
+	$terms = get_terms(
+		array(
+			'taxonomy'   => TAX_TRACK,
+			'hide_empty' => false,
+			'fields'     => 'ids',
+		)
+	);
+	foreach ( is_wp_error( $terms ) ? array() : $terms as $term_id ) {
+		delete_transient( 'ld_track_summary_' . $term_id );
+	}
+}
+add_action( 'save_post', __NAMESPACE__ . '\\flush_track_summaries' );
+add_action( 'edited_' . TAX_TRACK, __NAMESPACE__ . '\\flush_track_summaries' );

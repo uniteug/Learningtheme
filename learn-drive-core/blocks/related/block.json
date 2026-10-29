@@ -39,7 +39,8 @@
 			"enum": [
 				"list",
 				"cards",
-				"tiles"
+				"tiles",
+				"carousel"
 			],
 			"default": "list"
 		}

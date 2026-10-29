@@ -73,7 +73,9 @@ ob_start();
 				?>
 			<?php else : ?>
 				<span class="ld-badge"><?php esc_html_e( 'Accès gratuit', 'learn-drive-core' ); ?></span>
-				<a href="<?php echo esc_url( \LearnDrive\Core\setting_url( 'premium_url' ) ); ?>"><?php esc_html_e( 'Découvrir le premium', 'learn-drive-core' ); ?></a>
+				<?php if ( 'commercial' === \LearnDrive\Core\presentation() ) : ?>
+					<a href="<?php echo esc_url( \LearnDrive\Core\setting_url( 'premium_url' ) ); ?>"><?php esc_html_e( 'Découvrir le premium', 'learn-drive-core' ); ?></a>
+				<?php endif; ?>
 			<?php endif; ?>
 		</p>
 	</header>

@@ -3,7 +3,7 @@
 	"private": true,
 	"description": "Tests navigateur (Playwright) du thème et du plugin Learn & Drive.",
 	"scripts": {
-		"test": "node parcours.js && node formats.js && node blocs.js && node classe.js && node hors-ligne.js && node assistant.js"
+		"test": "node parcours.js && node formats.js && node blocs.js && node classe.js && node hors-ligne.js && node assistant.js && node accueil.js"
 	},
 	"devDependencies": {
 		"playwright": "1.63.0"

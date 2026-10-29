@@ -12,8 +12,9 @@ use LearnDrive\Core\Access;
 
 defined( 'ABSPATH' ) || exit;
 
-$learn_drive_key = 'ld_qotd_' . wp_date( 'Ymd' ) . '_' . sanitize_key( $attributes['track'] );
-$learn_drive_id  = (int) get_transient( $learn_drive_key );
+$learn_drive_country = $attributes['track'] ? '' : (string) \LearnDrive\Core\setting( 'default_country' );
+$learn_drive_key     = 'ld_qotd_' . wp_date( 'Ymd' ) . '_' . sanitize_key( $attributes['track'] . $learn_drive_country );
+$learn_drive_id      = (int) get_transient( $learn_drive_key );
 
 if ( ! $learn_drive_id || 'publish' !== get_post_status( $learn_drive_id ) ) {
 	$learn_drive_args = array(
@@ -37,6 +38,14 @@ if ( ! $learn_drive_id || 'publish' !== get_post_status( $learn_drive_id ) ) {
 				'taxonomy' => \LearnDrive\Core\TAX_TRACK,
 				'field'    => 'slug',
 				'terms'    => sanitize_title( $attributes['track'] ),
+			),
+		);
+	} elseif ( $learn_drive_country ) {
+		$learn_drive_args['tax_query'] = array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
+			array(
+				'taxonomy' => \LearnDrive\Core\TAX_COUNTRY,
+				'field'    => 'slug',
+				'terms'    => $learn_drive_country,
 			),
 		);
 	}

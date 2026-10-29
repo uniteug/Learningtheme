@@ -89,6 +89,6 @@ add_filter( 'wp_speculation_rules_href_exclude_paths', 'learn_drive_speculation_
  * @return int
  */
 function learn_drive_inline_styles_limit( $limit ) {
-	return max( (int) $limit, 100000 );
+	return max( (int) $limit, 160000 );
 }
 add_filter( 'styles_inline_size_limit', 'learn_drive_inline_styles_limit' );

@@ -29,12 +29,17 @@
 				{
 					"slug": "hero",
 					"name": "Bandeau",
-					"gradient": "linear-gradient(135deg, var(--wp--preset--color--primary) 0%, color-mix(in srgb, var(--wp--preset--color--primary) 70%, #000) 100%)"
+					"gradient": "radial-gradient(70rem 40rem at 90% -20%, color-mix(in srgb, var(--wp--preset--color--primary) 55%, #7dd3fc) 0%, transparent 60%), radial-gradient(50rem 30rem at -10% 120%, color-mix(in srgb, var(--wp--preset--color--accent) 35%, transparent) 0%, transparent 55%), linear-gradient(135deg, var(--wp--preset--color--primary) 0%, color-mix(in srgb, var(--wp--preset--color--primary) 45%, #020617) 100%)"
 				},
 				{
 					"slug": "surface-fade",
 					"name": "Surface dégradée",
 					"gradient": "linear-gradient(180deg, var(--wp--preset--color--surface) 0%, var(--wp--preset--color--base) 100%)"
+				},
+				{
+					"slug": "soft",
+					"name": "Doux",
+					"gradient": "linear-gradient(180deg, color-mix(in srgb, var(--wp--preset--color--primary) 6%, var(--wp--preset--color--base)) 0%, var(--wp--preset--color--base) 100%)"
 				}
 			]
 		},
@@ -60,7 +65,8 @@
 			"defaultPresets": false,
 			"presets": [
 				{ "slug": "soft", "name": "Douce", "shadow": "0 1px 2px rgb(15 23 42 / 0.06), 0 1px 3px rgb(15 23 42 / 0.08)" },
-				{ "slug": "raised", "name": "Relief", "shadow": "0 6px 24px -6px rgb(15 23 42 / 0.18)" }
+				{ "slug": "raised", "name": "Relief", "shadow": "0 6px 24px -6px rgb(15 23 42 / 0.18)" },
+				{ "slug": "float", "name": "Flottante", "shadow": "0 30px 60px -20px rgb(2 6 23 / 0.35), 0 12px 24px -12px rgb(2 6 23 / 0.2)" }
 			]
 		},
 		"border": {
@@ -251,8 +257,8 @@
 		},
 		"custom": {
 			"radius": {
-				"card": "8px",
-				"control": "8px"
+				"card": "16px",
+				"control": "12px"
 			},
 			"line-height": {
 				"tight": "1.15",
@@ -321,10 +327,10 @@
 			"heading": {
 				"color": { "text": "var(--wp--preset--color--contrast)" },
 				"typography": {
-					"fontFamily": "var(--wp--preset--font-family--atkinson)",
-					"fontWeight": "700",
+					"fontFamily": "var(--wp--preset--font-family--plus-jakarta-sans)",
+					"fontWeight": "800",
 					"lineHeight": "var(--wp--custom--line-height--heading)",
-					"letterSpacing": "-0.01em"
+					"letterSpacing": "-0.025em"
 				}
 			},
 			"h1": {

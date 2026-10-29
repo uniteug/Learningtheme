@@ -46,6 +46,12 @@ function learn_drive_register_block_styles() {
 		'core/post-template' => array(
 			'divided' => __( 'Liste séparée', 'learn-drive' ),
 		),
+		'core/query'         => array(
+			'carousel' => __( 'Carrousel', 'learn-drive' ),
+		),
+		'core/terms-query'   => array(
+			'carousel' => __( 'Carrousel', 'learn-drive' ),
+		),
 	);
 
 	foreach ( $styles as $block => $variations ) {

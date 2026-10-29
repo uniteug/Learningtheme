@@ -41,6 +41,13 @@ function defaults() {
 		'premium_url'      => '/premium/',
 		'account_url'      => '/mon-compte/',
 		'default_country'  => '',
+		// Présentation : « auto » suit le modèle d'accès (tout payant → vitrine commerciale).
+		'presentation'     => 'auto',
+		'home_eyebrow'     => '',
+		'home_title'       => '',
+		'home_lead'        => '',
+		'app_ios_url'      => '',
+		'app_android_url'  => '',
 		// Libellés renommables (le thème sert aussi hors permis).
 		'label_track'      => __( 'Catégorie de permis', 'learn-drive-core' ),
 		'label_track_pl'   => __( 'Catégories de permis', 'learn-drive-core' ),
@@ -78,6 +85,9 @@ function defaults() {
 		'org_same_as'      => '',
 		'news_name'        => '',
 		'thin_words'       => 40,
+		'index_policy'     => 1,
+		'index_min_words'  => 250,
+		'index_min_items'  => 3,
 		'legacy_schema'    => 0,
 		'indexnow'         => 1,
 		'llms_txt'         => 1,
@@ -111,9 +121,12 @@ function defaults() {
  */
 function settings() {
 	static $cache = null;
+	static $raw   = null;
 
-	if ( null === $cache || doing_action( 'update_option_' . OPTION ) ) {
-		$saved = get_option( OPTION, array() );
+	// get_option() est déjà en cache mémoire : on ne recalcule qu'après une modification.
+	$saved = get_option( OPTION, array() );
+	if ( null === $cache || $saved !== $raw ) {
+		$raw   = $saved;
 		$cache = wp_parse_args( is_array( $saved ) ? $saved : array(), defaults() );
 	}
 
@@ -130,6 +143,24 @@ function setting( $key ) {
 	$all = settings();
 	return $all[ $key ] ?? null;
 }
+
+/**
+ * Volet de présentation du site.
+ *
+ * - « commercial » : site payant — offres, essai gratuit, témoignages, tarifs ;
+ * - « editorial » : site gratuit ou freemium — portail d'information et
+ *   d'apprentissage, sans mise en avant d'offres payantes.
+ *
+ * @return string commercial|editorial
+ */
+function presentation() {
+	$choice = (string) setting( 'presentation' );
+	if ( in_array( $choice, array( 'commercial', 'editorial' ), true ) ) {
+		return $choice;
+	}
+	return 'paid' === setting( 'access_mode' ) ? 'commercial' : 'editorial';
+}
+add_filter( 'learn_drive_presentation', __NAMESPACE__ . '\\presentation' );
 
 /**
  * Types de contenus d'apprentissage.

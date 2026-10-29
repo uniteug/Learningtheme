@@ -7,5 +7,7 @@ DIR="$(dirname "$0")/../learn-drive-core/assets/js"
 for name in quiz account video; do
 	$ESBUILD "$DIR/$name.js" --minify --format=esm --target=es2020 --outfile="$DIR/$name.min.js" --log-level=warning
 done
-$ESBUILD "$DIR/../../../learn-drive/assets/js/theme-toggle.js" --minify --target=es2017 --outfile="$DIR/../../../learn-drive/assets/js/theme-toggle.min.js" --log-level=warning
+for name in theme-toggle carousel; do
+	$ESBUILD "$DIR/../../../learn-drive/assets/js/$name.js" --minify --target=es2017 --outfile="$DIR/../../../learn-drive/assets/js/$name.min.js" --log-level=warning
+done
 ls -l "$DIR"/*.min.js

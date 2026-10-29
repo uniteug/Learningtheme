@@ -159,6 +159,27 @@ function render() {
 				$checks['thin']
 			)
 		);
+		$excluded = \LearnDrive\Core\SEO\Index\report();
+		section(
+			__( 'Pages exclues de l’index : contenu trop court (complétez-les pour qu’elles soient indexées)', 'learn-drive-core' ),
+			array_map(
+				static function ( $id ) {
+					/* translators: %d: number of words */
+					return edit_link( $id ) . ' — ' . esc_html( sprintf( __( '%d mots', 'learn-drive-core' ), (int) get_post_meta( $id, '_ld_words', true ) ) );
+				},
+				$excluded['posts']
+			)
+		);
+		section(
+			__( 'Rubriques, thèmes et catégories exclus de l’index : trop peu de contenus et pas de texte d’introduction', 'learn-drive-core' ),
+			array_map(
+				static function ( $term ) {
+					/* translators: %d: number of items */
+					return '<a href="' . esc_url( get_edit_term_link( $term ) ) . '">' . esc_html( $term->name ) . '</a> — ' . esc_html( sprintf( _n( '%d contenu', '%d contenus', $term->count, 'learn-drive-core' ), $term->count ) );
+				},
+				$excluded['terms']
+			)
+		);
 		section( __( 'Images principales sans texte alternatif', 'learn-drive-core' ), array_map( __NAMESPACE__ . '\\edit_link', $checks['no_alt'] ) );
 		section(
 			__( 'Titres SEO trop longs (plus de 65 caractères)', 'learn-drive-core' ),

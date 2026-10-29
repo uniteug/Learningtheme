@@ -118,7 +118,7 @@ check( 'Zone hors image ramenée dans l’image', 100.0 >= Questions\sanitize_zo
 section( 'Règles d’examen par pays (aucun code par pays)' );
 
 $fr_exam = get_page_by_path( 'examen-blanc-code-permis-b', OBJECT, 'ld_quiz' );
-$it_exam = get_posts( array( 'post_type' => 'ld_quiz', 'meta_key' => '_ld_mode', 'meta_value' => 'exam', 'tax_query' => array( array( 'taxonomy' => 'ld_country', 'field' => 'slug', 'terms' => 'italia' ) ), 'posts_per_page' => 1 ) );
+$it_exam = get_posts( array( 'post_type' => 'ld_quiz', 'meta_key' => '_ld_mode', 'meta_value' => 'exam', 'tax_query' => array( array( 'taxonomy' => 'ld_country', 'field' => 'slug', 'terms' => 'italie' ) ), 'posts_per_page' => 1 ) );
 $it_exam = $it_exam ? $it_exam[0] : null;
 
 check( 'Examen France trouvé', (bool) $fr_exam );
@@ -400,6 +400,46 @@ Setup\apply( array( 'sector' => 'driving', 'country' => 'france', 'variation' =>
 $opts = get_option( 'learn_drive_core' );
 check( 'Retour au permis : libellés et variation d’origine', 'Catégorie de permis' === $opts['label_track'] && 'panneaux' === $opts['slug_sheet'] && ! str_contains( get_post_field( 'post_content', $styles_id ), '#6D28D9' ) );
 wp_set_current_user( 0 );
+
+/* ------------------------------------------------------------------ */
+section( 'Présentation et politique d’indexation' );
+
+$opts_backup = get_option( 'learn_drive_core' );
+$set_option  = static function ( array $changes ) use ( $opts_backup ) {
+	update_option( 'learn_drive_core', array_merge( $opts_backup, $changes ) );
+	do_action( 'update_option_learn_drive_core' );
+};
+$set_option( array( 'access_mode' => 'paid', 'presentation' => 'auto' ) );
+check( 'Tout payant → vitrine commerciale', 'commercial' === apply_filters( 'learn_drive_presentation', 'editorial' ) );
+$set_option( array( 'access_mode' => 'mixed', 'presentation' => 'auto' ) );
+check( 'Freemium → portail (aucune mise en avant payante)', 'editorial' === apply_filters( 'learn_drive_presentation', 'editorial' ) );
+$set_option( array( 'access_mode' => 'mixed', 'presentation' => 'commercial' ) );
+check( 'Choix manuel du volet respecté', 'commercial' === apply_filters( 'learn_drive_presentation', 'editorial' ) );
+$set_option( array( 'default_country' => 'italie' ) );
+$links = apply_filters( 'learn_drive_links', array( 'exam' => '', 'learn' => '', 'quiz' => '', 'signs' => '', 'news' => '', 'guides' => '', 'glossary' => '' ) );
+check( 'Accès rapides : examen blanc de la catégorie principale du pays', str_contains( $links['exam'], '/patente-b/examen-blanc/' ) );
+update_option( 'learn_drive_core', $opts_backup );
+
+$track_b = get_term_by( 'slug', 'patente-b', 'ld_track' );
+$summary = LearnDrive\Core\Blocks\track_summary( $track_b );
+check( 'Carte de programme : règles de l’examen (30 questions, 20 min, 3 erreurs)', in_array( '30 questions', $summary['facts'], true ) && in_array( '20 min', $summary['facts'], true ) && in_array( '3 erreurs max', $summary['facts'], true ) );
+
+$short = wp_insert_post( array( 'post_type' => 'post', 'post_status' => 'publish', 'post_title' => 'Brève trop courte', 'post_content' => '<!-- wp:paragraph --><p>Trois mots seulement.</p><!-- /wp:paragraph -->' ) );
+$cleanup[] = static function () use ( $short ) {
+	wp_delete_post( $short, true );
+};
+check( 'Article trop court : exclu de l’index et du sitemap', get_post_meta( $short, '_ld_noindex', true ) && get_post_meta( $short, '_ld_thin', true ) );
+$long = get_page_by_path( 'convertir-permis-etranger-italie', OBJECT, 'ld_guide' );
+check( 'Guide complet : indexé', $long && ! get_post_meta( $long->ID, '_ld_noindex', true ) );
+
+$lonely_tag = wp_insert_term( 'Étiquette isolée test', 'post_tag' );
+$cleanup[]  = static function () use ( $lonely_tag ) {
+	wp_delete_term( $lonely_tag['term_id'], 'post_tag' );
+};
+check( 'Étiquette avec un seul article : non indexée', LearnDrive\Core\SEO\Index\is_thin_term( get_term( $lonely_tag['term_id'] ) ) );
+check( 'Page pilier rédigée : indexée même avec peu de contenus', ! LearnDrive\Core\SEO\Index\is_thin_term( get_term_by( 'slug', 'patente-am', 'ld_track' ) ) );
+$args = LearnDrive\Core\SEO\Index\sitemap_terms( array(), 'post_tag' );
+check( 'Sitemap : étiquettes minces retirées', in_array( $lonely_tag['term_id'], $args['exclude'] ?? array(), true ) );
 
 /* ------------------------------------------------------------------ */
 foreach ( array_reverse( $cleanup ) as $fn ) {

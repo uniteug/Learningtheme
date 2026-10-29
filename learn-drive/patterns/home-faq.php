@@ -13,11 +13,13 @@ $learn_drive_faq = array(
 	array( __( 'Combien de temps faut-il pour préparer le code ?', 'learn-drive' ), __( 'La plupart des candidats sont prêts en quatre à huit semaines en s’entraînant 20 à 30 minutes par jour. Visez un score régulier au-dessus du seuil de réussite sur plusieurs examens blancs avant de vous présenter.', 'learn-drive' ) ),
 	array( __( 'Les questions sont-elles celles de l’examen officiel ?', 'learn-drive' ), __( 'Les questions officielles ne sont pas publiques. Nos questions reprennent le format, les thèmes et le niveau de l’examen, et chaque explication cite la règle ou l’article de loi concerné.', 'learn-drive' ) ),
 	array( __( 'Puis-je m’entraîner sur mobile ?', 'learn-drive' ), __( 'Oui. Le site est conçu d’abord pour le mobile : une question par écran, de grandes zones tactiles et la reprise automatique d’un quiz interrompu.', 'learn-drive' ) ),
-	array( __( 'Que contient l’accès premium ?', 'learn-drive' ), __( 'Les examens blancs illimités, toutes les explications détaillées, la révision de vos erreurs et des statistiques par thème. Les cours d’introduction, les fiches et l’actualité restent gratuits.', 'learn-drive' ) ),
+	learn_drive_is_commercial()
+		? array( __( 'Que contient l’accès premium ?', 'learn-drive' ), __( 'Les examens blancs illimités, toutes les explications détaillées, la révision de vos erreurs et des statistiques par thème. Les cours d’introduction, les fiches et l’actualité restent gratuits.', 'learn-drive' ) )
+		: array( __( 'Faut-il créer un compte ?', 'learn-drive' ), __( 'Non. Cours, quiz, panneaux et actualités sont accessibles librement. Un compte gratuit permet seulement de retrouver sur le site votre progression et vos erreurs à revoir, depuis n’importe quel appareil.', 'learn-drive' ) ),
 );
 ?>
-<!-- wp:group {"tagName":"section","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"}}},"layout":{"type":"constrained","contentSize":"820px"}} -->
-<section class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)">
+<!-- wp:group {"tagName":"section","className":"ld-reveal","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"}}},"layout":{"type":"constrained","contentSize":"820px"}} -->
+<section class="wp-block-group alignfull ld-reveal" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)">
 	<!-- wp:heading -->
 	<h2 class="wp-block-heading"><?php esc_html_e( 'Questions fréquentes', 'learn-drive' ); ?></h2>
 	<!-- /wp:heading -->

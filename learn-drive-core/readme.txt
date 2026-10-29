@@ -4,7 +4,7 @@ Tags: lms, quiz, education, permis, seo
 Requires at least: 7.0
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -32,6 +32,13 @@ Cours, quiz et examens blancs par pays, accès gratuit / premium, API REST et SE
 3. Réglages › Permaliens : structure recommandée `/actualites/%postname%/`.
 
 == Changelog ==
+
+= 1.2.0 =
+* Volets de présentation (vitrine / portail) et textes du bandeau d'accueil réglables.
+* Blocs « Programmes phares » et « Pays » ; contenus liés en carrousel.
+* Politique d'indexation : pages minces exclues de l'index et des sitemaps.
+* Liens App Store / Google Play réglables.
+* Démonstration Italie + Europe en français (patente B, A, AM ; guides et actualités sourcés).
 
 = 1.1.0 =
 * Espace auto-école : rôle Moniteur, classes avec code d'invitation, devoirs, suivi des élèves, export CSV.

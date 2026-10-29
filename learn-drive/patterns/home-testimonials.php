@@ -4,19 +4,19 @@
  * Slug: learn-drive/home-testimonials
  * Categories: learn-drive-home, learn-drive-marketing, testimonials
  * Keywords: avis, témoignages, auto-écoles, experts
- * Description: Avis d'élèves, auto-écoles partenaires et auteurs experts. Remplacez les exemples par de vrais avis modérés.
+ * Description: Avis d'élèves et d'auto-écoles partenaires. Les textes fournis sont des exemples : remplacez-les par de vrais avis vérifiés (ne publiez jamais d'avis inventés).
  *
  * @package LearnDrive
  */
 
 $learn_drive_reviews = array(
-	array( __( '« Les explications après chaque erreur m’ont fait comprendre les priorités une bonne fois pour toutes. Code obtenu avec 38/40. »', 'learn-drive' ), __( 'Inès — permis B', 'learn-drive' ) ),
-	array( __( '« Les examens blancs chronométrés sont exactement dans les conditions du jour J. Je révisais dans le bus sur mon téléphone. »', 'learn-drive' ), __( 'Malik — permis A2', 'learn-drive' ) ),
+	array( __( '« Les explications après chaque erreur m’ont fait comprendre les priorités une bonne fois pour toutes. Code obtenu avec 38/40. »', 'learn-drive' ), __( 'Inès — patente B', 'learn-drive' ) ),
+	array( __( '« Les examens blancs chronométrés sont exactement dans les conditions du jour J. Je révisais dans le bus sur mon téléphone. »', 'learn-drive' ), __( 'Malik — patente A2', 'learn-drive' ) ),
 	array( __( '« Nous l’utilisons avec nos élèves : on voit tout de suite les thèmes à retravailler avant de présenter quelqu’un. »', 'learn-drive' ), __( 'Auto-école partenaire', 'learn-drive' ) ),
 );
 ?>
-<!-- wp:group {"tagName":"section","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"}}},"layout":{"type":"constrained","contentSize":"1240px"}} -->
-<section class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)">
+<!-- wp:group {"tagName":"section","className":"ld-reveal","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"}}},"layout":{"type":"constrained","contentSize":"1240px"}} -->
+<section class="wp-block-group alignfull ld-reveal" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)">
 	<!-- wp:heading {"textAlign":"center"} -->
 	<h2 class="wp-block-heading has-text-align-center"><?php esc_html_e( 'Ils ont réussi avec nous', 'learn-drive' ); ?></h2>
 	<!-- /wp:heading -->

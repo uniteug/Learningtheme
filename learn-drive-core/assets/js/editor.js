@@ -25,6 +25,7 @@
 		postType: __( 'Type de contenu', 'learn-drive-core' ),
 		variant: __( 'Variante', 'learn-drive-core' ),
 		title: __( 'Titre', 'learn-drive-core' ),
+		country: __( 'Pays (slug ; vide = pays principal, « all » = tous)', 'learn-drive-core' ),
 	};
 
 	function controlFor( name, schema, value, onChange ) {
@@ -138,6 +139,8 @@
 		'term-content',
 		'dashboard',
 		'access-code',
+		'track-cards',
+		'countries',
 	].forEach( ( slug ) => {
 		const name = 'learn-drive/' + slug;
 		if ( getBlockType( name ) ) {

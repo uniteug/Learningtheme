@@ -3,7 +3,7 @@ Contributors: uniteug
 Requires at least: 7.0
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,11 @@ Non. Polices, icônes et scripts sont servis par votre site.
 Apparence › Éditeur › Styles › Parcourir les styles.
 
 == Changelog ==
+
+= 1.2.0 =
+* Accueil refait : volet portail (gratuit, freemium) ou vitrine (payant), programmes phares, magazine d'actualités, carrousels, animations au défilement.
+* Pages piliers, thèmes et archives : bandeau à la couleur de la catégorie, carrousels de leçons, quiz et actualités.
+* Titres en Plus Jakarta Sans, rayons et ombres modernisés, en-tête collant.
 
 = 1.1.0 =
 * Polices du texte et des titres préchargées : plus de saut de mise en page sur les leçons longues.
