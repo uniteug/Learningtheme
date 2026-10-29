@@ -35,7 +35,7 @@
 			<!-- wp:buttons -->
 			<div class="wp-block-buttons">
 				<!-- wp:button {"className":"is-style-outline"} -->
-				<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/cours/' ) ); ?>"><?php esc_html_e( 'Tous les cours', 'learn-drive' ); ?></a></div>
+				<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( learn_drive_links()['learn'] ); ?>"><?php esc_html_e( 'Tous les cours', 'learn-drive' ); ?></a></div>
 				<!-- /wp:button -->
 			</div>
 			<!-- /wp:buttons -->
@@ -72,7 +72,7 @@
 			<!-- wp:buttons -->
 			<div class="wp-block-buttons">
 				<!-- wp:button {"className":"is-style-outline"} -->
-				<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/cours/' ) ); ?>"><?php esc_html_e( 'Préparer la pratique', 'learn-drive' ); ?></a></div>
+				<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( learn_drive_links()['learn'] ); ?>"><?php esc_html_e( 'Préparer la pratique', 'learn-drive' ); ?></a></div>
 				<!-- /wp:button -->
 			</div>
 			<!-- /wp:buttons -->

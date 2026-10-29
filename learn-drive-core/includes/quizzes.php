@@ -270,7 +270,7 @@ function pool( $quiz_id ) {
 		array(
 			'post_type'      => PT_QUESTION,
 			'post_status'    => 'publish',
-			'posts_per_page' => 2000,
+			'posts_per_page' => 20000, // phpcs:ignore WordPress.WP.PostsPerPage.posts_per_page_posts_per_page -- identifiants seulement ; une banque officielle compte plusieurs milliers d'affirmations.
 			'fields'         => 'ids',
 			'no_found_rows'  => true,
 			'orderby'        => array(
@@ -312,7 +312,7 @@ function question_ids( $quiz_id, $seed = null ) {
 		return array_slice( $pool, 0, $count );
 	}
 
-	// Tirage réparti : on regroupe par thème puis on pioche à tour de rôle.
+	// Tirage réparti : quotas par thème s'ils existent, puis pioche à tour de rôle.
 	update_object_term_cache( $pool, PT_QUESTION );
 	$by_topic = array();
 	foreach ( seeded_shuffle( $pool, $seed ) as $id ) {
@@ -325,6 +325,19 @@ function question_ids( $quiz_id, $seed = null ) {
 
 	$picked       = array();
 	$picked_count = 0;
+
+	// Quotas officiels par thème (ex. Italie : 2 questions « Segnali di pericolo », 1 « Sorpasso »…).
+	foreach ( array_keys( $by_topic ) as $key ) {
+		$quota = $key ? (int) get_term_meta( $key, 'ld_exam_quota', true ) : 0;
+		while ( $quota-- > 0 && $by_topic[ $key ] && $picked_count < $count ) {
+			$picked[] = array_shift( $by_topic[ $key ] );
+			++$picked_count;
+		}
+		if ( ! $by_topic[ $key ] ) {
+			unset( $by_topic[ $key ] );
+		}
+	}
+
 	while ( $picked_count < $count && $by_topic ) {
 		foreach ( array_keys( $by_topic ) as $key ) {
 			if ( $picked_count >= $count ) {

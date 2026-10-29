@@ -1658,6 +1658,10 @@ video {
 	border-bottom: 1px solid var(--wp--preset--color--border);
 }
 
+.ld-mag__list .wp-block-post:not(:has(.wp-block-post-featured-image)) {
+	grid-template-columns: 1fr;
+}
+
 .ld-mag__list .wp-block-post:first-child {
 	padding-top: 0;
 }

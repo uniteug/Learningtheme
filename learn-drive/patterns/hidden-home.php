@@ -14,6 +14,14 @@ if ( learn_drive_is_commercial() ) {
 	$learn_drive_sections = array( 'home-hero', 'home-tracks', 'home-news', 'home-steps', 'home-topics', 'home-question-of-the-day', 'home-guides', 'home-signs', 'home-europe', 'home-app', 'faq' );
 }
 
+/**
+ * Sections de l'accueil, dans l'ordre (le plugin retire celles qui n'ont pas de contenu).
+ *
+ * @param string[] $sections Slugs de compositions sans le préfixe learn-drive/.
+ * @param string   $mode     commercial|editorial.
+ */
+$learn_drive_sections = (array) apply_filters( 'learn_drive_home_sections', $learn_drive_sections, learn_drive_presentation() );
+
 foreach ( $learn_drive_sections as $learn_drive_section ) {
 	echo '<!-- wp:pattern {"slug":"learn-drive/' . esc_attr( $learn_drive_section ) . '"} /-->' . "\n";
 }

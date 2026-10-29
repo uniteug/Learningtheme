@@ -1,0 +1,1427 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: learn-drive\n"
+"Language: it_IT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: learn-drive\n"
+
+#: patterns/footer-compact.php:19
+#: inc/presentation.php:216
+msgid "Mentions légales"
+msgstr "Note legali"
+
+#: patterns/footer-compact.php:20
+#: patterns/footer-minimal.php:16
+#: inc/presentation.php:217
+msgid "Confidentialité"
+msgstr "Privacy"
+
+#: patterns/footer-compact.php:21
+msgid "Politique éditoriale"
+msgstr "Politica editoriale"
+
+#: patterns/footer-compact.php
+msgctxt "Pattern title"
+msgid "Pied de page compact"
+msgstr "Piè di pagina compatto"
+
+#: patterns/key-changes.php:17
+#: inc/block-styles.php:21
+msgid "Ce qui change pour vous"
+msgstr "Cosa cambia per te"
+
+#: patterns/key-changes.php:22
+msgid "Premier changement concret, en une phrase."
+msgstr "Il primo cambiamento concreto, in una frase."
+
+#: patterns/key-changes.php:25
+msgid "Qui est concerné et à partir de quand."
+msgstr "Chi è interessato e da quando."
+
+#: patterns/key-changes.php:28
+msgid "Ce que vous devez faire (ou ne pas faire)."
+msgstr "Cosa devi fare (o non fare)."
+
+#: patterns/key-changes.php
+msgctxt "Pattern title"
+msgid "Ce qui change pour vous"
+msgstr "Cosa cambia per te"
+
+#: patterns/key-changes.php
+msgctxt "Pattern description"
+msgid "Encadré de trois puces maximum en tête d'article d'actualité."
+msgstr "Riquadro con massimo tre punti in apertura di una notizia."
+
+#: patterns/home-europe.php:24
+msgid "Ailleurs en Europe"
+msgstr "Altrove in Europa"
+
+#: patterns/home-europe.php:27
+msgid "Un permis, plusieurs pays"
+msgstr "Una patente, più paesi"
+
+#: patterns/home-europe.php:30
+msgid "Chaque pays a ses règles d’examen : nous les appliquons à la lettre dans les examens blancs."
+msgstr "Ogni paese ha le sue regole d’esame: le applichiamo alla lettera nelle simulazioni d’esame."
+
+#: patterns/home-europe.php:35
+msgid "Conduire à l’étranger"
+msgstr "Guidare all’estero"
+
+#: patterns/home-europe.php
+msgctxt "Pattern title"
+msgid "Accueil — Le permis en Europe"
+msgstr "Home — La patente in Europa"
+
+#: patterns/home-europe.php
+msgctxt "Pattern description"
+msgid "Les pays couverts (drapeau, catégories, nombre de questions) et l'accès aux guides de conduite à l'étranger."
+msgstr "I paesi coperti (bandiera, categorie, numero di domande) e l’accesso alle guide per guidare all’estero."
+
+#: patterns/home-steps.php:14
+#: inc/presentation.php:203
+msgid "Apprendre"
+msgstr "Impara"
+
+#: patterns/home-steps.php:14
+msgid "Des leçons courtes, illustrées et à jour de la réglementation, thème par thème."
+msgstr "Lezioni brevi, illustrate e aggiornate alla normativa, argomento per argomento."
+
+#: patterns/home-steps.php:14
+msgid "Voir les cours"
+msgstr "Vedi i corsi"
+
+#: patterns/home-steps.php:15
+msgid "S’entraîner"
+msgstr "Esercitati"
+
+#: patterns/home-steps.php:15
+msgid "Des quiz par thème avec correction immédiate et l’explication de chaque réponse."
+msgstr "Quiz per argomento con correzione immediata e la spiegazione di ogni risposta."
+
+#: patterns/home-steps.php:15
+msgid "Faire un quiz"
+msgstr "Fai un quiz"
+
+#: patterns/home-steps.php:16
+msgid "Se tester"
+msgstr "Mettiti alla prova"
+
+#: patterns/home-steps.php:16
+msgid "Des examens blancs au format officiel : même nombre de questions, même temps, même seuil."
+msgstr "Simulazioni d’esame nel formato ufficiale: stesso numero di domande, stesso tempo, stessa soglia."
+
+#: patterns/home-steps.php:16
+msgid "Lancer un examen blanc"
+msgstr "Avvia una simulazione d’esame"
+
+#: patterns/home-steps.php:24
+msgid "La méthode"
+msgstr "Il metodo"
+
+#: patterns/home-steps.php:27
+msgid "Trois étapes jusqu’au jour de l’examen"
+msgstr "Tre tappe fino al giorno dell’esame"
+
+#: patterns/home-steps.php
+msgctxt "Pattern title"
+msgid "Accueil — Comment ça marche"
+msgstr "Home — Come funziona"
+
+#: patterns/home-steps.php
+msgctxt "Pattern description"
+msgid "La méthode en trois étapes : apprendre, s'entraîner, se tester."
+msgstr "Il metodo in tre tappe: imparare, esercitarsi, mettersi alla prova."
+
+#: patterns/header-minimal.php:21
+#: patterns/header-minimal.php:21
+#: patterns/header-centered.php:42
+msgid "Mode sombre"
+msgstr "Modalità scura"
+
+#: patterns/header-minimal.php
+msgctxt "Pattern title"
+msgid "En-tête minimal (quiz)"
+msgstr "Intestazione minimale (quiz)"
+
+#: patterns/header-minimal.php
+msgctxt "Pattern description"
+msgid "En-tête sans distraction pour les quiz et examens blancs."
+msgstr "Intestazione senza distrazioni per quiz e simulazioni d’esame."
+
+#: patterns/home-theory-practice.php:20
+msgid "Théorie"
+msgstr "Teoria"
+
+#: patterns/home-theory-practice.php:23
+msgid "Les cours écrits"
+msgstr "I corsi scritti"
+
+#: patterns/home-theory-practice.php:26
+msgid "Chaque leçon explique une règle avec des schémas, puis vous fait vérifier que vous l’avez comprise."
+msgstr "Ogni lezione spiega una regola con degli schemi, poi ti fa verificare di averla capita."
+
+#: patterns/home-theory-practice.php:38
+#: inc/presentation.php:204
+msgid "Tous les cours"
+msgstr "Tutti i corsi"
+
+#: patterns/home-theory-practice.php:48
+msgid "Pratique"
+msgstr "Pratica"
+
+#: patterns/home-theory-practice.php:51
+msgid "Manœuvres et vérifications"
+msgstr "Manovre e controlli"
+
+#: patterns/home-theory-practice.php:54
+msgid "Préparez l’épreuve de conduite : vérifications techniques, manœuvres pas à pas, parcours types et conseils d’examinateurs."
+msgstr "Preparati all’esame di guida: controlli tecnici, manovre passo passo, percorsi tipo e consigli degli esaminatori."
+
+#: patterns/home-theory-practice.php:59
+msgid "Vérifications intérieures et extérieures"
+msgstr "Controlli interni ed esterni"
+
+#: patterns/home-theory-practice.php:62
+msgid "Créneau, bataille, demi-tour"
+msgstr "Parcheggio in parallelo, a pettine, inversione di marcia"
+
+#: patterns/home-theory-practice.php:65
+msgid "Insertion, dépassement, giratoires"
+msgstr "Immissione, sorpasso, rotatorie"
+
+#: patterns/home-theory-practice.php:68
+msgid "Questions orales et premiers secours"
+msgstr "Domande orali e primo soccorso"
+
+#: patterns/home-theory-practice.php:75
+msgid "Préparer la pratique"
+msgstr "Preparati alla pratica"
+
+#: patterns/home-theory-practice.php
+msgctxt "Pattern title"
+msgid "Accueil — Théorie et pratique"
+msgstr "Home — Teoria e pratica"
+
+#: patterns/home-theory-practice.php
+msgctxt "Pattern description"
+msgid "Deux colonnes : cours écrits et préparation à l'épreuve pratique."
+msgstr "Due colonne: corsi scritti e preparazione all’esame pratico."
+
+#: patterns/ad-slot.php:16
+msgid "Publicité"
+msgstr "Pubblicità"
+
+#: patterns/ad-slot.php
+msgctxt "Pattern title"
+msgid "Emplacement publicitaire"
+msgstr "Spazio pubblicitario"
+
+#: patterns/ad-slot.php
+msgctxt "Pattern description"
+msgid "Zone à hauteur réservée (aucun décalage de mise en page). Collez le code de votre régie dans le bloc HTML."
+msgstr "Area ad altezza riservata (nessuno spostamento del layout). Incolla il codice della tua concessionaria pubblicitaria nel blocco HTML."
+
+#: patterns/costs-table.php:14
+msgid "Poste"
+msgstr "Voce"
+
+#: patterns/costs-table.php:14
+msgid "Prix moyen"
+msgstr "Prezzo medio"
+
+#: patterns/costs-table.php:14
+msgid "Inscription et frais de dossier"
+msgstr "Iscrizione e spese di pratica"
+
+#: patterns/costs-table.php:14
+msgid "Examen du code"
+msgstr "Esame di teoria"
+
+#: patterns/costs-table.php:14
+msgid "Heures de conduite (20 h)"
+msgstr "Ore di guida (20 h)"
+
+#: patterns/costs-table.php:14
+msgid "Total estimé"
+msgstr "Totale stimato"
+
+#: patterns/costs-table.php:14
+msgid "Prix indicatifs, vérifiés le JJ/MM/AAAA. Source : …"
+msgstr "Prezzi indicativi, verificati il GG/MM/AAAA. Fonte: …"
+
+#: patterns/costs-table.php
+msgctxt "Pattern title"
+msgid "Tableau de coûts"
+msgstr "Tabella dei costi"
+
+#: patterns/costs-table.php
+msgctxt "Pattern description"
+msgid "Tableau de coûts avec total, lisible sur mobile."
+msgstr "Tabella dei costi con totale, leggibile da mobile."
+
+#: patterns/test-yourself.php:16
+msgid "Testez-vous"
+msgstr "Mettiti alla prova"
+
+#: patterns/test-yourself.php
+msgctxt "Pattern title"
+msgid "Testez-vous"
+msgstr "Mettiti alla prova"
+
+#: patterns/test-yourself.php
+msgctxt "Pattern description"
+msgid "Trois à cinq questions liées au sujet, jouables sur place (nécessite le plugin Learn & Drive Core)."
+msgstr "Da tre a cinque domande legate all’argomento, da fare direttamente sulla pagina (richiede il plugin Learn & Drive Core)."
+
+#: patterns/hidden-search-form.php:11
+#: patterns/hidden-search-form.php:11
+#: patterns/hidden-404.php:22
+msgid "Rechercher"
+msgstr "Cerca"
+
+#: patterns/hidden-search-form.php:11
+#: patterns/hidden-404.php:22
+#: patterns/hidden-no-results.php:14
+msgid "Rechercher une question, un panneau, un article…"
+msgstr "Cerca una domanda, un segnale, un articolo…"
+
+#: patterns/hidden-search-form.php
+msgctxt "Pattern title"
+msgid "Formulaire de recherche"
+msgstr "Modulo di ricerca"
+
+#: patterns/home-app.php:20
+msgid "Révisez aussi avec l’application mobile"
+msgstr "Ripassa anche con l’app"
+
+#: patterns/home-app.php:23
+msgid "Des quiz et des examens blancs dans votre poche, pour réviser partout, même quelques minutes."
+msgstr "Quiz e simulazioni d’esame sempre in tasca, per ripassare ovunque, anche solo per pochi minuti."
+
+#: patterns/home-app.php:29
+msgid "Télécharger sur l’App Store"
+msgstr "Scarica su App Store"
+
+#: patterns/home-app.php:34
+msgid "Disponible sur Google Play"
+msgstr "Disponibile su Google Play"
+
+#: patterns/home-app.php
+msgctxt "Pattern title"
+msgid "Offre — Application mobile"
+msgstr "Offerta — App mobile"
+
+#: patterns/home-app.php
+msgctxt "Pattern description"
+msgid "Liens vers l'application sur l'App Store et Google Play (affichée seulement si les adresses sont renseignées)."
+msgstr "Link all’app su App Store e Google Play (visibile solo se gli indirizzi sono inseriti)."
+
+#: patterns/hidden-404.php:17
+msgid "Cette page a pris une autre route"
+msgstr "Questa pagina ha preso un’altra strada"
+
+#: patterns/hidden-404.php:20
+msgid "Le lien est peut-être ancien ou la page a été déplacée. Cherchez ce dont vous avez besoin ou reprenez avec un quiz populaire."
+msgstr "Il link potrebbe essere vecchio o la pagina è stata spostata. Cerca quello che ti serve o riparti da un quiz popolare."
+
+#: patterns/hidden-404.php:27
+msgid "Quiz populaires"
+msgstr "Quiz più popolari"
+
+#: patterns/hidden-404.php
+msgctxt "Pattern title"
+msgid "Contenu de la page 404"
+msgstr "Contenuto della pagina 404"
+
+#: patterns/home-news.php:21
+#: patterns/hidden-news-intro.php:12
+#: patterns/header-centered.php:17
+msgid "Actualités"
+msgstr "Notizie"
+
+#: patterns/home-news.php:24
+msgid "À la une"
+msgstr "In primo piano"
+
+#: patterns/home-news.php:29
+msgid "Toute l’actualité"
+msgstr "Tutte le notizie"
+
+#: patterns/home-news.php
+msgctxt "Pattern title"
+msgid "Accueil — À la une"
+msgstr "Home — In primo piano"
+
+#: patterns/home-news.php
+msgctxt "Pattern description"
+msgid "Mise en page magazine : l'article à la une en grand, les quatre suivants en liste avec vignette."
+msgstr "Layout da magazine: l’articolo in primo piano in grande, i quattro successivi in elenco con miniatura."
+
+#: patterns/footer.php:25
+msgid "Cours, quiz et examens blancs rédigés et vérifiés par des enseignants, mis à jour à chaque évolution de la réglementation."
+msgstr "Corsi, quiz e simulazioni d’esame scritti e verificati da insegnanti, aggiornati a ogni modifica della normativa."
+
+#: patterns/footer.php:54
+msgid "Plan du site"
+msgstr "Mappa del sito"
+
+#: patterns/footer.php
+msgctxt "Pattern title"
+msgid "Pied de page"
+msgstr "Piè di pagina"
+
+#: patterns/footer.php
+msgctxt "Pattern description"
+msgid "Plan du site par rubrique, pages légales et politique éditoriale."
+msgstr "Mappa del sito per sezione, pagine legali e politica editoriale."
+
+#: patterns/home-cta.php:21
+msgid "Prêt à passer à la vitesse supérieure ?"
+msgstr "Pronto a cambiare marcia?"
+
+#: patterns/home-cta.php:24
+msgid "Créez votre compte en 30 secondes et retrouvez votre progression sur le site, depuis n’importe quel appareil."
+msgstr "Crea il tuo account in 30 secondi e ritrova i tuoi progressi sul sito, da qualsiasi dispositivo."
+
+#: patterns/home-cta.php:31
+#: patterns/home-cta.php:41
+#: patterns/home-hero.php:44
+msgid "Commencer gratuitement"
+msgstr "Inizia gratis"
+
+#: patterns/home-cta.php
+msgctxt "Pattern title"
+msgid "Offre — Appel final"
+msgstr "Offerta — Invito finale"
+
+#: patterns/home-cta.php
+msgctxt "Pattern description"
+msgid "Bandeau d'appel final et bouton d'inscription collant sur mobile (volet commercial)."
+msgstr "Banner di invito finale e pulsante d’iscrizione fisso su mobile (modalità commerciale)."
+
+#: patterns/footer-minimal.php
+msgctxt "Pattern title"
+msgid "Pied de page minimal"
+msgstr "Piè di pagina minimale"
+
+#: patterns/home-signs.php:24
+msgid "Signalisation"
+msgstr "Segnaletica"
+
+#: patterns/home-signs.php:27
+msgid "Les panneaux à reconnaître du premier coup d’œil"
+msgstr "I segnali da riconoscere al primo colpo d’occhio"
+
+#: patterns/home-signs.php:32
+msgid "Tous les panneaux"
+msgstr "Tutti i segnali"
+
+#: patterns/home-signs.php
+msgctxt "Pattern title"
+msgid "Accueil — Panneaux à connaître"
+msgstr "Home — Segnali da conoscere"
+
+#: patterns/home-signs.php
+msgctxt "Pattern description"
+msgid "Les fiches (panneaux, mémos) en carrousel illustré."
+msgstr "Le schede (segnali, promemoria) in un carosello illustrato."
+
+#: patterns/summary-box.php:16
+msgid "En résumé"
+msgstr "In sintesi"
+
+#: patterns/summary-box.php:19
+msgid "Répondez ici à la question principale en une ou deux phrases autonomes : le montant, le délai, le document ou la règle à retenir, avec sa source."
+msgstr "Rispondi qui alla domanda principale in una o due frasi autonome: l’importo, il termine, il documento o la regola da ricordare, con la relativa fonte."
+
+#: patterns/summary-box.php
+msgctxt "Pattern title"
+msgid "Encadré « En résumé »"
+msgstr "Riquadro «In sintesi»"
+
+#: patterns/summary-box.php
+msgctxt "Pattern description"
+msgid "La réponse en une phrase, pour les lecteurs pressés et les moteurs de recherche génératifs."
+msgstr "La risposta in una frase, per chi va di fretta e per i motori di ricerca generativi."
+
+#: patterns/home-free.php:14
+msgid "Une question du jour, corrigée et expliquée"
+msgstr "Una domanda del giorno, corretta e spiegata"
+
+#: patterns/home-free.php:15
+msgid "Les leçons d’introduction de chaque thème"
+msgstr "Le lezioni introduttive di ogni argomento"
+
+#: patterns/home-free.php:16
+msgid "Toutes les fiches panneaux et le lexique"
+msgstr "Tutte le schede dei segnali e il glossario"
+
+#: patterns/home-free.php:17
+msgid "L’actualité et les guides de démarches"
+msgstr "Le notizie e le guide alle pratiche"
+
+#: patterns/home-free.php:27
+msgid "Gratuit, sans inscription"
+msgstr "Gratis, senza registrazione"
+
+#: patterns/home-free.php:30
+msgid "Essayez avant de vous décider"
+msgstr "Prova prima di decidere"
+
+#: patterns/home-free.php:44
+msgid "Voir les leçons gratuites"
+msgstr "Vedi le lezioni gratuite"
+
+#: patterns/home-free.php
+msgctxt "Pattern title"
+msgid "Offre — Essayez gratuitement"
+msgstr "Offerta — Prova gratis"
+
+#: patterns/home-free.php
+msgctxt "Pattern description"
+msgid "Ce qui est gratuit, sans inscription, et une question jouable tout de suite (volet commercial)."
+msgstr "Cosa è gratuito, senza registrazione, e una domanda da provare subito (modalità commerciale)."
+
+#: patterns/home-question-of-the-day.php:16
+msgid "Question du jour"
+msgstr "Domanda del giorno"
+
+#: patterns/home-question-of-the-day.php:19
+msgid "Testez-vous en 30 secondes"
+msgstr "Mettiti alla prova in 30 secondi"
+
+#: patterns/home-question-of-the-day.php
+msgctxt "Pattern title"
+msgid "Accueil — Question du jour"
+msgstr "Home — Domanda del giorno"
+
+#: patterns/home-question-of-the-day.php
+msgctxt "Pattern description"
+msgid "Une question jouable directement sur la page (nécessite le plugin Learn & Drive Core)."
+msgstr "Una domanda da fare direttamente sulla pagina (richiede il plugin Learn & Drive Core)."
+
+#: patterns/hidden-news-latest-heading.php:14
+msgid "Derniers articles"
+msgstr "Ultimi articoli"
+
+#: patterns/hidden-news-latest-heading.php
+msgctxt "Pattern title"
+msgid "Titre (lecteurs d'écran) de la liste des actualités"
+msgstr "Titolo (per lettori di schermo) dell’elenco delle notizie"
+
+#: patterns/hidden-home.php
+msgctxt "Pattern title"
+msgid "Accueil (assemblage selon le volet de présentation)"
+msgstr "Home (composta in base alla modalità di presentazione)"
+
+#: patterns/hidden-home.php
+msgctxt "Pattern description"
+msgid "Portail d'information et d'apprentissage pour un site gratuit ou freemium ; vitrine commerciale (offres, essai, témoignages) pour un site payant."
+msgstr "Portale di informazione e apprendimento per un sito gratuito o freemium; vetrina commerciale (offerte, prova, testimonianze) per un sito a pagamento."
+
+#: patterns/home-tracks.php:19
+msgid "Nos formations"
+msgstr "I nostri corsi"
+
+#: patterns/home-tracks.php:19
+msgid "Programmes phares"
+msgstr "Percorsi in evidenza"
+
+#: patterns/home-tracks.php:22
+msgid "Choisissez votre formation"
+msgstr "Scegli il tuo corso"
+
+#: patterns/home-tracks.php:22
+msgid "Quel permis préparez-vous ?"
+msgstr "Per quale patente ti stai preparando?"
+
+#: patterns/home-tracks.php:25
+msgid "Chaque parcours réunit les cours, les quiz par thème et un examen blanc aux conditions réelles de l’épreuve."
+msgstr "Ogni percorso riunisce i corsi, i quiz per argomento e una simulazione d’esame nelle condizioni reali della prova."
+
+#: patterns/home-tracks.php
+msgctxt "Pattern title"
+msgid "Accueil — Programmes phares"
+msgstr "Home — Percorsi in evidenza"
+
+#: patterns/home-tracks.php
+msgctxt "Pattern description"
+msgid "Une carte par catégorie (permis, matière) avec les règles de l'examen, le nombre de leçons et de quiz et l'accès direct à l'examen blanc."
+msgstr "Una card per categoria (patente, materia) con le regole dell’esame, il numero di lezioni e di quiz e l’accesso diretto alla simulazione d’esame."
+
+#: patterns/steps.php:14
+msgid "Les étapes"
+msgstr "I passaggi"
+
+#: patterns/steps.php:19
+msgid "Rassemblez les documents"
+msgstr "Prepara i documenti"
+
+#: patterns/steps.php:19
+msgid "pièce d’identité, justificatif de domicile, photo numérique."
+msgstr "documento d’identità, attestazione di residenza, foto digitale."
+
+#: patterns/steps.php:22
+msgid "Faites la demande en ligne"
+msgstr "Fai la domanda online"
+
+#: patterns/steps.php:22
+msgid "sur le site officiel, ou via votre auto-école."
+msgstr "sul sito ufficiale o tramite la tua autoscuola."
+
+#: patterns/steps.php:25
+msgid "Réservez votre date d’examen"
+msgstr "Prenota la data dell’esame"
+
+#: patterns/steps.php:25
+msgid "dès réception de votre numéro de dossier."
+msgstr "appena ricevi il numero della pratica."
+
+#: patterns/steps.php
+msgctxt "Pattern title"
+msgid "Étapes d'une démarche"
+msgstr "Passaggi di una pratica"
+
+#: patterns/steps.php
+msgctxt "Pattern description"
+msgid "Liste numérotée d'étapes, idéale pour les guides « comment faire »."
+msgstr "Elenco numerato di passaggi, ideale per le guide «come fare»."
+
+#: patterns/home-hero.php:16
+#: patterns/home-hero.php:85
+msgid "Examen blanc"
+msgstr "Simulazione d’esame"
+
+#: patterns/home-hero.php:17
+#: patterns/header-centered.php:16
+#: inc/presentation.php:182
+msgid "Panneaux"
+msgstr "Segnali"
+
+#: patterns/home-hero.php:18
+msgid "Démarches"
+msgstr "Pratiche"
+
+#: patterns/home-hero.php:19
+#: inc/presentation.php:207
+msgid "Lexique"
+msgstr "Glossario"
+
+#: patterns/home-hero.php:47
+msgid "Voir les offres"
+msgstr "Vedi le offerte"
+
+#: patterns/home-hero.php:55
+msgid "Sans carte bancaire"
+msgstr "Senza carta di credito"
+
+#: patterns/home-hero.php:58
+msgid "Corrigés détaillés"
+msgstr "Correzioni dettagliate"
+
+#: patterns/home-hero.php:61
+msgid "Sur mobile et ordinateur"
+msgstr "Su mobile e computer"
+
+#: patterns/home-hero.php:66
+msgid "Rechercher sur le site"
+msgstr "Cerca nel sito"
+
+#: patterns/home-hero.php:66
+msgid "Une règle, un panneau, une démarche…"
+msgstr "Una regola, un segnale, una pratica…"
+
+#: patterns/home-hero.php:69
+msgid "Accès rapides"
+msgstr "Accesso rapido"
+
+#: patterns/home-hero.php:87
+msgid "Question 12 / 30"
+msgstr "Domanda 12 / 30"
+
+#: patterns/home-hero.php:88
+msgid "Sans signalisation, je cède le passage aux véhicules qui arrivent par la droite."
+msgstr "In assenza di segnaletica, do la precedenza ai veicoli che provengono da destra."
+
+#: patterns/home-hero.php:89
+msgid "Vrai"
+msgstr "Vero"
+
+#: patterns/home-hero.php:89
+msgid "Faux"
+msgstr "Falso"
+
+#: patterns/home-hero.php:91
+msgid "28 / 30 — réussi"
+msgstr "28 / 30 — superato"
+
+#: patterns/home-hero.php:92
+msgid "Corrigé expliqué"
+msgstr "Correzione spiegata"
+
+#: patterns/home-hero.php
+msgctxt "Pattern title"
+msgid "Accueil — Bandeau principal"
+msgstr "Home — Banner principale"
+
+#: patterns/home-hero.php
+msgctxt "Pattern description"
+msgid "H1 explicite, recherche, accès rapides et visuel animé d'un examen en cours. Volet portail : recherche et accès directs ; volet commercial : essai gratuit et réassurance."
+msgstr "H1 esplicito, ricerca, accessi rapidi e immagine animata di un esame in corso. Modalità portale: ricerca e accessi diretti; modalità commerciale: prova gratuita e rassicurazioni."
+
+#: patterns/home-testimonials.php:13
+msgid "« Les explications après chaque erreur m’ont fait comprendre les priorités une bonne fois pour toutes. Code obtenu avec 38/40. »"
+msgstr "«Le spiegazioni dopo ogni errore mi hanno fatto capire le precedenze una volta per tutte. Esame di teoria superato con 38/40.»"
+
+#: patterns/home-testimonials.php:13
+msgid "Inès — patente B"
+msgstr "Inès — patente B"
+
+#: patterns/home-testimonials.php:14
+msgid "« Les examens blancs chronométrés sont exactement dans les conditions du jour J. Je révisais dans le bus sur mon téléphone. »"
+msgstr "«Le simulazioni d’esame cronometrate riproducono esattamente le condizioni del giorno dell’esame. Ripassavo sul telefono in autobus.»"
+
+#: patterns/home-testimonials.php:14
+msgid "Malik — patente A2"
+msgstr "Malik — patente A2"
+
+#: patterns/home-testimonials.php:15
+msgid "« Nous l’utilisons avec nos élèves : on voit tout de suite les thèmes à retravailler avant de présenter quelqu’un. »"
+msgstr "«La usiamo con i nostri allievi: vediamo subito gli argomenti da rivedere prima di mandare qualcuno all’esame.»"
+
+#: patterns/home-testimonials.php:15
+msgid "Auto-école partenaire"
+msgstr "Autoscuola partner"
+
+#: patterns/home-testimonials.php:21
+msgid "Ils ont réussi avec nous"
+msgstr "Ce l’hanno fatta con noi"
+
+#: patterns/home-testimonials.php:30
+msgid "5 sur 5"
+msgstr "5 su 5"
+
+#: patterns/home-testimonials.php:45
+msgid "Contenus rédigés par des enseignants de la conduite et revérifiés à chaque évolution de la réglementation."
+msgstr "Contenuti scritti da insegnanti e istruttori di guida e ricontrollati a ogni modifica della normativa."
+
+#: patterns/home-testimonials.php:45
+#: patterns/editorial-policy.php:16
+#: inc/presentation.php:213
+msgid "Comment nous vérifions nos contenus"
+msgstr "Come verifichiamo i nostri contenuti"
+
+#: patterns/home-testimonials.php
+msgctxt "Pattern title"
+msgid "Accueil — Témoignages et preuves"
+msgstr "Home — Testimonianze e garanzie"
+
+#: patterns/home-testimonials.php
+msgctxt "Pattern description"
+msgid "Avis d'élèves et d'auto-écoles partenaires. Les textes fournis sont des exemples : remplacez-les par de vrais avis vérifiés (ne publiez jamais d'avis inventés)."
+msgstr "Recensioni di allievi e autoscuole partner. I testi forniti sono esempi: sostituiscili con recensioni reali e verificate (non pubblicare mai recensioni inventate)."
+
+#: patterns/hidden-news-intro.php:15
+msgid "Réformes, examens, sécurité routière : l’essentiel de l’actualité, expliqué et relié à nos cours et quiz."
+msgstr "Riforme, esami, sicurezza stradale: l’essenziale delle notizie, spiegato e collegato ai nostri corsi e quiz."
+
+#: patterns/hidden-news-intro.php
+msgctxt "Pattern title"
+msgid "En-tête de la rubrique Actualités"
+msgstr "Intestazione della sezione Notizie"
+
+#: patterns/home-faq.php:13
+msgid "Combien de temps faut-il pour préparer le code ?"
+msgstr "Quanto tempo serve per preparare l’esame di teoria?"
+
+#: patterns/home-faq.php:13
+msgid "La plupart des candidats sont prêts en quatre à huit semaines en s’entraînant 20 à 30 minutes par jour. Visez un score régulier au-dessus du seuil de réussite sur plusieurs examens blancs avant de vous présenter."
+msgstr "La maggior parte dei candidati è pronta in quattro-otto settimane, esercitandosi 20-30 minuti al giorno. Punta a ottenere con costanza un punteggio sopra la soglia di superamento in più simulazioni d’esame prima di presentarti."
+
+#: patterns/home-faq.php:14
+msgid "Les questions sont-elles celles de l’examen officiel ?"
+msgstr "Le domande sono quelle dell’esame ufficiale?"
+
+#: patterns/home-faq.php:14
+msgid "Les questions officielles ne sont pas publiques. Nos questions reprennent le format, les thèmes et le niveau de l’examen, et chaque explication cite la règle ou l’article de loi concerné."
+msgstr "Le domande ufficiali non sono pubbliche. Le nostre domande riprendono il formato, gli argomenti e il livello dell’esame, e ogni spiegazione cita la regola o l’articolo di legge di riferimento."
+
+#: patterns/home-faq.php:15
+msgid "Puis-je m’entraîner sur mobile ?"
+msgstr "Posso esercitarmi da mobile?"
+
+#: patterns/home-faq.php:15
+msgid "Oui. Le site est conçu d’abord pour le mobile : une question par écran, de grandes zones tactiles et la reprise automatique d’un quiz interrompu."
+msgstr "Sì. Il sito è pensato prima di tutto per il mobile: una domanda per schermata, ampie aree touch e la ripresa automatica di un quiz interrotto."
+
+#: patterns/home-faq.php:17
+msgid "Que contient l’accès premium ?"
+msgstr "Cosa include l’accesso premium?"
+
+#: patterns/home-faq.php:17
+msgid "Les examens blancs illimités, toutes les explications détaillées, la révision de vos erreurs et des statistiques par thème. Les cours d’introduction, les fiches et l’actualité restent gratuits."
+msgstr "Simulazioni d’esame illimitate, tutte le spiegazioni dettagliate, il ripasso dei tuoi errori e le statistiche per argomento. Le lezioni introduttive, le schede e le notizie restano gratuite."
+
+#: patterns/home-faq.php:18
+msgid "Faut-il créer un compte ?"
+msgstr "Serve creare un account?"
+
+#: patterns/home-faq.php:18
+msgid "Non. Cours, quiz, panneaux et actualités sont accessibles librement. Un compte gratuit permet seulement de retrouver sur le site votre progression et vos erreurs à revoir, depuis n’importe quel appareil."
+msgstr "No. Corsi, quiz, segnali e notizie sono accessibili liberamente. Un account gratuito serve solo a ritrovare sul sito i tuoi progressi e gli errori da rivedere, da qualsiasi dispositivo."
+
+#: patterns/home-faq.php:24
+msgid "Questions fréquentes"
+msgstr "Domande frequenti"
+
+#: patterns/home-faq.php
+msgctxt "Pattern title"
+msgid "FAQ éditoriale"
+msgstr "FAQ editoriale"
+
+#: patterns/home-faq.php
+msgctxt "Pattern description"
+msgid "Questions fréquentes en accordéon accessible (balise details), lisibles par Google dès le chargement."
+msgstr "Domande frequenti in una fisarmonica accessibile (tag details), leggibili da Google fin dal caricamento."
+
+#: patterns/editorial-policy.php:16
+msgid "Contenu vérifié."
+msgstr "Contenuto verificato."
+
+#: patterns/editorial-policy.php:16
+msgid "Nos articles sont rédigés par des spécialistes de la sécurité routière, relus avant publication et mis à jour à chaque évolution des textes."
+msgstr "I nostri articoli sono scritti da specialisti della sicurezza stradale, riletti prima della pubblicazione e aggiornati a ogni modifica delle norme."
+
+#: patterns/editorial-policy.php
+msgctxt "Pattern title"
+msgid "Encadré politique éditoriale"
+msgstr "Riquadro politica editoriale"
+
+#: patterns/editorial-policy.php
+msgctxt "Pattern description"
+msgid "Lien vers « Comment nous vérifions nos contenus », à placer en fin d'article."
+msgstr "Link a «Come verifichiamo i nostri contenuti», da inserire alla fine dell’articolo."
+
+#: patterns/cta-premium.php:18
+msgid "Prêt pour l’examen ?"
+msgstr "Pronto per l’esame?"
+
+#: patterns/cta-premium.php:21
+msgid "Examens blancs illimités et révision de vos erreurs avec l’accès premium."
+msgstr "Simulazioni d’esame illimitate e ripasso dei tuoi errori con l’accesso premium."
+
+#: patterns/cta-premium.php:28
+msgid "Découvrir le premium"
+msgstr "Scopri il premium"
+
+#: patterns/cta-premium.php
+msgctxt "Pattern title"
+msgid "Appel à l'action premium"
+msgstr "Invito all’azione premium"
+
+#: patterns/cta-premium.php
+msgctxt "Pattern description"
+msgid "Bandeau court qui mène à l'offre premium."
+msgstr "Banner breve che porta all’offerta premium."
+
+#: patterns/header-centered.php:14
+#: inc/presentation.php:180
+msgid "Cours"
+msgstr "Corsi"
+
+#: patterns/header-centered.php:15
+#: inc/presentation.php:181
+msgid "Quiz"
+msgstr "Quiz"
+
+#: patterns/header-centered.php:18
+#: patterns/home-guides.php:21
+#: inc/presentation.php:184
+msgid "Infos & démarches"
+msgstr "Guide e pratiche"
+
+#: patterns/header-centered.php
+msgctxt "Pattern title"
+msgid "En-tête centré"
+msgstr "Intestazione centrata"
+
+#: patterns/header-centered.php
+msgctxt "Pattern description"
+msgid "Titre centré façon magazine, menu sur une seconde ligne."
+msgstr "Titolo centrato in stile magazine, menu su una seconda riga."
+
+#: patterns/home-topics.php:22
+msgid "Programme officiel"
+msgstr "Programma ministeriale"
+
+#: patterns/home-topics.php:25
+msgid "Révisez thème par thème"
+msgstr "Ripassa argomento per argomento"
+
+#: patterns/home-topics.php:30
+msgid "Tous les quiz"
+msgstr "Tutti i quiz"
+
+#: patterns/home-topics.php
+msgctxt "Pattern title"
+msgid "Accueil — Réviser par thème"
+msgstr "Home — Ripassa per argomento"
+
+#: patterns/home-topics.php
+msgctxt "Pattern description"
+msgid "Les thèmes du programme officiel en carrousel défilant (tactile, clavier, boutons)."
+msgstr "Gli argomenti del programma ministeriale in un carosello scorrevole (touch, tastiera, pulsanti)."
+
+#: patterns/home-guides.php:24
+msgid "Les démarches, pas à pas"
+msgstr "Le pratiche, passo passo"
+
+#: patterns/home-guides.php:29
+msgid "Tous les guides"
+msgstr "Tutte le guide"
+
+#: patterns/home-guides.php
+msgctxt "Pattern title"
+msgid "Accueil — Démarches essentielles"
+msgstr "Home — Pratiche essenziali"
+
+#: patterns/home-guides.php
+msgctxt "Pattern description"
+msgid "Les six guides pratiques les plus récents en cartes numérotées."
+msgstr "Le sei guide pratiche più recenti in card numerate."
+
+#: patterns/hidden-no-results.php:12
+msgid "Aucun contenu ne correspond pour le moment. Essayez une recherche ou parcourez nos quiz."
+msgstr "Al momento nessun contenuto corrisponde. Prova una ricerca o sfoglia i nostri quiz."
+
+#: patterns/hidden-no-results.php
+msgctxt "Pattern title"
+msgid "Aucun résultat"
+msgstr "Nessun risultato"
+
+#: patterns/header.php:37
+msgid "Rechercher une question, un panneau…"
+msgstr "Cerca una domanda, un segnale…"
+
+#: patterns/header.php:46
+msgid "Mon espace"
+msgstr "La mia area"
+
+#: patterns/header.php
+msgctxt "Pattern title"
+msgid "En-tête"
+msgstr "Intestazione"
+
+#: patterns/header.php
+msgctxt "Pattern description"
+msgid "Logo, menu principal, recherche, mode sombre et compte."
+msgstr "Logo, menu principale, ricerca, modalità scura e account."
+
+#: patterns/home-premium.php:13
+msgid "Toutes les leçons d’introduction"
+msgstr "Tutte le lezioni introduttive"
+
+#: patterns/home-premium.php:14
+msgid "Quiz par thème avec correction"
+msgstr "Quiz per argomento con correzione"
+
+#: patterns/home-premium.php:15
+msgid "1 examen blanc par jour"
+msgstr "1 simulazione d’esame al giorno"
+
+#: patterns/home-premium.php:16
+msgid "Fiches panneaux et lexique"
+msgstr "Schede dei segnali e glossario"
+
+#: patterns/home-premium.php:19
+msgid "Toutes les questions et explications détaillées"
+msgstr "Tutte le domande e le spiegazioni dettagliate"
+
+#: patterns/home-premium.php:20
+msgid "Examens blancs illimités aux conditions réelles"
+msgstr "Simulazioni d’esame illimitate in condizioni reali"
+
+#: patterns/home-premium.php:21
+msgid "Révision intelligente de vos erreurs"
+msgstr "Ripasso intelligente dei tuoi errori"
+
+#: patterns/home-premium.php:22
+msgid "Statistiques par thème et prédiction de réussite"
+msgstr "Statistiche per argomento e previsione di superamento"
+
+#: patterns/home-premium.php:23
+msgid "Sans publicité, utilisable hors ligne"
+msgstr "Senza pubblicità, utilizzabile offline"
+
+#: patterns/home-premium.php:29
+msgid "Commencez gratuitement, allez plus loin quand vous voulez"
+msgstr "Inizia gratis, vai oltre quando vuoi"
+
+#: patterns/home-premium.php:37
+msgid "Gratuit"
+msgstr "Gratis"
+
+#: patterns/home-premium.php:66
+msgid "Premium"
+msgstr "Premium"
+
+#: patterns/home-premium.php:69
+msgid "Recommandé"
+msgstr "Consigliato"
+
+#: patterns/home-premium.php:74
+msgid "9,90 € / mois"
+msgstr "9,90 € / mese"
+
+#: patterns/home-premium.php:88
+msgid "Passer premium"
+msgstr "Passa a premium"
+
+#: patterns/home-premium.php
+msgctxt "Pattern title"
+msgid "Offre — Comparatif gratuit / premium"
+msgstr "Offerta — Confronto gratis / premium"
+
+#: patterns/home-premium.php
+msgctxt "Pattern description"
+msgid "Comparatif clair entre l'accès gratuit et l'accès premium."
+msgstr "Confronto chiaro tra l’accesso gratuito e l’accesso premium."
+
+#: styles/neutre.json
+msgctxt "Style variation name"
+msgid "Neutre"
+msgstr "Neutro"
+
+#: styles/neutre.json
+#: styles/coach.json
+#: styles/magazine.json
+msgctxt "Color name"
+msgid "Fond"
+msgstr "Sfondo"
+
+#: styles/neutre.json
+#: styles/coach.json
+#: styles/magazine.json
+msgctxt "Color name"
+msgid "Surface"
+msgstr "Superficie"
+
+#: styles/neutre.json
+#: styles/coach.json
+#: styles/magazine.json
+msgctxt "Color name"
+msgid "Texte"
+msgstr "Testo"
+
+#: styles/neutre.json
+#: styles/coach.json
+#: styles/magazine.json
+msgctxt "Color name"
+msgid "Texte discret"
+msgstr "Testo attenuato"
+
+#: styles/neutre.json
+#: styles/coach.json
+#: styles/magazine.json
+msgctxt "Color name"
+msgid "Bordure"
+msgstr "Bordo"
+
+#: styles/neutre.json
+#: styles/coach.json
+#: styles/magazine.json
+msgctxt "Color name"
+msgid "Primaire"
+msgstr "Primario"
+
+#: styles/neutre.json
+#: styles/coach.json
+#: styles/magazine.json
+msgctxt "Color name"
+msgid "Secondaire"
+msgstr "Secondario"
+
+#: styles/neutre.json
+#: styles/coach.json
+#: styles/magazine.json
+msgctxt "Color name"
+msgid "Accent"
+msgstr "Accento"
+
+#: styles/neutre.json
+#: styles/coach.json
+#: styles/magazine.json
+msgctxt "Color name"
+msgid "Réussite"
+msgstr "Successo"
+
+#: styles/neutre.json
+#: styles/coach.json
+#: styles/magazine.json
+msgctxt "Color name"
+msgid "Erreur"
+msgstr "Errore"
+
+#: styles/neutre.json
+#: styles/coach.json
+#: styles/magazine.json
+msgctxt "Color name"
+msgid "Avertissement"
+msgstr "Avviso"
+
+#: styles/neutre.json
+#: styles/coach.json
+#: styles/magazine.json
+msgctxt "Color name"
+msgid "Premium"
+msgstr "Premium"
+
+#: styles/coach.json
+msgctxt "Style variation name"
+msgid "Coach"
+msgstr "Coach"
+
+#: styles/magazine.json
+msgctxt "Style variation name"
+msgid "Magazine"
+msgstr "Magazine"
+
+#: styles/nuit.json
+msgctxt "Style variation name"
+msgid "Route de nuit"
+msgstr "Strada di notte"
+
+#: theme.json
+msgctxt "Style variation name"
+msgid "Route claire"
+msgstr "Strada chiara"
+
+#: theme.json
+msgctxt "Gradient name"
+msgid "Bandeau"
+msgstr "Banner"
+
+#: theme.json
+msgctxt "Gradient name"
+msgid "Surface dégradée"
+msgstr "Superficie sfumata"
+
+#: theme.json
+msgctxt "Gradient name"
+msgid "Doux"
+msgstr "Tenue"
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Très petite"
+msgstr "Molto piccola"
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Petite"
+msgstr "Piccola"
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Moyenne"
+msgstr "Media"
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Grande"
+msgstr "Grande"
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Très grande"
+msgstr "Molto grande"
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Énorme"
+msgstr "Enorme"
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Gigantesque"
+msgstr "Gigantesca"
+
+#: theme.json
+msgctxt "Font family name"
+msgid "Atkinson Hyperlegible"
+msgstr "Atkinson Hyperlegible"
+
+#: theme.json
+msgctxt "Font family name"
+msgid "Inter"
+msgstr "Inter"
+
+#: theme.json
+msgctxt "Font family name"
+msgid "Plus Jakarta Sans"
+msgstr "Plus Jakarta Sans"
+
+#: theme.json
+msgctxt "Font family name"
+msgid "Source Serif 4"
+msgstr "Source Serif 4"
+
+#: theme.json
+msgctxt "Font family name"
+msgid "Lexend (lecture facilitée)"
+msgstr "Lexend (lettura facilitata)"
+
+#: theme.json
+msgctxt "Font family name"
+msgid "Système"
+msgstr "Sistema"
+
+#: theme.json
+msgctxt "Font family name"
+msgid "Monospace"
+msgstr "Monospace"
+
+#: theme.json
+msgctxt "Space size name"
+msgid "2XS"
+msgstr "2XS"
+
+#: theme.json
+msgctxt "Space size name"
+msgid "XS"
+msgstr "XS"
+
+#: theme.json
+msgctxt "Space size name"
+msgid "S"
+msgstr "S"
+
+#: theme.json
+msgctxt "Space size name"
+msgid "M"
+msgstr "M"
+
+#: theme.json
+msgctxt "Space size name"
+msgid "L"
+msgstr "L"
+
+#: theme.json
+msgctxt "Space size name"
+msgid "XL"
+msgstr "XL"
+
+#: theme.json
+msgctxt "Space size name"
+msgid "2XL"
+msgstr "2XL"
+
+#: theme.json
+msgctxt "Space size name"
+msgid "3XL"
+msgstr "3XL"
+
+#: theme.json
+msgctxt "Shadow name"
+msgid "Douce"
+msgstr "Leggera"
+
+#: theme.json
+msgctxt "Shadow name"
+msgid "Relief"
+msgstr "Rilievo"
+
+#: theme.json
+msgctxt "Shadow name"
+msgid "Flottante"
+msgstr "Fluttuante"
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Page pleine largeur (sans titre)"
+msgstr "Pagina a larghezza piena (senza titolo)"
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Page sans distraction (quiz, compte)"
+msgstr "Pagina senza distrazioni (quiz, account)"
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Question — média à gauche"
+msgstr "Domanda — media a sinistra"
+
+#: theme.json
+msgctxt "Template part name"
+msgid "En-tête"
+msgstr "Intestazione"
+
+#: theme.json
+msgctxt "Template part name"
+msgid "En-tête centré"
+msgstr "Intestazione centrata"
+
+#: theme.json
+msgctxt "Template part name"
+msgid "En-tête minimal (quiz)"
+msgstr "Intestazione minimale (quiz)"
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Pied de page"
+msgstr "Piè di pagina"
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Pied de page compact"
+msgstr "Piè di pagina compatto"
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Pied de page minimal"
+msgstr "Piè di pagina minimale"
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Signature d'article"
+msgstr "Firma dell’articolo"
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Encadré auteur"
+msgstr "Riquadro autore"
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Carte de contenu"
+msgstr "Card contenuto"
+
+#: functions.php:126
+msgid "Learn & Drive — Accueil"
+msgstr "Learn & Drive — Home"
+
+#: functions.php:127
+msgid "Sections de la page d'accueil."
+msgstr "Sezioni della home page."
+
+#: functions.php:133
+msgid "Learn & Drive — Apprentissage"
+msgstr "Learn & Drive — Apprendimento"
+
+#: functions.php:134
+msgid "Blocs pour les cours, leçons et quiz."
+msgstr "Blocchi per corsi, lezioni e quiz."
+
+#: functions.php:140
+msgid "Learn & Drive — Éditorial"
+msgstr "Learn & Drive — Editoriale"
+
+#: functions.php:141
+msgid "Blocs pour les actualités et les guides pratiques."
+msgstr "Blocchi per notizie e guide pratiche."
+
+#: functions.php:147
+msgid "Learn & Drive — Offre"
+msgstr "Learn & Drive — Offerta"
+
+#: functions.php:148
+msgid "Tarifs, témoignages, application, appel à l’action."
+msgstr "Prezzi, testimonianze, app, invito all’azione."
+
+#: inc/block-styles.php:19
+#: inc/block-styles.php:25
+msgid "Carte"
+msgstr "Card"
+
+#: inc/block-styles.php:20
+msgid "Encadré"
+msgstr "Riquadro"
+
+#: inc/block-styles.php:22
+msgid "Section couleur"
+msgstr "Sezione colorata"
+
+#: inc/block-styles.php:28
+msgid "Liste à cocher"
+msgstr "Elenco con spunte"
+
+#: inc/block-styles.php:29
+msgid "Étapes numérotées"
+msgstr "Passaggi numerati"
+
+#: inc/block-styles.php:32
+msgid "Pastille"
+msgstr "Badge"
+
+#: inc/block-styles.php:35
+msgid "Tableau de coûts"
+msgstr "Tabella dei costi"
+
+#: inc/block-styles.php:38
+msgid "Question de FAQ"
+msgstr "Domanda FAQ"
+
+#: inc/block-styles.php:41
+msgid "Encadrée"
+msgstr "Con bordo"
+
+#: inc/block-styles.php:44
+msgid "Onglets"
+msgstr "Tab"
+
+#: inc/block-styles.php:47
+msgid "Liste séparée"
+msgstr "Elenco con separatori"
+
+#: inc/block-styles.php:50
+#: inc/block-styles.php:53
+msgid "Carrousel"
+msgstr "Carosello"
+
+#: inc/presentation.php:70
+msgid "Précédent"
+msgstr "Precedente"
+
+#: inc/presentation.php:71
+msgid "Suivant"
+msgstr "Successivo"
+
+#: inc/presentation.php:140
+msgid "Cours · Quiz · Examens blancs"
+msgstr "Corsi · Quiz · Simulazioni d’esame"
+
+#: inc/presentation.php:141
+msgid "Apprenez, entraînez-vous, réussissez votre examen"
+msgstr "Impara, esercitati, supera l’esame"
+
+#: inc/presentation.php:142
+msgid "Des cours clairs, des questions corrigées et expliquées, des examens blancs aux conditions réelles et toute l’actualité de votre formation, sur mobile comme sur ordinateur."
+msgstr "Corsi chiari, domande corrette e spiegate, simulazioni d’esame in condizioni reali e tutte le notizie sul tuo percorso, da mobile come da computer."
+
+#: inc/presentation.php:205
+msgid "Quiz par thème"
+msgstr "Quiz per argomento"
+
+#: inc/presentation.php:206
+msgid "Panneaux de signalisation"
+msgstr "Segnali stradali"
+
+#: inc/presentation.php:209
+msgid "S'informer"
+msgstr "Informati"
+
+#: inc/presentation.php:212
+msgid "Qui sommes-nous"
+msgstr "Chi siamo"
+
+#: inc/presentation.php:215
+msgid "Informations"
+msgstr "Informazioni"
+
+#: inc/presentation.php:218
+msgid "Contact"
+msgstr "Contatti"

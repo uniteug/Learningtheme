@@ -109,6 +109,23 @@ function attach_image( $source, $post_id, $alt, $base_dir = '' ) {
 		return 0;
 	}
 
+	// Une même figure sert à plusieurs questions : une seule pièce jointe par source.
+	$fingerprint = md5( $source );
+	$known       = get_posts(
+		array(
+			'post_type'      => 'attachment',
+			'post_status'    => 'inherit',
+			'posts_per_page' => 1,
+			'fields'         => 'ids',
+			'meta_key'       => '_ld_import_source', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+			'meta_value'     => $fingerprint, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
+		)
+	);
+	if ( $known ) {
+		set_post_thumbnail( $post_id, (int) $known[0] );
+		return (int) $known[0];
+	}
+
 	if ( preg_match( '#^https?://#', $source ) ) {
 		$id = media_sideload_image( esc_url_raw( $source ), $post_id, $alt, 'id' );
 	} else {
@@ -134,6 +151,7 @@ function attach_image( $source, $post_id, $alt, $base_dir = '' ) {
 	}
 
 	update_post_meta( $id, '_wp_attachment_image_alt', sanitize_text_field( $alt ) );
+	update_post_meta( $id, '_ld_import_source', $fingerprint );
 	set_post_thumbnail( $post_id, $id );
 	return (int) $id;
 }
@@ -246,7 +264,7 @@ function import_question( array $row, $base_dir = '', $dry_run = false ) {
 		);
 	}
 
-	foreach ( array( 'source', 'official_id', 'verified' ) as $key ) {
+	foreach ( array( 'source', 'official_id', 'verified', 'group' ) as $key ) {
 		if ( isset( $row[ $key ] ) ) {
 			update_post_meta( $id, '_ld_' . $key, sanitize_text_field( $row[ $key ] ) );
 		}
@@ -297,6 +315,7 @@ function import_file( $file, array $args = array(), $progress = null ) {
 		array(
 			'dry_run' => false,
 			'limit'   => 0,
+			'offset'  => 0,
 		)
 	);
 	$report = array(
@@ -359,14 +378,19 @@ function import_file( $file, array $args = array(), $progress = null ) {
 		$fh = fopen( $file, 'r' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fopen
 		while ( ( $raw = fgets( $fh ) ) !== false ) { // phpcs:ignore Generic.CodeAnalysis.AssignmentInCondition.FoundInWhileCondition
 			++$line;
+			if ( $line <= $args['offset'] ) {
+				continue;
+			}
 			$row = json_decode( $raw, true );
 			if ( is_array( $row ) ) {
 				$handle_row( $row, $line );
 			}
-			if ( $args['limit'] && $line >= $args['limit'] ) {
+			if ( $args['limit'] && $line >= $args['offset'] + $args['limit'] ) {
 				break;
 			}
 		}
+		$report['eof']  = feof( $fh );
+		$report['line'] = $line;
 		fclose( $fh ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
 	} else {
 		$data = json_decode( (string) file_get_contents( $file ), true ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
@@ -482,3 +506,72 @@ function export_file( $file, $format = 'jsonl' ) {
 	fclose( $fh ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
 	return $count;
 }
+
+/**
+ * Programme l'import d'un gros fichier JSON Lines en tâche de fond, par lots
+ * (hébergements mutualisés : aucune requête ne dépasse quelques secondes).
+ *
+ * @param string $file  Chemin du fichier .jsonl.
+ * @param int    $batch Questions par lot.
+ * @return bool
+ */
+function queue( $file, $batch = 200 ) {
+	if ( ! is_readable( $file ) ) {
+		return false;
+	}
+	update_option(
+		'ld_import_queue',
+		array(
+			'file'    => $file,
+			'offset'  => 0,
+			'batch'   => max( 20, (int) $batch ),
+			'created' => 0,
+			'updated' => 0,
+			'errors'  => array(),
+			'started' => time(),
+			'done'    => 0,
+		),
+		false
+	);
+	if ( ! wp_next_scheduled( 'learn_drive_import_batch' ) ) {
+		wp_schedule_single_event( time(), 'learn_drive_import_batch' );
+	}
+	return true;
+}
+
+/**
+ * Traite le lot suivant de l'import programmé et reprogramme le suivant.
+ *
+ * @return array|null État de l'import.
+ */
+function run_batch() {
+	$state = get_option( 'ld_import_queue' );
+	if ( ! is_array( $state ) || ! empty( $state['done'] ) ) {
+		return $state ? $state : null;
+	}
+	$report            = import_file(
+		$state['file'],
+		array(
+			'offset' => (int) $state['offset'],
+			'limit'  => (int) $state['batch'],
+		)
+	);
+	$state['offset']   = (int) ( $report['line'] ?? $state['offset'] );
+	$state['created'] += $report['created'];
+	$state['updated'] += $report['updated'];
+	$state['errors']   = array_slice( array_merge( $state['errors'], $report['errors'] ), -50 );
+	if ( ! empty( $report['eof'] ) || ( ! $report['created'] && ! $report['updated'] && ! $report['errors'] ) ) {
+		$state['done'] = time();
+		/**
+		 * Import programmé terminé.
+		 *
+		 * @param array $state Bilan.
+		 */
+		do_action( 'learn_drive_import_done', $state );
+	} else {
+		wp_schedule_single_event( time() + 5, 'learn_drive_import_batch' );
+	}
+	update_option( 'ld_import_queue', $state, false );
+	return $state;
+}
+add_action( 'learn_drive_import_batch', __NAMESPACE__ . '\\run_batch' );

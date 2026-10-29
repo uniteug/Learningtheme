@@ -10,25 +10,8 @@
  * @package LearnDrive
  */
 
-$learn_drive_columns = array(
-	__( 'Apprendre', 'learn-drive' )    => array(
-		array( __( 'Tous les cours', 'learn-drive' ), '/cours/' ),
-		array( __( 'Quiz par thème', 'learn-drive' ), '/quiz/' ),
-		array( __( 'Panneaux de signalisation', 'learn-drive' ), '/panneaux/' ),
-		array( __( 'Lexique', 'learn-drive' ), '/lexique/' ),
-	),
-	__( "S'informer", 'learn-drive' )   => array(
-		array( __( 'Actualités', 'learn-drive' ), '/actualites/' ),
-		array( __( 'Infos & démarches', 'learn-drive' ), '/infos/' ),
-		array( __( 'Qui sommes-nous', 'learn-drive' ), '/qui-sommes-nous/' ),
-		array( __( 'Comment nous vérifions nos contenus', 'learn-drive' ), '/politique-editoriale/' ),
-	),
-	__( 'Informations', 'learn-drive' ) => array(
-		array( __( 'Mentions légales', 'learn-drive' ), '/mentions-legales/' ),
-		array( __( 'Confidentialité', 'learn-drive' ), '/politique-de-confidentialite/' ),
-		array( __( 'Contact', 'learn-drive' ), '/contact/' ),
-	),
-);
+$learn_drive_columns = learn_drive_footer_columns();
+$learn_drive_urls    = learn_drive_links();
 ?>
 <!-- wp:group {"className":"ld-footer","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|40"}}},"layout":{"type":"constrained","contentSize":"1240px"}} -->
 <div class="wp-block-group ld-footer" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--40)">
@@ -52,7 +35,7 @@ $learn_drive_columns = array(
 			<!-- /wp:heading -->
 			<!-- wp:navigation {"overlayMenu":"never","layout":{"type":"flex","orientation":"vertical"},"style":{"spacing":{"blockGap":"0.5rem"}}} -->
 			<?php foreach ( $learn_drive_links as $learn_drive_link ) : ?>
-				<!-- wp:navigation-link {"label":"<?php echo esc_attr( $learn_drive_link[0] ); ?>","url":"<?php echo esc_url( home_url( $learn_drive_link[1] ) ); ?>","kind":"custom","isTopLevelLink":true} /-->
+				<!-- wp:navigation-link {"label":"<?php echo esc_attr( $learn_drive_link[0] ); ?>","url":"<?php echo esc_url( $learn_drive_link[1] ); ?>","kind":"custom","isTopLevelLink":true} /-->
 			<?php endforeach; ?>
 			<!-- /wp:navigation -->
 		</div>
@@ -66,9 +49,11 @@ $learn_drive_columns = array(
 		<!-- wp:paragraph {"fontSize":"x-small"} -->
 		<p class="has-x-small-font-size">© <?php echo esc_html( gmdate( 'Y' ) ); ?> <?php echo esc_html( get_bloginfo( 'name' ) ); ?></p>
 		<!-- /wp:paragraph -->
+		<?php if ( ! empty( $learn_drive_urls['sitemap'] ) ) : ?>
 		<!-- wp:paragraph {"fontSize":"x-small"} -->
-		<p class="has-x-small-font-size"><a href="<?php echo esc_url( home_url( '/plan-du-site/' ) ); ?>"><?php esc_html_e( 'Plan du site', 'learn-drive' ); ?></a></p>
+		<p class="has-x-small-font-size"><a href="<?php echo esc_url( $learn_drive_urls['sitemap'] ); ?>"><?php esc_html_e( 'Plan du site', 'learn-drive' ); ?></a></p>
 		<!-- /wp:paragraph -->
+		<?php endif; ?>
 	</div>
 	<!-- /wp:group -->
 </div>

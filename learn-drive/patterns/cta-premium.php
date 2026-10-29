@@ -25,7 +25,7 @@
 	<!-- wp:buttons -->
 	<div class="wp-block-buttons">
 		<!-- wp:button {"style":{"color":{"background":"var:preset|color|premium"}}} -->
-		<div class="wp-block-button"><a class="wp-block-button__link has-background wp-element-button" href="<?php echo esc_url( home_url( '/premium/' ) ); ?>" style="background-color:var(--wp--preset--color--premium)"><?php esc_html_e( 'Découvrir le premium', 'learn-drive' ); ?></a></div>
+		<div class="wp-block-button"><a class="wp-block-button__link has-background wp-element-button" href="<?php echo esc_url( learn_drive_links()['premium'] ); ?>" style="background-color:var(--wp--preset--color--premium)"><?php esc_html_e( 'Découvrir le premium', 'learn-drive' ); ?></a></div>
 		<!-- /wp:button -->
 	</div>
 	<!-- /wp:buttons -->

@@ -42,7 +42,7 @@ $learn_drive_reviews = array(
 	<!-- /wp:columns -->
 
 	<!-- wp:paragraph {"align":"center","fontSize":"small","style":{"color":{"text":"var:preset|color|muted"},"spacing":{"margin":{"top":"var:preset|spacing|40"}}}} -->
-	<p class="has-text-align-center has-text-color has-small-font-size" style="color:var(--wp--preset--color--muted);margin-top:var(--wp--preset--spacing--40)"><?php esc_html_e( 'Contenus rédigés par des enseignants de la conduite et revérifiés à chaque évolution de la réglementation.', 'learn-drive' ); ?> <a href="<?php echo esc_url( home_url( '/politique-editoriale/' ) ); ?>"><?php esc_html_e( 'Comment nous vérifions nos contenus', 'learn-drive' ); ?></a></p>
+	<p class="has-text-align-center has-text-color has-small-font-size" style="color:var(--wp--preset--color--muted);margin-top:var(--wp--preset--spacing--40)"><?php esc_html_e( 'Contenus rédigés par des enseignants de la conduite et revérifiés à chaque évolution de la réglementation.', 'learn-drive' ); ?> <a href="<?php echo esc_url( learn_drive_links()['editorial'] ); ?>"><?php esc_html_e( 'Comment nous vérifions nos contenus', 'learn-drive' ); ?></a></p>
 	<!-- /wp:paragraph -->
 </section>
 <!-- /wp:group -->

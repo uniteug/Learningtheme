@@ -351,3 +351,54 @@ function report() {
 	}
 	return compact( 'posts', 'terms' );
 }
+
+/**
+ * Yoast SEO : mêmes exclusions dans ses sitemaps (contenus, termes, auteurs).
+ *
+ * @param int[] $ids Identifiants déjà exclus.
+ * @return int[]
+ */
+function yoast_exclude_posts( $ids ) {
+	if ( ! enabled() ) {
+		return $ids;
+	}
+	$thin = get_posts(
+		array(
+			'post_type'      => 'any',
+			'post_status'    => 'publish',
+			'posts_per_page' => -1, // phpcs:ignore WordPress.WP.PostsPerPage.posts_per_page_posts_per_page -- identifiants seulement, mis en cache par Yoast.
+			'fields'         => 'ids',
+			'meta_key'       => '_ld_noindex', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+		)
+	);
+	return array_values( array_unique( array_merge( (array) $ids, array_map( 'intval', $thin ) ) ) );
+}
+add_filter( 'wpseo_exclude_from_sitemap_by_post_ids', __NAMESPACE__ . '\\yoast_exclude_posts' );
+
+/**
+ * Yoast SEO : termes minces hors sitemap.
+ *
+ * @param int[] $ids Identifiants déjà exclus.
+ * @return int[]
+ */
+function yoast_exclude_terms( $ids ) {
+	if ( ! enabled() ) {
+		return $ids;
+	}
+	return array_values( array_unique( array_merge( (array) $ids, wp_list_pluck( report()['terms'], 'term_id' ) ) ) );
+}
+add_filter( 'wpseo_exclude_from_sitemap_by_term_ids', __NAMESPACE__ . '\\yoast_exclude_terms' );
+
+/**
+ * Yoast SEO : auteurs minces hors sitemap (le filtre reçoit la liste des auteurs retenus).
+ *
+ * @param \WP_User[] $users Auteurs.
+ * @return \WP_User[]
+ */
+function yoast_exclude_authors( $users ) {
+	if ( ! enabled() || ! is_array( $users ) ) {
+		return $users;
+	}
+	return array_values( array_filter( $users, static fn( $user ) => ! ( $user instanceof \WP_User && is_thin_author( $user->ID ) ) ) );
+}
+add_filter( 'wpseo_sitemap_exclude_author', __NAMESPACE__ . '\\yoast_exclude_authors' );

@@ -51,7 +51,7 @@ $learn_drive_premium = array(
 			<!-- wp:buttons -->
 			<div class="wp-block-buttons">
 				<!-- wp:button {"className":"is-style-outline","width":100} -->
-				<div class="wp-block-button has-custom-width wp-block-button__width-100 is-style-outline"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/quiz/' ) ); ?>"><?php esc_html_e( 'Commencer gratuitement', 'learn-drive' ); ?></a></div>
+				<div class="wp-block-button has-custom-width wp-block-button__width-100 is-style-outline"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( learn_drive_links()['register'] ); ?>"><?php esc_html_e( 'Commencer gratuitement', 'learn-drive' ); ?></a></div>
 				<!-- /wp:button -->
 			</div>
 			<!-- /wp:buttons -->
@@ -85,7 +85,7 @@ $learn_drive_premium = array(
 			<!-- wp:buttons -->
 			<div class="wp-block-buttons">
 				<!-- wp:button {"width":100} -->
-				<div class="wp-block-button has-custom-width wp-block-button__width-100"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/premium/' ) ); ?>"><?php esc_html_e( 'Passer premium', 'learn-drive' ); ?></a></div>
+				<div class="wp-block-button has-custom-width wp-block-button__width-100"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( learn_drive_links()['premium'] ); ?>"><?php esc_html_e( 'Passer premium', 'learn-drive' ); ?></a></div>
 				<!-- /wp:button -->
 			</div>
 			<!-- /wp:buttons -->

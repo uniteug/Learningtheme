@@ -10,6 +10,30 @@
  */
 
 $learn_drive_links = learn_drive_links();
+$learn_drive_lead  = array(
+	'perPage' => 1,
+	'pages'   => 0,
+	'offset'  => 0,
+	'order'   => 'desc',
+	'orderBy' => 'date',
+	'author'  => '',
+	'search'  => '',
+	'exclude' => array(),
+	'sticky'  => '',
+	'inherit' => false,
+);
+$learn_drive_list  = array(
+	'perPage' => 4,
+	'pages'   => 0,
+	'offset'  => 1,
+	'order'   => 'desc',
+	'orderBy' => 'date',
+	'author'  => '',
+	'search'  => '',
+	'exclude' => array(),
+	'sticky'  => '',
+	'inherit' => false,
+);
 ?>
 <!-- wp:group {"tagName":"section","className":"ld-reveal","align":"full","backgroundColor":"surface","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"}}},"layout":{"type":"constrained","contentSize":"1240px"}} -->
 <section class="wp-block-group alignfull ld-reveal has-surface-background-color has-background" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)">
@@ -35,7 +59,8 @@ $learn_drive_links = learn_drive_links();
 	<div class="wp-block-columns ld-mag">
 		<!-- wp:column {"width":"58%"} -->
 		<div class="wp-block-column" style="flex-basis:58%">
-			<!-- wp:query {"queryId":11,"query":{"perPage":1,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":false},"className":"ld-mag__lead"} -->
+			<!-- wp:query {"queryId":11,"query":<?php learn_drive_the_query_json( 'news', $learn_drive_lead ); ?>
+			,"className":"ld-mag__lead"} -->
 			<div class="wp-block-query ld-mag__lead">
 				<!-- wp:post-template -->
 					<!-- wp:post-featured-image {"sizeSlug":"learn-drive-1200"} /-->
@@ -54,7 +79,8 @@ $learn_drive_links = learn_drive_links();
 
 		<!-- wp:column {"width":"42%"} -->
 		<div class="wp-block-column" style="flex-basis:42%">
-			<!-- wp:query {"queryId":12,"query":{"perPage":4,"pages":0,"offset":1,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":false},"className":"ld-mag__list"} -->
+			<!-- wp:query {"queryId":12,"query":<?php learn_drive_the_query_json( 'news', $learn_drive_list ); ?>
+			,"className":"ld-mag__list"} -->
 			<div class="wp-block-query ld-mag__list">
 				<!-- wp:post-template -->
 					<!-- wp:post-featured-image {"sizeSlug":"learn-drive-400"} /-->

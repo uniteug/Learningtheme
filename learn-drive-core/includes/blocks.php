@@ -113,6 +113,8 @@ function variant_heading( $variant, $post_type ) {
 		'same-topic'      => __( 'Sur le même sujet', 'learn-drive-core' ),
 		'news'            => __( 'Actualités liées', 'learn-drive-core' ),
 		'quizzes'         => __( 'Quiz du thème', 'learn-drive-core' ),
+		'track-quizzes'   => __( 'Quiz par thème', 'learn-drive-core' ),
+		'topic-questions' => __( 'Questions de ce thème', 'learn-drive-core' ),
 		'more-quizzes'    => __( 'Autres quiz', 'learn-drive-core' ),
 		'courses'         => __( 'Parcours de formation', 'learn-drive-core' ),
 		'lessons'         => __( 'Cours et leçons', 'learn-drive-core' ),
@@ -201,8 +203,9 @@ function related_ids( $post_type, $variant, $count, $block = null ) {
 		);
 	}
 
-	// Page pilier (catégorie ou thème) : tous les contenus du terme.
-	if ( ! $post_id && ( is_tax( TAX_TRACK ) || is_tax( TAX_TOPIC ) ) ) {
+	// Page pilier (catégorie ou thème) : tous les contenus du terme. Le contexte postId
+	// d'une archive vient du premier contenu de la boucle principale : on l'ignore.
+	if ( ( is_tax( TAX_TRACK ) || is_tax( TAX_TOPIC ) ) && ! is_singular() && ! ( $block && isset( $block->context['queryId'] ) ) ) {
 		$term              = get_queried_object();
 		$args['tax_query'] = array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 			array(

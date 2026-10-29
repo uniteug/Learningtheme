@@ -10,7 +10,18 @@
  */
 
 $learn_drive_links = learn_drive_links();
-$learn_drive_type  = learn_drive_has_core_plugin() ? 'ld_guide' : 'page';
+$learn_drive_query = array(
+	'perPage' => 6,
+	'pages'   => 0,
+	'offset'  => 0,
+	'order'   => 'desc',
+	'orderBy' => 'date',
+	'author'  => '',
+	'search'  => '',
+	'exclude' => array(),
+	'sticky'  => '',
+	'inherit' => false,
+);
 ?>
 <!-- wp:group {"tagName":"section","className":"ld-reveal","align":"full","backgroundColor":"surface","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"}}},"layout":{"type":"constrained","contentSize":"1240px"}} -->
 <section class="wp-block-group alignfull ld-reveal has-surface-background-color has-background" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)">
@@ -32,7 +43,8 @@ $learn_drive_type  = learn_drive_has_core_plugin() ? 'ld_guide' : 'page';
 	</div>
 	<!-- /wp:group -->
 
-	<!-- wp:query {"queryId":14,"query":{"perPage":6,"pages":0,"offset":0,"postType":"<?php echo esc_attr( $learn_drive_type ); ?>","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":false},"className":"ld-guides"} -->
+	<!-- wp:query {"queryId":14,"query":<?php learn_drive_the_query_json( 'guides', $learn_drive_query ); ?>
+	,"className":"ld-guides"} -->
 	<div class="wp-block-query ld-guides">
 		<!-- wp:post-template {"layout":{"type":"grid","columnCount":3,"minimumColumnWidth":"18rem"}} -->
 			<!-- wp:post-title {"level":3,"isLink":true} /-->

@@ -146,3 +146,67 @@ function front_country_query( $query, $block ) {
 	return $query;
 }
 add_filter( 'query_loop_block_query_vars', __NAMESPACE__ . '\\front_country_query', 10, 2 );
+
+/**
+ * Accueil : retire les sections qui n'auraient rien à montrer sur ce site.
+ *
+ * @param string[] $sections Sections.
+ * @return string[]
+ */
+function home_sections( $sections ) {
+	$published = static function ( $type ) {
+		$counts = wp_count_posts( $type );
+		return (int) ( $counts->publish ?? 0 );
+	};
+	$terms     = static function ( $taxonomy ) {
+		return (int) wp_count_terms(
+			array(
+				'taxonomy'   => $taxonomy,
+				'hide_empty' => false,
+			)
+		);
+	};
+
+	$guides_type = function_exists( 'learn_drive_query_args' ) ? learn_drive_query_args( 'guides' )['postType'] : PT_GUIDE;
+	$empty       = array(
+		'home-guides'              => ! $published( $guides_type ),
+		'home-signs'               => ! $published( PT_SHEET ),
+		'home-europe'              => $terms( \LearnDrive\Core\TAX_COUNTRY ) < 2,
+		'home-topics'              => ! $terms( \LearnDrive\Core\TAX_TOPIC ),
+		'home-tracks'              => ! $terms( TAX_TRACK ),
+		'home-question-of-the-day' => ! $published( \LearnDrive\Core\PT_QUESTION ),
+	);
+
+	return array_values( array_filter( $sections, static fn( $section ) => empty( $empty[ $section ] ) ) );
+}
+add_filter( 'learn_drive_home_sections', __NAMESPACE__ . '\\home_sections' );
+
+/**
+ * Menu principal : retire les liens vers des rubriques vides.
+ *
+ * @param array $items Liste de [libellé, adresse].
+ * @return array
+ */
+function nav_items( $items ) {
+	$empty = array();
+	foreach ( array( \LearnDrive\Core\PT_LESSON, PT_SHEET, PT_GUIDE, PT_GLOSSARY ) as $type ) {
+		$counts = wp_count_posts( $type );
+		$link   = get_post_type_archive_link( $type );
+		if ( $link && ! (int) ( $counts->publish ?? 0 ) ) {
+			$empty[] = untrailingslashit( $link );
+		}
+	}
+	return array_values( array_filter( $items, static fn( $item ) => ! in_array( untrailingslashit( (string) $item[1] ), $empty, true ) ) );
+}
+add_filter( 'learn_drive_nav_items', __NAMESPACE__ . '\\nav_items' );
+
+/**
+ * Pied de page : mêmes règles que le menu (pas de lien vers une rubrique vide).
+ *
+ * @param array $columns Titre => liens.
+ * @return array
+ */
+function footer_columns( $columns ) {
+	return array_map( __NAMESPACE__ . '\\nav_items', (array) $columns );
+}
+add_filter( 'learn_drive_footer_columns', __NAMESPACE__ . '\\footer_columns' );

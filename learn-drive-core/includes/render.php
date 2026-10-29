@@ -457,15 +457,22 @@ function quiz( array $args ) {
 		$html .= '</div>';
 	}
 
-	// Questions.
-	$html .= '<ol class="ld-quiz__questions">';
-	foreach ( $ids as $index => $id ) {
-		$question = Questions\get( $id );
-		if ( $question ) {
-			$html .= question_item( $question, $index, $item_args );
+	// Accueil d'un examen tiré d'une grande banque avec quotas officiels : composition de
+	// la fiche plutôt qu'une liste de questions qui ne seront pas celles de l'épreuve.
+	$blueprint = $exam_home && $quiz_id ? exam_blueprint( $quiz_id ) : '';
+	if ( $blueprint ) {
+		$html .= $blueprint;
+	} else {
+		// Questions.
+		$html .= '<ol class="ld-quiz__questions">';
+		foreach ( $ids as $index => $id ) {
+			$question = Questions\get( $id );
+			if ( $question ) {
+				$html .= question_item( $question, $index, $item_args );
+			}
 		}
+		$html .= '</ol>';
 	}
-	$html .= '</ol>';
 
 	// Navigation.
 	if ( ! $in_play ) {
@@ -686,5 +693,56 @@ function hotspot_html( array $question, array $args ) {
 		Questions\HOTSPOT_COLS,
 		Questions\HOTSPOT_ROWS,
 		$cells
+	);
+}
+
+/**
+ * Composition officielle d'une fiche d'examen (thèmes et nombre de questions),
+ * quand les thèmes du pays portent un quota.
+ *
+ * @param int $quiz_id Examen.
+ * @return string
+ */
+function exam_blueprint( $quiz_id ) {
+	$country = wp_get_post_terms( $quiz_id, \LearnDrive\Core\TAX_COUNTRY, array( 'fields' => 'slugs' ) );
+	$args    = array(
+		'taxonomy'   => \LearnDrive\Core\TAX_TOPIC,
+		'hide_empty' => true,
+		'orderby'    => 'term_id',
+		'meta_query' => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+			array(
+				'key'     => 'ld_exam_quota',
+				'value'   => 0,
+				'compare' => '>',
+				'type'    => 'NUMERIC',
+			),
+		),
+	);
+	if ( $country && ! is_wp_error( $country ) ) {
+		$args['meta_query'][] = array(
+			'key'   => 'ld_country',
+			'value' => $country[0],
+		);
+	}
+	$topics = get_terms( $args );
+	if ( ! $topics || is_wp_error( $topics ) ) {
+		return '';
+	}
+	$rows  = '';
+	$total = 0;
+	foreach ( $topics as $topic ) {
+		$quota  = (int) get_term_meta( $topic->term_id, 'ld_exam_quota', true );
+		$total += $quota;
+		$rows  .= sprintf( '<tr><td><a href="%s">%s</a></td><td>%s</td><td>%d</td></tr>', esc_url( get_term_link( $topic ) ), esc_html( $topic->name ), esc_html( number_format_i18n( $topic->count ) ), $quota );
+	}
+	return sprintf(
+		'<section class="ld-exam-blueprint"><h2>%1$s</h2><p>%2$s</p><figure class="wp-block-table"><table><thead><tr><th>%3$s</th><th>%4$s</th><th>%5$s</th></tr></thead><tbody>%6$s</tbody></table></figure></section>',
+		esc_html__( 'Composition de la fiche d’examen', 'learn-drive-core' ),
+		/* translators: %d: number of questions */
+		esc_html( sprintf( __( 'Chaque examen blanc tire au hasard %d questions selon la répartition officielle par thème : jamais deux fois la même fiche.', 'learn-drive-core' ), $total ) ),
+		esc_html__( 'Thème', 'learn-drive-core' ),
+		esc_html__( 'Questions dans la banque', 'learn-drive-core' ),
+		esc_html__( 'Questions à l’examen', 'learn-drive-core' ),
+		$rows
 	);
 }

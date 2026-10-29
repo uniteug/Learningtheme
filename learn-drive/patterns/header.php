@@ -10,13 +10,8 @@
  * @package LearnDrive
  */
 
-$learn_drive_links = array(
-	array( __( 'Cours', 'learn-drive' ), '/cours/' ),
-	array( __( 'Quiz', 'learn-drive' ), '/quiz/' ),
-	array( __( 'Panneaux', 'learn-drive' ), '/panneaux/' ),
-	array( __( 'Actualités', 'learn-drive' ), '/actualites/' ),
-	array( __( 'Infos & démarches', 'learn-drive' ), '/infos/' ),
-);
+$learn_drive_items = learn_drive_nav_items();
+$learn_drive_links = learn_drive_links();
 ?>
 <!-- wp:group {"className":"ld-header","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained","contentSize":"1240px"}} -->
 <div class="wp-block-group ld-header" style="padding-top:0;padding-bottom:0">
@@ -32,8 +27,8 @@ $learn_drive_links = array(
 		<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|30"}},"layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"center","justifyContent":"right"}} -->
 		<div class="wp-block-group">
 			<!-- wp:navigation {"overlayMenu":"mobile","layout":{"type":"flex","justifyContent":"right"},"style":{"spacing":{"blockGap":"1.25rem"}}} -->
-			<?php foreach ( $learn_drive_links as $learn_drive_link ) : ?>
-				<!-- wp:navigation-link {"label":"<?php echo esc_attr( $learn_drive_link[0] ); ?>","url":"<?php echo esc_url( home_url( $learn_drive_link[1] ) ); ?>","kind":"custom","isTopLevelLink":true} /-->
+			<?php foreach ( $learn_drive_items as $learn_drive_item ) : ?>
+				<!-- wp:navigation-link {"label":"<?php echo esc_attr( $learn_drive_item[0] ); ?>","url":"<?php echo esc_url( $learn_drive_item[1] ); ?>","kind":"custom","isTopLevelLink":true} /-->
 			<?php endforeach; ?>
 			<!-- /wp:navigation -->
 
@@ -48,7 +43,7 @@ $learn_drive_links = array(
 				<!-- wp:buttons {"className":"ld-account"} -->
 				<div class="wp-block-buttons ld-account">
 					<!-- wp:button {"className":"is-style-outline"} -->
-					<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/mon-compte/' ) ); ?>" rel="nofollow"><?php esc_html_e( 'Mon espace', 'learn-drive' ); ?></a></div>
+					<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( $learn_drive_links['account'] ); ?>" rel="nofollow"><?php esc_html_e( 'Mon espace', 'learn-drive' ); ?></a></div>
 					<!-- /wp:button -->
 				</div>
 				<!-- /wp:buttons -->
