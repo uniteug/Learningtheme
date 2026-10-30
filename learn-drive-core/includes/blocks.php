@@ -332,6 +332,9 @@ function render_list( array $ids, $layout, $heading, $classes = '' ) {
 			$type = get_post_type( $id );
 			if ( PT_QUIZ === $type ) {
 				$count = count( Quizzes\question_ids( $id ) );
+				if ( ! $count ) {
+					continue; // Quiz encore vide (import en cours) : pas de carte « 0 question ».
+				}
 				/* translators: %d: number of questions */
 				$badge = sprintf( _n( '%d question', '%d questions', $count, 'learn-drive-core' ), $count );
 			} elseif ( 'post' === $type ) {

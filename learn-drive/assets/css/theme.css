@@ -431,11 +431,25 @@ video {
 	color: inherit;
 }
 
-/* Le bandeau reste aligné à gauche dans la colonne large, lignes de longueur confortable. */
+/*
+ * Le bandeau reste aligné à gauche dans la colonne large (1240px), lignes de
+ * longueur confortable. La colonne est fixée ici plutôt que laissée aux seules
+ * règles de mise en page générées par WordPress : si elles manquent (cache,
+ * optimiseur CSS), les titres retombaient sur la largeur de contenu (760px)
+ * alors que la marge, calculée sur le parent, en retirait 500.
+ */
+.wp-block-group.ld-hero > :where(:not(.alignfull):not(.alignwide)) {
+	max-width: min(100%, 1240px);
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .ld-hero :where(h1, .ld-hero__lead, .wp-block-term-description) {
 	box-sizing: border-box;
-	padding-right: max(0px, calc(100% - 46rem));
+	padding-right: max(0px, calc(min(100%, 1240px) - 736px));
 	text-wrap: balance;
+	overflow-wrap: normal;
+	hyphens: manual;
 }
 
 .ld-hero .ld-hero__lead,
