@@ -3,7 +3,7 @@
  * Plugin Name:       Learn & Drive Core
  * Plugin URI:        https://github.com/uniteug/Learningtheme
  * Description:       Plugin compagnon du thème Learn & Drive : cours, leçons, questions, quiz et examens blancs par pays, fiches, guides, lexique, accès gratuit / premium, API REST et SEO intégré (données structurées, sitemaps, maillage interne).
- * Version:           1.2.4
+ * Version:           1.3.0
  * Requires at least: 7.0
  * Requires PHP:      8.1
  * Author:            uniteug
@@ -19,7 +19,7 @@ namespace LearnDrive\Core;
 
 defined( 'ABSPATH' ) || exit;
 
-const VERSION = '1.2.4';
+const VERSION = '1.3.0';
 
 define( 'LEARN_DRIVE_CORE_VERSION', VERSION );
 define( 'LEARN_DRIVE_CORE_FILE', __FILE__ );

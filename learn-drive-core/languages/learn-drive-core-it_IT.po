@@ -1819,7 +1819,7 @@ msgstr "Origine"
 msgid "Aucun accès pour le moment."
 msgstr "Nessun accesso per il momento."
 
-#: includes/theme-bridge.php:284
+#: includes/theme-bridge.php:299
 #: includes/post-types.php:202
 #: includes/post-types.php:202
 msgid "Pays"
@@ -2655,7 +2655,7 @@ msgid "Quiz du thème"
 msgstr "Quiz dell’argomento"
 
 #: includes/blocks.php:116
-#: blocks/exam-link/render.php:25
+#: blocks/exam-link/render.php:27
 msgid "Quiz par thème"
 msgstr "Quiz per argomento"
 

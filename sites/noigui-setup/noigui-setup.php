@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Noigui — configurazione del sito
  * Description:       Configura Learn & Drive per noigui.com: patente italiana, banca ufficiale dei quiz ministeriali (listato «Patente AB», 7.020 affermazioni), argomenti con le quote d'esame, simulazione d'esame, menu e collegamenti all'app. Le spiegazioni già scritte negli articoli «Quiz Patente B» vengono collegate alle affermazioni corrispondenti.
- * Version:           1.0.2
+ * Version:           1.1.0
  * Requires at least: 6.9
  * Requires PHP:      8.1
  * Requires Plugins:  learn-drive-core
@@ -25,7 +25,7 @@ use const LearnDrive\Core\TAX_TOPIC;
 
 defined( 'ABSPATH' ) || exit;
 
-const VERSION = '1.0.2';
+const VERSION = '1.1.0';
 const DIR     = __DIR__ . '/';
 
 /**

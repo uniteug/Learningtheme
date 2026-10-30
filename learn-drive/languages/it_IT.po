@@ -9,13 +9,13 @@ msgstr ""
 "X-Domain: learn-drive\n"
 
 #: patterns/footer-compact.php:19
-#: inc/presentation.php:248
+#: inc/presentation.php:250
 msgid "Mentions légales"
 msgstr "Note legali"
 
 #: patterns/footer-compact.php:20
 #: patterns/footer-minimal.php:16
-#: inc/presentation.php:249
+#: inc/presentation.php:251
 msgid "Confidentialité"
 msgstr "Privacy"
 
@@ -82,7 +82,7 @@ msgid "Les pays couverts (drapeau, catégories, nombre de questions) et l'accès
 msgstr "I paesi coperti (bandiera, categorie, numero di domande) e l’accesso alle guide per guidare all’estero."
 
 #: patterns/home-steps.php:14
-#: inc/presentation.php:235
+#: inc/presentation.php:237
 msgid "Apprendre"
 msgstr "Impara"
 
@@ -165,7 +165,7 @@ msgid "Chaque leçon explique une règle avec des schémas, puis vous fait véri
 msgstr "Ogni lezione spiega una regola con degli schemi, poi ti fa verificare di averla capita."
 
 #: patterns/home-theory-practice.php:38
-#: inc/presentation.php:236
+#: inc/presentation.php:238
 msgid "Tous les cours"
 msgstr "Tutti i corsi"
 
@@ -541,25 +541,29 @@ msgctxt "Pattern description"
 msgid "Portail d'information et d'apprentissage pour un site gratuit ou freemium ; vitrine commerciale (offres, essai, témoignages) pour un site payant."
 msgstr "Portale di informazione e apprendimento per un sito gratuito o freemium; vetrina commerciale (offerte, prova, testimonianze) per un sito a pagamento."
 
-#: patterns/home-tracks.php:19
+#: patterns/home-tracks.php:20
 msgid "Nos formations"
 msgstr "I nostri corsi"
 
-#: patterns/home-tracks.php:19
+#: patterns/home-tracks.php:20
 msgid "Programmes phares"
 msgstr "Percorsi in evidenza"
 
-#: patterns/home-tracks.php:22
+#: patterns/home-tracks.php:23
 msgid "Choisissez votre formation"
 msgstr "Scegli il tuo corso"
 
-#: patterns/home-tracks.php:22
+#: patterns/home-tracks.php:23
 msgid "Quel permis préparez-vous ?"
 msgstr "Per quale patente ti stai preparando?"
 
-#: patterns/home-tracks.php:25
+#: patterns/home-tracks.php:26
 msgid "Chaque parcours réunit les cours, les quiz par thème et un examen blanc aux conditions réelles de l’épreuve."
 msgstr "Ogni percorso riunisce i corsi, i quiz per argomento e una simulazione d’esame nelle condizioni reali della prova."
+
+#: patterns/home-tracks.php:30
+msgid "Toutes les catégories de permis"
+msgstr "Tutte le categorie di patente"
 
 #: patterns/home-tracks.php
 msgctxt "Pattern title"
@@ -638,7 +642,7 @@ msgid "Accès rapides"
 msgstr "Accesso rapido"
 
 #: patterns/home-hero.php:80
-#: inc/presentation.php:213
+#: inc/presentation.php:215
 msgid "Examen blanc"
 msgstr "Simulazione d’esame"
 
@@ -714,7 +718,7 @@ msgstr "Contenuti scritti da insegnanti e istruttori di guida e ricontrollati a 
 
 #: patterns/home-testimonials.php:45
 #: patterns/editorial-policy.php:16
-#: inc/presentation.php:245
+#: inc/presentation.php:247
 msgid "Comment nous vérifions nos contenus"
 msgstr "Come verifichiamo i nostri contenuti"
 
@@ -832,24 +836,24 @@ msgid "Bandeau court qui mène à l'offre premium."
 msgstr "Banner breve che porta all’offerta premium."
 
 #: patterns/header-centered.php:14
-#: inc/presentation.php:181
+#: inc/presentation.php:183
 msgid "Cours"
 msgstr "Corsi"
 
 #: patterns/header-centered.php:15
-#: inc/presentation.php:182
+#: inc/presentation.php:184
 msgid "Quiz"
 msgstr "Quiz"
 
 #: patterns/header-centered.php:16
-#: inc/presentation.php:183
-#: inc/presentation.php:214
+#: inc/presentation.php:185
+#: inc/presentation.php:216
 msgid "Panneaux"
 msgstr "Segnali"
 
 #: patterns/header-centered.php:18
 #: patterns/home-guides.php:33
-#: inc/presentation.php:185
+#: inc/presentation.php:187
 msgid "Infos & démarches"
 msgstr "Guide e pratiche"
 
@@ -1399,47 +1403,47 @@ msgstr "Precedente"
 msgid "Suivant"
 msgstr "Successivo"
 
-#: inc/presentation.php:140
+#: inc/presentation.php:142
 msgid "Cours · Quiz · Examens blancs"
 msgstr "Corsi · Quiz · Simulazioni d’esame"
 
-#: inc/presentation.php:141
+#: inc/presentation.php:143
 msgid "Apprenez, entraînez-vous, réussissez votre examen"
 msgstr "Impara, esercitati, supera l’esame"
 
-#: inc/presentation.php:142
+#: inc/presentation.php:144
 msgid "Des cours clairs, des questions corrigées et expliquées, des examens blancs aux conditions réelles et toute l’actualité de votre formation, sur mobile comme sur ordinateur."
 msgstr "Corsi chiari, domande corrette e spiegate, simulazioni d’esame in condizioni reali e tutte le notizie sul tuo percorso, da mobile come da computer."
 
-#: inc/presentation.php:215
+#: inc/presentation.php:217
 msgid "Démarches"
 msgstr "Pratiche"
 
-#: inc/presentation.php:216
-#: inc/presentation.php:239
+#: inc/presentation.php:218
+#: inc/presentation.php:241
 msgid "Lexique"
 msgstr "Glossario"
 
-#: inc/presentation.php:237
+#: inc/presentation.php:239
 msgid "Quiz par thème"
 msgstr "Quiz per argomento"
 
-#: inc/presentation.php:238
+#: inc/presentation.php:240
 msgid "Panneaux de signalisation"
 msgstr "Segnali stradali"
 
-#: inc/presentation.php:241
+#: inc/presentation.php:243
 msgid "S'informer"
 msgstr "Informati"
 
-#: inc/presentation.php:244
+#: inc/presentation.php:246
 msgid "Qui sommes-nous"
 msgstr "Chi siamo"
 
-#: inc/presentation.php:247
+#: inc/presentation.php:249
 msgid "Informations"
 msgstr "Informazioni"
 
-#: inc/presentation.php:250
+#: inc/presentation.php:252
 msgid "Contact"
 msgstr "Contatti"
