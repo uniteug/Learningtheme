@@ -356,3 +356,60 @@ function serve_avatar() {
 	exit;
 }
 add_action( 'template_redirect', __NAMESPACE__ . '\\serve_avatar', 0 );
+
+/*
+ * Extensions de cache : après une mise à jour du plugin ou du thème, les pages
+ * gardées en cache contiennent l'ancien CSS (inséré en ligne). On les purge.
+ */
+
+/**
+ * Vide le cache de pages des extensions courantes (SpeedyCache, WP Rocket,
+ * W3 Total Cache, WP Super Cache, LiteSpeed).
+ */
+function purge_page_cache() {
+	try {
+		if ( class_exists( '\SpeedyCache\Delete' ) && is_callable( array( '\SpeedyCache\Delete', 'run' ) ) ) {
+			\SpeedyCache\Delete::run( array() );
+		}
+		if ( function_exists( 'rocket_clean_domain' ) ) {
+			rocket_clean_domain();
+		}
+		if ( function_exists( 'w3tc_flush_all' ) ) {
+			w3tc_flush_all();
+		}
+		if ( function_exists( 'wp_cache_clear_cache' ) ) {
+			wp_cache_clear_cache();
+		}
+	} catch ( \Throwable $e ) {
+		unset( $e ); // Une extension de cache ne doit jamais bloquer la mise à jour.
+	}
+	do_action( 'litespeed_purge_all' ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- hook de LiteSpeed Cache.
+
+	// SpeedyCache range ses pages dans wp-content/cache/speedycache : purge directe en dernier recours.
+	$dir = WP_CONTENT_DIR . '/cache/speedycache';
+	if ( is_dir( $dir ) ) {
+		require_once ABSPATH . 'wp-admin/includes/file.php';
+		if ( WP_Filesystem() ) {
+			global $wp_filesystem;
+			foreach ( (array) glob( $dir . '/*', GLOB_ONLYDIR ) as $sub ) {
+				$wp_filesystem->delete( $sub, true );
+			}
+		}
+	}
+	wp_cache_flush();
+}
+add_action( 'learn_drive_purge_cache', __NAMESPACE__ . '\\purge_page_cache' );
+
+/**
+ * Purge une fois après chaque nouvelle version du plugin ou du thème.
+ */
+function purge_after_update() {
+	$theme   = wp_get_theme( get_template() );
+	$release = \LearnDrive\Core\VERSION . '|' . get_template() . '@' . $theme->get( 'Version' );
+	if ( get_option( 'ld_release' ) !== $release ) {
+		update_option( 'ld_release', $release, true );
+		purge_page_cache();
+	}
+}
+add_action( 'admin_init', __NAMESPACE__ . '\\purge_after_update' );
+add_action( 'rest_api_init', __NAMESPACE__ . '\\purge_after_update' );

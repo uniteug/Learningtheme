@@ -382,16 +382,28 @@
 	pointer-events: none;
 }
 
+/*
+ * Figure de la question : taille mesurée, comme sur l'écran d'examen. Les
+ * figures ministérielles font 200 px ; elles ne sont jamais étirées sur toute
+ * la colonne (flou, question repoussée sous la ligne de flottaison).
+ */
 .ld-q__media {
 	margin: 0 0 1rem;
+	text-align: center;
 }
 
 .ld-q__img {
-	display: block;
-	width: 100%;
+	display: inline-block;
+	width: auto;
+	max-width: min(100%, 240px);
+	max-height: 240px;
 	height: auto;
+	object-fit: contain;
+	padding: 0.5rem;
+	border: 1px solid var(--ldq-border);
 	border-radius: var(--ldq-radius);
-	background: var(--ldq-border);
+	background: #fff;
+	vertical-align: top;
 }
 
 .ld-q__hint {

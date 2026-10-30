@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Learn & Drive — installazione del tema
  * Description:       Installa e aggiorna il tema a blocchi Learn & Drive contenuto in questo pacchetto (learn-drive.zip). Utile quando il tema non può essere caricato da Aspetto › Temi. Non attiva il tema: lo si attiva da Aspetto › Temi.
- * Version:           1.2.3
+ * Version:           1.2.4
  * Requires at least: 7.0
  * Requires PHP:      8.1
  * Author:            Learn & Drive
@@ -16,7 +16,7 @@ namespace LearnDrive\ThemeInstaller;
 
 defined( 'ABSPATH' ) || exit;
 
-const VERSION = '1.2.3';
+const VERSION = '1.2.4';
 const THEME   = 'learn-drive';
 
 /**
@@ -61,8 +61,9 @@ function install() {
 
 	wp_clean_themes_cache();
 	if ( get_stylesheet() === THEME ) {
-		// Il tema attivo è cambiato : modelli e stili rigenerati.
+		// Il tema attivo è cambiato : modelli, stili e pagine in cache rigenerati.
 		wp_cache_flush();
+		do_action( 'learn_drive_purge_cache' );
 	}
 	return true;
 }

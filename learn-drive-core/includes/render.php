@@ -71,7 +71,7 @@ function media_html( array $question, $lcp = false ) {
 
 	$attrs = array(
 		'class'    => 'ld-q__img',
-		'sizes'    => '(max-width: 860px) 100vw, 760px',
+		'sizes'    => '240px',
 		'decoding' => 'async',
 	);
 	if ( $lcp ) {
