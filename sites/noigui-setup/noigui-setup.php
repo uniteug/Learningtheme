@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Noigui — configurazione del sito
  * Description:       Configura Learn & Drive per noigui.com: patente italiana, banca ufficiale dei quiz ministeriali (listato «Patente AB», 7.020 affermazioni), argomenti con le quote d'esame, simulazione d'esame, menu e collegamenti all'app. Le spiegazioni già scritte negli articoli «Quiz Patente B» vengono collegate alle affermazioni corrispondenti.
- * Version:           1.1.0
+ * Version:           1.1.1
  * Requires at least: 6.9
  * Requires PHP:      8.1
  * Requires Plugins:  learn-drive-core
@@ -25,7 +25,7 @@ use const LearnDrive\Core\TAX_TOPIC;
 
 defined( 'ABSPATH' ) || exit;
 
-const VERSION = '1.1.0';
+const VERSION = '1.1.1';
 const DIR     = __DIR__ . '/';
 
 /**
@@ -228,6 +228,9 @@ function setup() {
 	// Contenuti creati senza utente connesso (cron, prima versione) : autore = amministratore.
 	assign_author();
 
+	// Doppioni lasciati da un lotto d'importazione interrotto.
+	dedupe_questions();
+
 	// Colori del marchio Noigui (blu del logo), contrasto AA sul bianco.
 	brand_styles();
 
@@ -245,6 +248,61 @@ function setup() {
 			update_option( 'ld_flush_rewrite', 1 );
 		}
 	);
+}
+
+/**
+ * Elimina (nel cestino) i doppioni di domande: stesso numero ministeriale,
+ * oppure domanda senza numero con lo stesso testo di una domanda numerata
+ * (lotto d'importazione interrotto). Si tiene sempre la più vecchia.
+ *
+ * @return int Domande spostate nel cestino.
+ */
+function dedupe_questions() {
+	global $wpdb;
+	$trash = array();
+
+	// phpcs:disable WordPress.DB.DirectDatabaseQuery -- controllo una tantum su migliaia di righe.
+	$groups = $wpdb->get_col(
+		$wpdb->prepare(
+			"SELECT GROUP_CONCAT(p.ID ORDER BY p.ID) FROM {$wpdb->postmeta} m JOIN {$wpdb->posts} p ON p.ID = m.post_id
+			WHERE m.meta_key = '_ld_official_id' AND p.post_type = %s AND p.post_status = 'publish'
+			GROUP BY m.meta_value HAVING COUNT(*) > 1",
+			PT_QUESTION
+		)
+	);
+	foreach ( $groups as $ids ) {
+		$trash = array_merge( $trash, array_slice( array_map( 'intval', explode( ',', $ids ) ), 1 ) );
+	}
+
+	$orphans = $wpdb->get_results(
+		$wpdb->prepare(
+			"SELECT p.ID, p.post_title FROM {$wpdb->posts} p
+			LEFT JOIN {$wpdb->postmeta} m ON m.post_id = p.ID AND m.meta_key = '_ld_official_id'
+			WHERE p.post_type = %s AND p.post_status = 'publish' AND m.meta_id IS NULL",
+			PT_QUESTION
+		)
+	);
+	foreach ( $orphans as $orphan ) {
+		$twin = (int) $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT p.ID FROM {$wpdb->posts} p JOIN {$wpdb->postmeta} m ON m.post_id = p.ID AND m.meta_key = '_ld_official_id'
+				WHERE p.post_type = %s AND p.post_status = 'publish' AND p.post_title = %s AND p.ID <> %d LIMIT 1",
+				PT_QUESTION,
+				$orphan->post_title,
+				$orphan->ID
+			)
+		);
+		if ( $twin ) {
+			$trash[] = (int) $orphan->ID;
+		}
+	}
+	// phpcs:enable WordPress.DB.DirectDatabaseQuery
+
+	foreach ( array_unique( $trash ) as $id ) {
+		wp_trash_post( $id );
+	}
+	update_option( 'noigui_dedupe', array( time(), count( $trash ), array_values( array_unique( $trash ) ) ), false );
+	return count( $trash );
 }
 
 /**
