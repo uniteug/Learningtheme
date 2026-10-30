@@ -1,0 +1,1449 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: learn-drive\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: learn-drive\n"
+
+#: patterns/footer-compact.php:19
+#: inc/presentation.php:250
+msgid "Mentions légales"
+msgstr "Legal notice"
+
+#: patterns/footer-compact.php:20
+#: patterns/footer-minimal.php:16
+#: inc/presentation.php:251
+msgid "Confidentialité"
+msgstr "Privacy"
+
+#: patterns/footer-compact.php:21
+msgid "Politique éditoriale"
+msgstr "Editorial policy"
+
+#: patterns/footer-compact.php
+msgctxt "Pattern title"
+msgid "Pied de page compact"
+msgstr "Compact footer"
+
+#: patterns/key-changes.php:17
+#: inc/block-styles.php:21
+msgid "Ce qui change pour vous"
+msgstr "What changes for you"
+
+#: patterns/key-changes.php:22
+msgid "Premier changement concret, en une phrase."
+msgstr "First concrete change, in one sentence."
+
+#: patterns/key-changes.php:25
+msgid "Qui est concerné et à partir de quand."
+msgstr "Who is affected and from when."
+
+#: patterns/key-changes.php:28
+msgid "Ce que vous devez faire (ou ne pas faire)."
+msgstr "What you need to do (or not do)."
+
+#: patterns/key-changes.php
+msgctxt "Pattern title"
+msgid "Ce qui change pour vous"
+msgstr "What changes for you"
+
+#: patterns/key-changes.php
+msgctxt "Pattern description"
+msgid "Encadré de trois puces maximum en tête d'article d'actualité."
+msgstr "Box with up to three bullet points at the top of a news article."
+
+#: patterns/home-europe.php:24
+msgid "Ailleurs en Europe"
+msgstr "Elsewhere in Europe"
+
+#: patterns/home-europe.php:27
+msgid "Un permis, plusieurs pays"
+msgstr "One license, several countries"
+
+#: patterns/home-europe.php:30
+msgid "Chaque pays a ses règles d’examen : nous les appliquons à la lettre dans les examens blancs."
+msgstr "Each country has its own exam rules: we apply them to the letter in our mock exams."
+
+#: patterns/home-europe.php:35
+msgid "Conduire à l’étranger"
+msgstr "Driving abroad"
+
+#: patterns/home-europe.php
+msgctxt "Pattern title"
+msgid "Accueil — Le permis en Europe"
+msgstr "Home — Licenses in Europe"
+
+#: patterns/home-europe.php
+msgctxt "Pattern description"
+msgid "Les pays couverts (drapeau, catégories, nombre de questions) et l'accès aux guides de conduite à l'étranger."
+msgstr "Covered countries (flag, categories, number of questions) and access to guides on driving abroad."
+
+#: patterns/home-steps.php:14
+#: inc/presentation.php:237
+msgid "Apprendre"
+msgstr "Learn"
+
+#: patterns/home-steps.php:14
+msgid "Des leçons courtes, illustrées et à jour de la réglementation, thème par thème."
+msgstr "Short, illustrated lessons, up to date with current regulations, topic by topic."
+
+#: patterns/home-steps.php:14
+msgid "Voir les cours"
+msgstr "See the courses"
+
+#: patterns/home-steps.php:15
+msgid "S’entraîner"
+msgstr "Practice"
+
+#: patterns/home-steps.php:15
+msgid "Des quiz par thème avec correction immédiate et l’explication de chaque réponse."
+msgstr "Quizzes by topic with instant feedback and an explanation for every answer."
+
+#: patterns/home-steps.php:15
+msgid "Faire un quiz"
+msgstr "Take a quiz"
+
+#: patterns/home-steps.php:16
+msgid "Se tester"
+msgstr "Test yourself"
+
+#: patterns/home-steps.php:16
+msgid "Des examens blancs au format officiel : même nombre de questions, même temps, même seuil."
+msgstr "Mock exams in the official format: same number of questions, same time limit, same pass mark."
+
+#: patterns/home-steps.php:16
+msgid "Lancer un examen blanc"
+msgstr "Start a mock exam"
+
+#: patterns/home-steps.php:24
+msgid "La méthode"
+msgstr "The method"
+
+#: patterns/home-steps.php:27
+msgid "Trois étapes jusqu’au jour de l’examen"
+msgstr "Three steps to exam day"
+
+#: patterns/home-steps.php
+msgctxt "Pattern title"
+msgid "Accueil — Comment ça marche"
+msgstr "Home — How it works"
+
+#: patterns/home-steps.php
+msgctxt "Pattern description"
+msgid "La méthode en trois étapes : apprendre, s'entraîner, se tester."
+msgstr "The three-step method: learn, practice, test yourself."
+
+#: patterns/header-minimal.php:21
+#: patterns/header-minimal.php:21
+#: patterns/header-centered.php:42
+msgid "Mode sombre"
+msgstr "Dark mode"
+
+#: patterns/header-minimal.php
+msgctxt "Pattern title"
+msgid "En-tête minimal (quiz)"
+msgstr "Minimal header (quiz)"
+
+#: patterns/header-minimal.php
+msgctxt "Pattern description"
+msgid "En-tête sans distraction pour les quiz et examens blancs."
+msgstr "Distraction-free header for quizzes and mock exams."
+
+#: patterns/home-theory-practice.php:20
+msgid "Théorie"
+msgstr "Theory"
+
+#: patterns/home-theory-practice.php:23
+msgid "Les cours écrits"
+msgstr "Written courses"
+
+#: patterns/home-theory-practice.php:26
+msgid "Chaque leçon explique une règle avec des schémas, puis vous fait vérifier que vous l’avez comprise."
+msgstr "Each lesson explains a rule with diagrams, then has you check that you understood it."
+
+#: patterns/home-theory-practice.php:38
+#: inc/presentation.php:238
+msgid "Tous les cours"
+msgstr "All courses"
+
+#: patterns/home-theory-practice.php:48
+msgid "Pratique"
+msgstr "Practical"
+
+#: patterns/home-theory-practice.php:51
+msgid "Manœuvres et vérifications"
+msgstr "Maneuvers and checks"
+
+#: patterns/home-theory-practice.php:54
+msgid "Préparez l’épreuve de conduite : vérifications techniques, manœuvres pas à pas, parcours types et conseils d’examinateurs."
+msgstr "Prepare for the road test: vehicle checks, step-by-step maneuvers, typical routes and examiners’ tips."
+
+#: patterns/home-theory-practice.php:59
+msgid "Vérifications intérieures et extérieures"
+msgstr "Interior and exterior checks"
+
+#: patterns/home-theory-practice.php:62
+msgid "Créneau, bataille, demi-tour"
+msgstr "Parallel parking, bay parking, U-turn"
+
+#: patterns/home-theory-practice.php:65
+msgid "Insertion, dépassement, giratoires"
+msgstr "Merging, overtaking, roundabouts"
+
+#: patterns/home-theory-practice.php:68
+msgid "Questions orales et premiers secours"
+msgstr "Oral questions and first aid"
+
+#: patterns/home-theory-practice.php:75
+msgid "Préparer la pratique"
+msgstr "Prepare for the road test"
+
+#: patterns/home-theory-practice.php
+msgctxt "Pattern title"
+msgid "Accueil — Théorie et pratique"
+msgstr "Home — Theory and practice"
+
+#: patterns/home-theory-practice.php
+msgctxt "Pattern description"
+msgid "Deux colonnes : cours écrits et préparation à l'épreuve pratique."
+msgstr "Two columns: written courses and road test preparation."
+
+#: patterns/ad-slot.php:16
+msgid "Publicité"
+msgstr "Advertisement"
+
+#: patterns/ad-slot.php
+msgctxt "Pattern title"
+msgid "Emplacement publicitaire"
+msgstr "Ad slot"
+
+#: patterns/ad-slot.php
+msgctxt "Pattern description"
+msgid "Zone à hauteur réservée (aucun décalage de mise en page). Collez le code de votre régie dans le bloc HTML."
+msgstr "Fixed-height area (no layout shift). Paste your ad network’s code into the HTML block."
+
+#: patterns/costs-table.php:14
+msgid "Poste"
+msgstr "Item"
+
+#: patterns/costs-table.php:14
+msgid "Prix moyen"
+msgstr "Average price"
+
+#: patterns/costs-table.php:14
+msgid "Inscription et frais de dossier"
+msgstr "Registration and application fees"
+
+#: patterns/costs-table.php:14
+msgid "Examen du code"
+msgstr "Knowledge test"
+
+#: patterns/costs-table.php:14
+msgid "Heures de conduite (20 h)"
+msgstr "Driving lessons (20 h)"
+
+#: patterns/costs-table.php:14
+msgid "Total estimé"
+msgstr "Estimated total"
+
+#: patterns/costs-table.php:14
+msgid "Prix indicatifs, vérifiés le JJ/MM/AAAA. Source : …"
+msgstr "Indicative prices, checked on MM/DD/YYYY. Source: …"
+
+#: patterns/costs-table.php
+msgctxt "Pattern title"
+msgid "Tableau de coûts"
+msgstr "Cost table"
+
+#: patterns/costs-table.php
+msgctxt "Pattern description"
+msgid "Tableau de coûts avec total, lisible sur mobile."
+msgstr "Cost table with total, readable on mobile."
+
+#: patterns/test-yourself.php:16
+msgid "Testez-vous"
+msgstr "Test yourself"
+
+#: patterns/test-yourself.php
+msgctxt "Pattern title"
+msgid "Testez-vous"
+msgstr "Test yourself"
+
+#: patterns/test-yourself.php
+msgctxt "Pattern description"
+msgid "Trois à cinq questions liées au sujet, jouables sur place (nécessite le plugin Learn & Drive Core)."
+msgstr "Three to five questions related to the topic, playable right on the page (requires the Learn & Drive Core plugin)."
+
+#: patterns/hidden-search-form.php:11
+#: patterns/hidden-search-form.php:11
+#: patterns/hidden-404.php:22
+msgid "Rechercher"
+msgstr "Search"
+
+#: patterns/hidden-search-form.php:11
+#: patterns/hidden-404.php:22
+#: patterns/hidden-no-results.php:14
+msgid "Rechercher une question, un panneau, un article…"
+msgstr "Search for a question, a road sign, an article…"
+
+#: patterns/hidden-search-form.php
+msgctxt "Pattern title"
+msgid "Formulaire de recherche"
+msgstr "Search form"
+
+#: patterns/home-app.php:20
+msgid "Révisez aussi avec l’application mobile"
+msgstr "Study with the mobile app too"
+
+#: patterns/home-app.php:23
+msgid "Des quiz et des examens blancs dans votre poche, pour réviser partout, même quelques minutes."
+msgstr "Quizzes and mock exams in your pocket, so you can study anywhere, even for a few minutes."
+
+#: patterns/home-app.php:29
+msgid "Télécharger sur l’App Store"
+msgstr "Download on the App Store"
+
+#: patterns/home-app.php:34
+msgid "Disponible sur Google Play"
+msgstr "Get it on Google Play"
+
+#: patterns/home-app.php
+msgctxt "Pattern title"
+msgid "Offre — Application mobile"
+msgstr "Offer — Mobile app"
+
+#: patterns/home-app.php
+msgctxt "Pattern description"
+msgid "Liens vers l'application sur l'App Store et Google Play (affichée seulement si les adresses sont renseignées)."
+msgstr "Links to the app on the App Store and Google Play (shown only if the URLs are filled in)."
+
+#: patterns/hidden-404.php:17
+msgid "Cette page a pris une autre route"
+msgstr "This page took a different road"
+
+#: patterns/hidden-404.php:20
+msgid "Le lien est peut-être ancien ou la page a été déplacée. Cherchez ce dont vous avez besoin ou reprenez avec un quiz populaire."
+msgstr "The link may be outdated or the page may have moved. Search for what you need or pick up with a popular quiz."
+
+#: patterns/hidden-404.php:27
+msgid "Quiz populaires"
+msgstr "Popular quizzes"
+
+#: patterns/hidden-404.php
+msgctxt "Pattern title"
+msgid "Contenu de la page 404"
+msgstr "404 page content"
+
+#: patterns/home-news.php:45
+#: patterns/hidden-news-intro.php:12
+#: patterns/header-centered.php:17
+msgid "Actualités"
+msgstr "News"
+
+#: patterns/home-news.php:48
+msgid "À la une"
+msgstr "Featured"
+
+#: patterns/home-news.php:53
+msgid "Toute l’actualité"
+msgstr "All news"
+
+#: patterns/home-news.php
+msgctxt "Pattern title"
+msgid "Accueil — À la une"
+msgstr "Home — Featured"
+
+#: patterns/home-news.php
+msgctxt "Pattern description"
+msgid "Mise en page magazine : l'article à la une en grand, les quatre suivants en liste avec vignette."
+msgstr "Magazine layout: the featured article shown large, the next four in a list with thumbnails."
+
+#: patterns/footer.php:25
+msgid "Cours, quiz et examens blancs rédigés et vérifiés par des enseignants, mis à jour à chaque évolution de la réglementation."
+msgstr "Courses, quizzes and mock exams written and checked by instructors, updated whenever the regulations change."
+
+#: patterns/footer.php:54
+msgid "Plan du site"
+msgstr "Site map"
+
+#: patterns/footer.php
+msgctxt "Pattern title"
+msgid "Pied de page"
+msgstr "Footer"
+
+#: patterns/footer.php
+msgctxt "Pattern description"
+msgid "Plan du site par rubrique, pages légales et politique éditoriale."
+msgstr "Site map by section, legal pages and editorial policy."
+
+#: patterns/home-cta.php:21
+msgid "Prêt à passer à la vitesse supérieure ?"
+msgstr "Ready to shift into high gear?"
+
+#: patterns/home-cta.php:24
+msgid "Créez votre compte en 30 secondes et retrouvez votre progression sur le site, depuis n’importe quel appareil."
+msgstr "Create your account in 30 seconds and pick up your progress on the site from any device."
+
+#: patterns/home-cta.php:31
+#: patterns/home-cta.php:41
+#: patterns/home-hero.php:39
+msgid "Commencer gratuitement"
+msgstr "Start for free"
+
+#: patterns/home-cta.php
+msgctxt "Pattern title"
+msgid "Offre — Appel final"
+msgstr "Offer — Final call to action"
+
+#: patterns/home-cta.php
+msgctxt "Pattern description"
+msgid "Bandeau d'appel final et bouton d'inscription collant sur mobile (volet commercial)."
+msgstr "Final call-to-action banner and sticky sign-up button on mobile (commercial mode)."
+
+#: patterns/footer-minimal.php
+msgctxt "Pattern title"
+msgid "Pied de page minimal"
+msgstr "Minimal footer"
+
+#: patterns/home-signs.php:24
+msgid "Signalisation"
+msgstr "Road signs"
+
+#: patterns/home-signs.php:27
+msgid "Les panneaux à reconnaître du premier coup d’œil"
+msgstr "Road signs to recognize at a glance"
+
+#: patterns/home-signs.php:32
+msgid "Tous les panneaux"
+msgstr "All road signs"
+
+#: patterns/home-signs.php
+msgctxt "Pattern title"
+msgid "Accueil — Panneaux à connaître"
+msgstr "Home — Road signs to know"
+
+#: patterns/home-signs.php
+msgctxt "Pattern description"
+msgid "Les fiches (panneaux, mémos) en carrousel illustré."
+msgstr "Fact sheets (road signs, memos) in an illustrated carousel."
+
+#: patterns/summary-box.php:16
+msgid "En résumé"
+msgstr "In short"
+
+#: patterns/summary-box.php:19
+msgid "Répondez ici à la question principale en une ou deux phrases autonomes : le montant, le délai, le document ou la règle à retenir, avec sa source."
+msgstr "Answer the main question here in one or two self-contained sentences: the amount, the deadline, the document or the rule to remember, with its source."
+
+#: patterns/summary-box.php
+msgctxt "Pattern title"
+msgid "Encadré « En résumé »"
+msgstr "“In short” box"
+
+#: patterns/summary-box.php
+msgctxt "Pattern description"
+msgid "La réponse en une phrase, pour les lecteurs pressés et les moteurs de recherche génératifs."
+msgstr "The answer in one sentence, for readers in a hurry and for generative search engines."
+
+#: patterns/home-free.php:14
+msgid "Une question du jour, corrigée et expliquée"
+msgstr "A question of the day, answered and explained"
+
+#: patterns/home-free.php:15
+msgid "Les leçons d’introduction de chaque thème"
+msgstr "The introductory lessons for every topic"
+
+#: patterns/home-free.php:16
+msgid "Toutes les fiches panneaux et le lexique"
+msgstr "All road sign fact sheets and the glossary"
+
+#: patterns/home-free.php:17
+msgid "L’actualité et les guides de démarches"
+msgstr "News and procedure guides"
+
+#: patterns/home-free.php:27
+msgid "Gratuit, sans inscription"
+msgstr "Free, no sign-up required"
+
+#: patterns/home-free.php:30
+msgid "Essayez avant de vous décider"
+msgstr "Try it before you decide"
+
+#: patterns/home-free.php:44
+msgid "Voir les leçons gratuites"
+msgstr "See the free lessons"
+
+#: patterns/home-free.php
+msgctxt "Pattern title"
+msgid "Offre — Essayez gratuitement"
+msgstr "Offer — Try it for free"
+
+#: patterns/home-free.php
+msgctxt "Pattern description"
+msgid "Ce qui est gratuit, sans inscription, et une question jouable tout de suite (volet commercial)."
+msgstr "What is free, with no sign-up, and a question you can answer right away (commercial mode)."
+
+#: patterns/home-question-of-the-day.php:16
+msgid "Question du jour"
+msgstr "Question of the day"
+
+#: patterns/home-question-of-the-day.php:19
+msgid "Testez-vous en 30 secondes"
+msgstr "Test yourself in 30 seconds"
+
+#: patterns/home-question-of-the-day.php
+msgctxt "Pattern title"
+msgid "Accueil — Question du jour"
+msgstr "Home — Question of the day"
+
+#: patterns/home-question-of-the-day.php
+msgctxt "Pattern description"
+msgid "Une question jouable directement sur la page (nécessite le plugin Learn & Drive Core)."
+msgstr "A question playable right on the page (requires the Learn & Drive Core plugin)."
+
+#: patterns/hidden-market-news.php:28
+msgid "Dernières actualités"
+msgstr "Latest news"
+
+#: patterns/hidden-market-news.php:31
+msgid "Toutes les actualités"
+msgstr "All news"
+
+#: patterns/hidden-market-news.php
+msgctxt "Pattern title"
+msgid "Actualités du marché"
+msgstr "Market news"
+
+#: patterns/hidden-market-news.php
+msgctxt "Pattern description"
+msgid "Dernières actualités du pays affiché (hub d'un marché), en cartes."
+msgstr "Latest news for the displayed country (market hub), as cards."
+
+#: patterns/hidden-news-latest-heading.php:14
+msgid "Derniers articles"
+msgstr "Latest articles"
+
+#: patterns/hidden-news-latest-heading.php
+msgctxt "Pattern title"
+msgid "Titre (lecteurs d'écran) de la liste des actualités"
+msgstr "News list heading (screen readers)"
+
+#: patterns/hidden-home.php
+msgctxt "Pattern title"
+msgid "Accueil (assemblage selon le volet de présentation)"
+msgstr "Home (assembled according to the presentation mode)"
+
+#: patterns/hidden-home.php
+msgctxt "Pattern description"
+msgid "Portail d'information et d'apprentissage pour un site gratuit ou freemium ; vitrine commerciale (offres, essai, témoignages) pour un site payant."
+msgstr "Information and learning portal for a free or freemium site; commercial showcase (plans, trial, testimonials) for a paid site."
+
+#: patterns/home-tracks.php:20
+msgid "Nos formations"
+msgstr "Our programs"
+
+#: patterns/home-tracks.php:20
+msgid "Programmes phares"
+msgstr "Featured programs"
+
+#: patterns/home-tracks.php:23
+msgid "Choisissez votre formation"
+msgstr "Choose your program"
+
+#: patterns/home-tracks.php:23
+msgid "Quel permis préparez-vous ?"
+msgstr "Which license are you preparing for?"
+
+#: patterns/home-tracks.php:26
+msgid "Chaque parcours réunit les cours, les quiz par thème et un examen blanc aux conditions réelles de l’épreuve."
+msgstr "Each track brings together the courses, quizzes by topic and a mock exam under real test conditions."
+
+#: patterns/home-tracks.php:30
+msgid "Toutes les catégories de permis"
+msgstr "All license categories"
+
+#: patterns/home-tracks.php
+msgctxt "Pattern title"
+msgid "Accueil — Programmes phares"
+msgstr "Home — Featured programs"
+
+#: patterns/home-tracks.php
+msgctxt "Pattern description"
+msgid "Une carte par catégorie (permis, matière) avec les règles de l'examen, le nombre de leçons et de quiz et l'accès direct à l'examen blanc."
+msgstr "One card per category (license, subject) with the exam rules, the number of lessons and quizzes, and direct access to the mock exam."
+
+#: patterns/steps.php:14
+msgid "Les étapes"
+msgstr "The steps"
+
+#: patterns/steps.php:19
+msgid "Rassemblez les documents"
+msgstr "Gather your documents"
+
+#: patterns/steps.php:19
+msgid "pièce d’identité, justificatif de domicile, photo numérique."
+msgstr "ID, proof of address, digital photo."
+
+#: patterns/steps.php:22
+msgid "Faites la demande en ligne"
+msgstr "Apply online"
+
+#: patterns/steps.php:22
+msgid "sur le site officiel, ou via votre auto-école."
+msgstr "on the official website, or through your driving school."
+
+#: patterns/steps.php:25
+msgid "Réservez votre date d’examen"
+msgstr "Book your exam date"
+
+#: patterns/steps.php:25
+msgid "dès réception de votre numéro de dossier."
+msgstr "as soon as you receive your application number."
+
+#: patterns/steps.php
+msgctxt "Pattern title"
+msgid "Étapes d'une démarche"
+msgstr "Procedure steps"
+
+#: patterns/steps.php
+msgctxt "Pattern description"
+msgid "Liste numérotée d'étapes, idéale pour les guides « comment faire »."
+msgstr "Numbered list of steps, ideal for “how-to” guides."
+
+#: patterns/home-hero.php:42
+msgid "Voir les offres"
+msgstr "See plans"
+
+#: patterns/home-hero.php:50
+msgid "Sans carte bancaire"
+msgstr "No credit card required"
+
+#: patterns/home-hero.php:53
+msgid "Corrigés détaillés"
+msgstr "Detailed answers"
+
+#: patterns/home-hero.php:56
+msgid "Sur mobile et ordinateur"
+msgstr "On mobile and desktop"
+
+#: patterns/home-hero.php:61
+msgid "Rechercher sur le site"
+msgstr "Search the site"
+
+#: patterns/home-hero.php:61
+msgid "Une règle, un panneau, une démarche…"
+msgstr "A rule, a road sign, a procedure…"
+
+#: patterns/home-hero.php:64
+msgid "Accès rapides"
+msgstr "Quick links"
+
+#: patterns/home-hero.php:80
+#: inc/presentation.php:215
+msgid "Examen blanc"
+msgstr "Mock exam"
+
+#: patterns/home-hero.php:82
+msgid "Question 12 / 30"
+msgstr "Question 12 / 30"
+
+#: patterns/home-hero.php:83
+msgid "Sans signalisation, je cède le passage aux véhicules qui arrivent par la droite."
+msgstr "Where there are no signs, I yield to vehicles coming from the right."
+
+#: patterns/home-hero.php:84
+msgid "Vrai"
+msgstr "True"
+
+#: patterns/home-hero.php:84
+msgid "Faux"
+msgstr "False"
+
+#: patterns/home-hero.php:86
+msgid "28 / 30 — réussi"
+msgstr "28 / 30 — passed"
+
+#: patterns/home-hero.php:87
+msgid "Corrigé expliqué"
+msgstr "Answer explained"
+
+#: patterns/home-hero.php
+msgctxt "Pattern title"
+msgid "Accueil — Bandeau principal"
+msgstr "Home — Hero banner"
+
+#: patterns/home-hero.php
+msgctxt "Pattern description"
+msgid "H1 explicite, recherche, accès rapides et visuel animé d'un examen en cours. Volet portail : recherche et accès directs ; volet commercial : essai gratuit et réassurance."
+msgstr "Explicit H1, search, quick links and an animated visual of an exam in progress. Portal mode: search and direct links; commercial mode: free trial and reassurance."
+
+#: patterns/home-testimonials.php:13
+msgid "« Les explications après chaque erreur m’ont fait comprendre les priorités une bonne fois pour toutes. Code obtenu avec 38/40. »"
+msgstr "“The explanations after each mistake made me understand right-of-way rules once and for all. Passed my knowledge test with 38/40.”"
+
+#: patterns/home-testimonials.php:13
+msgid "Inès — patente B"
+msgstr "Inès — B license"
+
+#: patterns/home-testimonials.php:14
+msgid "« Les examens blancs chronométrés sont exactement dans les conditions du jour J. Je révisais dans le bus sur mon téléphone. »"
+msgstr "“The timed mock exams are exactly like the real thing on exam day. I studied on my phone on the bus.”"
+
+#: patterns/home-testimonials.php:14
+msgid "Malik — patente A2"
+msgstr "Malik — A2 license"
+
+#: patterns/home-testimonials.php:15
+msgid "« Nous l’utilisons avec nos élèves : on voit tout de suite les thèmes à retravailler avant de présenter quelqu’un. »"
+msgstr "“We use it with our students: we can see right away which topics need more work before putting someone forward for the test.”"
+
+#: patterns/home-testimonials.php:15
+msgid "Auto-école partenaire"
+msgstr "Partner driving school"
+
+#: patterns/home-testimonials.php:21
+msgid "Ils ont réussi avec nous"
+msgstr "They passed with us"
+
+#: patterns/home-testimonials.php:30
+msgid "5 sur 5"
+msgstr "5 out of 5"
+
+#: patterns/home-testimonials.php:45
+msgid "Contenus rédigés par des enseignants de la conduite et revérifiés à chaque évolution de la réglementation."
+msgstr "Content written by driving instructors and re-checked whenever the regulations change."
+
+#: patterns/home-testimonials.php:45
+#: patterns/editorial-policy.php:16
+#: inc/presentation.php:247
+msgid "Comment nous vérifions nos contenus"
+msgstr "How we check our content"
+
+#: patterns/home-testimonials.php
+msgctxt "Pattern title"
+msgid "Accueil — Témoignages et preuves"
+msgstr "Home — Testimonials and proof"
+
+#: patterns/home-testimonials.php
+msgctxt "Pattern description"
+msgid "Avis d'élèves et d'auto-écoles partenaires. Les textes fournis sont des exemples : remplacez-les par de vrais avis vérifiés (ne publiez jamais d'avis inventés)."
+msgstr "Reviews from students and partner driving schools. The texts provided are examples: replace them with real, verified reviews (never publish made-up reviews)."
+
+#: patterns/hidden-news-intro.php:15
+msgid "Réformes, examens, sécurité routière : l’essentiel de l’actualité, expliqué et relié à nos cours et quiz."
+msgstr "Reforms, exams, road safety: the essential news, explained and linked to our courses and quizzes."
+
+#: patterns/hidden-news-intro.php
+msgctxt "Pattern title"
+msgid "En-tête de la rubrique Actualités"
+msgstr "News section header"
+
+#: patterns/home-faq.php:13
+msgid "Combien de temps faut-il pour préparer le code ?"
+msgstr "How long does it take to prepare for the knowledge test?"
+
+#: patterns/home-faq.php:13
+msgid "La plupart des candidats sont prêts en quatre à huit semaines en s’entraînant 20 à 30 minutes par jour. Visez un score régulier au-dessus du seuil de réussite sur plusieurs examens blancs avant de vous présenter."
+msgstr "Most candidates are ready in four to eight weeks by practicing 20 to 30 minutes a day. Aim for a consistent score above the pass mark on several mock exams before you take the test."
+
+#: patterns/home-faq.php:14
+msgid "Les questions sont-elles celles de l’examen officiel ?"
+msgstr "Are the questions the same as on the official exam?"
+
+#: patterns/home-faq.php:14
+msgid "Les questions officielles ne sont pas publiques. Nos questions reprennent le format, les thèmes et le niveau de l’examen, et chaque explication cite la règle ou l’article de loi concerné."
+msgstr "The official questions are not public. Our questions follow the format, topics and level of the exam, and each explanation cites the relevant rule or section of the law."
+
+#: patterns/home-faq.php:15
+msgid "Puis-je m’entraîner sur mobile ?"
+msgstr "Can I practice on mobile?"
+
+#: patterns/home-faq.php:15
+msgid "Oui. Le site est conçu d’abord pour le mobile : une question par écran, de grandes zones tactiles et la reprise automatique d’un quiz interrompu."
+msgstr "Yes. The site is designed mobile-first: one question per screen, large touch targets and automatic resume of an interrupted quiz."
+
+#: patterns/home-faq.php:17
+msgid "Que contient l’accès premium ?"
+msgstr "What does premium access include?"
+
+#: patterns/home-faq.php:17
+msgid "Les examens blancs illimités, toutes les explications détaillées, la révision de vos erreurs et des statistiques par thème. Les cours d’introduction, les fiches et l’actualité restent gratuits."
+msgstr "Unlimited mock exams, all detailed explanations, review of your mistakes and statistics by topic. Introductory courses, fact sheets and news remain free."
+
+#: patterns/home-faq.php:18
+msgid "Faut-il créer un compte ?"
+msgstr "Do I need to create an account?"
+
+#: patterns/home-faq.php:18
+msgid "Non. Cours, quiz, panneaux et actualités sont accessibles librement. Un compte gratuit permet seulement de retrouver sur le site votre progression et vos erreurs à revoir, depuis n’importe quel appareil."
+msgstr "No. Courses, quizzes, road signs and news are freely available. A free account only lets you pick up your progress and the mistakes to review on the site, from any device."
+
+#: patterns/home-faq.php:24
+msgid "Questions fréquentes"
+msgstr "Frequently asked questions"
+
+#: patterns/home-faq.php
+msgctxt "Pattern title"
+msgid "FAQ éditoriale"
+msgstr "Editorial FAQ"
+
+#: patterns/home-faq.php
+msgctxt "Pattern description"
+msgid "Questions fréquentes en accordéon accessible (balise details), lisibles par Google dès le chargement."
+msgstr "Frequently asked questions in an accessible accordion (details element), readable by Google as soon as the page loads."
+
+#: patterns/editorial-policy.php:16
+msgid "Contenu vérifié."
+msgstr "Verified content."
+
+#: patterns/editorial-policy.php:16
+msgid "Nos articles sont rédigés par des spécialistes de la sécurité routière, relus avant publication et mis à jour à chaque évolution des textes."
+msgstr "Our articles are written by road safety specialists, reviewed before publication and updated whenever the rules change."
+
+#: patterns/editorial-policy.php
+msgctxt "Pattern title"
+msgid "Encadré politique éditoriale"
+msgstr "Editorial policy box"
+
+#: patterns/editorial-policy.php
+msgctxt "Pattern description"
+msgid "Lien vers « Comment nous vérifions nos contenus », à placer en fin d'article."
+msgstr "Link to “How we check our content”, to be placed at the end of an article."
+
+#: patterns/cta-premium.php:18
+msgid "Prêt pour l’examen ?"
+msgstr "Ready for the exam?"
+
+#: patterns/cta-premium.php:21
+msgid "Examens blancs illimités et révision de vos erreurs avec l’accès premium."
+msgstr "Unlimited mock exams and review of your mistakes with premium access."
+
+#: patterns/cta-premium.php:28
+msgid "Découvrir le premium"
+msgstr "Discover premium"
+
+#: patterns/cta-premium.php
+msgctxt "Pattern title"
+msgid "Appel à l'action premium"
+msgstr "Premium call to action"
+
+#: patterns/cta-premium.php
+msgctxt "Pattern description"
+msgid "Bandeau court qui mène à l'offre premium."
+msgstr "Short banner leading to the premium offer."
+
+#: patterns/header-centered.php:14
+#: inc/presentation.php:183
+msgid "Cours"
+msgstr "Courses"
+
+#: patterns/header-centered.php:15
+#: inc/presentation.php:184
+msgid "Quiz"
+msgstr "Quizzes"
+
+#: patterns/header-centered.php:16
+#: inc/presentation.php:185
+#: inc/presentation.php:216
+msgid "Panneaux"
+msgstr "Road signs"
+
+#: patterns/header-centered.php:18
+#: patterns/home-guides.php:33
+#: inc/presentation.php:187
+msgid "Infos & démarches"
+msgstr "Guides & procedures"
+
+#: patterns/header-centered.php
+msgctxt "Pattern title"
+msgid "En-tête centré"
+msgstr "Centered header"
+
+#: patterns/header-centered.php
+msgctxt "Pattern description"
+msgid "Titre centré façon magazine, menu sur une seconde ligne."
+msgstr "Magazine-style centered title, menu on a second line."
+
+#: patterns/home-topics.php:22
+msgid "Programme officiel"
+msgstr "Official syllabus"
+
+#: patterns/home-topics.php:25
+msgid "Révisez thème par thème"
+msgstr "Study topic by topic"
+
+#: patterns/home-topics.php:30
+msgid "Tous les quiz"
+msgstr "All quizzes"
+
+#: patterns/home-topics.php
+msgctxt "Pattern title"
+msgid "Accueil — Réviser par thème"
+msgstr "Home — Study by topic"
+
+#: patterns/home-topics.php
+msgctxt "Pattern description"
+msgid "Les thèmes du programme officiel en carrousel défilant (tactile, clavier, boutons)."
+msgstr "The official syllabus topics in a scrolling carousel (touch, keyboard, buttons)."
+
+#: patterns/home-guides.php:36
+msgid "Les démarches, pas à pas"
+msgstr "Procedures, step by step"
+
+#: patterns/home-guides.php:41
+msgid "Tous les guides"
+msgstr "All guides"
+
+#: patterns/home-guides.php
+msgctxt "Pattern title"
+msgid "Accueil — Démarches essentielles"
+msgstr "Home — Essential procedures"
+
+#: patterns/home-guides.php
+msgctxt "Pattern description"
+msgid "Les six guides pratiques les plus récents en cartes numérotées."
+msgstr "The six most recent practical guides as numbered cards."
+
+#: patterns/hidden-no-results.php:12
+msgid "Aucun contenu ne correspond pour le moment. Essayez une recherche ou parcourez nos quiz."
+msgstr "No content matches yet. Try a search or browse our quizzes."
+
+#: patterns/hidden-no-results.php
+msgctxt "Pattern title"
+msgid "Aucun résultat"
+msgstr "No results"
+
+#: patterns/header.php:45
+msgid "Rechercher une question, un panneau…"
+msgstr "Search for a question, a road sign…"
+
+#: patterns/header.php:54
+msgid "Mon espace"
+msgstr "My account"
+
+#: patterns/header.php
+msgctxt "Pattern title"
+msgid "En-tête"
+msgstr "Header"
+
+#: patterns/header.php
+msgctxt "Pattern description"
+msgid "Logo, menu principal, recherche, mode sombre et compte."
+msgstr "Logo, main menu, search, dark mode and account."
+
+#: patterns/home-premium.php:13
+msgid "Toutes les leçons d’introduction"
+msgstr "All introductory lessons"
+
+#: patterns/home-premium.php:14
+msgid "Quiz par thème avec correction"
+msgstr "Quizzes by topic with answers"
+
+#: patterns/home-premium.php:15
+msgid "1 examen blanc par jour"
+msgstr "1 mock exam per day"
+
+#: patterns/home-premium.php:16
+msgid "Fiches panneaux et lexique"
+msgstr "Road sign fact sheets and glossary"
+
+#: patterns/home-premium.php:19
+msgid "Toutes les questions et explications détaillées"
+msgstr "All questions and detailed explanations"
+
+#: patterns/home-premium.php:20
+msgid "Examens blancs illimités aux conditions réelles"
+msgstr "Unlimited mock exams under real conditions"
+
+#: patterns/home-premium.php:21
+msgid "Révision intelligente de vos erreurs"
+msgstr "Smart review of your mistakes"
+
+#: patterns/home-premium.php:22
+msgid "Statistiques par thème et prédiction de réussite"
+msgstr "Statistics by topic and pass prediction"
+
+#: patterns/home-premium.php:23
+msgid "Sans publicité, utilisable hors ligne"
+msgstr "Ad-free, works offline"
+
+#: patterns/home-premium.php:29
+msgid "Commencez gratuitement, allez plus loin quand vous voulez"
+msgstr "Start for free, go further whenever you want"
+
+#: patterns/home-premium.php:37
+msgid "Gratuit"
+msgstr "Free"
+
+#: patterns/home-premium.php:66
+msgid "Premium"
+msgstr "Premium"
+
+#: patterns/home-premium.php:69
+msgid "Recommandé"
+msgstr "Recommended"
+
+#: patterns/home-premium.php:74
+msgid "9,90 € / mois"
+msgstr "€9.90 / month"
+
+#: patterns/home-premium.php:88
+msgid "Passer premium"
+msgstr "Go premium"
+
+#: patterns/home-premium.php
+msgctxt "Pattern title"
+msgid "Offre — Comparatif gratuit / premium"
+msgstr "Offer — Free vs. premium comparison"
+
+#: patterns/home-premium.php
+msgctxt "Pattern description"
+msgid "Comparatif clair entre l'accès gratuit et l'accès premium."
+msgstr "Clear comparison between free access and premium access."
+
+#: styles/neutre.json
+msgctxt "Style variation name"
+msgid "Neutre"
+msgstr "Neutral"
+
+#: styles/neutre.json
+#: styles/coach.json
+#: styles/magazine.json
+msgctxt "Color name"
+msgid "Fond"
+msgstr "Background"
+
+#: styles/neutre.json
+#: styles/coach.json
+#: styles/magazine.json
+msgctxt "Color name"
+msgid "Surface"
+msgstr "Surface"
+
+#: styles/neutre.json
+#: styles/coach.json
+#: styles/magazine.json
+msgctxt "Color name"
+msgid "Texte"
+msgstr "Text"
+
+#: styles/neutre.json
+#: styles/coach.json
+#: styles/magazine.json
+msgctxt "Color name"
+msgid "Texte discret"
+msgstr "Muted text"
+
+#: styles/neutre.json
+#: styles/coach.json
+#: styles/magazine.json
+msgctxt "Color name"
+msgid "Bordure"
+msgstr "Border"
+
+#: styles/neutre.json
+#: styles/coach.json
+#: styles/magazine.json
+msgctxt "Color name"
+msgid "Primaire"
+msgstr "Primary"
+
+#: styles/neutre.json
+#: styles/coach.json
+#: styles/magazine.json
+msgctxt "Color name"
+msgid "Secondaire"
+msgstr "Secondary"
+
+#: styles/neutre.json
+#: styles/coach.json
+#: styles/magazine.json
+msgctxt "Color name"
+msgid "Accent"
+msgstr "Accent"
+
+#: styles/neutre.json
+#: styles/coach.json
+#: styles/magazine.json
+msgctxt "Color name"
+msgid "Réussite"
+msgstr "Success"
+
+#: styles/neutre.json
+#: styles/coach.json
+#: styles/magazine.json
+msgctxt "Color name"
+msgid "Erreur"
+msgstr "Error"
+
+#: styles/neutre.json
+#: styles/coach.json
+#: styles/magazine.json
+msgctxt "Color name"
+msgid "Avertissement"
+msgstr "Warning"
+
+#: styles/neutre.json
+#: styles/coach.json
+#: styles/magazine.json
+msgctxt "Color name"
+msgid "Premium"
+msgstr "Premium"
+
+#: styles/coach.json
+msgctxt "Style variation name"
+msgid "Coach"
+msgstr "Coach"
+
+#: styles/magazine.json
+msgctxt "Style variation name"
+msgid "Magazine"
+msgstr "Magazine"
+
+#: styles/nuit.json
+msgctxt "Style variation name"
+msgid "Route de nuit"
+msgstr "Night road"
+
+#: theme.json
+msgctxt "Style variation name"
+msgid "Route claire"
+msgstr "Light road"
+
+#: theme.json
+msgctxt "Gradient name"
+msgid "Bandeau"
+msgstr "Banner"
+
+#: theme.json
+msgctxt "Gradient name"
+msgid "Surface dégradée"
+msgstr "Gradient surface"
+
+#: theme.json
+msgctxt "Gradient name"
+msgid "Doux"
+msgstr "Soft"
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Très petite"
+msgstr "Extra small"
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Petite"
+msgstr "Small"
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Moyenne"
+msgstr "Medium"
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Grande"
+msgstr "Large"
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Très grande"
+msgstr "Extra large"
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Énorme"
+msgstr "Huge"
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Gigantesque"
+msgstr "Gigantic"
+
+#: theme.json
+msgctxt "Font family name"
+msgid "Atkinson Hyperlegible"
+msgstr "Atkinson Hyperlegible"
+
+#: theme.json
+msgctxt "Font family name"
+msgid "Inter"
+msgstr "Inter"
+
+#: theme.json
+msgctxt "Font family name"
+msgid "Plus Jakarta Sans"
+msgstr "Plus Jakarta Sans"
+
+#: theme.json
+msgctxt "Font family name"
+msgid "Source Serif 4"
+msgstr "Source Serif 4"
+
+#: theme.json
+msgctxt "Font family name"
+msgid "Lexend (lecture facilitée)"
+msgstr "Lexend (easier reading)"
+
+#: theme.json
+msgctxt "Font family name"
+msgid "Système"
+msgstr "System"
+
+#: theme.json
+msgctxt "Font family name"
+msgid "Monospace"
+msgstr "Monospace"
+
+#: theme.json
+msgctxt "Space size name"
+msgid "2XS"
+msgstr "2XS"
+
+#: theme.json
+msgctxt "Space size name"
+msgid "XS"
+msgstr "XS"
+
+#: theme.json
+msgctxt "Space size name"
+msgid "S"
+msgstr "S"
+
+#: theme.json
+msgctxt "Space size name"
+msgid "M"
+msgstr "M"
+
+#: theme.json
+msgctxt "Space size name"
+msgid "L"
+msgstr "L"
+
+#: theme.json
+msgctxt "Space size name"
+msgid "XL"
+msgstr "XL"
+
+#: theme.json
+msgctxt "Space size name"
+msgid "2XL"
+msgstr "2XL"
+
+#: theme.json
+msgctxt "Space size name"
+msgid "3XL"
+msgstr "3XL"
+
+#: theme.json
+msgctxt "Shadow name"
+msgid "Douce"
+msgstr "Soft"
+
+#: theme.json
+msgctxt "Shadow name"
+msgid "Relief"
+msgstr "Raised"
+
+#: theme.json
+msgctxt "Shadow name"
+msgid "Flottante"
+msgstr "Floating"
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Page pleine largeur (sans titre)"
+msgstr "Full-width page (no title)"
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Page sans distraction (quiz, compte)"
+msgstr "Distraction-free page (quiz, account)"
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Question — média à gauche"
+msgstr "Question — media on the left"
+
+#: theme.json
+msgctxt "Template part name"
+msgid "En-tête"
+msgstr "Header"
+
+#: theme.json
+msgctxt "Template part name"
+msgid "En-tête centré"
+msgstr "Centered header"
+
+#: theme.json
+msgctxt "Template part name"
+msgid "En-tête minimal (quiz)"
+msgstr "Minimal header (quiz)"
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Pied de page"
+msgstr "Footer"
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Pied de page compact"
+msgstr "Compact footer"
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Pied de page minimal"
+msgstr "Minimal footer"
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Signature d'article"
+msgstr "Article byline"
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Encadré auteur"
+msgstr "Author box"
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Carte de contenu"
+msgstr "Content card"
+
+#: functions.php:126
+msgid "Learn & Drive — Accueil"
+msgstr "Learn & Drive — Home"
+
+#: functions.php:127
+msgid "Sections de la page d'accueil."
+msgstr "Home page sections."
+
+#: functions.php:133
+msgid "Learn & Drive — Apprentissage"
+msgstr "Learn & Drive — Learning"
+
+#: functions.php:134
+msgid "Blocs pour les cours, leçons et quiz."
+msgstr "Blocks for courses, lessons and quizzes."
+
+#: functions.php:140
+msgid "Learn & Drive — Éditorial"
+msgstr "Learn & Drive — Editorial"
+
+#: functions.php:141
+msgid "Blocs pour les actualités et les guides pratiques."
+msgstr "Blocks for news and practical guides."
+
+#: functions.php:147
+msgid "Learn & Drive — Offre"
+msgstr "Learn & Drive — Offer"
+
+#: functions.php:148
+msgid "Tarifs, témoignages, application, appel à l’action."
+msgstr "Pricing, testimonials, app, call to action."
+
+#: inc/block-styles.php:19
+#: inc/block-styles.php:25
+msgid "Carte"
+msgstr "Card"
+
+#: inc/block-styles.php:20
+msgid "Encadré"
+msgstr "Callout"
+
+#: inc/block-styles.php:22
+msgid "Section couleur"
+msgstr "Color section"
+
+#: inc/block-styles.php:28
+msgid "Liste à cocher"
+msgstr "Checklist"
+
+#: inc/block-styles.php:29
+msgid "Étapes numérotées"
+msgstr "Numbered steps"
+
+#: inc/block-styles.php:32
+msgid "Pastille"
+msgstr "Badge"
+
+#: inc/block-styles.php:35
+msgid "Tableau de coûts"
+msgstr "Cost table"
+
+#: inc/block-styles.php:38
+msgid "Question de FAQ"
+msgstr "FAQ question"
+
+#: inc/block-styles.php:41
+msgid "Encadrée"
+msgstr "Boxed"
+
+#: inc/block-styles.php:44
+msgid "Onglets"
+msgstr "Tabs"
+
+#: inc/block-styles.php:47
+msgid "Liste séparée"
+msgstr "Divided list"
+
+#: inc/block-styles.php:50
+#: inc/block-styles.php:53
+msgid "Carrousel"
+msgstr "Carousel"
+
+#: inc/presentation.php:70
+msgid "Précédent"
+msgstr "Previous"
+
+#: inc/presentation.php:71
+msgid "Suivant"
+msgstr "Next"
+
+#: inc/presentation.php:142
+msgid "Cours · Quiz · Examens blancs"
+msgstr "Courses · Quizzes · Mock exams"
+
+#: inc/presentation.php:143
+msgid "Apprenez, entraînez-vous, réussissez votre examen"
+msgstr "Learn, practice, pass your exam"
+
+#: inc/presentation.php:144
+msgid "Des cours clairs, des questions corrigées et expliquées, des examens blancs aux conditions réelles et toute l’actualité de votre formation, sur mobile comme sur ordinateur."
+msgstr "Clear courses, questions with answers and explanations, mock exams under real conditions and all the news about your training, on mobile and desktop alike."
+
+#: inc/presentation.php:217
+msgid "Démarches"
+msgstr "Procedures"
+
+#: inc/presentation.php:218
+#: inc/presentation.php:241
+msgid "Lexique"
+msgstr "Glossary"
+
+#: inc/presentation.php:239
+msgid "Quiz par thème"
+msgstr "Quizzes by topic"
+
+#: inc/presentation.php:240
+msgid "Panneaux de signalisation"
+msgstr "Road signs"
+
+#: inc/presentation.php:243
+msgid "S'informer"
+msgstr "Stay informed"
+
+#: inc/presentation.php:246
+msgid "Qui sommes-nous"
+msgstr "About us"
+
+#: inc/presentation.php:249
+msgid "Informations"
+msgstr "Information"
+
+#: inc/presentation.php:252
+msgid "Contact"
+msgstr "Contact"

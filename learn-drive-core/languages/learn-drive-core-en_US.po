@@ -1,0 +1,3307 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: learn-drive-core\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: learn-drive-core\n"
+
+#: assets/js/editor.js
+msgid "ID du quiz (0 = quiz affiché)"
+msgstr "Quiz ID (0 = displayed quiz)"
+
+#: assets/js/editor.js
+msgid "Source des questions"
+msgstr "Question source"
+
+#: assets/js/editor.js
+#: includes/admin/access-admin.php:128
+msgid "Nombre"
+msgstr "Number"
+
+#: assets/js/editor.js
+msgid "Version compacte"
+msgstr "Compact version"
+
+#: assets/js/editor.js
+msgid "Titre (laisser vide pour le titre par défaut)"
+msgstr "Title (leave empty for the default title)"
+
+#: assets/js/editor.js
+msgid "ID de la question (0 = question affichée)"
+msgstr "Question ID (0 = displayed question)"
+
+#: assets/js/editor.js
+msgid "Mise en page"
+msgstr "Layout"
+
+#: assets/js/editor.js
+msgid "Catégorie (slug, optionnel)"
+msgstr "Category (slug, optional)"
+
+#: assets/js/editor.js
+msgid "Type de contenu"
+msgstr "Content type"
+
+#: assets/js/editor.js
+msgid "Variante"
+msgstr "Variant"
+
+#: assets/js/editor.js
+msgid "Titre"
+msgstr "Title"
+
+#: assets/js/editor.js
+msgid "Pays (slug ; vide = pays principal, « all » = tous)"
+msgstr "Country (slug; empty = main country, “all” = all)"
+
+#: assets/js/editor.js
+#: includes/admin/settings.php:25
+#: includes/admin/settings.php:25
+msgid "Réglages"
+msgstr "Settings"
+
+#: assets/js/editor.js
+msgid "aperçu disponible sur la page publiée."
+msgstr "preview available on the published page."
+
+#: includes/rest.php:65
+msgid "Trop de requêtes, réessayez dans une minute."
+msgstr "Too many requests, please try again in a minute."
+
+#: includes/rest.php:97
+msgid "Connectez-vous pour accéder à votre progression."
+msgstr "Log in to access your progress."
+
+#: includes/rest.php:349
+#: includes/render.php:567
+msgid "Source :"
+msgstr "Source:"
+
+#: includes/rest.php:373
+#: includes/rest.php:660
+#: includes/rest.php:713
+msgid "Question introuvable."
+msgstr "Question not found."
+
+#: includes/rest.php:431
+#: includes/rest.php:674
+msgid "Quiz introuvable."
+msgstr "Quiz not found."
+
+#: includes/rest.php:434
+msgid "Ce quiz fait partie de l’accès premium."
+msgstr "This quiz is part of premium access."
+
+#: includes/rest.php:456
+msgid "Session d’examen expirée : relancez un examen blanc."
+msgstr "Exam session expired: start a new mock exam."
+
+#: includes/rest.php:604
+msgid "Pagination limitée : utilisez une clé d’API pour synchroniser la banque complète."
+msgstr "Pagination limited: use an API key to sync the full question bank."
+
+#: includes/rest.php:757
+msgid "Date invalide."
+msgstr "Invalid date."
+
+#: includes/rest.php:786
+msgid "Code validé : votre accès est ouvert."
+msgstr "Code accepted: your access is now active."
+
+#: includes/rest.php:816
+msgid "Bienvenue dans la classe « %s »."
+msgstr "Welcome to the “%s” class."
+
+#: includes/rest.php:829
+msgid "Vous ne faites pas partie de cette classe."
+msgstr "You are not a member of this class."
+
+#: includes/rest.php:834
+msgid "Vous avez quitté la classe."
+msgstr "You have left the class."
+
+#: includes/progress.php:264
+#: includes/progress.php:292
+#: includes/progress.php:322
+msgid "Progression d’apprentissage"
+msgstr "Learning progress"
+
+#: includes/progress.php:296
+#: includes/classes.php:479
+msgid "Examens blancs"
+msgstr "Mock exams"
+
+#: includes/progress.php:300
+msgid "Questions à revoir"
+msgstr "Questions to review"
+
+#: includes/progress.php:304
+msgid "Données complètes (JSON)"
+msgstr "Full data (JSON)"
+
+#: includes/admin/settings.php:24
+#: includes/admin/settings.php:24
+#: includes/blocks.php:82
+msgid "Learn & Drive"
+msgstr "Learn & Drive"
+
+#: includes/admin/settings.php:26
+msgid "Outils"
+msgstr "Tools"
+
+#: includes/admin/settings.php:26
+msgid "Import, export, démo"
+msgstr "Import, export, demo"
+
+#: includes/admin/settings.php:102
+#: includes/admin/meta-boxes.php:587
+#: includes/admin/access-admin.php:34
+msgid "Gratuit"
+msgstr "Free"
+
+#: includes/admin/settings.php:103
+#: includes/admin/meta-boxes.php:369
+#: includes/admin/meta-boxes.php:588
+msgid "Gratuit avec inscription"
+msgstr "Free with sign-up"
+
+#: includes/admin/settings.php:104
+#: includes/admin/meta-boxes.php:589
+#: includes/admin/access-admin.php:36
+msgid "Premium"
+msgstr "Premium"
+
+#: includes/admin/settings.php:109
+msgid "Accès et libellés"
+msgstr "Access and labels"
+
+#: includes/admin/settings.php:113
+msgid "Mode global"
+msgstr "Global mode"
+
+#: includes/admin/settings.php:115
+#: includes/admin/setup.php:474
+msgid "Tout gratuit"
+msgstr "All free"
+
+#: includes/admin/settings.php:116
+msgid "Tout payant (actualités et infos restent publiques)"
+msgstr "All paid (news and guides stay public)"
+
+#: includes/admin/settings.php:117
+msgid "Mixte (freemium)"
+msgstr "Mixed (freemium)"
+
+#: includes/admin/settings.php:122
+msgid "Présentation du site"
+msgstr "Site presentation"
+
+#: includes/admin/settings.php:124
+msgid "Automatique (vitrine si tout payant, portail sinon)"
+msgstr "Automatic (showcase if all paid, portal otherwise)"
+
+#: includes/admin/settings.php:125
+msgid "Vitrine commerciale : offres, essai gratuit, témoignages, tarifs"
+msgstr "Commercial showcase: plans, free trial, testimonials, pricing"
+
+#: includes/admin/settings.php:126
+msgid "Portail d’information et d’apprentissage : aucune mise en avant payante"
+msgstr "Information and learning portal: no paid promotion"
+
+#: includes/admin/settings.php:129
+msgid "Accueil : surtitre du bandeau"
+msgstr "Home: banner eyebrow text"
+
+#: includes/admin/settings.php:129
+msgid "Vide = « Cours · Quiz · Examens blancs »."
+msgstr "Empty = “Courses · Quizzes · Mock exams”."
+
+#: includes/admin/settings.php:130
+msgid "Accueil : titre principal (H1)"
+msgstr "Home: main heading (H1)"
+
+#: includes/admin/settings.php:130
+msgid "Vide = slogan du site. Une phrase claire avec vos mots-clés."
+msgstr "Empty = site tagline. One clear sentence with your keywords."
+
+#: includes/admin/settings.php:131
+msgid "Accueil : texte d’introduction"
+msgstr "Home: introduction text"
+
+#: includes/admin/settings.php:132
+msgid "Mode mixte : règle par défaut des contenus"
+msgstr "Mixed mode: default rule for content"
+
+#: includes/admin/settings.php:133
+msgid "Mode mixte : examens blancs"
+msgstr "Mixed mode: mock exams"
+
+#: includes/admin/settings.php:134
+msgid "Pays principal (slug)"
+msgstr "Main country (slug)"
+
+#: includes/admin/settings.php:134
+msgid "Sur l’accueil, n’affiche que les catégories et thèmes de ce pays. Vide = tous."
+msgstr "On the home page, only show categories and topics for this country. Empty = all."
+
+#: includes/admin/settings.php:135
+msgid "Page de l’offre premium"
+msgstr "Premium offer page"
+
+#: includes/admin/settings.php:136
+msgid "Application : adresse sur l’App Store"
+msgstr "App: App Store URL"
+
+#: includes/admin/settings.php:137
+msgid "Application : adresse sur Google Play"
+msgstr "App: Google Play URL"
+
+#: includes/admin/settings.php:138
+msgid "Page « Mon espace »"
+msgstr "“My account” page"
+
+#: includes/admin/settings.php:139
+msgid "Libellé « Catégorie » (singulier)"
+msgstr "“Category” label (singular)"
+
+#: includes/admin/settings.php:139
+msgid "Ex. : Catégorie de permis, Classe, Niveau scolaire."
+msgstr "E.g.: License category, Class, Grade level."
+
+#: includes/admin/settings.php:140
+msgid "Libellé « Catégorie » (pluriel)"
+msgstr "“Category” label (plural)"
+
+#: includes/admin/settings.php:141
+msgid "Libellé « Thème » (singulier)"
+msgstr "“Topic” label (singular)"
+
+#: includes/admin/settings.php:142
+msgid "Libellé « Thème » (pluriel)"
+msgstr "“Topic” label (plural)"
+
+#: includes/admin/settings.php:143
+msgid "Libellé « Fiche » (singulier)"
+msgstr "“Fact sheet” label (singular)"
+
+#: includes/admin/settings.php:143
+msgid "Ex. : Panneau, Formule, Notion."
+msgstr "E.g.: Road sign, Formula, Concept."
+
+#: includes/admin/settings.php:144
+msgid "Libellé « Fiche » (pluriel)"
+msgstr "“Fact sheet” label (plural)"
+
+#: includes/admin/settings.php:148
+#: includes/admin/seo-health.php:227
+msgid "URL"
+msgstr "URL"
+
+#: includes/admin/settings.php:150
+#: includes/admin/meta-boxes.php:687
+#: includes/post-types.php:97
+msgid "Leçons"
+msgstr "Lessons"
+
+#: includes/admin/settings.php:151
+#: includes/admin/meta-boxes.php:335
+#: includes/admin/meta-boxes.php:688
+msgid "Cours"
+msgstr "Courses"
+
+#: includes/admin/settings.php:152
+#: includes/admin/meta-boxes.php:689
+#: includes/post-types.php:133
+msgid "Quiz"
+msgstr "Quizzes"
+
+#: includes/admin/settings.php:153
+#: includes/admin/meta-boxes.php:691
+#: blocks/track-cards/render.php:86
+msgid "Examen blanc"
+msgstr "Mock exam"
+
+#: includes/admin/settings.php:154
+#: includes/admin/meta-boxes.php:234
+#: includes/admin/meta-boxes.php:690
+msgid "Questions"
+msgstr "Questions"
+
+#: includes/admin/settings.php:155
+msgid "Fiches"
+msgstr "Fact sheets"
+
+#: includes/admin/settings.php:156
+#: includes/post-types.php:167
+#: includes/blocks.php:126
+msgid "Infos & démarches"
+msgstr "Guides & procedures"
+
+#: includes/admin/settings.php:157
+#: includes/post-types.php:184
+#: includes/blocks.php:547
+msgid "Lexique"
+msgstr "Glossary"
+
+#: includes/admin/settings.php:158
+msgid "Base des catégories (si silo désactivé)"
+msgstr "Category base (if silo is disabled)"
+
+#: includes/admin/settings.php:159
+msgid "Base des thèmes"
+msgstr "Topic base"
+
+#: includes/admin/settings.php:160
+msgid "Base des pays"
+msgstr "Country base"
+
+#: includes/admin/settings.php:164
+msgid "SEO"
+msgstr "SEO"
+
+#: includes/admin/settings.php:166
+msgid "Gérer les titres et descriptions"
+msgstr "Manage titles and descriptions"
+
+#: includes/admin/settings.php:166
+msgid "Désactivé automatiquement si Yoast, Rank Math, SEOPress, AIOSEO ou The SEO Framework est actif."
+msgstr "Automatically disabled if Yoast, Rank Math, SEOPress, AIOSEO or The SEO Framework is active."
+
+#: includes/admin/settings.php:167
+msgid "Séparateur"
+msgstr "Separator"
+
+#: includes/admin/settings.php:168
+msgid "Modèle de titre — question"
+msgstr "Title template — question"
+
+#: includes/admin/settings.php:169
+msgid "Modèle de titre — quiz"
+msgstr "Title template — quiz"
+
+#: includes/admin/settings.php:170
+msgid "Modèle de titre — leçon et cours"
+msgstr "Title template — lesson and course"
+
+#: includes/admin/settings.php:171
+msgid "Modèle de titre — fiche"
+msgstr "Title template — fact sheet"
+
+#: includes/admin/settings.php:172
+msgid "Modèle de titre — info & démarche"
+msgstr "Title template — guide & procedure"
+
+#: includes/admin/settings.php:173
+msgid "Modèle de titre — actualité"
+msgstr "Title template — news"
+
+#: includes/admin/settings.php:174
+msgid "Modèle de titre — lexique"
+msgstr "Title template — glossary"
+
+#: includes/admin/settings.php:175
+msgid "Modèle de titre — page pilier"
+msgstr "Title template — pillar page"
+
+#: includes/admin/settings.php:178
+msgid "Type d’organisation"
+msgstr "Organization type"
+
+#: includes/admin/settings.php:186
+msgid "Nom de l’organisation"
+msgstr "Organization name"
+
+#: includes/admin/settings.php:187
+msgid "Logo (ID du média, sinon logo du site)"
+msgstr "Logo (media ID, otherwise site logo)"
+
+#: includes/admin/settings.php:188
+msgid "Profils officiels (sameAs)"
+msgstr "Official profiles (sameAs)"
+
+#: includes/admin/settings.php:188
+msgid "Une URL par ligne."
+msgstr "One URL per line."
+
+#: includes/admin/settings.php:189
+msgid "Nom de publication Google News"
+msgstr "Google News publication name"
+
+#: includes/admin/settings.php:190
+msgid "Mots minimum d’une explication indexable"
+msgstr "Minimum words for an indexable explanation"
+
+#: includes/admin/settings.php:191
+msgid "Ne pas indexer les pages minces ou inutiles (contenus courts, rubriques presque vides, auteurs sans biographie, archives par date, fichiers joints, flux)"
+msgstr "Do not index thin or useless pages (short content, nearly empty sections, authors without a bio, date archives, attachments, feeds)"
+
+#: includes/admin/settings.php:192
+msgid "Mots minimum d’un article, guide ou leçon indexable (pages : 60 %, fiches : 30 %, lexique : 20 %)"
+msgstr "Minimum words for an indexable article, guide or lesson (pages: 60%, fact sheets: 30%, glossary: 20%)"
+
+#: includes/admin/settings.php:193
+msgid "Contenus minimum d’une rubrique, d’un thème ou d’un auteur indexable (sauf page pilier rédigée)"
+msgstr "Minimum items for an indexable section, topic or author (except a written pillar page)"
+
+#: includes/admin/settings.php:194
+msgid "Liens automatiques du lexique (première occurrence)"
+msgstr "Automatic glossary links (first occurrence)"
+
+#: includes/admin/settings.php:195
+msgid "Liens du lexique par page (maximum)"
+msgstr "Glossary links per page (maximum)"
+
+#: includes/admin/settings.php:196
+msgid "Générer les images de partage des quiz et questions"
+msgstr "Generate share images for quizzes and questions"
+
+#: includes/admin/settings.php:197
+msgid "Donner une image à la une (titre et rubrique) aux articles qui n’en ont pas"
+msgstr "Give a featured image (title and section) to articles that have none"
+
+#: includes/admin/settings.php:198
+msgid "Adresses des articles par rubrique (/news/article/), anciennes adresses redirigées"
+msgstr "Article URLs by section (/news/article/), old URLs redirected"
+
+#: includes/admin/settings.php:199
+msgid "Notifier IndexNow (Bing, Yandex) à chaque publication"
+msgstr "Notify IndexNow (Bing, Yandex) on every publication"
+
+#: includes/admin/settings.php:200
+msgid "Publier /llms.txt (pages piliers pour les assistants IA)"
+msgstr "Publish /llms.txt (pillar pages for AI assistants)"
+
+#: includes/admin/settings.php:201
+msgid "Bloquer ces robots d’IA dans robots.txt"
+msgstr "Block these AI bots in robots.txt"
+
+#: includes/admin/settings.php:202
+msgid "Journaliser les erreurs 404"
+msgstr "Log 404 errors"
+
+#: includes/admin/settings.php:206
+msgid "Performance et médias"
+msgstr "Performance and media"
+
+#: includes/admin/settings.php:210
+msgid "Format des images générées"
+msgstr "Generated image format"
+
+#: includes/admin/settings.php:214
+msgid "Format d’origine"
+msgstr "Original format"
+
+#: includes/admin/settings.php:217
+msgid "Qualité (40 à 95)"
+msgstr "Quality (40 to 95)"
+
+#: includes/admin/settings.php:218
+msgid "Ne générer que les tailles utiles"
+msgstr "Only generate useful sizes"
+
+#: includes/admin/settings.php:219
+msgid "Renommer les fichiers envoyés (minuscules, sans accents, titre du contenu)"
+msgstr "Rename uploaded files (lowercase, no accents, content title)"
+
+#: includes/admin/settings.php:220
+msgid "Façade vidéo (YouTube / Vimeo chargés au clic)"
+msgstr "Video facade (YouTube / Vimeo loaded on click)"
+
+#: includes/admin/settings.php:221
+msgid "Supprimer le script des émojis"
+msgstr "Remove the emoji script"
+
+#: includes/admin/settings.php:222
+msgid "Avatars locaux (aucune requête vers Gravatar)"
+msgstr "Local avatars (no requests to Gravatar)"
+
+#: includes/admin/settings.php:223
+msgid "Révision hors ligne (application installable, pages consultées gardées sur l’appareil)"
+msgstr "Offline study (installable app, viewed pages kept on the device)"
+
+#: includes/admin/settings.php:224
+msgid "URL du CDN d’images"
+msgstr "Image CDN URL"
+
+#: includes/admin/settings.php:228
+msgid "API et intégrations"
+msgstr "API and integrations"
+
+#: includes/admin/settings.php:230
+msgid "Clés d’API (application, sites clients)"
+msgstr "API keys (app, client sites)"
+
+#: includes/admin/settings.php:230
+msgid "Une clé par ligne, 20 caractères minimum. En-tête HTTP : X-Learn-Key."
+msgstr "One key per line, at least 20 characters. HTTP header: X-Learn-Key."
+
+#: includes/admin/settings.php:231
+msgid "Requêtes par minute et par visiteur"
+msgstr "Requests per minute per visitor"
+
+#: includes/admin/settings.php:232
+msgid "URL du webhook (CRM, e-mailing)"
+msgstr "Webhook URL (CRM, email marketing)"
+
+#: includes/admin/settings.php:233
+msgid "Secret de signature (HMAC SHA-256)"
+msgstr "Signing secret (HMAC SHA-256)"
+
+#: includes/admin/settings.php:251
+msgid "Learn & Drive — Réglages"
+msgstr "Learn & Drive — Settings"
+
+#: includes/admin/settings.php:253
+msgid "Un plugin SEO est actif : Learn & Drive lui laisse les balises meta et fusionne ses données structurées dans son graphe."
+msgstr "An SEO plugin is active: Learn & Drive leaves the meta tags to it and merges its structured data into that plugin’s graph."
+
+#: includes/admin/settings.php:322
+msgid "Learn & Drive — Import, export, démo"
+msgstr "Learn & Drive — Import, export, demo"
+
+#: includes/admin/settings.php:329
+msgid "Importer des questions"
+msgstr "Import questions"
+
+#: includes/admin/settings.php:330
+msgid "CSV (séparateur virgule ou point-virgule), JSON ou JSON Lines. Les questions existantes (même slug ou identifiant officiel) sont mises à jour."
+msgstr "CSV (comma or semicolon separator), JSON or JSON Lines. Existing questions (same slug or official ID) are updated."
+
+#: includes/admin/settings.php:335
+msgid "Simulation (aucune écriture)"
+msgstr "Dry run (nothing is written)"
+
+#: includes/admin/settings.php:336
+msgid "Importer"
+msgstr "Import"
+
+#: includes/admin/settings.php:338
+msgid "Pour plusieurs milliers de questions avec images, préférez WP-CLI : wp learn import fichier.csv"
+msgstr "For several thousand questions with images, use WP-CLI instead: wp learn import file.csv"
+
+#: includes/admin/settings.php:341
+msgid "Exporter les questions"
+msgstr "Export questions"
+
+#: includes/admin/settings.php:346
+msgid "Télécharger"
+msgstr "Download"
+
+#: includes/admin/settings.php:350
+msgid "Contenu de démonstration"
+msgstr "Demo content"
+
+#: includes/admin/settings.php:351
+msgid "2 pays, 5 catégories, 120 questions, quiz, examens blancs, leçons, panneaux, actualités et guides. Définit aussi la page d’accueil et la page des actualités."
+msgstr "2 countries, 5 categories, 120 questions, quizzes, mock exams, lessons, road signs, news and guides. Also sets the home page and the news page."
+
+#: includes/admin/settings.php:353
+msgid "Déjà importé : relancer met les contenus à jour sans doublon."
+msgstr "Already imported: running it again updates the content without duplicates."
+
+#: includes/admin/settings.php:358
+msgid "Importer la démo"
+msgstr "Import the demo"
+
+#: includes/admin/settings.php:371
+#: includes/admin/settings.php:408
+#: includes/admin/settings.php:429
+msgid "Action non autorisée."
+msgstr "Unauthorized action."
+
+#: includes/admin/settings.php:376
+msgid "Aucun fichier reçu."
+msgstr "No file received."
+
+#: includes/admin/settings.php:382
+msgid "Format non pris en charge."
+msgstr "Unsupported format."
+
+#: includes/admin/settings.php:393
+msgid "Import terminé : %1$d créées, %2$d mises à jour, %3$d erreurs."
+msgstr "Import complete: %1$d created, %2$d updated, %3$d errors."
+
+#: includes/admin/settings.php:437
+msgid "Démo importée (%d questions)."
+msgstr "Demo imported (%d questions)."
+
+#: includes/admin/setup.php:30
+msgid "Permis de conduire"
+msgstr "Driver’s license"
+
+#: includes/admin/setup.php:31
+msgid "Code de la route, examens blancs officiels par pays, panneaux."
+msgstr "Rules of the road, official mock exams by country, road signs."
+
+#: includes/admin/setup.php:33
+#: includes/helpers.php:52
+msgid "Catégorie de permis"
+msgstr "License category"
+
+#: includes/admin/setup.php:34
+#: includes/helpers.php:53
+msgid "Catégories de permis"
+msgstr "License categories"
+
+#: includes/admin/setup.php:35
+#: includes/helpers.php:54
+msgid "Thème officiel"
+msgstr "Official topic"
+
+#: includes/admin/setup.php:36
+#: includes/helpers.php:55
+msgid "Thèmes officiels"
+msgstr "Official topics"
+
+#: includes/admin/setup.php:37
+#: includes/helpers.php:56
+msgid "Panneau"
+msgstr "Road sign"
+
+#: includes/admin/setup.php:38
+#: includes/helpers.php:57
+msgid "Panneaux"
+msgstr "Road signs"
+
+#: includes/admin/setup.php:43
+msgid "Soutien scolaire"
+msgstr "Tutoring"
+
+#: includes/admin/setup.php:44
+msgid "Niveaux, chapitres, fiches de révision, exercices corrigés."
+msgstr "Grade levels, chapters, review sheets, exercises with answers."
+
+#: includes/admin/setup.php:46
+#: includes/admin/setup.php:59
+#: includes/post-types.php:266
+msgid "Niveau"
+msgstr "Grade level"
+
+#: includes/admin/setup.php:47
+#: includes/admin/setup.php:60
+#: includes/post-types.php:266
+msgid "Niveaux"
+msgstr "Grade levels"
+
+#: includes/admin/setup.php:48
+msgid "Chapitre"
+msgstr "Chapter"
+
+#: includes/admin/setup.php:49
+msgid "Chapitres"
+msgstr "Chapters"
+
+#: includes/admin/setup.php:50
+msgid "Fiche de révision"
+msgstr "Review sheet"
+
+#: includes/admin/setup.php:51
+msgid "Fiches de révision"
+msgstr "Review sheets"
+
+#: includes/admin/setup.php:56
+msgid "Langues"
+msgstr "Languages"
+
+#: includes/admin/setup.php:57
+msgid "Niveaux A1 à C2, compétences, fiches de vocabulaire."
+msgstr "Levels A1 to C2, skills, vocabulary sheets."
+
+#: includes/admin/setup.php:61
+msgid "Compétence"
+msgstr "Skill"
+
+#: includes/admin/setup.php:62
+#: includes/integrations.php:227
+msgid "Compétences"
+msgstr "Skills"
+
+#: includes/admin/setup.php:63
+msgid "Fiche de vocabulaire"
+msgstr "Vocabulary sheet"
+
+#: includes/admin/setup.php:64
+msgid "Fiches de vocabulaire"
+msgstr "Vocabulary sheets"
+
+#: includes/admin/setup.php:69
+msgid "Certifications professionnelles"
+msgstr "Professional certifications"
+
+#: includes/admin/setup.php:70
+msgid "Certifications, domaines du référentiel, fiches mémo, examens blancs."
+msgstr "Certifications, framework domains, memo sheets, mock exams."
+
+#: includes/admin/setup.php:72
+msgid "Certification"
+msgstr "Certification"
+
+#: includes/admin/setup.php:73
+msgid "Certifications"
+msgstr "Certifications"
+
+#: includes/admin/setup.php:74
+msgid "Domaine"
+msgstr "Domain"
+
+#: includes/admin/setup.php:75
+msgid "Domaines"
+msgstr "Domains"
+
+#: includes/admin/setup.php:76
+msgid "Fiche mémo"
+msgstr "Memo sheet"
+
+#: includes/admin/setup.php:77
+msgid "Fiches mémo"
+msgstr "Memo sheets"
+
+#: includes/admin/setup.php:91
+msgid "France"
+msgstr "France"
+
+#: includes/admin/setup.php:92
+msgid "Belgique"
+msgstr "Belgium"
+
+#: includes/admin/setup.php:93
+msgid "Suisse"
+msgstr "Switzerland"
+
+#: includes/admin/setup.php:94
+msgid "Canada"
+msgstr "Canada"
+
+#: includes/admin/setup.php:95
+msgid "Luxembourg"
+msgstr "Luxembourg"
+
+#: includes/admin/setup.php:96
+msgid "Maroc"
+msgstr "Morocco"
+
+#: includes/admin/setup.php:97
+msgid "Algérie"
+msgstr "Algeria"
+
+#: includes/admin/setup.php:98
+msgid "Tunisie"
+msgstr "Tunisia"
+
+#: includes/admin/setup.php:99
+msgid "Sénégal"
+msgstr "Senegal"
+
+#: includes/admin/setup.php:100
+msgid "Côte d’Ivoire"
+msgstr "Côte d’Ivoire"
+
+#: includes/admin/setup.php:101
+msgid "Cameroun"
+msgstr "Cameroon"
+
+#: includes/admin/setup.php:102
+msgid "Italie"
+msgstr "Italy"
+
+#: includes/admin/setup.php:124
+msgid "D’origine"
+msgstr "Original"
+
+#: includes/admin/setup.php:251
+msgid "Démonstration importée : %1$d questions, %2$d leçons, %3$d actualités."
+msgstr "Demo imported: %1$d questions, %2$d lessons, %3$d news articles."
+
+#: includes/admin/setup.php:260
+msgid "Secteur : %s (libellés et adresses adaptés)."
+msgstr "Sector: %s (labels and URLs adapted)."
+
+#: includes/admin/setup.php:270
+msgid "Pays principal : %s."
+msgstr "Main country: %s."
+
+#: includes/admin/setup.php:273
+msgid "Tous les pays affichés sur l’accueil."
+msgstr "All countries shown on the home page."
+
+#: includes/admin/setup.php:280
+msgid "tout gratuit"
+msgstr "all free"
+
+#: includes/admin/setup.php:281
+msgid "gratuit et premium"
+msgstr "free and premium"
+
+#: includes/admin/setup.php:282
+msgid "tout payant"
+msgstr "all paid"
+
+#: includes/admin/setup.php:285
+msgid "Modèle d’accès : %s."
+msgstr "Access model: %s."
+
+#: includes/admin/setup.php:296
+msgid "Apparence : %s."
+msgstr "Appearance: %s."
+
+#: includes/admin/setup.php:301
+#: includes/demo.php:648
+msgid "Mon espace"
+msgstr "My account"
+
+#: includes/admin/setup.php:302
+#: includes/demo.php:656
+msgid "Plan du site"
+msgstr "Site map"
+
+#: includes/admin/setup.php:303
+msgid "Pages « Mon espace » et « Plan du site » prêtes."
+msgstr "“My account” and “Site map” pages ready."
+
+#: includes/admin/setup.php:309
+msgid "Adresses lisibles activées (/actualites/titre/, /rubrique/nom/)."
+msgstr "Readable URLs enabled (/actualites/titre/, /rubrique/nom/)."
+
+#: includes/admin/setup.php:322
+#: includes/admin/setup.php:412
+msgid "Assistant de démarrage"
+msgstr "Setup wizard"
+
+#: includes/admin/setup.php:322
+msgid "Démarrage"
+msgstr "Getting started"
+
+#: includes/admin/setup.php:352
+msgid "Configurez votre site en deux minutes : secteur, pays, apparence et contenu de départ."
+msgstr "Set up your site in two minutes: sector, country, appearance and starter content."
+
+#: includes/admin/setup.php:354
+msgid "Lancer l’assistant"
+msgstr "Launch the wizard"
+
+#: includes/admin/setup.php:413
+msgid "Quelques choix pour adapter le thème et le plugin à votre site. Tout reste modifiable ensuite dans les réglages et l’éditeur du site."
+msgstr "A few choices to tailor the theme and plugin to your site. Everything can still be changed later in the settings and the site editor."
+
+#: includes/admin/setup.php:420
+msgid "Que proposez-vous ?"
+msgstr "What do you offer?"
+
+#: includes/admin/setup.php:433
+msgid "Pays principal"
+msgstr "Main country"
+
+#: includes/admin/setup.php:434
+msgid "L’accueil met en avant les catégories et thèmes de ce pays ; les règles d’examen (nombre de questions, seuil, chrono) se règlent par pays."
+msgstr "The home page highlights this country’s categories and topics; exam rules (number of questions, pass mark, timer) are set per country."
+
+#: includes/admin/setup.php:436
+msgid "Tous les pays"
+msgstr "All countries"
+
+#: includes/admin/setup.php:445
+msgid "Apparence"
+msgstr "Appearance"
+
+#: includes/admin/setup.php:450
+msgid "Garder l’apparence actuelle"
+msgstr "Keep the current appearance"
+
+#: includes/admin/setup.php:451
+msgid "Vos réglages de l’éditeur du site sont conservés."
+msgstr "Your site editor settings are kept."
+
+#: includes/admin/setup.php:470
+msgid "Accès aux contenus"
+msgstr "Content access"
+
+#: includes/admin/setup.php:474
+msgid "Site financé par la publicité ou une auto-école."
+msgstr "Site funded by advertising or a driving school."
+
+#: includes/admin/setup.php:475
+msgid "Gratuit et premium"
+msgstr "Free and premium"
+
+#: includes/admin/setup.php:475
+msgid "Découverte gratuite, examens et leçons avancées réservés."
+msgstr "Free discovery, exams and advanced lessons reserved."
+
+#: includes/admin/setup.php:476
+msgid "Tout payant"
+msgstr "All paid"
+
+#: includes/admin/setup.php:476
+msgid "Les actualités restent publiques pour le référencement."
+msgstr "News stays public for search engines."
+
+#: includes/admin/setup.php:490
+msgid "Contenu de départ"
+msgstr "Starter content"
+
+#: includes/admin/setup.php:491
+msgid "Importer la démonstration (permis B : 125 questions, leçons, quiz, examens blancs France et Italie, panneaux, actualités)"
+msgstr "Import the demo (B license: 125 questions, lessons, quizzes, mock exams for France and Italy, road signs, news)"
+
+#: includes/admin/setup.php:492
+msgid "Créer les pages « Mon espace » et « Plan du site », ouvrir les inscriptions et activer des adresses lisibles si ce n’est pas déjà fait"
+msgstr "Create the “My account” and “Site map” pages, open registration and enable readable URLs if not already done"
+
+#: includes/admin/setup.php:495
+msgid "Configurer mon site"
+msgstr "Set up my site"
+
+#: includes/admin/setup.php:509
+msgid "Votre site est prêt"
+msgstr "Your site is ready"
+
+#: includes/admin/setup.php:515
+msgid "Et maintenant"
+msgstr "What’s next"
+
+#: includes/admin/setup.php:517
+msgid "Voir le site"
+msgstr "View the site"
+
+#: includes/admin/setup.php:518
+msgid "Personnaliser l’apparence"
+msgstr "Customize the appearance"
+
+#: includes/admin/setup.php:519
+msgid "Écrire une question"
+msgstr "Write a question"
+
+#: includes/admin/setup.php:520
+msgid "Importer des questions (CSV)"
+msgstr "Import questions (CSV)"
+
+#: includes/admin/setup.php:521
+msgid "Créer une classe"
+msgstr "Create a class"
+
+#: includes/admin/setup.php:523
+msgid "Relancer l’assistant"
+msgstr "Run the wizard again"
+
+#: includes/admin/seo-health.php:23
+#: includes/admin/seo-health.php:23
+#: includes/admin/seo-health.php:143
+msgid "Santé SEO"
+msgstr "SEO health"
+
+#: includes/admin/seo-health.php:124
+msgid "Redirection enregistrée."
+msgstr "Redirect saved."
+
+#: includes/admin/seo-health.php:145
+msgid "points à corriger"
+msgstr "issues to fix"
+
+#: includes/admin/seo-health.php:146
+msgid "questions non indexées (explication trop courte ou doublon)"
+msgstr "unindexed questions (explanation too short or duplicate)"
+
+#: includes/admin/seo-health.php:147
+msgid "URL en erreur 404"
+msgstr "URLs returning 404"
+
+#: includes/admin/seo-health.php:149
+msgid "Connectez Google Search Console et Bing Webmaster Tools en y déclarant /wp-sitemap.xml et /news-sitemap.xml pour suivre clics et impressions par contenu."
+msgstr "Connect Google Search Console and Bing Webmaster Tools by submitting /wp-sitemap.xml and /news-sitemap.xml to track clicks and impressions per piece of content."
+
+#: includes/admin/seo-health.php:153
+msgid "Questions sans explication suffisante (noindex automatique)"
+msgstr "Questions without a sufficient explanation (automatic noindex)"
+
+#: includes/admin/seo-health.php:157
+#: includes/admin/seo-health.php:168
+msgid "%d mots"
+msgstr "%d words"
+
+#: includes/admin/seo-health.php:164
+msgid "Pages exclues de l’index : contenu trop court (complétez-les pour qu’elles soient indexées)"
+msgstr "Pages excluded from the index: content too short (expand them so they get indexed)"
+
+#: includes/admin/seo-health.php:174
+msgid "Rubriques, thèmes et catégories exclus de l’index : trop peu de contenus et pas de texte d’introduction"
+msgstr "Sections, topics and categories excluded from the index: too little content and no introduction text"
+
+#: includes/admin/seo-health.php:178
+msgid "%d contenu"
+msgid_plural "%d contenus"
+msgstr[0] "%d item"
+msgstr[1] "%d items"
+
+#: includes/admin/seo-health.php:183
+msgid "Images principales sans texte alternatif"
+msgstr "Main images without alt text"
+
+#: includes/admin/seo-health.php:185
+msgid "Titres SEO trop longs (plus de 65 caractères)"
+msgstr "SEO titles too long (over 65 characters)"
+
+#: includes/admin/seo-health.php:189
+msgid "%d caractères"
+msgstr "%d characters"
+
+#: includes/admin/seo-health.php:196
+msgid "Quasi-doublons (même énoncé) : choisissez une question canonique"
+msgstr "Near-duplicates (same question text): choose a canonical question"
+
+#: includes/admin/seo-health.php:204
+msgid "Pages orphelines (aucun lien entrant ni rattachement)"
+msgstr "Orphan pages (no inbound links or parent)"
+
+#: includes/admin/seo-health.php:206
+msgid "Questions signalées par les apprenants"
+msgstr "Questions reported by learners"
+
+#: includes/admin/seo-health.php:210
+msgid "%d signalement(s)"
+msgstr "%d report(s)"
+
+#: includes/admin/seo-health.php:217
+msgid "Erreurs 404 et redirections"
+msgstr "404 errors and redirects"
+
+#: includes/admin/seo-health.php:223
+msgid "Ajouter la redirection 301"
+msgstr "Add the 301 redirect"
+
+#: includes/admin/seo-health.php:227
+msgid "Visites"
+msgstr "Visits"
+
+#: includes/admin/seo-health.php:227
+msgid "Dernière"
+msgstr "Last"
+
+#: includes/admin/seo-health.php:227
+msgid "Provenance"
+msgstr "Referrer"
+
+#: includes/admin/seo-health.php:233
+msgid "Aucune erreur 404 enregistrée."
+msgstr "No 404 errors logged."
+
+#: includes/admin/seo-health.php:239
+msgid "Redirections actives"
+msgstr "Active redirects"
+
+#: includes/admin/seo-health.php:244
+msgid "Supprimer"
+msgstr "Delete"
+
+#: includes/admin/seo-health.php:262
+msgid "Rien à signaler."
+msgstr "Nothing to report."
+
+#: includes/admin/classes-admin.php:25
+#: includes/admin/classes-admin.php:25
+#: includes/admin/classes-admin.php:227
+msgid "Auto-école"
+msgstr "Driving school"
+
+#: includes/admin/classes-admin.php:74
+msgid "Vous ne pouvez pas gérer cette classe."
+msgstr "You cannot manage this class."
+
+#: includes/admin/classes-admin.php:188
+msgid "Classe créée. Donnez le code d’invitation à vos élèves."
+msgstr "Class created. Give the invitation code to your students."
+
+#: includes/admin/classes-admin.php:189
+msgid "Devoir assigné."
+msgstr "Assignment created."
+
+#: includes/admin/classes-admin.php:190
+msgid "Devoir retiré."
+msgstr "Assignment removed."
+
+#: includes/admin/classes-admin.php:191
+msgid "Élève retiré de la classe."
+msgstr "Student removed from the class."
+
+#: includes/admin/classes-admin.php:192
+msgid "Modification enregistrée."
+msgstr "Change saved."
+
+#: includes/admin/classes-admin.php:193
+msgid "Nouveau code créé : l’ancien ne fonctionne plus."
+msgstr "New code created: the old one no longer works."
+
+#: includes/admin/classes-admin.php:194
+msgid "Classe supprimée. Les élèves conservent leur progression."
+msgstr "Class deleted. Students keep their progress."
+
+#: includes/admin/classes-admin.php:195
+msgid "Action impossible : vérifiez les informations saisies."
+msgstr "Action not possible: check the information you entered."
+
+#: includes/admin/classes-admin.php:229
+msgid "Créez une classe, donnez son code à vos élèves : ils la rejoignent depuis leur espace « Mon compte ». Vous suivez ensuite leur progression et leur assignez des quiz."
+msgstr "Create a class and give its code to your students: they join it from their “My account” area. You can then track their progress and assign them quizzes."
+
+#: includes/admin/classes-admin.php:233
+#: includes/classes.php:97
+#: includes/classes.php:662
+msgid "Classe"
+msgstr "Class"
+
+#: includes/admin/classes-admin.php:234
+#: includes/admin/classes-admin.php:305
+msgid "Code d’invitation"
+msgstr "Invitation code"
+
+#: includes/admin/classes-admin.php:235
+msgid "Élèves"
+msgstr "Students"
+
+#: includes/admin/classes-admin.php:236
+#: includes/admin/classes-admin.php:338
+msgid "Devoirs"
+msgstr "Assignments"
+
+#: includes/admin/classes-admin.php:237
+msgid "Inscriptions"
+msgstr "Enrollment"
+
+#: includes/admin/classes-admin.php:239
+#: includes/classes.php:65
+msgid "Moniteur"
+msgstr "Instructor"
+
+#: includes/admin/classes-admin.php:254
+msgid "ouvertes"
+msgstr "open"
+
+#: includes/admin/classes-admin.php:254
+msgid "fermées"
+msgstr "closed"
+
+#: includes/admin/classes-admin.php:261
+msgid "Aucune classe pour le moment."
+msgstr "No classes yet."
+
+#: includes/admin/classes-admin.php:267
+msgid "Nouvelle classe"
+msgstr "New class"
+
+#: includes/admin/classes-admin.php:270
+msgid "Nom"
+msgstr "Name"
+
+#: includes/admin/classes-admin.php:271
+msgid "Permis B — session de mars"
+msgstr "B license — March session"
+
+#: includes/admin/classes-admin.php:272
+msgid "Nombre de places (0 = illimité)"
+msgstr "Number of seats (0 = unlimited)"
+
+#: includes/admin/classes-admin.php:274
+msgid "Créer la classe"
+msgstr "Create the class"
+
+#: includes/admin/classes-admin.php:299
+msgid "Toutes les classes"
+msgstr "All classes"
+
+#: includes/admin/classes-admin.php:310
+msgid "Les élèves créent un compte gratuit puis saisissent ce code dans <a href=\"%s\">Mon compte</a>."
+msgstr "Students create a free account, then enter this code in <a href=\"%s\">My account</a>."
+
+#: includes/admin/classes-admin.php:314
+msgid "Inscriptions ouvertes."
+msgstr "Enrollment open."
+
+#: includes/admin/classes-admin.php:314
+msgid "Inscriptions fermées."
+msgstr "Enrollment closed."
+
+#: includes/admin/classes-admin.php:315
+msgid "Fermer"
+msgstr "Close"
+
+#: includes/admin/classes-admin.php:315
+#: includes/admin/access-admin.php:123
+msgid "Ouvrir"
+msgstr "Open"
+
+#: includes/admin/classes-admin.php:316
+msgid "Nouveau code"
+msgstr "New code"
+
+#: includes/admin/classes-admin.php:321
+msgid "Assigner un quiz"
+msgstr "Assign a quiz"
+
+#: includes/admin/classes-admin.php:325
+msgid "Quiz ou examen blanc"
+msgstr "Quiz or mock exam"
+
+#: includes/admin/classes-admin.php:331
+msgid "À faire avant le (facultatif)"
+msgstr "Due by (optional)"
+
+#: includes/admin/classes-admin.php:333
+msgid "Assigner"
+msgstr "Assign"
+
+#: includes/admin/classes-admin.php:346
+msgid "avant le %s"
+msgstr "by %s"
+
+#: includes/admin/classes-admin.php:349
+msgid "%1$d / %2$d élève(s) l’ont fait"
+msgstr "%1$d / %2$d student(s) completed it"
+
+#: includes/admin/classes-admin.php:350
+#: includes/admin/classes-admin.php:395
+#: includes/admin/meta-boxes.php:60
+msgid "Retirer"
+msgstr "Remove"
+
+#: includes/admin/classes-admin.php:359
+msgid "%d élève"
+msgid_plural "%d élèves"
+msgstr[0] "%d student"
+msgstr[1] "%d students"
+
+#: includes/admin/classes-admin.php:362
+msgid "Exporter en CSV"
+msgstr "Export to CSV"
+
+#: includes/admin/classes-admin.php:374
+msgid "Actions"
+msgstr "Actions"
+
+#: includes/admin/classes-admin.php:395
+msgid "Retirer cet élève de la classe ? Sa progression est conservée."
+msgstr "Remove this student from the class? Their progress is kept."
+
+#: includes/admin/classes-admin.php:399
+msgid "Aucun élève inscrit : partagez le code d’invitation."
+msgstr "No students enrolled: share the invitation code."
+
+#: includes/admin/classes-admin.php:405
+msgid "Supprimer cette classe ? Les élèves conservent leur progression."
+msgstr "Delete this class? Students keep their progress."
+
+#: includes/admin/classes-admin.php:405
+msgid "Supprimer la classe"
+msgstr "Delete the class"
+
+#: includes/admin/meta-boxes.php:34
+msgid "Propositions et correction"
+msgstr "Answer choices and answer key"
+
+#: includes/admin/meta-boxes.php:35
+msgid "Réglages du quiz"
+msgstr "Quiz settings"
+
+#: includes/admin/meta-boxes.php:36
+msgid "Rattachements"
+msgstr "Assignments"
+
+#: includes/admin/meta-boxes.php:37
+msgid "Accès"
+msgstr "Access"
+
+#: includes/admin/meta-boxes.php:38
+msgid "Référencement (Learn & Drive)"
+msgstr "SEO (Learn & Drive)"
+
+#: includes/admin/meta-boxes.php:57
+#: includes/admin/meta-boxes.php:109
+msgid "Proposition"
+msgstr "Answer choice"
+
+#: includes/admin/meta-boxes.php:58
+#: includes/admin/meta-boxes.php:111
+#: includes/render.php:39
+msgid "Bonne réponse"
+msgstr "Correct answer"
+
+#: includes/admin/meta-boxes.php:59
+#: includes/admin/meta-boxes.php:110
+#: includes/admin/meta-boxes.php:110
+msgid "Correspondance"
+msgstr "Match"
+
+#: includes/admin/meta-boxes.php:86
+msgid "L’énoncé est le titre. L’explication (obligatoire, 40 mots minimum pour être indexée) se rédige dans le contenu : réponse dans la première phrase, règle citée."
+msgstr "The question text is the title. The explanation (required, at least 40 words to be indexed) goes in the content: the answer in the first sentence, with the rule cited."
+
+#: includes/admin/meta-boxes.php:91
+msgid "Explication trop courte (%d mots) : la question ne sera pas indexée par les moteurs de recherche."
+msgstr "Explanation too short (%d words): the question will not be indexed by search engines."
+
+#: includes/admin/meta-boxes.php:96
+#: includes/admin/meta-boxes.php:275
+#: includes/admin/meta-boxes.php:765
+msgid "Format"
+msgstr "Format"
+
+#: includes/admin/meta-boxes.php:105
+msgid "Propositions"
+msgstr "Answer choices"
+
+#: includes/admin/meta-boxes.php:105
+msgid "(2 à 6, cochez la ou les bonnes réponses)"
+msgstr "(2 to 6, check the correct answer or answers)"
+
+#: includes/admin/meta-boxes.php:105
+msgid "(saisissez les éléments dans l’ordre juste : ils seront mélangés à l’affichage)"
+msgstr "(enter the items in the correct order: they will be shuffled when displayed)"
+
+#: includes/admin/meta-boxes.php:105
+msgid "(chaque ligne : un élément et sa correspondance)"
+msgstr "(each line: an item and its match)"
+
+#: includes/admin/meta-boxes.php:116
+msgid "Ajouter une proposition"
+msgstr "Add an answer choice"
+
+#: includes/admin/meta-boxes.php:120
+msgid "Zones justes de l’image"
+msgstr "Correct areas of the image"
+
+#: includes/admin/meta-boxes.php:120
+msgid "Dessinez la zone en faisant glisser sur l’image principale (enregistrez d’abord l’image principale). Valeurs en % de l’image."
+msgstr "Draw the area by dragging over the main image (save the main image first). Values in % denote positions relative to the image."
+
+#: includes/admin/meta-boxes.php:129
+#: includes/helpers.php:280
+msgid "Réponse numérique"
+msgstr "Numeric answer"
+
+#: includes/admin/meta-boxes.php:130
+msgid "Valeur"
+msgstr "Value"
+
+#: includes/admin/meta-boxes.php:131
+msgid "Tolérance ±"
+msgstr "Tolerance ±"
+
+#: includes/admin/meta-boxes.php:132
+msgid "Unité"
+msgstr "Unit"
+
+#: includes/admin/meta-boxes.php:137
+msgid "Source réglementaire"
+msgstr "Regulatory source"
+
+#: includes/admin/meta-boxes.php:138
+msgid "Code de la route, article R415-5"
+msgstr "French Highway Code, article R415-5"
+
+#: includes/admin/meta-boxes.php:141
+msgid "Identifiant officiel"
+msgstr "Official ID"
+
+#: includes/admin/meta-boxes.php:145
+msgid "Dernière vérification réglementaire"
+msgstr "Last regulatory check"
+
+#: includes/admin/meta-boxes.php:149
+msgid "Difficulté"
+msgstr "Difficulty"
+
+#: includes/admin/meta-boxes.php:152
+msgid "Facile"
+msgstr "Easy"
+
+#: includes/admin/meta-boxes.php:153
+msgid "Moyenne"
+msgstr "Medium"
+
+#: includes/admin/meta-boxes.php:154
+msgid "Difficile"
+msgstr "Hard"
+
+#: includes/admin/meta-boxes.php:156
+msgid "Question éliminatoire"
+msgstr "Automatic-fail question"
+
+#: includes/admin/meta-boxes.php:160
+msgid "Fiche liée"
+msgstr "Linked fact sheet"
+
+#: includes/admin/meta-boxes.php:164
+msgid "Leçon de révision"
+msgstr "Review lesson"
+
+#: includes/admin/meta-boxes.php:165
+msgid "Par défaut : la première leçon du même thème."
+msgstr "Default: the first lesson of the same topic."
+
+#: includes/admin/meta-boxes.php:171
+msgid "Signalements des apprenants"
+msgstr "Learner reports"
+
+#: includes/admin/meta-boxes.php:180
+msgid "%1$d réponses, %2$d %% de réussite."
+msgstr "%1$d answers, %2$d%% success rate."
+
+#: includes/admin/meta-boxes.php:224
+msgid "Mode"
+msgstr "Mode"
+
+#: includes/admin/meta-boxes.php:227
+msgid "Quiz thématique (correction immédiate)"
+msgstr "Topic quiz (instant feedback)"
+
+#: includes/admin/meta-boxes.php:228
+msgid "Entraînement libre"
+msgstr "Free practice"
+
+#: includes/admin/meta-boxes.php:229
+msgid "Examen blanc (conditions réelles, tirage aléatoire)"
+msgstr "Mock exam (real conditions, random draw)"
+
+#: includes/admin/meta-boxes.php:239
+msgid "Sans liste manuelle, le quiz pioche dans les %d questions publiées qui partagent ses pays, catégories et thèmes."
+msgstr "Without a manual list, the quiz draws from the %d published questions that share its countries, categories and topics."
+
+#: includes/admin/meta-boxes.php:242
+msgid "Liste manuelle (ID séparés par des virgules, optionnel)"
+msgstr "Manual list (comma-separated IDs, optional)"
+
+#: includes/admin/meta-boxes.php:248
+msgid "Règles"
+msgstr "Rules"
+
+#: includes/admin/meta-boxes.php:249
+msgid "Laissez vide pour hériter des règles du pays et de la catégorie (valeur effective entre crochets)."
+msgstr "Leave empty to inherit the country and category rules (effective value in brackets)."
+
+#: includes/admin/meta-boxes.php:266
+#: includes/classes.php:507
+msgid "oui"
+msgstr "yes"
+
+#: includes/admin/meta-boxes.php:266
+#: includes/classes.php:507
+msgid "non"
+msgstr "no"
+
+#: includes/admin/meta-boxes.php:278
+#: includes/admin/meta-boxes.php:301
+#: includes/admin/meta-boxes.php:317
+msgid "— hériter —"
+msgstr "— inherit —"
+
+#: includes/admin/meta-boxes.php:286
+msgid "Nombre de questions"
+msgstr "Number of questions"
+
+#: includes/admin/meta-boxes.php:290
+msgid "Durée totale (secondes)"
+msgstr "Total duration (seconds)"
+
+#: includes/admin/meta-boxes.php:294
+msgid "Temps par question (secondes)"
+msgstr "Time per question (seconds)"
+
+#: includes/admin/meta-boxes.php:298
+msgid "Seuil de réussite"
+msgstr "Pass mark"
+
+#: includes/admin/meta-boxes.php:302
+msgid "Pourcentage minimum"
+msgstr "Minimum percentage"
+
+#: includes/admin/meta-boxes.php:303
+msgid "Bonnes réponses minimum"
+msgstr "Minimum correct answers"
+
+#: includes/admin/meta-boxes.php:304
+msgid "Erreurs maximum"
+msgstr "Maximum mistakes"
+
+#: includes/admin/meta-boxes.php:310
+msgid "Points négatifs par erreur"
+msgstr "Penalty points per mistake"
+
+#: includes/admin/meta-boxes.php:314
+msgid "Retour arrière"
+msgstr "Going back"
+
+#: includes/admin/meta-boxes.php:318
+msgid "Autorisé"
+msgstr "Allowed"
+
+#: includes/admin/meta-boxes.php:319
+msgid "Interdit"
+msgstr "Not allowed"
+
+#: includes/admin/meta-boxes.php:337
+msgid "L’ordre des leçons suit l’attribut « Ordre »."
+msgstr "Lesson order follows the “Order” attribute."
+
+#: includes/admin/meta-boxes.php:340
+#: blocks/sheet-meta/render.php:36
+msgid "Code officiel"
+msgstr "Official code"
+
+#: includes/admin/meta-boxes.php:343
+msgid "Synonymes"
+msgstr "Synonyms"
+
+#: includes/admin/meta-boxes.php:343
+msgid "Séparés par des virgules, liés automatiquement dans les textes."
+msgstr "Comma-separated, automatically linked in texts."
+
+#: includes/admin/meta-boxes.php:346
+msgid "Ce qui a changé (historique visible)"
+msgstr "What changed (visible history)"
+
+#: includes/admin/meta-boxes.php:347
+msgid "Ex. : nouveau tarif de l’examen"
+msgstr "E.g.: new exam fee"
+
+#: includes/admin/meta-boxes.php:348
+msgid "Renseignez ce champ lors d’une mise à jour importante : la date et la note s’ajoutent à l’historique."
+msgstr "Fill in this field for a significant update: the date and note are added to the history."
+
+#: includes/admin/meta-boxes.php:350
+msgid "Leçon « À réviser »"
+msgstr "“To review” lesson"
+
+#: includes/admin/meta-boxes.php:367
+msgid "Hériter (catégorie, cours, réglage global)"
+msgstr "Inherit (category, course, global setting)"
+
+#: includes/admin/meta-boxes.php:368
+msgid "Gratuit, ouvert à tous"
+msgstr "Free, open to all"
+
+#: includes/admin/meta-boxes.php:370
+msgid "Premium (offre payante)"
+msgstr "Premium (paid offer)"
+
+#: includes/admin/meta-boxes.php:378
+msgid "Règle effective : %s"
+msgstr "Effective rule: %s"
+
+#: includes/admin/meta-boxes.php:380
+msgid "Astuce : insérez un bloc « Lire la suite » pour garder le début de la leçon gratuit."
+msgstr "Tip: insert a “Read more” block to keep the start of the lesson free."
+
+#: includes/admin/meta-boxes.php:392
+msgid "Un plugin SEO est actif : titres et descriptions se règlent dans ce plugin. Les données structurées Learn & Drive y sont fusionnées automatiquement."
+msgstr "An SEO plugin is active: titles and descriptions are set in that plugin. Learn & Drive structured data is merged into it automatically."
+
+#: includes/admin/meta-boxes.php:400
+msgid "Titre SEO"
+msgstr "SEO title"
+
+#: includes/admin/meta-boxes.php:402
+msgid "Variables : {title} {track} {topic} {country} {site}. Visez 50 à 60 caractères."
+msgstr "Variables: {title} {track} {topic} {country} {site}. Aim for 50 to 60 characters."
+
+#: includes/admin/meta-boxes.php:405
+msgid "Titre de partage (Open Graph)"
+msgstr "Share title (Open Graph)"
+
+#: includes/admin/meta-boxes.php:409
+msgid "Meta description"
+msgstr "Meta description"
+
+#: includes/admin/meta-boxes.php:413
+msgid "Exclure des moteurs de recherche (noindex)"
+msgstr "Exclude from search engines (noindex)"
+
+#: includes/admin/meta-boxes.php:417
+msgid "Quasi-doublon : question canonique (ID)"
+msgstr "Near-duplicate: canonical question (ID)"
+
+#: includes/admin/meta-boxes.php:461
+#: includes/questions.php:209
+msgid "Vrai"
+msgstr "True"
+
+#: includes/admin/meta-boxes.php:465
+#: includes/questions.php:213
+msgid "Faux"
+msgstr "False"
+
+#: includes/admin/meta-boxes.php:576
+msgid "Couleur"
+msgstr "Color"
+
+#: includes/admin/meta-boxes.php:580
+msgid "Accès par défaut"
+msgstr "Default access"
+
+#: includes/admin/meta-boxes.php:586
+msgid "Hériter du réglage global"
+msgstr "Inherit the global setting"
+
+#: includes/admin/meta-boxes.php:598
+#: blocks/track-facts/render.php:24
+msgid "Âge minimum"
+msgstr "Minimum age"
+
+#: includes/admin/meta-boxes.php:602
+msgid "Contenu de la page pilier"
+msgstr "Pillar page content"
+
+#: includes/admin/meta-boxes.php:614
+msgid "Conditions d’inscription, déroulé de l’examen, FAQ éditoriale…"
+msgstr "Eligibility requirements, how the exam works, editorial FAQ…"
+
+#: includes/admin/meta-boxes.php:618
+msgid "Équivalence entre pays"
+msgstr "Cross-country equivalence"
+
+#: includes/admin/meta-boxes.php:621
+msgid "Même clé pour les catégories équivalentes d’un pays à l’autre (ex. « b » pour patente B, permis B, permiso B) : les pages sont reliées pour Google (hreflang)."
+msgstr "Same key for equivalent categories from one country to another (e.g. “b” for patente B, permis B, permiso B): the pages are linked for Google (hreflang)."
+
+#: includes/admin/meta-boxes.php:631
+msgid "Règles de l’examen"
+msgstr "Exam rules"
+
+#: includes/admin/meta-boxes.php:653
+msgid "Marché"
+msgstr "Market"
+
+#: includes/admin/meta-boxes.php:656
+msgid "Marché principal du site : toujours en ligne."
+msgstr "Main market of the site: always online."
+
+#: includes/admin/meta-boxes.php:658
+msgid "En ligne"
+msgstr "Online"
+
+#: includes/admin/meta-boxes.php:659
+msgid "Décoché : marché en préparation. Ses contenus ne sont visibles que des éditeurs, jamais indexés ni présents dans les sitemaps."
+msgstr "Unchecked: market in preparation. Its content is visible to editors only, never indexed or included in sitemaps."
+
+#: includes/admin/meta-boxes.php:664
+msgid "Langue de l’interface"
+msgstr "Interface language"
+
+#: includes/admin/meta-boxes.php:667
+msgid "Langue du site"
+msgstr "Site language"
+
+#: includes/admin/meta-boxes.php:672
+msgid "Les pages de ce marché s’affichent dans cette langue (menus, boutons, dates) et sont reliées aux autres marchés pour Google (hreflang)."
+msgstr "This market’s pages are displayed in this language (menus, buttons, dates) and are linked to the other markets for Google (hreflang)."
+
+#: includes/admin/meta-boxes.php:676
+msgid "Adresse de l’accueil du marché"
+msgstr "Market home page URL"
+
+#: includes/admin/meta-boxes.php:679
+msgid "Ex. « fr » ou « permis » : page qui présente toutes les catégories et l’actualité du marché. Vide : adresse du pays."
+msgstr "E.g. “fr” or “permis”: a page presenting all the categories and news for the market. Empty: the country URL."
+
+#: includes/admin/meta-boxes.php:683
+msgid "Segments d’URL"
+msgstr "URL segments"
+
+#: includes/admin/meta-boxes.php:702
+msgid "Dans la langue du marché (ex. « questions », « preguntas »). Vide : segment du site."
+msgstr "In the market’s language (e.g. “questions”, “preguntas”). Empty: the site’s segment."
+
+#: includes/admin/meta-boxes.php:766
+msgid "Indexable"
+msgstr "Indexable"
+
+#: includes/admin/meta-boxes.php:767
+msgid "Signalements"
+msgstr "Reports"
+
+#: includes/admin/meta-boxes.php:782
+msgid "Non"
+msgstr "No"
+
+#: includes/admin/meta-boxes.php:782
+msgid "Oui"
+msgstr "Yes"
+
+#: includes/admin/access-admin.php:22
+#: includes/admin/access-admin.php:22
+#: includes/admin/access-admin.php:73
+msgid "Accès et codes"
+msgstr "Access and codes"
+
+#: includes/admin/access-admin.php:35
+msgid "Inscription"
+msgstr "Sign-up"
+
+#: includes/admin/access-admin.php:58
+msgid "Accès ouvert."
+msgstr "Access granted."
+
+#: includes/admin/access-admin.php:60
+msgid "Aucun compte avec cette adresse."
+msgstr "No account with this email address."
+
+#: includes/admin/access-admin.php:66
+msgid "%d codes générés."
+msgstr "%d codes generated."
+
+#: includes/admin/access-admin.php:81
+msgid "Ce qui est gratuit ou payant, et pourquoi"
+msgstr "What is free or paid, and why"
+
+#: includes/admin/access-admin.php:92
+msgid "hérite du réglage global"
+msgstr "inherits the global setting"
+
+#: includes/admin/access-admin.php:119
+msgid "Ouvrir un accès"
+msgstr "Grant access"
+
+#: includes/admin/access-admin.php:121
+msgid "E-mail du compte"
+msgstr "Account email"
+
+#: includes/admin/access-admin.php:122
+#: includes/admin/access-admin.php:129
+#: includes/admin/access-admin.php:139
+msgid "Offre"
+msgstr "Plan"
+
+#: includes/admin/access-admin.php:122
+msgid "Jours"
+msgstr "Days"
+
+#: includes/admin/access-admin.php:122
+msgid "jours (0 = illimité)"
+msgstr "days (0 = unlimited)"
+
+#: includes/admin/access-admin.php:126
+msgid "Générer des codes d’accès"
+msgstr "Generate access codes"
+
+#: includes/admin/access-admin.php:130
+msgid "Durée (jours)"
+msgstr "Duration (days)"
+
+#: includes/admin/access-admin.php:131
+msgid "Utilisations par code"
+msgstr "Uses per code"
+
+#: includes/admin/access-admin.php:132
+msgid "Groupe (auto-école, classe)"
+msgstr "Group (driving school, class)"
+
+#: includes/admin/access-admin.php:133
+msgid "Générer"
+msgstr "Generate"
+
+#: includes/admin/access-admin.php:137
+msgid "Derniers accès ouverts"
+msgstr "Recently granted access"
+
+#: includes/admin/access-admin.php:139
+msgid "Utilisateur"
+msgstr "User"
+
+#: includes/admin/access-admin.php:139
+msgid "Début"
+msgstr "Start"
+
+#: includes/admin/access-admin.php:139
+msgid "Fin"
+msgstr "End"
+
+#: includes/admin/access-admin.php:139
+msgid "Origine"
+msgstr "Origin"
+
+#: includes/admin/access-admin.php:152
+msgid "Aucun accès pour le moment."
+msgstr "No access granted yet."
+
+#: includes/theme-bridge.php:299
+#: includes/post-types.php:202
+#: includes/post-types.php:202
+msgid "Pays"
+msgstr "Country"
+
+#: includes/pwa.php:177
+msgid "Hors ligne"
+msgstr "Offline"
+
+#: includes/pwa.php:195
+msgid "Vous êtes hors ligne"
+msgstr "You are offline"
+
+#: includes/pwa.php:196
+msgid "Pas de connexion pour le moment. Vous pouvez continuer à réviser les pages déjà consultées sur cet appareil."
+msgstr "No connection right now. You can keep studying the pages you have already viewed on this device."
+
+#: includes/pwa.php:197
+msgid "Réessayer"
+msgstr "Try again"
+
+#: includes/pwa.php:198
+msgid "Disponibles hors ligne"
+msgstr "Available offline"
+
+#: includes/pwa.php:200
+msgid "Aucune page enregistrée pour l’instant : les leçons, questions et fiches que vous ouvrez avec une connexion restent ensuite disponibles ici."
+msgstr "No pages saved yet: the lessons, questions and fact sheets you open while connected will then remain available here."
+
+#: includes/classes.php:96
+msgid "Classes"
+msgstr "Classes"
+
+#: includes/classes.php:176
+msgid "Donnez un nom à la classe."
+msgstr "Give the class a name."
+
+#: includes/classes.php:301
+msgid "Code de classe inconnu. Vérifiez-le auprès de votre auto-école."
+msgstr "Unknown class code. Check it with your driving school."
+
+#: includes/classes.php:304
+msgid "Cette classe n’accepte plus de nouveaux élèves."
+msgstr "This class is no longer accepting new students."
+
+#: includes/classes.php:309
+msgid "Vous faites déjà partie de cette classe."
+msgstr "You are already a member of this class."
+
+#: includes/classes.php:312
+msgid "Cette classe est complète."
+msgstr "This class is full."
+
+#: includes/classes.php:377
+msgid "Choisissez un quiz publié."
+msgstr "Choose a published quiz."
+
+#: includes/classes.php:473
+msgid "Élève"
+msgstr "Student"
+
+#: includes/classes.php:474
+msgid "E-mail"
+msgstr "Email"
+
+#: includes/classes.php:475
+#: includes/classes.php:666
+msgid "Inscrit le"
+msgstr "Enrolled on"
+
+#: includes/classes.php:476
+msgid "Dernière activité"
+msgstr "Last activity"
+
+#: includes/classes.php:477
+msgid "Questions répondues"
+msgstr "Questions answered"
+
+#: includes/classes.php:478
+msgid "Bonnes réponses (%)"
+msgstr "Correct answers (%)"
+
+#: includes/classes.php:480
+msgid "Examens réussis, 5 derniers (%)"
+msgstr "Exams passed, last 5 (%)"
+
+#: includes/classes.php:481
+#: blocks/dashboard/render.php:88
+msgid "Prêt pour l’examen"
+msgstr "Ready for the exam"
+
+#: includes/classes.php:482
+msgid "Thème le plus faible"
+msgstr "Weakest topic"
+
+#: includes/classes.php:483
+msgid "Erreurs à revoir"
+msgstr "Mistakes to review"
+
+#: includes/classes.php:516
+msgid "en retard"
+msgstr "overdue"
+
+#: includes/classes.php:516
+msgid "à faire"
+msgstr "to do"
+
+#: includes/classes.php:638
+#: includes/classes.php:658
+#: includes/classes.php:702
+msgid "Classes d’auto-école"
+msgstr "Driving school classes"
+
+#: includes/questions.php:341
+msgid "la zone surlignée sur l’image"
+msgstr "the highlighted area in the image"
+
+#: includes/questions.php:485
+msgid "Rédigez l’explication de la question (dans le contenu) avant de la publier."
+msgstr "Write the question’s explanation (in the content) before publishing it."
+
+#: includes/demo.php:466
+msgid "Panneau « %s »"
+msgstr "“%s” sign"
+
+#: includes/demo.php:520
+msgid "Trois panneaux côte à côte : cédez le passage, stop et sens interdit"
+msgstr "Three signs side by side: yield, stop and do not enter"
+
+#: includes/demo.php:632
+#: includes/seo/breadcrumbs.php:72
+msgid "Accueil"
+msgstr "Home"
+
+#: includes/demo.php:640
+#: includes/seo/context.php:218
+#: includes/seo/breadcrumbs.php:36
+msgid "Actualités"
+msgstr "News"
+
+#: includes/demo.php:657
+msgid "Pages"
+msgstr "Pages"
+
+#: includes/demo.php:657
+msgid "Rubriques d’actualité"
+msgstr "News sections"
+
+#: includes/demo.php:664
+msgid "Contact"
+msgstr "Contact"
+
+#: includes/demo.php:665
+msgid "Une question sur nos contenus, une erreur à signaler ? Écrivez-nous à l’adresse indiquée dans les mentions légales : nous répondons sous 48 heures ouvrées."
+msgstr "A question about our content, or an error to report? Write to us at the address given in the legal notice: we reply within 48 business hours."
+
+#: includes/demo.php:673
+msgid "Politique de confidentialité"
+msgstr "Privacy policy"
+
+#: includes/demo.php:674
+msgid "Aucun cookie non essentiel n’est déposé avant votre consentement. Vos statistiques d’apprentissage sont pseudonymisées, exportables et supprimables à tout moment depuis votre espace."
+msgstr "No non-essential cookies are set before you give your consent. Your learning statistics are pseudonymized and can be exported or deleted at any time from your account."
+
+#: includes/demo.php:695
+msgid "Enseignant de la conduite et de la sécurité routière"
+msgstr "Driving and road safety instructor"
+
+#: includes/demo.php:696
+msgid "Code de la route, Pédagogie, Sécurité routière"
+msgstr "Rules of the road, Teaching, Road safety"
+
+#: includes/integrations.php:28
+msgid "Offre d’accès Learn & Drive"
+msgstr "Learn & Drive access plan"
+
+#: includes/integrations.php:31
+msgid "« all » pour tout le contenu premium, « track:slug » pour une catégorie, « post:ID » pour un cours."
+msgstr "“all” for all premium content, “track:slug” for a category, “post:ID” for a course."
+
+#: includes/integrations.php:37
+msgid "Durée d’accès (jours)"
+msgstr "Access duration (days)"
+
+#: includes/integrations.php:41
+msgid "0 = accès illimité. Pour un abonnement, l’accès suit l’état de l’abonnement."
+msgstr "0 = unlimited access. For a subscription, access follows the subscription status."
+
+#: includes/integrations.php:220
+msgid "Profil d’auteur (Learn & Drive)"
+msgstr "Author profile (Learn & Drive)"
+
+#: includes/integrations.php:223
+msgid "Fonction"
+msgstr "Job title"
+
+#: includes/integrations.php:224
+msgid "Moniteur diplômé, juriste…"
+msgstr "Certified instructor, lawyer…"
+
+#: includes/integrations.php:228
+msgid "Séparées par des virgules."
+msgstr "Comma-separated."
+
+#: includes/integrations.php:231
+msgid "Profils publics"
+msgstr "Public profiles"
+
+#: includes/integrations.php:232
+msgid "Une URL par ligne (LinkedIn, site professionnel…)."
+msgstr "One URL per line (LinkedIn, professional website…)."
+
+#: includes/integrations.php:296
+msgid "Invité"
+msgstr "Guest"
+
+#: includes/quizzes.php:202
+msgid "%1$d bonnes réponses sur %2$d minimum"
+msgstr "%1$d correct answers out of %2$d minimum"
+
+#: includes/quizzes.php:205
+msgid "%d erreur maximum"
+msgid_plural "%d erreurs maximum"
+msgstr[0] "%d mistake maximum"
+msgstr[1] "%d mistakes maximum"
+
+#: includes/quizzes.php:208
+msgid "%d %% de bonnes réponses"
+msgstr "%d%% correct answers"
+
+#: includes/quizzes.php:592
+msgid "Divers"
+msgstr "Miscellaneous"
+
+#: includes/import.php:195
+msgid "Titre (énoncé) manquant."
+msgstr "Missing title (question text)."
+
+#: includes/import.php:203
+#: includes/import.php:214
+msgid "Propositions invalides : %s"
+msgstr "Invalid answer choices: %s"
+
+#: includes/import.php:355
+msgid "Fichier illisible."
+msgstr "Unreadable file."
+
+#: includes/import.php:373
+msgid "Ligne %1$d : %2$s"
+msgstr "Line %1$d: %2$s"
+
+#: includes/post-types.php:43
+msgid "Ajouter une %s"
+msgstr "Add new %s"
+
+#: includes/post-types.php:43
+msgid "Ajouter un %s"
+msgstr "Add new %s"
+
+#: includes/post-types.php:44
+msgid "Ajouter"
+msgstr "Add"
+
+#: includes/post-types.php:46
+#: includes/post-types.php:326
+msgid "Modifier : %s"
+msgstr "Edit: %s"
+
+#: includes/post-types.php:48
+msgid "Voir : %s"
+msgstr "View: %s"
+
+#: includes/post-types.php:50
+#: includes/post-types.php:330
+msgid "Rechercher : %s"
+msgstr "Search: %s"
+
+#: includes/post-types.php:51
+msgid "Aucun élément trouvé."
+msgstr "No items found."
+
+#: includes/post-types.php:52
+msgid "Aucun élément dans la corbeille."
+msgstr "No items found in Trash."
+
+#: includes/post-types.php:55
+msgid "Image principale"
+msgstr "Featured image"
+
+#: includes/post-types.php:56
+msgid "Définir l’image principale"
+msgstr "Set featured image"
+
+#: includes/post-types.php:57
+msgid "Retirer l’image principale"
+msgstr "Remove featured image"
+
+#: includes/post-types.php:58
+msgid "Utiliser comme image principale"
+msgstr "Use as featured image"
+
+#: includes/post-types.php:81
+msgid "Parcours complet par catégorie ou matière."
+msgstr "Complete track by category or subject."
+
+#: includes/post-types.php:97
+#: includes/blocks.php:542
+msgid "Leçon"
+msgstr "Lesson"
+
+#: includes/post-types.php:98
+msgid "Unité de cours, théorique ou pratique."
+msgstr "Course unit, theory or practical."
+
+#: includes/post-types.php:115
+#: includes/blocks.php:543
+msgid "Question"
+msgstr "Question"
+
+#: includes/post-types.php:116
+msgid "Question avec propositions, correction et explication."
+msgstr "Question with answer choices, answer key and explanation."
+
+#: includes/post-types.php:134
+msgid "Série de questions : thématique, entraînement ou examen blanc."
+msgstr "Set of questions: topic quiz, practice or mock exam."
+
+#: includes/post-types.php:151
+msgid "Fiche : panneau, manœuvre, notion, formule."
+msgstr "Fact sheet: road sign, maneuver, concept, formula."
+
+#: includes/post-types.php:167
+#: includes/blocks.php:546
+msgid "Info & démarche"
+msgstr "Guide & procedure"
+
+#: includes/post-types.php:168
+msgid "Contenu pratique mis à jour : coûts, documents, délais."
+msgstr "Updated practical content: costs, documents, timelines."
+
+#: includes/post-types.php:184
+msgid "Définition"
+msgstr "Definition"
+
+#: includes/post-types.php:185
+msgid "Définitions courtes, liées automatiquement dans les textes."
+msgstr "Short definitions, automatically linked in texts."
+
+#: includes/post-types.php:203
+msgid "Pays ou juridiction : règles d’examen, format des questions."
+msgstr "Country or jurisdiction: exam rules, question format."
+
+#: includes/post-types.php:220
+msgid "Structure les silos : chaque terme a sa page pilier."
+msgstr "Structures the silos: each term has its own pillar page."
+
+#: includes/post-types.php:237
+msgid "Thèmes du programme officiel de chaque pays."
+msgstr "Topics of each country’s official syllabus."
+
+#: includes/post-types.php:253
+msgid "Type d’épreuve"
+msgstr "Test type"
+
+#: includes/post-types.php:253
+msgid "Types d’épreuve"
+msgstr "Test types"
+
+#: includes/post-types.php:279
+msgid "Matière"
+msgstr "Subject"
+
+#: includes/post-types.php:279
+msgid "Matières"
+msgstr "Subjects"
+
+#: includes/post-types.php:280
+msgid "Rend le site utilisable hors permis (physique, langues…)."
+msgstr "Makes the site usable beyond driver’s licenses (physics, languages…)."
+
+#: includes/post-types.php:296
+msgid "Famille"
+msgstr "Family"
+
+#: includes/post-types.php:296
+msgid "Familles"
+msgstr "Families"
+
+#: includes/post-types.php:328
+msgid "Ajouter : %s"
+msgstr "Add: %s"
+
+#: includes/post-types.php:331
+msgid "Aucun terme trouvé."
+msgstr "No terms found."
+
+#: includes/post-types.php:332
+msgid "← Retour"
+msgstr "← Back"
+
+#: includes/helpers.php:277
+msgid "Vrai / faux"
+msgstr "True / false"
+
+#: includes/helpers.php:278
+msgid "Choix unique"
+msgstr "Single choice"
+
+#: includes/helpers.php:279
+msgid "Choix multiple"
+msgstr "Multiple choice"
+
+#: includes/helpers.php:281
+msgid "Remettre dans l’ordre"
+msgstr "Put in order"
+
+#: includes/helpers.php:282
+msgid "Association"
+msgstr "Matching"
+
+#: includes/helpers.php:283
+msgid "Image cliquable"
+msgstr "Clickable image"
+
+#: includes/helpers.php:284
+msgid "Carte mémoire"
+msgstr "Flashcard"
+
+#: includes/helpers.php:299
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d minute"
+msgstr[1] "%d minutes"
+
+#: includes/helpers.php:302
+msgid "%d seconde"
+msgid_plural "%d secondes"
+msgstr[0] "%d second"
+msgstr[1] "%d seconds"
+
+#: includes/seo/context.php:134
+msgid "Quiz %2$s : %1$s"
+msgstr "%2$s quiz: %1$s"
+
+#: includes/seo/context.php:136
+msgid "Réponse et explication détaillée."
+msgstr "Answer and detailed explanation."
+
+#: includes/seo/context.php:231
+msgid "Recherche : %s"
+msgstr "Search: %s"
+
+#: includes/seo/context.php:235
+#: includes/seo/breadcrumbs.php:186
+msgid "Page introuvable"
+msgstr "Page not found"
+
+#: includes/seo/context.php:249
+msgid "Page %d"
+msgstr "Page %d"
+
+#: includes/seo/context.php:277
+msgid "Actualités de %1$s : %2$s."
+msgstr "%1$s news: %2$s."
+
+#: includes/seo/context.php:284
+msgid "Actualités « %1$s » sur %2$s : les dernières informations, expliquées et reliées aux cours et quiz."
+msgstr "“%1$s” news on %2$s: the latest updates, explained and linked to courses and quizzes."
+
+#: includes/seo/breadcrumbs.php:184
+msgid "Recherche"
+msgstr "Search"
+
+#: includes/render.php:40
+msgid "Mauvaise réponse"
+msgstr "Wrong answer"
+
+#: includes/render.php:41
+msgid "Réponse attendue :"
+msgstr "Expected answer:"
+
+#: includes/render.php:42
+msgid "La correction détaillée est réservée aux abonnés."
+msgstr "The detailed answer key is for subscribers only."
+
+#: includes/render.php:43
+msgid "Débloquer"
+msgstr "Unlock"
+
+#: includes/render.php:44
+msgid "Réussi ! Vous avez atteint le seuil de réussite."
+msgstr "Passed! You reached the pass mark."
+
+#: includes/render.php:45
+msgid "Pas encore : continuez à réviser les thèmes ci-dessous."
+msgstr "Not yet: keep studying the topics below."
+
+#: includes/render.php:46
+msgid "Connexion impossible. Vos réponses sont conservées : réessayez."
+msgstr "Unable to connect. Your answers have been kept: try again."
+
+#: includes/render.php:47
+msgid "Merci, votre signalement a été transmis."
+msgstr "Thank you, your report has been sent."
+
+#: includes/render.php:48
+msgid "Lien copié : envoyez-le pour lancer le défi !"
+msgstr "Link copied: send it to start the challenge!"
+
+#: includes/render.php:49
+msgid "Score à battre :"
+msgstr "Score to beat:"
+
+#: includes/render.php:50
+msgid "Revoir la leçon"
+msgstr "Review the lesson"
+
+#: includes/render.php:51
+msgid "Temps écoulé"
+msgstr "Time’s up"
+
+#: includes/render.php:52
+msgid "erreur(s) sur"
+msgstr "mistake(s) out of"
+
+#: includes/render.php:54
+msgid "J’ai obtenu %s. Ferez-vous mieux ?"
+msgstr "I scored %s. Can you do better?"
+
+#: includes/render.php:109
+#: includes/render.php:114
+msgid "Votre réponse"
+msgstr "Your answer"
+
+#: includes/render.php:138
+msgid "Retourner la carte"
+msgstr "Flip the card"
+
+#: includes/render.php:167
+msgid "Une ou plusieurs bonnes réponses."
+msgstr "One or more correct answers."
+
+#: includes/render.php:204
+msgid "Question %d"
+msgstr "Question %d"
+
+#: includes/render.php:218
+msgid "Valider"
+msgstr "Submit"
+
+#: includes/render.php:223
+msgid "Je savais"
+msgstr "I knew it"
+
+#: includes/render.php:224
+msgid "À revoir"
+msgstr "To review"
+
+#: includes/render.php:235
+msgid "Signaler une erreur"
+msgstr "Report an error"
+
+#: includes/render.php:238
+msgid "Qu’est-ce qui ne va pas dans cette question ?"
+msgstr "What is wrong with this question?"
+
+#: includes/render.php:239
+msgid "Envoyer"
+msgstr "Send"
+
+#: includes/render.php:396
+#: includes/blocks.php:322
+#: includes/blocks.php:339
+msgid "%d question"
+msgid_plural "%d questions"
+msgstr[0] "%d question"
+msgstr[1] "%d questions"
+
+#: includes/render.php:400
+msgid "%s au total"
+msgstr "%s in total"
+
+#: includes/render.php:403
+#: blocks/track-facts/render.php:38
+msgid "%s par question"
+msgstr "%s per question"
+
+#: includes/render.php:405
+msgid "Sans limite de temps"
+msgstr "No time limit"
+
+#: includes/render.php:407
+msgid "Correction après chaque question"
+msgstr "Answers shown after each question"
+
+#: includes/render.php:409
+msgid "Retour arrière impossible"
+msgstr "No going back"
+
+#: includes/render.php:429
+msgid "Lancer l’examen blanc"
+msgstr "Start the mock exam"
+
+#: includes/render.php:432
+msgid "Commencer l’examen"
+msgstr "Start the exam"
+
+#: includes/render.php:432
+msgid "Commencer le quiz"
+msgstr "Start the quiz"
+
+#: includes/render.php:433
+msgid "Reprendre où j’en étais"
+msgstr "Resume where I left off"
+
+#: includes/render.php:438
+msgid "Temps majoré (+ 50 %, aménagement d’épreuve)"
+msgstr "Extended time (+50%, test accommodation)"
+
+#: includes/render.php:449
+msgid "Quitter le quiz"
+msgstr "Quit the quiz"
+
+#: includes/render.php:451
+msgid "Progression"
+msgstr "Progress"
+
+#: includes/render.php:453
+msgid "Temps restant"
+msgstr "Time remaining"
+
+#: includes/render.php:455
+msgid "Agrandir le texte"
+msgstr "Enlarge text"
+
+#: includes/render.php:456
+msgid "Police adaptée à la dyslexie"
+msgstr "Dyslexia-friendly font"
+
+#: includes/render.php:480
+msgid "← Précédente"
+msgstr "← Previous"
+
+#: includes/render.php:481
+msgid "Suivante →"
+msgstr "Next →"
+
+#: includes/render.php:482
+msgid "Terminer et corriger"
+msgstr "Finish and check answers"
+
+#: includes/render.php:482
+msgid "Voir mon résultat"
+msgstr "See my result"
+
+#: includes/render.php:483
+msgid "Retour au résultat"
+msgstr "Back to result"
+
+#: includes/render.php:492
+msgid "Votre résultat"
+msgstr "Your result"
+
+#: includes/render.php:496
+msgid "Erreurs par thème"
+msgstr "Mistakes by topic"
+
+#: includes/render.php:499
+msgid "Revoir la correction"
+msgstr "Review the answers"
+
+#: includes/render.php:501
+msgid "Nouvel examen blanc"
+msgstr "New mock exam"
+
+#: includes/render.php:503
+msgid "Recommencer"
+msgstr "Start over"
+
+#: includes/render.php:506
+msgid "Défier un ami"
+msgstr "Challenge a friend"
+
+#: includes/render.php:513
+msgid "Faire le quiz complet"
+msgstr "Take the full quiz"
+
+#: includes/render.php:553
+msgid "Voir la réponse et l’explication"
+msgstr "See the answer and explanation"
+
+#: includes/render.php:558
+msgid "Bonne réponse :"
+msgstr "Correct answer:"
+
+#: includes/render.php:570
+msgid "Référence officielle :"
+msgstr "Official reference:"
+
+#: includes/render.php:573
+msgid "Vérifiée le"
+msgstr "Checked on"
+
+#: includes/render.php:578
+msgid "%d %% des apprenants trouvent la bonne réponse"
+msgstr "%d%% of learners find the correct answer"
+
+#: includes/render.php:599
+msgid "Remettez les éléments dans le bon ordre avec les flèches."
+msgstr "Put the items in the correct order using the arrows."
+
+#: includes/render.php:612
+msgid "Monter : %s"
+msgstr "Move up: %s"
+
+#: includes/render.php:614
+msgid "Descendre : %s"
+msgstr "Move down: %s"
+
+#: includes/render.php:632
+msgid "— Choisir —"
+msgstr "— Choose —"
+
+#: includes/render.php:637
+msgid "Associez chaque élément à sa correspondance."
+msgstr "Match each item with its counterpart."
+
+#: includes/render.php:660
+msgid "Image manquante pour cette question."
+msgstr "Image missing for this question."
+
+#: includes/render.php:683
+msgid "Zone ligne %1$d, colonne %2$d"
+msgstr "Area row %1$d, column %2$d"
+
+#: includes/render.php:690
+msgid "Touchez la zone de l’image qui répond à la question."
+msgstr "Tap the area of the image that answers the question."
+
+#: includes/render.php:692
+msgid "Zones de l’image"
+msgstr "Image areas"
+
+#: includes/render.php:740
+msgid "Composition de la fiche d’examen"
+msgstr "Exam paper composition"
+
+#: includes/render.php:742
+msgid "Chaque examen blanc tire au hasard %d questions selon la répartition officielle par thème : jamais deux fois la même fiche."
+msgstr "Each mock exam randomly draws %d questions following the official breakdown by topic: never the same paper twice."
+
+#: includes/render.php:743
+msgid "Thème"
+msgstr "Topic"
+
+#: includes/render.php:744
+msgid "Questions dans la banque"
+msgstr "Questions in the bank"
+
+#: includes/render.php:745
+msgid "Questions à l’examen"
+msgstr "Questions in the exam"
+
+#: includes/access.php:405
+msgid "Ce code n’existe pas."
+msgstr "This code does not exist."
+
+#: includes/access.php:408
+#: includes/access.php:416
+msgid "Ce code a déjà été utilisé."
+msgstr "This code has already been used."
+
+#: includes/access.php:411
+msgid "Ce code a expiré."
+msgstr "This code has expired."
+
+#: includes/access.php:453
+msgid "Contenu gratuit réservé aux inscrits"
+msgstr "Free content for registered users"
+
+#: includes/access.php:454
+msgid "Créez votre compte gratuit pour lire la suite et suivre votre progression."
+msgstr "Create your free account to keep reading and track your progress."
+
+#: includes/access.php:455
+msgid "Créer mon compte gratuit"
+msgstr "Create my free account"
+
+#: includes/access.php:459
+#: includes/access.php:477
+#: blocks/dashboard/render.php:27
+msgid "Se connecter"
+msgstr "Log in"
+
+#: includes/access.php:463
+msgid "La suite de cette leçon est réservée aux abonnés"
+msgstr "The rest of this lesson is for subscribers only"
+
+#: includes/access.php:464
+msgid "Correction détaillée réservée aux abonnés"
+msgstr "Detailed answer key for subscribers only"
+
+#: includes/access.php:465
+msgid "Ce quiz fait partie de l’accès premium"
+msgstr "This quiz is part of premium access"
+
+#: includes/access.php:468
+msgid "Débloquez toutes les explications, les examens blancs illimités et la révision de vos erreurs."
+msgstr "Unlock all explanations, unlimited mock exams and review of your mistakes."
+
+#: includes/access.php:469
+msgid "Débloquer l’accès"
+msgstr "Unlock access"
+
+#: includes/access.php:475
+msgid "Déjà abonné ?"
+msgstr "Already a subscriber?"
+
+#: includes/blocks.php:112
+msgid "À réviser"
+msgstr "To review"
+
+#: includes/blocks.php:113
+msgid "Sur le même sujet"
+msgstr "On the same topic"
+
+#: includes/blocks.php:114
+msgid "Actualités liées"
+msgstr "Related news"
+
+#: includes/blocks.php:115
+msgid "Quiz du thème"
+msgstr "Topic quizzes"
+
+#: includes/blocks.php:116
+#: blocks/exam-link/render.php:27
+msgid "Quiz par thème"
+msgstr "Quizzes by topic"
+
+#: includes/blocks.php:117
+msgid "Questions de ce thème"
+msgstr "Questions on this topic"
+
+#: includes/blocks.php:118
+msgid "Autres quiz"
+msgstr "Other quizzes"
+
+#: includes/blocks.php:119
+msgid "Parcours de formation"
+msgstr "Learning track"
+
+#: includes/blocks.php:120
+msgid "Cours et leçons"
+msgstr "Courses and lessons"
+
+#: includes/blocks.php:121
+msgid "Leçons de ce thème"
+msgstr "Lessons on this topic"
+
+#: includes/blocks.php:122
+msgid "Questions proches"
+msgstr "Similar questions"
+
+#: includes/blocks.php:123
+msgid "Questions sur ce panneau"
+msgstr "Questions about this road sign"
+
+#: includes/blocks.php:124
+msgid "Fiches liées"
+msgstr "Related fact sheets"
+
+#: includes/blocks.php:125
+msgid "Dans la même famille"
+msgstr "In the same family"
+
+#: includes/blocks.php:127
+msgid "Voir aussi"
+msgstr "See also"
+
+#: includes/blocks.php:128
+msgid "Leçon à revoir"
+msgstr "Lesson to review"
+
+#: includes/blocks.php:539
+msgid "Actualité"
+msgstr "News"
+
+#: includes/blocks.php:540
+msgid "Page"
+msgstr "Page"
+
+#: includes/blocks.php:623
+msgid "%d min"
+msgstr "%d min"
+
+#: includes/blocks.php:626
+msgid "%d s / question"
+msgstr "%d s / question"
+
+#: includes/blocks.php:630
+msgid "%d erreur max"
+msgid_plural "%d erreurs max"
+msgstr[0] "%d mistake max"
+msgstr[1] "%d mistakes max"
+
+#: includes/blocks.php:633
+msgid "%1$d/%2$d pour réussir"
+msgstr "%1$d/%2$d to pass"
+
+#: includes/blocks.php:639
+msgid "dès %s ans"
+msgstr "from age %s"
+
+#: includes/media.php:128
+msgid "Vidéo"
+msgstr "Video"
+
+#: includes/media.php:142
+msgid "Lire la vidéo : %s"
+msgstr "Play the video: %s"
+
+#: includes/post-sections.php:226
+msgid "Segment d’URL des articles"
+msgstr "Article URL segment"
+
+#: includes/post-sections.php:229
+msgid "Court et parlant (ex. « news », « guide ») : les articles de la rubrique ont pour adresse /segment/article/. Vide : slug de la rubrique. Actif si « Adresses des articles par rubrique » est coché dans les réglages."
+msgstr "Short and meaningful (e.g. “news”, “guide”): articles in the section have the URL /segment/article/. Empty: the section slug. Active if “Article URLs by section” is checked in the settings."
+
+#: blocks/archive-intro/block.json
+msgctxt "block title"
+msgid "Introduction d'archive"
+msgstr "Archive introduction"
+
+#: blocks/archive-intro/block.json
+msgctxt "block description"
+msgid "Description de la rubrique ou du type de contenu."
+msgstr "Description of the section or content type."
+
+#: blocks/archive-intro/render.php:23
+msgid "%1$s — %2$s."
+msgstr "%1$s — %2$s."
+
+#: blocks/lesson-nav/block.json
+msgctxt "block title"
+msgid "Leçon précédente / suivante"
+msgstr "Previous / next lesson"
+
+#: blocks/lesson-nav/block.json
+msgctxt "block description"
+msgid "Navigation dans l'ordre du cours."
+msgstr "Navigation in course order."
+
+#: blocks/lesson-nav/render.php:27
+msgid "← Leçon précédente"
+msgstr "← Previous lesson"
+
+#: blocks/lesson-nav/render.php:30
+msgid "Leçon suivante →"
+msgstr "Next lesson →"
+
+#: blocks/lesson-nav/render.php:33
+msgid "Navigation entre les leçons"
+msgstr "Lesson navigation"
+
+#: blocks/stats/block.json
+msgctxt "block title"
+msgid "Chiffres clés"
+msgstr "Key figures"
+
+#: blocks/stats/block.json
+msgctxt "block description"
+msgid "Nombre de questions, quiz et catégories, calculé en direct."
+msgstr "Number of questions, quizzes and categories, calculated live."
+
+#: blocks/stats/render.php:28
+msgid "question expliquée"
+msgid_plural "questions expliquées"
+msgstr[0] "explained question"
+msgstr[1] "explained questions"
+
+#: blocks/stats/render.php:29
+msgid "quiz et examen blanc"
+msgid_plural "quiz et examens blancs"
+msgstr[0] "quiz and mock exam"
+msgstr[1] "quizzes and mock exams"
+
+#: blocks/stats/render.php:30
+msgid "leçon"
+msgid_plural "leçons"
+msgstr[0] "lesson"
+msgstr[1] "lessons"
+
+#: blocks/stats/render.php:31
+msgid "catégorie"
+msgid_plural "catégories"
+msgstr[0] "category"
+msgstr[1] "categories"
+
+#: blocks/term-content/block.json
+msgctxt "block title"
+msgid "Contenu de la page pilier"
+msgstr "Pillar page content"
+
+#: blocks/term-content/block.json
+msgctxt "block description"
+msgid "Contenu éditorial rédigé pour la catégorie (conditions, déroulé, FAQ)."
+msgstr "Editorial content written for the category (requirements, how it works, FAQ)."
+
+#: blocks/toc/block.json
+msgctxt "block title"
+msgid "Sommaire"
+msgstr "Table of contents"
+
+#: blocks/toc/block.json
+msgctxt "block description"
+msgid "Sommaire collant généré depuis les titres du contenu."
+msgstr "Sticky table of contents generated from the content headings."
+
+#: blocks/toc/render.php:31
+msgid "Sommaire"
+msgstr "Table of contents"
+
+#: blocks/track-facts/block.json
+msgctxt "block title"
+msgid "Règles de l'examen"
+msgstr "Exam rules"
+
+#: blocks/track-facts/block.json
+msgctxt "block description"
+msgid "Âge minimum, nombre de questions, durée et seuil de réussite de la catégorie."
+msgstr "Minimum age, number of questions, duration and pass mark for the category."
+
+#: blocks/track-facts/render.php:24
+msgid "%s ans"
+msgstr "%s years"
+
+#: blocks/track-facts/render.php:35
+#: blocks/track-facts/render.php:38
+msgid "Durée"
+msgstr "Duration"
+
+#: blocks/track-facts/render.php:40
+msgid "Réussite"
+msgstr "Pass mark"
+
+#: blocks/track-facts/render.php:56
+msgid "L’examen du %s en bref"
+msgstr "The %s exam at a glance"
+
+#: blocks/track-cards/block.json
+msgctxt "block title"
+msgid "Programmes phares"
+msgstr "Featured programs"
+
+#: blocks/track-cards/block.json
+msgctxt "block description"
+msgid "Cartes des catégories (permis, matières) avec les règles de l’examen, le nombre de leçons et de quiz, et un accès direct à l’examen blanc. Mode « examens » : choix de l’examen blanc à passer."
+msgstr "Category cards (licenses, subjects) with the exam rules, the number of lessons and quizzes, and direct access to the mock exam. “Exams” mode: choose which mock exam to take."
+
+#: blocks/track-cards/render.php:70
+msgid "%d leçon"
+msgid_plural "%d leçons"
+msgstr[0] "%d lesson"
+msgstr[1] "%d lessons"
+
+#: blocks/track-cards/render.php:74
+msgid "%d quiz"
+msgid_plural "%d quiz"
+msgstr[0] "%d quiz"
+msgstr[1] "%d quizzes"
+
+#: blocks/track-cards/render.php:86
+msgid "Commencer l’examen blanc"
+msgstr "Start the mock exam"
+
+#: blocks/track-cards/render.php:95
+msgid "Examens blancs en préparation :"
+msgstr "Mock exams in preparation:"
+
+#: blocks/question/block.json
+msgctxt "block title"
+msgid "Question"
+msgstr "Question"
+
+#: blocks/question/block.json
+msgctxt "block description"
+msgid "Énoncé, propositions, réponse et explication d'une question (page question)."
+msgstr "Question text, answer choices, answer and explanation of a question (question page)."
+
+#: blocks/quiz/block.json
+msgctxt "block title"
+msgid "Quiz"
+msgstr "Quiz"
+
+#: blocks/quiz/block.json
+msgctxt "block description"
+msgid "Lecteur de quiz : thématique, entraînement ou examen blanc. Questions lisibles par Google, correction côté serveur."
+msgstr "Quiz player: topic quiz, practice or mock exam. Questions readable by Google, answers checked server-side."
+
+#: blocks/quiz/render.php:29
+msgid "Testez-vous"
+msgstr "Test yourself"
+
+#: blocks/quiz/render.php:32
+msgid "Faire le quiz complet : %s"
+msgstr "Take the full quiz: %s"
+
+#: blocks/updated/block.json
+msgctxt "block title"
+msgid "Date de mise à jour"
+msgstr "Update date"
+
+#: blocks/updated/block.json
+msgctxt "block description"
+msgid "Badge « Mis à jour » avec la date de dernière modification significative."
+msgstr "“Updated” badge with the date of the last significant change."
+
+#: blocks/updated/render.php:35
+msgid "Mis à jour"
+msgstr "Updated"
+
+#: blocks/updated/render.php:38
+msgid "le %s"
+msgstr "on %s"
+
+#: blocks/content-type/block.json
+msgctxt "block title"
+msgid "Type de contenu"
+msgstr "Content type"
+
+#: blocks/content-type/block.json
+msgctxt "block description"
+msgid "Libellé du type de contenu (résultats de recherche)."
+msgstr "Content type label (search results)."
+
+#: blocks/question-of-the-day/block.json
+msgctxt "block title"
+msgid "Question du jour"
+msgstr "Question of the day"
+
+#: blocks/question-of-the-day/block.json
+msgctxt "block description"
+msgid "Une question jouable directement, renouvelée chaque jour."
+msgstr "A question playable right away, refreshed every day."
+
+#: blocks/question-of-the-day/render.php:75
+msgid "Voir l’explication complète"
+msgstr "See the full explanation"
+
+#: blocks/related/block.json
+msgctxt "block title"
+msgid "Contenus liés"
+msgstr "Related content"
+
+#: blocks/related/block.json
+msgctxt "block description"
+msgid "Maillage interne automatique : leçons, quiz, questions, fiches, actualités ou guides liés par thème et catégorie."
+msgstr "Automatic internal linking: lessons, quizzes, questions, fact sheets, news or guides related by topic and category."
+
+#: blocks/access-badge/block.json
+msgctxt "block title"
+msgid "Badge d'accès"
+msgstr "Access badge"
+
+#: blocks/access-badge/block.json
+msgctxt "block description"
+msgid "Indique si le contenu est premium ou réservé aux inscrits."
+msgstr "Shows whether the content is premium or for registered users only."
+
+#: blocks/access-badge/render.php:26
+#: blocks/course-outline/render.php:37
+msgid "Débloqué"
+msgstr "Unlocked"
+
+#: blocks/access-badge/render.php:29
+#: blocks/course-outline/render.php:37
+msgid "Gratuit avec compte"
+msgstr "Free with an account"
+
+#: blocks/exam-link/block.json
+msgctxt "block title"
+msgid "Bouton examen blanc"
+msgstr "Mock exam button"
+
+#: blocks/exam-link/block.json
+msgctxt "block description"
+msgid "Lien vers l'examen blanc de la catégorie."
+msgstr "Link to the category’s mock exam."
+
+#: blocks/exam-link/render.php:23
+msgid "Lancer un examen blanc %s"
+msgstr "Start a %s mock exam"
+
+#: blocks/access-code/block.json
+msgctxt "block title"
+msgid "Code d'accès"
+msgstr "Access code"
+
+#: blocks/access-code/block.json
+msgctxt "block description"
+msgid "Formulaire pour activer un code d'accès (auto-école, agence)."
+msgstr "Form to activate an access code (driving school, agency)."
+
+#: blocks/access-code/render.php:15
+msgid "Connectez-vous pour activer votre code d’accès."
+msgstr "Log in to activate your access code."
+
+#: blocks/access-code/render.php:29
+msgid "Code d’accès"
+msgstr "Access code"
+
+#: blocks/access-code/render.php:31
+msgid "Activer"
+msgstr "Activate"
+
+#: blocks/sheet-meta/block.json
+msgctxt "block title"
+msgid "Informations de la fiche"
+msgstr "Fact sheet information"
+
+#: blocks/sheet-meta/block.json
+msgctxt "block description"
+msgid "Code officiel et famille d'une fiche (panneau, notion)."
+msgstr "Official code and family of a fact sheet (road sign, concept)."
+
+#: blocks/sheet-meta/render.php:39
+msgid "Questions liées"
+msgstr "Related questions"
+
+#: blocks/change-log/block.json
+msgctxt "block title"
+msgid "Historique des mises à jour"
+msgstr "Update history"
+
+#: blocks/change-log/block.json
+msgctxt "block description"
+msgid "Ce qui a changé, et quand, sur un contenu réglementaire."
+msgstr "What changed, and when, on regulatory content."
+
+#: blocks/change-log/render.php:40
+msgid "Historique des mises à jour"
+msgstr "Update history"
+
+#: blocks/author-profile/block.json
+msgctxt "block title"
+msgid "Profil d'auteur"
+msgstr "Author profile"
+
+#: blocks/author-profile/block.json
+msgctxt "block description"
+msgid "Photo, biographie, compétences et profils publics de l'auteur."
+msgstr "The author’s photo, bio, areas of expertise and public profiles."
+
+#: blocks/course-outline/block.json
+msgctxt "block title"
+msgid "Programme du cours"
+msgstr "Course syllabus"
+
+#: blocks/course-outline/block.json
+msgctxt "block description"
+msgid "Liste ordonnée des leçons d'un cours avec leur statut d'accès."
+msgstr "Ordered list of a course’s lessons with their access status."
+
+#: blocks/course-outline/render.php:53
+msgid "Programme : %d leçon"
+msgid_plural "Programme : %d leçons"
+msgstr[0] "Syllabus: %d lesson"
+msgstr[1] "Syllabus: %d lessons"
+
+#: blocks/countries/block.json
+msgctxt "block title"
+msgid "Pays"
+msgstr "Countries"
+
+#: blocks/countries/block.json
+msgctxt "block description"
+msgid "Cartes des pays couverts (drapeau, catégories, nombre de questions), pour une section « Le permis en Europe »."
+msgstr "Cards for the covered countries (flag, categories, number of questions), for a “Licenses in Europe” section."
+
+#: blocks/dashboard/block.json
+msgctxt "block title"
+msgid "Tableau de bord apprenant"
+msgstr "Learner dashboard"
+
+#: blocks/dashboard/block.json
+msgctxt "block description"
+msgid "Progression, examens blancs, erreurs à revoir, export et suppression des données."
+msgstr "Progress, mock exams, mistakes to review, data export and deletion."
+
+#: blocks/dashboard/render.php:24
+msgid "Suivez votre progression"
+msgstr "Track your progress"
+
+#: blocks/dashboard/render.php:25
+msgid "Sans compte, vos quiz en cours sont gardés sur cet appareil. Avec un compte gratuit, retrouvez votre progression partout, vos erreurs à revoir et vos statistiques par thème."
+msgstr "Without an account, your quizzes in progress are kept on this device. With a free account, get your progress everywhere, your mistakes to review and your statistics by topic."
+
+#: blocks/dashboard/render.php:29
+msgid "Créer un compte gratuit"
+msgstr "Create a free account"
+
+#: blocks/dashboard/render.php:49
+msgid "Supprimer définitivement votre progression ? Cette action est irréversible."
+msgstr "Permanently delete your progress? This action cannot be undone."
+
+#: blocks/dashboard/render.php:50
+msgid "Votre progression a été supprimée."
+msgstr "Your progress has been deleted."
+
+#: blocks/dashboard/render.php:51
+msgid "Une erreur est survenue, réessayez."
+msgstr "An error occurred, please try again."
+
+#: blocks/dashboard/render.php:52
+msgid "Objectif enregistré."
+msgstr "Goal saved."
+
+#: blocks/dashboard/render.php:53
+msgid "Quitter cette classe ? Votre moniteur ne verra plus votre progression."
+msgstr "Leave this class? Your instructor will no longer see your progress."
+
+#: blocks/dashboard/render.php:63
+msgid "Bonjour %s"
+msgstr "Hello %s"
+
+#: blocks/dashboard/render.php:71
+msgid "jusqu’au %s"
+msgstr "until %s"
+
+#: blocks/dashboard/render.php:75
+msgid "Accès gratuit"
+msgstr "Free access"
+
+#: blocks/dashboard/render.php:77
+msgid "Découvrir le premium"
+msgstr "Discover premium"
+
+#: blocks/dashboard/render.php:86
+msgid "examens blancs réussis (5 derniers)"
+msgstr "mock exams passed (last 5)"
+
+#: blocks/dashboard/render.php:93
+msgid "jour(s) d’affilée"
+msgstr "day(s) in a row"
+
+#: blocks/dashboard/render.php:97
+msgid "erreur(s) à revoir aujourd’hui"
+msgstr "mistake(s) to review today"
+
+#: blocks/dashboard/render.php:101
+msgid "examen(s) blanc(s) passé(s)"
+msgstr "mock exam(s) taken"
+
+#: blocks/dashboard/render.php:107
+msgid "À revoir aujourd’hui"
+msgstr "To review today"
+
+#: blocks/dashboard/render.php:117
+msgid "Mon auto-école"
+msgstr "My driving school"
+
+#: blocks/dashboard/render.php:124
+msgid "Moniteur : %s"
+msgstr "Instructor: %s"
+
+#: blocks/dashboard/render.php:137
+msgid "Fait — meilleur score %d %%"
+msgstr "Done — best score %d%%"
+
+#: blocks/dashboard/render.php:139
+msgid "En retard"
+msgstr "Overdue"
+
+#: blocks/dashboard/render.php:142
+msgid "À faire avant le %s"
+msgstr "Due by %s"
+
+#: blocks/dashboard/render.php:144
+msgid "À faire"
+msgstr "To do"
+
+#: blocks/dashboard/render.php:152
+msgid "Aucun devoir pour le moment."
+msgstr "No assignments yet."
+
+#: blocks/dashboard/render.php:154
+msgid "Quitter la classe"
+msgstr "Leave the class"
+
+#: blocks/dashboard/render.php:158
+msgid "Code donné par votre auto-école"
+msgstr "Code given by your driving school"
+
+#: blocks/dashboard/render.php:160
+msgid "Rejoindre la classe"
+msgstr "Join the class"
+
+#: blocks/dashboard/render.php:162
+msgid "En rejoignant une classe, votre moniteur voit votre progression (thèmes, examens blancs, devoirs). Vous pouvez la quitter à tout moment."
+msgstr "When you join a class, your instructor can see your progress (topics, mock exams, assignments). You can leave it at any time."
+
+#: blocks/dashboard/render.php:169
+msgid "Derniers examens blancs"
+msgstr "Latest mock exams"
+
+#: blocks/dashboard/render.php:171
+msgid "Date"
+msgstr "Date"
+
+#: blocks/dashboard/render.php:171
+msgid "Examen"
+msgstr "Exam"
+
+#: blocks/dashboard/render.php:171
+msgid "Score"
+msgstr "Score"
+
+#: blocks/dashboard/render.php:171
+msgid "Résultat"
+msgstr "Result"
+
+#: blocks/dashboard/render.php:178
+msgid "Réussi"
+msgstr "Passed"
+
+#: blocks/dashboard/render.php:178
+msgid "Échoué"
+msgstr "Failed"
+
+#: blocks/dashboard/render.php:187
+msgid "Mon objectif"
+msgstr "My goal"
+
+#: blocks/dashboard/render.php:189
+msgid "Date de mon examen"
+msgstr "My exam date"
+
+#: blocks/dashboard/render.php:191
+msgid "Enregistrer"
+msgstr "Save"
+
+#: blocks/dashboard/render.php:198
+msgid "J-%d : faites un examen blanc par jour et revoyez vos erreurs du jour."
+msgid_plural "J-%d : faites un examen blanc par jour et revoyez vos erreurs du jour."
+msgstr[0] "%d day to go: take one mock exam a day and review today’s mistakes."
+msgstr[1] "%d days to go: take one mock exam a day and review today’s mistakes."
+
+#: blocks/dashboard/render.php:205
+msgid "J’ai un code d’accès"
+msgstr "I have an access code"
+
+#: blocks/dashboard/render.php:210
+msgid "Mes données"
+msgstr "My data"
+
+#: blocks/dashboard/render.php:211
+msgid "Vos statistiques d’apprentissage sont pseudonymisées. Vous pouvez les télécharger ou les supprimer à tout moment."
+msgstr "Your learning statistics are pseudonymized. You can download or delete them at any time."
+
+#: blocks/dashboard/render.php:213
+msgid "Télécharger mes données"
+msgstr "Download my data"
+
+#: blocks/dashboard/render.php:214
+msgid "Supprimer ma progression"
+msgstr "Delete my progress"
+
+#: blocks/topic-progress/block.json
+msgctxt "block title"
+msgid "Progression par thème"
+msgstr "Progress by topic"
+
+#: blocks/topic-progress/block.json
+msgctxt "block description"
+msgid "Jauges de progression de l'apprenant connecté."
+msgstr "Progress gauges for the logged-in learner."
+
+#: blocks/topic-progress/render.php:41
+msgid "Votre progression"
+msgstr "Your progress"
