@@ -313,12 +313,10 @@ function question_ids( $quiz_id, $seed = null ) {
 	}
 
 	// Tirage réparti : quotas par thème s'ils existent, puis pioche à tour de rôle.
-	update_object_term_cache( $pool, PT_QUESTION );
+	$topic_of = topic_map( $quiz_id, $pool );
 	$by_topic = array();
 	foreach ( seeded_shuffle( $pool, $seed ) as $id ) {
-		$topic              = primary_term( $id, TAX_TOPIC );
-		$key                = $topic ? $topic->term_id : 0;
-		$by_topic[ $key ][] = $id;
+		$by_topic[ $topic_of[ $id ] ?? 0 ][] = $id;
 	}
 	ksort( $by_topic );
 	$by_topic = seeded_shuffle_groups( $by_topic, $seed );
@@ -352,6 +350,51 @@ function question_ids( $quiz_id, $seed = null ) {
 	}
 
 	return seeded_shuffle( $picked, $seed . 'order' );
+}
+
+/**
+ * Thème de chaque question d'un pool, en une requête et mis en cache (une
+ * banque officielle compte plusieurs milliers d'affirmations).
+ *
+ * @param int   $quiz_id Quiz.
+ * @param int[] $pool    Questions.
+ * @return array<int,int> question => thème.
+ */
+function topic_map( $quiz_id, array $pool ) {
+	global $wpdb;
+
+	$key = 'ld_topics_' . $quiz_id . '_' . md5( wp_cache_get_last_changed( 'posts' ) . wp_cache_get_last_changed( 'terms' ) );
+	$map = get_transient( $key );
+	if ( is_array( $map ) ) {
+		return $map;
+	}
+
+	$map = array();
+	foreach ( array_chunk( $pool, 2000 ) as $chunk ) {
+		$placeholders = implode( ',', array_fill( 0, count( $chunk ), '%d' ) );
+		$rows         = $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+			$wpdb->prepare(
+				"SELECT tr.object_id, tt.term_id FROM {$wpdb->term_relationships} tr INNER JOIN {$wpdb->term_taxonomy} tt ON tt.term_taxonomy_id = tr.term_taxonomy_id WHERE tt.taxonomy = %s AND tr.object_id IN ($placeholders)", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- marqueurs générés ci-dessus.
+				array_merge( array( TAX_TOPIC ), $chunk )
+			)
+		);
+		foreach ( $rows as $row ) {
+			$id = (int) $row->object_id;
+			if ( ! isset( $map[ $id ] ) ) {
+				$map[ $id ] = (int) $row->term_id;
+			}
+		}
+	}
+	// Thème principal choisi à la main, prioritaire (une seule requête).
+	$primaries = $wpdb->get_results( $wpdb->prepare( "SELECT post_id, meta_value FROM {$wpdb->postmeta} WHERE meta_key = %s", '_ld_primary_' . TAX_TOPIC ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+	foreach ( $primaries as $row ) {
+		if ( isset( $map[ (int) $row->post_id ] ) && (int) $row->meta_value ) {
+			$map[ (int) $row->post_id ] = (int) $row->meta_value;
+		}
+	}
+
+	set_transient( $key, $map, DAY_IN_SECONDS );
+	return $map;
 }
 
 /**
