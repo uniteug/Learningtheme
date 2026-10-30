@@ -413,3 +413,31 @@ function purge_after_update() {
 }
 add_action( 'admin_init', __NAMESPACE__ . '\\purge_after_update' );
 add_action( 'rest_api_init', __NAMESPACE__ . '\\purge_after_update' );
+
+/*
+ * Polylang : types de contenus et taxonomies traduisibles (aussi déclarés
+ * dans wpml-config.xml, lu par WPML et Polylang).
+ */
+
+/**
+ * Types de contenus traduisibles.
+ *
+ * @param string[] $types Types.
+ * @return string[]
+ */
+function pll_post_types( $types ) {
+	return array_merge( (array) $types, array_combine( \LearnDrive\Core\content_types(), \LearnDrive\Core\content_types() ) );
+}
+add_filter( 'pll_get_post_types', __NAMESPACE__ . '\\pll_post_types' );
+
+/**
+ * Taxonomies traduisibles.
+ *
+ * @param string[] $taxonomies Taxonomies.
+ * @return string[]
+ */
+function pll_taxonomies( $taxonomies ) {
+	$ours = array( \LearnDrive\Core\TAX_COUNTRY, \LearnDrive\Core\TAX_TRACK, \LearnDrive\Core\TAX_TOPIC, \LearnDrive\Core\TAX_EXAM, \LearnDrive\Core\TAX_LEVEL, \LearnDrive\Core\TAX_SUBJECT, \LearnDrive\Core\TAX_FAMILY );
+	return array_merge( (array) $taxonomies, array_combine( $ours, $ours ) );
+}
+add_filter( 'pll_get_taxonomies', __NAMESPACE__ . '\\pll_taxonomies' );

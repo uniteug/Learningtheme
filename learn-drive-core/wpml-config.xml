@@ -1,0 +1,92 @@
+<wpml-config>
+	<!--
+		Learn & Drive Core : configuration multilingue lue par WPML et Polylang.
+		Les contenus et taxonomies sont traduisibles ; les réglages techniques
+		(format, règles d'examen, accès, identifiants officiels…) sont copiés
+		d'une langue à l'autre, les textes (réponses, SEO, pages piliers) traduits.
+	-->
+	<custom-types>
+		<custom-type translate="1">ld_course</custom-type>
+		<custom-type translate="1">ld_lesson</custom-type>
+		<custom-type translate="1">ld_question</custom-type>
+		<custom-type translate="1">ld_quiz</custom-type>
+		<custom-type translate="1">ld_sheet</custom-type>
+		<custom-type translate="1">ld_guide</custom-type>
+		<custom-type translate="1">ld_glossary</custom-type>
+		<custom-type translate="0">ld_class</custom-type>
+	</custom-types>
+	<taxonomies>
+		<taxonomy translate="1">ld_country</taxonomy>
+		<taxonomy translate="1">ld_track</taxonomy>
+		<taxonomy translate="1">ld_topic</taxonomy>
+		<taxonomy translate="1">ld_exam_type</taxonomy>
+		<taxonomy translate="1">ld_level</taxonomy>
+		<taxonomy translate="1">ld_subject</taxonomy>
+		<taxonomy translate="1">ld_sheet_family</taxonomy>
+	</taxonomies>
+	<custom-fields>
+		<custom-field action="translate">_ld_answers</custom-field>
+		<custom-field action="translate">_ld_seo_title</custom-field>
+		<custom-field action="translate">_ld_seo_desc</custom-field>
+		<custom-field action="translate">_ld_og_title</custom-field>
+		<custom-field action="translate">_ld_synonyms</custom-field>
+		<custom-field action="translate">_ld_changelog</custom-field>
+		<custom-field action="copy">_ld_format</custom-field>
+		<custom-field action="copy">_ld_mode</custom-field>
+		<custom-field action="copy">_ld_rules</custom-field>
+		<custom-field action="copy">_ld_access</custom-field>
+		<custom-field action="copy">_ld_difficulty</custom-field>
+		<custom-field action="copy">_ld_eliminatory</custom-field>
+		<custom-field action="copy">_ld_hotspots</custom-field>
+		<custom-field action="copy">_ld_numeric</custom-field>
+		<custom-field action="copy">_ld_official_id</custom-field>
+		<custom-field action="copy">_ld_source</custom-field>
+		<custom-field action="copy">_ld_verified</custom-field>
+		<custom-field action="copy">_ld_group</custom-field>
+		<custom-field action="copy">_ld_seo_noindex</custom-field>
+		<custom-field action="copy">_ld_translation_group</custom-field>
+		<custom-field action="ignore">_ld_noindex</custom-field>
+		<custom-field action="ignore">_ld_thin</custom-field>
+		<custom-field action="ignore">_ld_words</custom-field>
+		<custom-field action="ignore">_ld_stats</custom-field>
+		<custom-field action="ignore">_ld_reports</custom-field>
+		<custom-field action="ignore">_ld_report_count</custom-field>
+		<custom-field action="ignore">_ld_import_source</custom-field>
+		<custom-field action="ignore">_ld_generated</custom-field>
+	</custom-fields>
+	<custom-term-fields>
+		<custom-term-field action="translate">ld_content</custom-term-field>
+		<custom-term-field action="translate">ld_short</custom-term-field>
+		<custom-term-field action="translate">ld_url_base</custom-term-field>
+		<custom-term-field action="translate">ld_hub</custom-term-field>
+		<custom-term-field action="translate">ld_slugs</custom-term-field>
+		<custom-term-field action="copy">ld_color</custom-term-field>
+		<custom-term-field action="copy">ld_min_age</custom-term-field>
+		<custom-term-field action="copy">ld_country</custom-term-field>
+		<custom-term-field action="copy">ld_order</custom-term-field>
+		<custom-term-field action="copy">ld_equivalent</custom-term-field>
+		<custom-term-field action="copy">ld_rules</custom-term-field>
+		<custom-term-field action="copy">ld_exam_quota</custom-term-field>
+		<custom-term-field action="copy">ld_access</custom-term-field>
+		<custom-term-field action="copy">ld_flag</custom-term-field>
+		<custom-term-field action="copy">ld_active</custom-term-field>
+		<custom-term-field action="copy">ld_locale</custom-term-field>
+	</custom-term-fields>
+	<admin-texts>
+		<key name="learn_drive_core">
+			<key name="home_eyebrow" />
+			<key name="home_title" />
+			<key name="home_lead" />
+			<key name="org_name" />
+			<key name="news_name" />
+			<key name="label_track" />
+			<key name="label_track_pl" />
+			<key name="label_topic" />
+			<key name="label_topic_pl" />
+			<key name="label_sheet" />
+			<key name="label_sheet_pl" />
+			<key name="account_url" />
+			<key name="premium_url" />
+		</key>
+	</admin-texts>
+</wpml-config>

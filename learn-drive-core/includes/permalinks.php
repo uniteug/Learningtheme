@@ -60,6 +60,7 @@ function track_markets() {
 			array(
 				'taxonomy'   => TAX_TRACK,
 				'hide_empty' => false,
+				'lang'       => '', // Polylang : catégories de toutes les langues.
 			)
 		);
 		$map   = array();

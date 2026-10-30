@@ -41,6 +41,17 @@ defined( 'ABSPATH' ) || exit;
 const SEGMENTS = array( 'slug_lesson', 'slug_course', 'slug_quiz', 'slug_question', 'slug_exam' );
 
 /**
+ * Une extension multilingue (Polylang, WPML) gère-t-elle les langues ? Elle
+ * choisit alors la langue de l'interface et publie les hreflang entre
+ * traductions : le plugin lui laisse la main.
+ *
+ * @return bool
+ */
+function multilingual_plugin() {
+	return function_exists( 'pll_current_language' ) || defined( 'ICL_SITEPRESS_VERSION' );
+}
+
+/**
  * Marché par défaut (pays principal du site).
  *
  * @return string Slug du pays, ou chaîne vide.
@@ -68,6 +79,7 @@ function all( $refresh = false ) {
 		array(
 			'taxonomy'   => TAX_COUNTRY,
 			'hide_empty' => false,
+			'lang'       => '', // Polylang : toutes les langues.
 		)
 	);
 	foreach ( is_wp_error( $terms ) ? array() : $terms as $term ) {
@@ -256,7 +268,7 @@ add_filter( 'get_available_languages', __NAMESPACE__ . '\\available_languages' )
  * plugin, dates, attribut lang, og:locale).
  */
 function switch_locale() {
-	if ( is_admin() ) {
+	if ( is_admin() || multilingual_plugin() ) {
 		return;
 	}
 	$locale = locale( current() );
@@ -343,6 +355,7 @@ function inactive_term_ids() {
 			'taxonomy'   => array( TAX_TRACK, TAX_TOPIC, 'category' ),
 			'hide_empty' => false,
 			'fields'     => 'ids',
+			'lang'       => '',
 			'meta_query' => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 				array(
 					'key'     => 'ld_country',
@@ -540,7 +553,7 @@ function alternates() {
  */
 function print_alternates() {
 	/** This filter is documented in includes/seo/meta.php */
-	if ( is_paged() || apply_filters( 'learn_drive_noindex', false ) ) {
+	if ( is_paged() || multilingual_plugin() || apply_filters( 'learn_drive_noindex', false ) ) {
 		return;
 	}
 	foreach ( alternates() as $code => $url ) {

@@ -46,6 +46,7 @@ function sections() {
 			'taxonomy'   => 'category',
 			'parent'     => 0,
 			'hide_empty' => false,
+			'lang'       => '', // Polylang : rubriques de toutes les langues.
 		)
 	);
 	foreach ( is_wp_error( $terms ) ? array() : $terms as $term ) {
