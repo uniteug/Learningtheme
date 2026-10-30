@@ -93,6 +93,28 @@ function wrap( $text, $size, $font, $width ) {
 }
 
 /**
+ * Rubrique principale d'un article (celle choisie dans Yoast, sinon la plus précise).
+ *
+ * @param int $post_id Article.
+ * @return \WP_Term|null
+ */
+function primary_category( $post_id ) {
+	$primary = (int) get_post_meta( $post_id, '_yoast_wpseo_primary_category', true );
+	if ( $primary ) {
+		$term = get_term( $primary, 'category' );
+		if ( $term instanceof \WP_Term ) {
+			return $term;
+		}
+	}
+	$terms = get_the_category( $post_id );
+	if ( ! $terms ) {
+		return null;
+	}
+	usort( $terms, static fn( $a, $b ) => (int) $b->parent <=> (int) $a->parent );
+	return 'uncategorized' === $terms[0]->slug ? null : $terms[0];
+}
+
+/**
  * Génère l'image PNG.
  *
  * @param int $post_id Contenu.
@@ -120,6 +142,9 @@ function generate( $post_id ) {
 	$hex        = ltrim( color(), '#' );
 	$track      = $post_id ? primary_term( $post_id, TAX_TRACK ) : null;
 	$term       = $track ? $track : ( $post_id ? primary_term( $post_id, TAX_TOPIC ) : null );
+	if ( ! $term && $post_id && 'post' === get_post_type( $post_id ) ) {
+		$term = primary_category( $post_id ); // Actualités et guides : leur rubrique.
+	}
 	$term_color = $track ? sanitize_hex_color( get_term_meta( $track->term_id, 'ld_color', true ) ) : '';
 	if ( $term_color ) {
 		$hex = ltrim( $term_color, '#' );

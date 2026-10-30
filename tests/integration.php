@@ -457,6 +457,24 @@ $args = LearnDrive\Core\SEO\Index\sitemap_terms( array(), 'post_tag' );
 check( 'Sitemap : étiquettes minces retirées', in_array( $lonely_tag['term_id'], $args['exclude'] ?? array(), true ) );
 
 /* ------------------------------------------------------------------ */
+section( 'Image à la une automatique des articles' );
+
+$feat_post = wp_insert_post( array( 'post_type' => 'post', 'post_status' => 'publish', 'post_title' => 'Article test sans image à la une', 'post_content' => '<!-- wp:paragraph --><p>Texte.</p><!-- /wp:paragraph -->' ) );
+$feat_id   = get_post_thumbnail_id( $feat_post );
+$cleanup[] = static function () use ( $feat_post, $feat_id ) {
+	if ( $feat_id ) {
+		wp_delete_attachment( $feat_id, true );
+	}
+	wp_delete_post( $feat_post, true );
+};
+if ( function_exists( 'imagettftext' ) ) {
+	$feat_src = $feat_id ? wp_get_attachment_image_src( $feat_id, 'full' ) : null;
+	check( 'Article publié sans image : image à la une générée (1200 px, texte alternatif)', $feat_src && $feat_src[1] >= 1200 && 'Article test sans image à la une' === get_post_meta( $feat_id, '_wp_attachment_image_alt', true ) );
+} else {
+	check( 'GD/FreeType absent : pas d’image générée, pas d’erreur', ! $feat_id );
+}
+
+/* ------------------------------------------------------------------ */
 section( 'Marchés (pays, langue, hreflang, mise en ligne)' );
 
 use LearnDrive\Core\Markets;

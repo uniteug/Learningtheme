@@ -62,7 +62,7 @@ function sanitize( $input ) {
 		return $input;
 	}
 
-	$checkboxes = array( 'seo_titles', 'legacy_schema', 'indexnow', 'llms_txt', 'glossary_links', 'og_images', 'log_404', 'trim_image_sizes', 'rename_uploads', 'video_facade', 'disable_emojis', 'local_avatars', 'offline', 'index_policy' );
+	$checkboxes = array( 'seo_titles', 'legacy_schema', 'indexnow', 'llms_txt', 'glossary_links', 'og_images', 'auto_featured', 'log_404', 'trim_image_sizes', 'rename_uploads', 'video_facade', 'disable_emojis', 'local_avatars', 'offline', 'index_policy' );
 	$tab_fields = isset( $input['_fields'] ) ? array_map( 'sanitize_key', explode( ',', (string) $input['_fields'] ) ) : array();
 
 	foreach ( $tab_fields as $key ) {
@@ -194,6 +194,7 @@ function tabs() {
 				'glossary_links'  => array( 'checkbox', __( 'Liens automatiques du lexique (première occurrence)', 'learn-drive-core' ) ),
 				'glossary_max'    => array( 'number', __( 'Liens du lexique par page (maximum)', 'learn-drive-core' ) ),
 				'og_images'       => array( 'checkbox', __( 'Générer les images de partage des quiz et questions', 'learn-drive-core' ) ),
+				'auto_featured'   => array( 'checkbox', __( 'Donner une image à la une (titre et rubrique) aux articles qui n’en ont pas', 'learn-drive-core' ) ),
 				'indexnow'        => array( 'checkbox', __( 'Notifier IndexNow (Bing, Yandex) à chaque publication', 'learn-drive-core' ) ),
 				'llms_txt'        => array( 'checkbox', __( 'Publier /llms.txt (pages piliers pour les assistants IA)', 'learn-drive-core' ) ),
 				'ai_block'        => array( 'bots', __( 'Bloquer ces robots d’IA dans robots.txt', 'learn-drive-core' ) ),

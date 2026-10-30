@@ -54,6 +54,7 @@ $learn_drive_core_files = array(
 	'includes/seo/ai.php',
 	'includes/seo/internal-links.php',
 	'includes/seo/og-image.php',
+	'includes/seo/featured.php',
 	'includes/seo/redirects.php',
 	'includes/seo/index-policy.php',
 	'includes/admin/settings.php',
