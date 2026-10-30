@@ -9,7 +9,8 @@
  * @package LearnDrive
  */
 
-$learn_drive_shop = learn_drive_is_commercial();
+$learn_drive_shop  = learn_drive_is_commercial();
+$learn_drive_links = learn_drive_links();
 ?>
 <!-- wp:group {"tagName":"section","className":"ld-reveal","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"}}},"layout":{"type":"constrained","contentSize":"1240px"}} -->
 <section class="wp-block-group alignfull ld-reveal" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)">
@@ -24,11 +25,16 @@ $learn_drive_shop = learn_drive_is_commercial();
 		<!-- wp:paragraph {"className":"ld-section-lead"} -->
 		<p class="ld-section-lead"><?php esc_html_e( 'Chaque parcours réunit les cours, les quiz par thème et un examen blanc aux conditions réelles de l’épreuve.', 'learn-drive' ); ?></p>
 		<!-- /wp:paragraph -->
+		<?php if ( ! empty( $learn_drive_links['tracks'] ) ) : ?>
+			<!-- wp:paragraph {"className":"ld-section-link"} -->
+			<p class="ld-section-link"><a href="<?php echo esc_url( $learn_drive_links['tracks'] ); ?>"><?php esc_html_e( 'Toutes les catégories de permis', 'learn-drive' ); ?></a></p>
+			<!-- /wp:paragraph -->
+		<?php endif; ?>
 	</div>
 	<!-- /wp:group -->
 
 	<?php if ( learn_drive_has_core_plugin() ) : ?>
-		<!-- wp:learn-drive/track-cards /-->
+		<!-- wp:learn-drive/track-cards {"count":6} /-->
 	<?php else : ?>
 		<!-- wp:terms-query {"termQuery":{"perPage":12,"taxonomy":"category","order":"asc","orderBy":"name","include":[],"hideEmpty":true,"showNested":false,"inherit":false},"className":"ld-term-grid"} -->
 		<div class="wp-block-terms-query ld-term-grid">

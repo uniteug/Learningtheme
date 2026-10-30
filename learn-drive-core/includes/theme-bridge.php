@@ -66,7 +66,8 @@ function links( $links ) {
 		array(
 			'exam'        => $exam ? get_permalink( $exam ) : $archive( PT_QUIZ, $links['exam'] ),
 			'learn'       => $track ? get_term_link( $track ) : $links['learn'],
-			'quiz'        => $track ? home_url( user_trailingslashit( $track->slug . '/' . setting( 'slug_quiz' ) ) ) : $archive( PT_QUIZ, $links['quiz'] ),
+			'quiz'        => $track ? home_url( user_trailingslashit( $track->slug . '/' . \LearnDrive\Core\Markets\segment( 'slug_quiz', \LearnDrive\Core\Markets\of_term( $track ) ) ) ) : $archive( PT_QUIZ, $links['quiz'] ),
+			'tracks'      => tracks_hub_link(),
 			'signs'       => $archive( PT_SHEET, $links['signs'] ),
 			'news'        => $news ? get_permalink( $news ) : $links['news'],
 			'guides'      => $archive( PT_GUIDE, $links['guides'] ),
@@ -80,6 +81,20 @@ function links( $links ) {
 	);
 }
 add_filter( 'learn_drive_links', __NAMESPACE__ . '\\links' );
+
+/**
+ * Page de toutes les catégories de permis du marché principal, s'il en a plusieurs.
+ *
+ * @return string
+ */
+function tracks_hub_link() {
+	$market = \LearnDrive\Core\Markets\get( \LearnDrive\Core\Markets\default_market() );
+	if ( ! $market || count( track_menu( $market['slug'] ) ) < 2 ) {
+		return '';
+	}
+	$link = get_term_link( $market['term_id'], \LearnDrive\Core\TAX_COUNTRY );
+	return is_wp_error( $link ) ? '' : $link;
+}
 
 /**
  * Textes du bandeau d'accueil saisis dans les réglages.

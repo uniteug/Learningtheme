@@ -110,6 +110,8 @@ function learn_drive_links() {
 		'account'     => home_url( '/mon-compte/' ),
 		'register'    => wp_registration_url(),
 		'premium'     => home_url( '/premium/' ),
+		// Page de toutes les catégories de permis (hub du marché), fournie par le plugin.
+		'tracks'      => '',
 		// Application mobile : affichée seulement si une adresse est renseignée.
 		'app_ios'     => '',
 		'app_android' => '',
