@@ -12,12 +12,7 @@
 $learn_drive_links = learn_drive_links();
 $learn_drive_text  = learn_drive_home_text();
 $learn_drive_shop  = learn_drive_is_commercial();
-$learn_drive_chips = array(
-	array( __( 'Examen blanc', 'learn-drive' ), $learn_drive_links['exam'] ),
-	array( __( 'Panneaux', 'learn-drive' ), $learn_drive_links['signs'] ),
-	array( __( 'Démarches', 'learn-drive' ), $learn_drive_links['guides'] ),
-	array( __( 'Lexique', 'learn-drive' ), $learn_drive_links['glossary'] ),
-);
+$learn_drive_chips = learn_drive_hero_chips();
 ?>
 <!-- wp:group {"tagName":"section","className":"ld-hero ld-hero--home","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60","left":"var:preset|spacing|40","right":"var:preset|spacing|40"}}},"layout":{"type":"constrained","contentSize":"1240px"}} -->
 <section class="wp-block-group alignfull ld-hero ld-hero--home" style="padding-top:var(--wp--preset--spacing--60);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--60);padding-left:var(--wp--preset--spacing--40)">

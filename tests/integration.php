@@ -438,6 +438,21 @@ $cleanup[]  = static function () use ( $lonely_tag ) {
 };
 check( 'Étiquette avec un seul article : non indexée', LearnDrive\Core\SEO\Index\is_thin_term( get_term( $lonely_tag['term_id'] ) ) );
 check( 'Page pilier rédigée : indexée même avec peu de contenus', ! LearnDrive\Core\SEO\Index\is_thin_term( get_term_by( 'slug', 'patente-am', 'ld_track' ) ) );
+$parent_cat = wp_insert_term( 'Rubrique parente test', 'category' );
+$child_cat  = wp_insert_term( 'Sous-rubrique test', 'category', array( 'parent' => $parent_cat['term_id'] ) );
+$child_ids  = array();
+for ( $i = 0; $i < 3; $i++ ) {
+	$child_ids[] = wp_insert_post( array( 'post_type' => 'post', 'post_status' => 'publish', 'post_title' => 'Article rangé test ' . $i, 'post_category' => array( $child_cat['term_id'] ) ) );
+}
+$cleanup[] = static function () use ( $parent_cat, $child_cat, $child_ids ) {
+	foreach ( $child_ids as $id ) {
+		wp_delete_post( $id, true );
+	}
+	wp_delete_term( $child_cat['term_id'], 'category' );
+	wp_delete_term( $parent_cat['term_id'], 'category' );
+};
+clean_term_cache( array( $parent_cat['term_id'], $child_cat['term_id'] ), 'category' );
+check( 'Rubrique parente sans article direct : indexée grâce à ses sous-rubriques', ! LearnDrive\Core\SEO\Index\is_thin_term( get_term( $parent_cat['term_id'] ) ) );
 $args = LearnDrive\Core\SEO\Index\sitemap_terms( array(), 'post_tag' );
 check( 'Sitemap : étiquettes minces retirées', in_array( $lonely_tag['term_id'], $args['exclude'] ?? array(), true ) );
 

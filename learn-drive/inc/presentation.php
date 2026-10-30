@@ -193,6 +193,28 @@ function learn_drive_nav_items() {
 }
 
 /**
+ * Accès rapides du bandeau d'accueil.
+ *
+ * @return array<int,array{0:string,1:string}> Libellé, adresse.
+ */
+function learn_drive_hero_chips() {
+	$links = learn_drive_links();
+	$chips = array(
+		array( __( 'Examen blanc', 'learn-drive' ), $links['exam'] ),
+		array( __( 'Panneaux', 'learn-drive' ), $links['signs'] ),
+		array( __( 'Démarches', 'learn-drive' ), $links['guides'] ),
+		array( __( 'Lexique', 'learn-drive' ), $links['glossary'] ),
+	);
+
+	/**
+	 * Accès rapides du bandeau d'accueil (les rubriques vides sont retirées par le plugin compagnon).
+	 *
+	 * @param array $chips Liste de [libellé, adresse].
+	 */
+	return array_values( array_filter( (array) apply_filters( 'learn_drive_hero_chips', $chips ), static fn( $item ) => ! empty( $item[1] ) ) );
+}
+
+/**
  * Colonnes de liens du pied de page.
  *
  * @return array<string,array<int,array{0:string,1:string}>> Titre => liens.

@@ -199,6 +199,7 @@ function nav_items( $items ) {
 	return array_values( array_filter( $items, static fn( $item ) => ! in_array( untrailingslashit( (string) $item[1] ), $empty, true ) ) );
 }
 add_filter( 'learn_drive_nav_items', __NAMESPACE__ . '\\nav_items' );
+add_filter( 'learn_drive_hero_chips', __NAMESPACE__ . '\\nav_items', 30 );
 
 /**
  * Pied de page : mêmes règles que le menu (pas de lien vers une rubrique vide).

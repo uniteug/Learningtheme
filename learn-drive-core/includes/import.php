@@ -157,6 +157,31 @@ function attach_image( $source, $post_id, $alt, $base_dir = '' ) {
 }
 
 /**
+ * Auteur des contenus importés : l'utilisateur connecté, sinon (import en
+ * arrière-plan par le cron) le premier administrateur.
+ *
+ * @return int
+ */
+function default_author() {
+	static $author = null;
+	if ( get_current_user_id() ) {
+		return get_current_user_id();
+	}
+	if ( null === $author ) {
+		$admins = get_users(
+			array(
+				'role'    => 'administrator',
+				'number'  => 1,
+				'orderby' => 'ID',
+				'fields'  => 'ID',
+			)
+		);
+		$author = $admins ? (int) $admins[0] : 0;
+	}
+	return $author;
+}
+
+/**
  * Crée ou met à jour une question.
  *
  * @param array  $row      Données.
@@ -237,6 +262,8 @@ function import_question( array $row, $base_dir = '', $dry_run = false ) {
 	);
 	if ( $existing ) {
 		$postarr['ID'] = $existing;
+	} else {
+		$postarr['post_author'] = default_author();
 	}
 
 	$id = wp_insert_post( wp_slash( $postarr ), true );

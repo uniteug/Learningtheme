@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Noigui — configurazione del sito
  * Description:       Configura Learn & Drive per noigui.com: patente italiana, banca ufficiale dei quiz ministeriali (listato «Patente AB», 7.020 affermazioni), argomenti con le quote d'esame, simulazione d'esame, menu e collegamenti all'app. Le spiegazioni già scritte negli articoli «Quiz Patente B» vengono collegate alle affermazioni corrispondenti.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Requires at least: 6.9
  * Requires PHP:      8.1
  * Requires Plugins:  learn-drive-core
@@ -25,7 +25,7 @@ use const LearnDrive\Core\TAX_TOPIC;
 
 defined( 'ABSPATH' ) || exit;
 
-const VERSION = '1.0.0';
+const VERSION = '1.0.1';
 const DIR     = __DIR__ . '/';
 
 /**
@@ -113,6 +113,8 @@ function upsert( $type, array $postarr ) {
 	);
 	if ( $found ) {
 		$data['ID'] = $found->ID;
+	} else {
+		$data['post_author'] = Import\default_author();
 	}
 	$id = wp_insert_post( wp_slash( $data ), true );
 	return is_wp_error( $id ) ? 0 : (int) $id;
@@ -206,6 +208,9 @@ function setup() {
 	);
 	update_post_meta( $account, '_ld_seo_noindex', 1 );
 
+	// Contenuti creati senza utente connesso (cron, prima versione) : autore = amministratore.
+	assign_author();
+
 	// Colori del marchio Noigui (blu del logo), contrasto AA sul bianco.
 	brand_styles();
 
@@ -223,6 +228,22 @@ function setup() {
 			update_option( 'ld_flush_rewrite', 1 );
 		}
 	);
+}
+
+/**
+ * Assegna all'amministratore domande, quiz e figure importati senza autore.
+ */
+function assign_author() {
+	global $wpdb;
+	$author = Import\default_author();
+	if ( ! $author ) {
+		return;
+	}
+	// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- aggiornamento in blocco una tantum.
+	$updated = $wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->posts} SET post_author = %d WHERE post_author = 0 AND post_type IN ( %s, %s, 'attachment' )", $author, PT_QUESTION, PT_QUIZ ) );
+	if ( $updated ) {
+		wp_cache_flush();
+	}
 }
 
 /**
@@ -366,8 +387,8 @@ add_filter( 'learn_drive_links', __NAMESPACE__ . '\\links', 20 );
  * @return array
  */
 function nav_items() {
-	$links  = function_exists( 'learn_drive_links' ) ? learn_drive_links() : array();
-	$track  = get_term_by( 'slug', 'patente-b', TAX_TRACK );
+	$links   = function_exists( 'learn_drive_links' ) ? learn_drive_links() : array();
+	$track   = get_term_by( 'slug', 'patente-b', TAX_TRACK );
 	$quizzes = get_term_by( 'slug', 'quiz-patente-b', 'category' );
 	return array(
 		array( 'Patente B', $track ? get_term_link( $track ) : '' ),
@@ -378,6 +399,41 @@ function nav_items() {
 	);
 }
 add_filter( 'learn_drive_nav_items', __NAMESPACE__ . '\\nav_items', 20 );
+
+/**
+ * Accessi rapidi del banner della home.
+ *
+ * @return array
+ */
+function hero_chips() {
+	$links   = function_exists( 'learn_drive_links' ) ? learn_drive_links() : array();
+	$quizzes = get_term_by( 'slug', 'quiz-patente-b', 'category' );
+	return array(
+		array( 'Simulazione d’esame', $links['exam'] ?? '' ),
+		array( 'Quiz per argomento', $links['quiz'] ?? '' ),
+		array( 'Quiz commentati', $quizzes ? get_term_link( $quizzes ) : '' ),
+		array( 'Guide', $links['guides'] ?? '' ),
+	);
+}
+add_filter( 'learn_drive_hero_chips', __NAMESPACE__ . '\\hero_chips', 20 );
+
+/**
+ * Riquadri già presenti negli articoli («Leggi anche») allineati al tema.
+ */
+function article_styles() {
+	if ( ! is_singular( 'post' ) ) {
+		return;
+	}
+	wp_register_style( 'noigui-articles', false, array(), VERSION );
+	wp_enqueue_style( 'noigui-articles' );
+	wp_add_inline_style(
+		'noigui-articles',
+		'.noigui-leggi-anche{margin:2rem 0;padding:1.25rem 1.5rem;border:1px solid var(--wp--preset--color--border,#dfe5ee);border-left:4px solid var(--wp--preset--color--primary,#0a6e9e);border-radius:12px;background:var(--wp--preset--color--surface,#f5f8fc)}'
+		. '.noigui-leggi-anche h3{margin:0 0 .5rem;font-size:1.05rem}.noigui-leggi-anche ul{margin:0;padding-left:1.1rem}.noigui-leggi-anche li{margin:.3rem 0}'
+		. '.nqz-q{border-color:var(--wp--preset--color--border,#dcdcec)!important}.nqz-b:focus-visible{outline:3px solid var(--wp--preset--color--primary,#0a6e9e);outline-offset:2px}'
+	);
+}
+add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\\article_styles' );
 
 /**
  * Piè di pagina.
@@ -393,19 +449,19 @@ function footer_columns() {
 		return $term ? get_term_link( $term ) : '';
 	};
 	return array(
-		'Impara'      => array(
+		'Impara'    => array(
 			array( 'Patente B', $track ? get_term_link( $track ) : '' ),
 			array( 'Simulazione d’esame', $links['exam'] ?? '' ),
 			array( 'Quiz per argomento', $links['quiz'] ?? '' ),
 			array( 'Quiz commentati', $quizzes ? get_term_link( $quizzes ) : '' ),
 		),
-		'Informati'   => array(
+		'Informati' => array(
 			array( 'News', $links['news'] ?? '' ),
 			array( 'Guide', $links['guides'] ?? '' ),
 			array( 'Neopatentati', $cats( 'guide-neopatentati' ) ),
 			array( 'Categorie di patente', $cats( 'guide-categorie-patente' ) ),
 		),
-		'Noigui'      => array(
+		'Noigui'    => array(
 			array( 'Chi siamo', home_url( '/about/' ) ),
 			array( 'Contatti', home_url( '/contact/' ) ),
 			array( 'App Android', $links['app_android'] ?? '' ),

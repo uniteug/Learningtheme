@@ -188,7 +188,33 @@ function is_thin_term( $term ) {
 	if ( 'post_tag' === $term->taxonomy ) {
 		$min_items *= 2;
 	}
-	return (int) $term->count < $min_items && term_words( $term ) < 120;
+	return term_count( $term ) < $min_items && term_words( $term ) < 120;
+}
+
+/**
+ * Nombre de contenus d'un terme, sous-termes compris pour les taxonomies
+ * hiérarchiques (une rubrique parente dont les articles sont tous rangés
+ * dans ses sous-rubriques n'est pas mince : son archive les affiche).
+ *
+ * @param \WP_Term $term Terme.
+ * @return int
+ */
+function term_count( \WP_Term $term ) {
+	$count = (int) $term->count;
+	if ( is_taxonomy_hierarchical( $term->taxonomy ) ) {
+		$children = get_terms(
+			array(
+				'taxonomy'   => $term->taxonomy,
+				'child_of'   => $term->term_id,
+				'hide_empty' => false,
+				'fields'     => 'all',
+			)
+		);
+		foreach ( is_array( $children ) ? $children : array() as $child ) {
+			$count += (int) $child->count;
+		}
+	}
+	return $count;
 }
 
 /**
@@ -280,6 +306,8 @@ function sitemap_terms( $args, $taxonomy ) {
 	if ( $exclude ) {
 		$args['exclude'] = array_merge( (array) ( $args['exclude'] ?? array() ), $exclude );
 	}
+	// Rubriques parentes sans contenu direct : gardées si leurs sous-rubriques en ont.
+	$args['hide_empty'] = false;
 	return $args;
 }
 add_filter( 'wp_sitemaps_taxonomies_query_args', __NAMESPACE__ . '\\sitemap_terms', 10, 2 );
@@ -388,6 +416,19 @@ function yoast_exclude_terms( $ids ) {
 	return array_values( array_unique( array_merge( (array) $ids, wp_list_pluck( report()['terms'], 'term_id' ) ) ) );
 }
 add_filter( 'wpseo_exclude_from_sitemap_by_term_ids', __NAMESPACE__ . '\\yoast_exclude_terms' );
+
+/**
+ * Yoast SEO masque les termes sans contenu direct, dont les rubriques parentes
+ * qui rangent tout dans leurs sous-rubriques : la règle des termes minces
+ * (sous-termes compris) décide à sa place.
+ *
+ * @param bool $hide_empty Masquer les termes vides.
+ * @return bool
+ */
+function yoast_keep_parent_terms( $hide_empty ) {
+	return enabled() ? false : $hide_empty;
+}
+add_filter( 'wpseo_sitemap_exclude_empty_terms', __NAMESPACE__ . '\\yoast_keep_parent_terms' );
 
 /**
  * Yoast SEO : auteurs minces hors sitemap (le filtre reçoit la liste des auteurs retenus).
