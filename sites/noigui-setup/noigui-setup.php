@@ -153,6 +153,20 @@ function setup() {
 	);
 	update_term_meta( $italia, 'ld_flag', '#009246,#FFFFFF,#CE2B37' );
 
+	// Mercato: lingua, home di tutte le patenti (/patenti/) e testo della pagina.
+	update_term_meta( $italia, 'ld_locale', 'it_IT' );
+	update_term_meta( $italia, 'ld_hub', 'patenti' );
+	update_term_meta( $italia, 'ld_active', '1' );
+	wp_update_term(
+		$italia,
+		TAX_COUNTRY,
+		array(
+			'name'        => 'Patenti in Italia',
+			'description' => hub_description(),
+		)
+	);
+	update_term_meta( $italia, 'ld_content', hub_content() );
+
 	// Categorie di patente (pagine pilastro).
 	foreach ( tracks() as $track ) {
 		$id = term( TAX_TRACK, $track['slug'], $track['name'], $track['description'] );
@@ -160,6 +174,9 @@ function setup() {
 		update_term_meta( $id, 'ld_color', $track['color'] );
 		update_term_meta( $id, 'ld_min_age', $track['min_age'] );
 		update_term_meta( $id, 'ld_content', $track['content'] );
+		update_term_meta( $id, 'ld_order', (int) ( $track['order'] ?? 0 ) );
+		update_term_meta( $id, 'ld_short', (string) ( $track['short'] ?? '' ) );
+		update_term_meta( $id, 'ld_equivalent', (string) ( $track['equivalent'] ?? '' ) );
 	}
 
 	// I 25 argomenti ministeriali, con la quota di ciascuno nella scheda d'esame.
@@ -391,8 +408,13 @@ function nav_items() {
 	$links   = function_exists( 'learn_drive_links' ) ? learn_drive_links() : array();
 	$track   = get_term_by( 'slug', 'patente-b', TAX_TRACK );
 	$quizzes = get_term_by( 'slug', 'quiz-patente-b', 'category' );
+	$patenti = function_exists( 'LearnDrive\\Core\\Theme\\track_menu' ) ? \LearnDrive\Core\Theme\track_menu( 'italia' ) : array();
+	$hub     = get_term_by( 'slug', 'italia', TAX_COUNTRY );
+	if ( $hub ) {
+		$patenti[] = array( 'Tutte le patenti', get_term_link( $hub ), 'Confronta categorie, età ed esami' );
+	}
 	return array(
-		array( 'Patente B', $track ? get_term_link( $track ) : '' ),
+		$patenti ? array( 'Patenti', $hub ? get_term_link( $hub ) : '', $patenti ) : array( 'Patente B', $track ? get_term_link( $track ) : '' ),
 		array( 'Simulazione d’esame', $links['exam'] ?? '' ),
 		array( 'Quiz commentati', $quizzes ? get_term_link( $quizzes ) : '' ),
 		array( 'Guide', $links['guides'] ?? '' ),

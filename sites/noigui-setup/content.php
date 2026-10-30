@@ -194,3 +194,23 @@ function quizzes() {
 	}
 	return $list;
 }
+
+/**
+ * Descrizione della pagina «Patenti in Italia» (/patenti/).
+ *
+ * @return string
+ */
+function hub_description() {
+	return 'Tutte le categorie di patente in Italia: cosa si può guidare, a che età, come si svolgono gli esami e quali quiz preparare.';
+}
+
+/**
+ * Testo della pagina «Patenti in Italia».
+ *
+ * @return string
+ */
+function hub_content() {
+	return h2( 'Come scegliere la patente giusta' )
+		. p( 'In Italia le patenti sono divise per tipo di veicolo: ciclomotori e motocicli (AM, A1, A2, A), autovetture (B e BE), autocarri (C1, C, CE) e autobus (D1, D, DE). Ogni categoria ha un’età minima, un esame di teoria e una prova pratica; per guidare per lavoro camion e autobus serve anche la Carta di qualificazione del conducente (CQC).' )
+		. p( 'Le categorie superiori si conseguono partendo dalla patente B. Per ogni patente trovi requisiti, svolgimento degli esami e le guide pratiche della redazione, con i quiz ministeriali dove disponibili.' );
+}
