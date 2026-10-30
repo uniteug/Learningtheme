@@ -560,6 +560,7 @@ function queue( $file, $batch = 200 ) {
 		),
 		false
 	);
+	update_option( 'ld_import_active', 1, true );
 	if ( ! wp_next_scheduled( 'learn_drive_import_batch' ) ) {
 		wp_schedule_single_event( time(), 'learn_drive_import_batch' );
 	}
@@ -569,36 +570,102 @@ function queue( $file, $batch = 200 ) {
 /**
  * Traite le lot suivant de l'import programmé et reprogramme le suivant.
  *
+ * Robuste aux interruptions : un lot de secours est programmé avant le
+ * traitement (si PHP s'arrête en plein lot, la chaîne repart), un lot qui
+ * échoue est retenté avec une taille divisée par deux, et une ligne qui
+ * échoue seule à plusieurs reprises est ignorée et signalée.
+ *
  * @return array|null État de l'import.
  */
 function run_batch() {
 	$state = get_option( 'ld_import_queue' );
 	if ( ! is_array( $state ) || ! empty( $state['done'] ) ) {
+		update_option( 'ld_import_active', 0, true );
 		return $state ? $state : null;
 	}
+	if ( get_transient( 'ld_import_lock' ) ) {
+		return $state; // Un lot est déjà en cours.
+	}
+	set_transient( 'ld_import_lock', 1, 5 * MINUTE_IN_SECONDS );
+	update_option( 'ld_import_active', 1, true );
+
+	// Lot de secours, annulé si ce lot se termine normalement.
+	if ( ! wp_next_scheduled( 'learn_drive_import_batch' ) ) {
+		wp_schedule_single_event( time() + 6 * MINUTE_IN_SECONDS, 'learn_drive_import_batch' );
+	}
+
+	// Nouvelle tentative au même endroit : lot réduit de moitié à chaque échec.
+	$offset   = (int) $state['offset'];
+	$attempts = ( (int) ( $state['attempt_offset'] ?? -1 ) === $offset ) ? (int) ( $state['attempts'] ?? 0 ) + 1 : 1;
+	$limit    = max( 1, (int) $state['batch'] >> min( $attempts - 1, 12 ) );
+	if ( $attempts > 1 && 1 === $limit && $attempts > 14 ) {
+		// La ligne échoue seule à chaque fois : on la signale et on passe à la suivante.
+		$state['errors'][] = sprintf( 'Ligne %d ignorée après plusieurs échecs.', $offset + 1 );
+		$state['offset']   = $offset + 1;
+		$state['attempts'] = 0;
+		update_option( 'ld_import_queue', $state, false );
+		delete_transient( 'ld_import_lock' );
+		wp_clear_scheduled_hook( 'learn_drive_import_batch' );
+		wp_schedule_single_event( time() + 5, 'learn_drive_import_batch' );
+		return $state;
+	}
+	$state['attempt_offset'] = $offset;
+	$state['attempts']       = $attempts;
+	update_option( 'ld_import_queue', $state, false );
+
+	if ( function_exists( 'set_time_limit' ) ) {
+		set_time_limit( 300 ); // phpcs:ignore Squiz.PHP.DiscouragedFunctions.Discouraged -- import en arrière-plan.
+	}
+	wp_raise_memory_limit( 'admin' );
+
 	$report            = import_file(
 		$state['file'],
 		array(
-			'offset' => (int) $state['offset'],
-			'limit'  => (int) $state['batch'],
+			'offset' => $offset,
+			'limit'  => $limit,
 		)
 	);
-	$state['offset']   = (int) ( $report['line'] ?? $state['offset'] );
+	$state['offset']   = (int) ( $report['line'] ?? $offset );
 	$state['created'] += $report['created'];
 	$state['updated'] += $report['updated'];
 	$state['errors']   = array_slice( array_merge( $state['errors'], $report['errors'] ), -50 );
+	$state['attempts'] = 0;
+
+	wp_clear_scheduled_hook( 'learn_drive_import_batch' );
 	if ( ! empty( $report['eof'] ) || ( ! $report['created'] && ! $report['updated'] && ! $report['errors'] ) ) {
 		$state['done'] = time();
+		update_option( 'ld_import_queue', $state, false );
+		update_option( 'ld_import_active', 0, true );
+		delete_transient( 'ld_import_lock' );
 		/**
 		 * Import programmé terminé.
 		 *
 		 * @param array $state Bilan.
 		 */
 		do_action( 'learn_drive_import_done', $state );
-	} else {
-		wp_schedule_single_event( time() + 5, 'learn_drive_import_batch' );
+		return $state;
 	}
 	update_option( 'ld_import_queue', $state, false );
+	delete_transient( 'ld_import_lock' );
+	wp_schedule_single_event( time() + 5, 'learn_drive_import_batch' );
 	return $state;
 }
 add_action( 'learn_drive_import_batch', __NAMESPACE__ . '\\run_batch' );
+
+/**
+ * Relance un import programmé dont la chaîne de lots s'est interrompue
+ * (lecture d'une option chargée d'office : aucun coût hors import).
+ */
+function resume_queue() {
+	$active = get_option( 'ld_import_active', null );
+	if ( null === $active ) {
+		// Première version sans indicateur : on le déduit de l'état de la file.
+		$state  = get_option( 'ld_import_queue' );
+		$active = ( is_array( $state ) && empty( $state['done'] ) ) ? 1 : 0;
+		update_option( 'ld_import_active', $active, true );
+	}
+	if ( $active && ! wp_next_scheduled( 'learn_drive_import_batch' ) && ! get_transient( 'ld_import_lock' ) ) {
+		wp_schedule_single_event( time(), 'learn_drive_import_batch' );
+	}
+}
+add_action( 'init', __NAMESPACE__ . '\\resume_queue', 99 );
