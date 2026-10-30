@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Noigui — configurazione del sito
  * Description:       Configura Learn & Drive per noigui.com: patente italiana, banca ufficiale dei quiz ministeriali (listato «Patente AB», 7.020 affermazioni), argomenti con le quote d'esame, simulazione d'esame, menu e collegamenti all'app. Le spiegazioni già scritte negli articoli «Quiz Patente B» vengono collegate alle affermazioni corrispondenti.
- * Version:           1.0.1
+ * Version:           1.0.2
  * Requires at least: 6.9
  * Requires PHP:      8.1
  * Requires Plugins:  learn-drive-core
@@ -25,7 +25,7 @@ use const LearnDrive\Core\TAX_TOPIC;
 
 defined( 'ABSPATH' ) || exit;
 
-const VERSION = '1.0.1';
+const VERSION = '1.0.2';
 const DIR     = __DIR__ . '/';
 
 /**
@@ -376,6 +376,7 @@ function links( $links ) {
 			'legal'       => home_url( '/term-condition/' ),
 			'sitemap'     => '',
 			'app_android' => 'https://play.google.com/store/apps/details?id=com.noigui',
+			'app_ios'     => 'https://apps.apple.com/it/app/noigui-patente-guida-insieme/id6779575620',
 		)
 	);
 }
@@ -465,6 +466,7 @@ function footer_columns() {
 			array( 'Chi siamo', home_url( '/about/' ) ),
 			array( 'Contatti', home_url( '/contact/' ) ),
 			array( 'App Android', $links['app_android'] ?? '' ),
+			array( 'App iOS', $links['app_ios'] ?? '' ),
 			array( 'Termini e condizioni', home_url( '/term-condition/' ) ),
 			array( 'Privacy', get_privacy_policy_url() ),
 			array( 'Eliminazione account', home_url( '/delete-account-request/' ) ),
@@ -573,6 +575,10 @@ function manifest( $manifest ) {
 			'platform' => 'play',
 			'url'      => 'https://play.google.com/store/apps/details?id=com.noigui',
 			'id'       => 'com.noigui',
+		),
+		array(
+			'platform' => 'itunes',
+			'url'      => 'https://apps.apple.com/it/app/noigui-patente-guida-insieme/id6779575620',
 		),
 	);
 	$manifest['prefer_related_applications'] = true;

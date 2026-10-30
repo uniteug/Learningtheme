@@ -26,6 +26,7 @@ function settings() {
 		'news_name'       => 'Noigui',
 		'account_url'     => '/la-mia-area/',
 		'app_android_url' => 'https://play.google.com/store/apps/details?id=com.noigui',
+		'app_ios_url'     => 'https://apps.apple.com/it/app/noigui-patente-guida-insieme/id6779575620',
 		'label_track'     => 'Categoria di patente',
 		'label_track_pl'  => 'Categorie di patente',
 		'label_topic'     => 'Argomento',
