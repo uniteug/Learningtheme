@@ -14,6 +14,7 @@ use LearnDrive\Core\Questions;
 use LearnDrive\Core\Quizzes;
 use function LearnDrive\Core\content_types;
 use function LearnDrive\Core\format_label;
+use function LearnDrive\Core\setting;
 use const LearnDrive\Core\PT_COURSE;
 use const LearnDrive\Core\PT_LESSON;
 use const LearnDrive\Core\PT_QUESTION;
@@ -613,7 +614,17 @@ function term_fields( $term ) {
 				<p class="description"><?php esc_html_e( 'Conditions d’inscription, déroulé de l’examen, FAQ éditoriale…', 'learn-drive-core' ); ?></p>
 			</td>
 		</tr>
+		<tr class="form-field">
+			<th><label for="ld_equivalent"><?php esc_html_e( 'Équivalence entre pays', 'learn-drive-core' ); ?></label></th>
+			<td>
+				<input type="text" id="ld_equivalent" name="ld_equivalent" value="<?php echo esc_attr( get_term_meta( $term->term_id, 'ld_equivalent', true ) ); ?>" placeholder="b">
+				<p class="description"><?php esc_html_e( 'Même clé pour les catégories équivalentes d’un pays à l’autre (ex. « b » pour patente B, permis B, permiso B) : les pages sont reliées pour Google (hreflang).', 'learn-drive-core' ); ?></p>
+			</td>
+		</tr>
 		<?php
+	}
+	if ( TAX_COUNTRY === $taxonomy ) {
+		market_fields( $term );
 	}
 	?>
 	<tr class="form-field">
@@ -623,6 +634,76 @@ function term_fields( $term ) {
 	<?php
 }
 add_action( TAX_TRACK . '_edit_form_fields', __NAMESPACE__ . '\\term_fields' );
+
+/**
+ * Réglages du marché (pays) : langue, mise en ligne, hub et segments d'URL.
+ *
+ * @param \WP_Term $term Pays.
+ */
+function market_fields( $term ) {
+	$id      = $term->term_id;
+	$locale  = (string) get_term_meta( $id, 'ld_locale', true );
+	$slugs   = get_term_meta( $id, 'ld_slugs', true );
+	$slugs   = is_array( $slugs ) ? $slugs : array();
+	$default = setting( 'default_country' ) === $term->slug;
+	$locales = array_unique( array_merge( array( 'it_IT', 'fr_FR', 'es_ES', 'de_DE', 'pt_PT', 'nl_NL', 'en_GB' ), get_available_languages() ) );
+	sort( $locales );
+	?>
+	<tr class="form-field">
+		<th><?php esc_html_e( 'Marché', 'learn-drive-core' ); ?></th>
+		<td>
+			<?php if ( $default ) : ?>
+				<p><?php esc_html_e( 'Marché principal du site : toujours en ligne.', 'learn-drive-core' ); ?></p>
+			<?php else : ?>
+				<label><input type="checkbox" name="ld_active" value="1" <?php checked( '0' !== (string) get_term_meta( $id, 'ld_active', true ) ); ?>> <?php esc_html_e( 'En ligne', 'learn-drive-core' ); ?></label>
+				<p class="description"><?php esc_html_e( 'Décoché : marché en préparation. Ses contenus ne sont visibles que des éditeurs, jamais indexés ni présents dans les sitemaps.', 'learn-drive-core' ); ?></p>
+			<?php endif; ?>
+		</td>
+	</tr>
+	<tr class="form-field">
+		<th><label for="ld_locale"><?php esc_html_e( 'Langue de l’interface', 'learn-drive-core' ); ?></label></th>
+		<td>
+			<select id="ld_locale" name="ld_locale">
+				<option value=""><?php esc_html_e( 'Langue du site', 'learn-drive-core' ); ?></option>
+				<?php foreach ( $locales as $code ) : ?>
+					<option value="<?php echo esc_attr( $code ); ?>" <?php selected( $locale, $code ); ?>><?php echo esc_html( $code ); ?></option>
+				<?php endforeach; ?>
+			</select>
+			<p class="description"><?php esc_html_e( 'Les pages de ce marché s’affichent dans cette langue (menus, boutons, dates) et sont reliées aux autres marchés pour Google (hreflang).', 'learn-drive-core' ); ?></p>
+		</td>
+	</tr>
+	<tr class="form-field">
+		<th><label for="ld_hub"><?php esc_html_e( 'Adresse de l’accueil du marché', 'learn-drive-core' ); ?></label></th>
+		<td>
+			<code><?php echo esc_html( home_url( '/' ) ); ?></code><input type="text" id="ld_hub" name="ld_hub" value="<?php echo esc_attr( get_term_meta( $id, 'ld_hub', true ) ); ?>" placeholder="fr" style="width:12em">
+			<p class="description"><?php esc_html_e( 'Ex. « fr » ou « permis » : page qui présente toutes les catégories et l’actualité du marché. Vide : adresse du pays.', 'learn-drive-core' ); ?></p>
+		</td>
+	</tr>
+	<tr class="form-field">
+		<th><?php esc_html_e( 'Segments d’URL', 'learn-drive-core' ); ?></th>
+		<td>
+			<?php
+			foreach ( array(
+				'slug_lesson'   => __( 'Leçons', 'learn-drive-core' ),
+				'slug_course'   => __( 'Cours', 'learn-drive-core' ),
+				'slug_quiz'     => __( 'Quiz', 'learn-drive-core' ),
+				'slug_question' => __( 'Questions', 'learn-drive-core' ),
+				'slug_exam'     => __( 'Examen blanc', 'learn-drive-core' ),
+			) as $key => $label ) {
+				printf(
+					'<label style="display:inline-block;margin:0 1em .5em 0">%s<br><input type="text" name="ld_slugs[%s]" value="%s" placeholder="%s" style="width:12em"></label>',
+					esc_html( $label ),
+					esc_attr( $key ),
+					esc_attr( $slugs[ $key ] ?? '' ),
+					esc_attr( setting( $key ) )
+				);
+			}
+			?>
+			<p class="description"><?php esc_html_e( 'Dans la langue du marché (ex. « questions », « preguntas »). Vide : segment du site.', 'learn-drive-core' ); ?></p>
+		</td>
+	</tr>
+	<?php
+}
 add_action( TAX_COUNTRY . '_edit_form_fields', __NAMESPACE__ . '\\term_fields' );
 
 /**
@@ -645,6 +726,27 @@ function save_term( $term_id ) {
 	}
 	if ( isset( $_POST['ld_content'] ) ) {
 		update_term_meta( $term_id, 'ld_content', wp_kses_post( wp_unslash( $_POST['ld_content'] ) ) );
+	}
+	if ( isset( $_POST['ld_equivalent'] ) ) {
+		update_term_meta( $term_id, 'ld_equivalent', sanitize_key( wp_unslash( $_POST['ld_equivalent'] ) ) );
+	}
+	if ( isset( $_POST['ld_locale'] ) ) {
+		$term = get_term( $term_id );
+		$locale = preg_replace( '/[^A-Za-z_]/', '', sanitize_text_field( wp_unslash( $_POST['ld_locale'] ) ) );
+		update_term_meta( $term_id, 'ld_locale', $locale );
+		// Paquet de langue de WordPress pour ce marché (dates, textes du cœur).
+		if ( $locale && 'en_US' !== $locale && ! in_array( $locale, get_available_languages(), true ) && current_user_can( 'install_languages' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/translation-install.php';
+			if ( wp_can_install_language_pack() ) {
+				wp_download_language_pack( $locale );
+			}
+		}
+		update_term_meta( $term_id, 'ld_hub', sanitize_title( wp_unslash( $_POST['ld_hub'] ?? '' ) ) );
+		update_term_meta( $term_id, 'ld_slugs', array_filter( array_map( 'sanitize_title', array_intersect_key( (array) wp_unslash( $_POST['ld_slugs'] ?? array() ), array_flip( \LearnDrive\Core\Markets\SEGMENTS ) ) ) ) ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- nettoyé par sanitize_title().
+		if ( $term && setting( 'default_country' ) !== $term->slug ) {
+			update_term_meta( $term_id, 'ld_active', empty( $_POST['ld_active'] ) ? '0' : '1' );
+		}
+		\LearnDrive\Core\Permalinks\schedule_flush();
 	}
 	if ( isset( $_POST['ld_term_rules'] ) ) {
 		update_term_meta( $term_id, 'ld_rules', Quizzes\sanitize_rules( (array) wp_unslash( $_POST['ld_term_rules'] ) ) ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- nettoyé par sanitize_rules().

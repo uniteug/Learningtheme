@@ -170,13 +170,14 @@ function learn_drive_drop_empty_sections( $content, $block ) {
 add_filter( 'render_block_core/group', 'learn_drive_drop_empty_sections', 10, 2 );
 
 /**
- * Liens du menu principal (en-tête).
+ * Liens du menu principal (en-tête). Un élément peut porter un sous-menu :
+ * [libellé, adresse, [[libellé, adresse, description], …]].
  *
- * @return array<int,array{0:string,1:string}> Libellé, adresse.
+ * @return array<int,array> Libellé, adresse, sous-éléments éventuels.
  */
 function learn_drive_nav_items() {
 	$links = learn_drive_links();
-	$items = array(
+	$base  = array(
 		array( __( 'Cours', 'learn-drive' ), $links['learn'] ),
 		array( __( 'Quiz', 'learn-drive' ), $links['quiz'] ),
 		array( __( 'Panneaux', 'learn-drive' ), $links['signs'] ),
@@ -187,9 +188,18 @@ function learn_drive_nav_items() {
 	/**
 	 * Liens du menu principal.
 	 *
-	 * @param array $items Liste de [libellé, adresse].
+	 * @param array $items Liste de [libellé, adresse, sous-éléments éventuels].
 	 */
-	return array_values( array_filter( (array) apply_filters( 'learn_drive_nav_items', $items ), static fn( $item ) => ! empty( $item[1] ) ) );
+	$items = array();
+	foreach ( (array) apply_filters( 'learn_drive_nav_items', $base ) as $item ) {
+		if ( ! empty( $item[2] ) ) {
+			$item[2] = array_values( array_filter( (array) $item[2], static fn( $child ) => ! empty( $child[1] ) ) );
+		}
+		if ( ! empty( $item[1] ) || ! empty( $item[2] ) ) {
+			$items[] = $item;
+		}
+	}
+	return $items;
 }
 
 /**

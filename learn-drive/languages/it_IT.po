@@ -9,13 +9,13 @@ msgstr ""
 "X-Domain: learn-drive\n"
 
 #: patterns/footer-compact.php:19
-#: inc/presentation.php:216
+#: inc/presentation.php:248
 msgid "Mentions légales"
 msgstr "Note legali"
 
 #: patterns/footer-compact.php:20
 #: patterns/footer-minimal.php:16
-#: inc/presentation.php:217
+#: inc/presentation.php:249
 msgid "Confidentialité"
 msgstr "Privacy"
 
@@ -82,7 +82,7 @@ msgid "Les pays couverts (drapeau, catégories, nombre de questions) et l'accès
 msgstr "I paesi coperti (bandiera, categorie, numero di domande) e l’accesso alle guide per guidare all’estero."
 
 #: patterns/home-steps.php:14
-#: inc/presentation.php:203
+#: inc/presentation.php:235
 msgid "Apprendre"
 msgstr "Impara"
 
@@ -165,7 +165,7 @@ msgid "Chaque leçon explique une règle avec des schémas, puis vous fait véri
 msgstr "Ogni lezione spiega una regola con degli schemi, poi ti fa verificare di averla capita."
 
 #: patterns/home-theory-practice.php:38
-#: inc/presentation.php:204
+#: inc/presentation.php:236
 msgid "Tous les cours"
 msgstr "Tutti i corsi"
 
@@ -337,17 +337,17 @@ msgctxt "Pattern title"
 msgid "Contenu de la page 404"
 msgstr "Contenuto della pagina 404"
 
-#: patterns/home-news.php:21
+#: patterns/home-news.php:45
 #: patterns/hidden-news-intro.php:12
 #: patterns/header-centered.php:17
 msgid "Actualités"
 msgstr "Notizie"
 
-#: patterns/home-news.php:24
+#: patterns/home-news.php:48
 msgid "À la une"
 msgstr "In primo piano"
 
-#: patterns/home-news.php:29
+#: patterns/home-news.php:53
 msgid "Toute l’actualité"
 msgstr "Tutte le notizie"
 
@@ -389,7 +389,7 @@ msgstr "Crea il tuo account in 30 secondi e ritrova i tuoi progressi sul sito, d
 
 #: patterns/home-cta.php:31
 #: patterns/home-cta.php:41
-#: patterns/home-hero.php:44
+#: patterns/home-hero.php:39
 msgid "Commencer gratuitement"
 msgstr "Inizia gratis"
 
@@ -504,6 +504,24 @@ msgctxt "Pattern description"
 msgid "Une question jouable directement sur la page (nécessite le plugin Learn & Drive Core)."
 msgstr "Una domanda da fare direttamente sulla pagina (richiede il plugin Learn & Drive Core)."
 
+#: patterns/hidden-market-news.php:28
+msgid "Dernières actualités"
+msgstr "Ultime notizie"
+
+#: patterns/hidden-market-news.php:31
+msgid "Toutes les actualités"
+msgstr "Tutte le notizie"
+
+#: patterns/hidden-market-news.php
+msgctxt "Pattern title"
+msgid "Actualités du marché"
+msgstr "Notizie del mercato"
+
+#: patterns/hidden-market-news.php
+msgctxt "Pattern description"
+msgid "Dernières actualités du pays affiché (hub d'un marché), en cartes."
+msgstr "Ultime notizie del paese mostrato (pagina di un mercato), in schede."
+
 #: patterns/hidden-news-latest-heading.php:14
 msgid "Derniers articles"
 msgstr "Ultimi articoli"
@@ -591,75 +609,60 @@ msgctxt "Pattern description"
 msgid "Liste numérotée d'étapes, idéale pour les guides « comment faire »."
 msgstr "Elenco numerato di passaggi, ideale per le guide «come fare»."
 
-#: patterns/home-hero.php:16
-#: patterns/home-hero.php:85
-msgid "Examen blanc"
-msgstr "Simulazione d’esame"
-
-#: patterns/home-hero.php:17
-#: patterns/header-centered.php:16
-#: inc/presentation.php:182
-msgid "Panneaux"
-msgstr "Segnali"
-
-#: patterns/home-hero.php:18
-msgid "Démarches"
-msgstr "Pratiche"
-
-#: patterns/home-hero.php:19
-#: inc/presentation.php:207
-msgid "Lexique"
-msgstr "Glossario"
-
-#: patterns/home-hero.php:47
+#: patterns/home-hero.php:42
 msgid "Voir les offres"
 msgstr "Vedi le offerte"
 
-#: patterns/home-hero.php:55
+#: patterns/home-hero.php:50
 msgid "Sans carte bancaire"
 msgstr "Senza carta di credito"
 
-#: patterns/home-hero.php:58
+#: patterns/home-hero.php:53
 msgid "Corrigés détaillés"
 msgstr "Correzioni dettagliate"
 
-#: patterns/home-hero.php:61
+#: patterns/home-hero.php:56
 msgid "Sur mobile et ordinateur"
 msgstr "Su mobile e computer"
 
-#: patterns/home-hero.php:66
+#: patterns/home-hero.php:61
 msgid "Rechercher sur le site"
 msgstr "Cerca nel sito"
 
-#: patterns/home-hero.php:66
+#: patterns/home-hero.php:61
 msgid "Une règle, un panneau, une démarche…"
 msgstr "Una regola, un segnale, una pratica…"
 
-#: patterns/home-hero.php:69
+#: patterns/home-hero.php:64
 msgid "Accès rapides"
 msgstr "Accesso rapido"
 
-#: patterns/home-hero.php:87
+#: patterns/home-hero.php:80
+#: inc/presentation.php:213
+msgid "Examen blanc"
+msgstr "Simulazione d’esame"
+
+#: patterns/home-hero.php:82
 msgid "Question 12 / 30"
 msgstr "Domanda 12 / 30"
 
-#: patterns/home-hero.php:88
+#: patterns/home-hero.php:83
 msgid "Sans signalisation, je cède le passage aux véhicules qui arrivent par la droite."
 msgstr "In assenza di segnaletica, do la precedenza ai veicoli che provengono da destra."
 
-#: patterns/home-hero.php:89
+#: patterns/home-hero.php:84
 msgid "Vrai"
 msgstr "Vero"
 
-#: patterns/home-hero.php:89
+#: patterns/home-hero.php:84
 msgid "Faux"
 msgstr "Falso"
 
-#: patterns/home-hero.php:91
+#: patterns/home-hero.php:86
 msgid "28 / 30 — réussi"
 msgstr "28 / 30 — superato"
 
-#: patterns/home-hero.php:92
+#: patterns/home-hero.php:87
 msgid "Corrigé expliqué"
 msgstr "Correzione spiegata"
 
@@ -711,7 +714,7 @@ msgstr "Contenuti scritti da insegnanti e istruttori di guida e ricontrollati a 
 
 #: patterns/home-testimonials.php:45
 #: patterns/editorial-policy.php:16
-#: inc/presentation.php:213
+#: inc/presentation.php:245
 msgid "Comment nous vérifions nos contenus"
 msgstr "Come verifichiamo i nostri contenuti"
 
@@ -829,18 +832,24 @@ msgid "Bandeau court qui mène à l'offre premium."
 msgstr "Banner breve che porta all’offerta premium."
 
 #: patterns/header-centered.php:14
-#: inc/presentation.php:180
+#: inc/presentation.php:181
 msgid "Cours"
 msgstr "Corsi"
 
 #: patterns/header-centered.php:15
-#: inc/presentation.php:181
+#: inc/presentation.php:182
 msgid "Quiz"
 msgstr "Quiz"
 
+#: patterns/header-centered.php:16
+#: inc/presentation.php:183
+#: inc/presentation.php:214
+msgid "Panneaux"
+msgstr "Segnali"
+
 #: patterns/header-centered.php:18
-#: patterns/home-guides.php:21
-#: inc/presentation.php:184
+#: patterns/home-guides.php:33
+#: inc/presentation.php:185
 msgid "Infos & démarches"
 msgstr "Guide e pratiche"
 
@@ -876,11 +885,11 @@ msgctxt "Pattern description"
 msgid "Les thèmes du programme officiel en carrousel défilant (tactile, clavier, boutons)."
 msgstr "Gli argomenti del programma ministeriale in un carosello scorrevole (touch, tastiera, pulsanti)."
 
-#: patterns/home-guides.php:24
+#: patterns/home-guides.php:36
 msgid "Les démarches, pas à pas"
 msgstr "Le pratiche, passo passo"
 
-#: patterns/home-guides.php:29
+#: patterns/home-guides.php:41
 msgid "Tous les guides"
 msgstr "Tutte le guide"
 
@@ -903,11 +912,11 @@ msgctxt "Pattern title"
 msgid "Aucun résultat"
 msgstr "Nessun risultato"
 
-#: patterns/header.php:37
+#: patterns/header.php:45
 msgid "Rechercher une question, un panneau…"
 msgstr "Cerca una domanda, un segnale…"
 
-#: patterns/header.php:46
+#: patterns/header.php:54
 msgid "Mon espace"
 msgstr "La mia area"
 
@@ -1402,26 +1411,35 @@ msgstr "Impara, esercitati, supera l’esame"
 msgid "Des cours clairs, des questions corrigées et expliquées, des examens blancs aux conditions réelles et toute l’actualité de votre formation, sur mobile comme sur ordinateur."
 msgstr "Corsi chiari, domande corrette e spiegate, simulazioni d’esame in condizioni reali e tutte le notizie sul tuo percorso, da mobile come da computer."
 
-#: inc/presentation.php:205
+#: inc/presentation.php:215
+msgid "Démarches"
+msgstr "Pratiche"
+
+#: inc/presentation.php:216
+#: inc/presentation.php:239
+msgid "Lexique"
+msgstr "Glossario"
+
+#: inc/presentation.php:237
 msgid "Quiz par thème"
 msgstr "Quiz per argomento"
 
-#: inc/presentation.php:206
+#: inc/presentation.php:238
 msgid "Panneaux de signalisation"
 msgstr "Segnali stradali"
 
-#: inc/presentation.php:209
+#: inc/presentation.php:241
 msgid "S'informer"
 msgstr "Informati"
 
-#: inc/presentation.php:212
+#: inc/presentation.php:244
 msgid "Qui sommes-nous"
 msgstr "Chi siamo"
 
-#: inc/presentation.php:215
+#: inc/presentation.php:247
 msgid "Informations"
 msgstr "Informazioni"
 
-#: inc/presentation.php:218
+#: inc/presentation.php:250
 msgid "Contact"
 msgstr "Contatti"

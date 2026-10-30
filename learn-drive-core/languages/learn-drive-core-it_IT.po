@@ -157,19 +157,19 @@ msgid "Import, export, démo"
 msgstr "Importazione, esportazione, demo"
 
 #: includes/admin/settings.php:102
-#: includes/admin/meta-boxes.php:586
+#: includes/admin/meta-boxes.php:587
 #: includes/admin/access-admin.php:34
 msgid "Gratuit"
 msgstr "Gratuito"
 
 #: includes/admin/settings.php:103
-#: includes/admin/meta-boxes.php:368
-#: includes/admin/meta-boxes.php:587
+#: includes/admin/meta-boxes.php:369
+#: includes/admin/meta-boxes.php:588
 msgid "Gratuit avec inscription"
 msgstr "Gratuito con registrazione"
 
 #: includes/admin/settings.php:104
-#: includes/admin/meta-boxes.php:588
+#: includes/admin/meta-boxes.php:589
 #: includes/admin/access-admin.php:36
 msgid "Premium"
 msgstr "Premium"
@@ -301,30 +301,32 @@ msgid "URL"
 msgstr "URL"
 
 #: includes/admin/settings.php:150
+#: includes/admin/meta-boxes.php:687
 #: includes/post-types.php:97
 msgid "Leçons"
 msgstr "Lezioni"
 
 #: includes/admin/settings.php:151
-#: includes/admin/meta-boxes.php:334
-#: includes/post-types.php:80
+#: includes/admin/meta-boxes.php:335
+#: includes/admin/meta-boxes.php:688
 msgid "Cours"
 msgstr "Corsi"
 
 #: includes/admin/settings.php:152
-#: includes/post-types.php:133
+#: includes/admin/meta-boxes.php:689
 #: includes/post-types.php:133
 msgid "Quiz"
 msgstr "Quiz"
 
 #: includes/admin/settings.php:153
-#: blocks/track-cards/render.php:64
+#: includes/admin/meta-boxes.php:691
+#: blocks/track-cards/render.php:72
 msgid "Examen blanc"
 msgstr "Simulazione d’esame"
 
 #: includes/admin/settings.php:154
-#: includes/admin/meta-boxes.php:233
-#: includes/post-types.php:115
+#: includes/admin/meta-boxes.php:234
+#: includes/admin/meta-boxes.php:690
 msgid "Questions"
 msgstr "Domande"
 
@@ -340,7 +342,7 @@ msgstr "Guide e pratiche"
 
 #: includes/admin/settings.php:157
 #: includes/post-types.php:184
-#: includes/blocks.php:544
+#: includes/blocks.php:547
 msgid "Lexique"
 msgstr "Glossario"
 
@@ -1251,7 +1253,7 @@ msgstr "%1$d / %2$d allievi l’hanno svolto"
 
 #: includes/admin/classes-admin.php:350
 #: includes/admin/classes-admin.php:395
-#: includes/admin/meta-boxes.php:59
+#: includes/admin/meta-boxes.php:60
 msgid "Retirer"
 msgstr "Rimuovi"
 
@@ -1285,383 +1287,435 @@ msgstr "Eliminare questa classe? Gli allievi conservano i propri progressi."
 msgid "Supprimer la classe"
 msgstr "Elimina la classe"
 
-#: includes/admin/meta-boxes.php:33
+#: includes/admin/meta-boxes.php:34
 msgid "Propositions et correction"
 msgstr "Risposte e correzione"
 
-#: includes/admin/meta-boxes.php:34
+#: includes/admin/meta-boxes.php:35
 msgid "Réglages du quiz"
 msgstr "Impostazioni del quiz"
 
-#: includes/admin/meta-boxes.php:35
+#: includes/admin/meta-boxes.php:36
 msgid "Rattachements"
 msgstr "Collegamenti"
 
-#: includes/admin/meta-boxes.php:36
+#: includes/admin/meta-boxes.php:37
 msgid "Accès"
 msgstr "Accesso"
 
-#: includes/admin/meta-boxes.php:37
+#: includes/admin/meta-boxes.php:38
 msgid "Référencement (Learn & Drive)"
 msgstr "Posizionamento (Learn & Drive)"
 
-#: includes/admin/meta-boxes.php:56
-#: includes/admin/meta-boxes.php:108
+#: includes/admin/meta-boxes.php:57
+#: includes/admin/meta-boxes.php:109
 msgid "Proposition"
 msgstr "Risposta"
 
-#: includes/admin/meta-boxes.php:57
-#: includes/admin/meta-boxes.php:110
+#: includes/admin/meta-boxes.php:58
+#: includes/admin/meta-boxes.php:111
 #: includes/render.php:39
 msgid "Bonne réponse"
 msgstr "Risposta corretta"
 
-#: includes/admin/meta-boxes.php:58
-#: includes/admin/meta-boxes.php:109
-#: includes/admin/meta-boxes.php:109
+#: includes/admin/meta-boxes.php:59
+#: includes/admin/meta-boxes.php:110
+#: includes/admin/meta-boxes.php:110
 msgid "Correspondance"
 msgstr "Corrispondenza"
 
-#: includes/admin/meta-boxes.php:85
+#: includes/admin/meta-boxes.php:86
 msgid "L’énoncé est le titre. L’explication (obligatoire, 40 mots minimum pour être indexée) se rédige dans le contenu : réponse dans la première phrase, règle citée."
 msgstr "Il testo della domanda è il titolo. La spiegazione (obbligatoria, minimo 40 parole per essere indicizzata) si scrive nel contenuto: risposta nella prima frase, regola citata."
 
-#: includes/admin/meta-boxes.php:90
+#: includes/admin/meta-boxes.php:91
 msgid "Explication trop courte (%d mots) : la question ne sera pas indexée par les moteurs de recherche."
 msgstr "Spiegazione troppo breve (%d parole): la domanda non verrà indicizzata dai motori di ricerca."
 
-#: includes/admin/meta-boxes.php:95
-#: includes/admin/meta-boxes.php:274
-#: includes/admin/meta-boxes.php:663
+#: includes/admin/meta-boxes.php:96
+#: includes/admin/meta-boxes.php:275
+#: includes/admin/meta-boxes.php:765
 msgid "Format"
 msgstr "Formato"
 
-#: includes/admin/meta-boxes.php:104
+#: includes/admin/meta-boxes.php:105
 msgid "Propositions"
 msgstr "Risposte"
 
-#: includes/admin/meta-boxes.php:104
+#: includes/admin/meta-boxes.php:105
 msgid "(2 à 6, cochez la ou les bonnes réponses)"
 msgstr "(da 2 a 6, seleziona la o le risposte corrette)"
 
-#: includes/admin/meta-boxes.php:104
+#: includes/admin/meta-boxes.php:105
 msgid "(saisissez les éléments dans l’ordre juste : ils seront mélangés à l’affichage)"
 msgstr "(inserisci gli elementi nell’ordine giusto: verranno mescolati in visualizzazione)"
 
-#: includes/admin/meta-boxes.php:104
+#: includes/admin/meta-boxes.php:105
 msgid "(chaque ligne : un élément et sa correspondance)"
 msgstr "(ogni riga: un elemento e la sua corrispondenza)"
 
-#: includes/admin/meta-boxes.php:115
+#: includes/admin/meta-boxes.php:116
 msgid "Ajouter une proposition"
 msgstr "Aggiungi una risposta"
 
-#: includes/admin/meta-boxes.php:119
+#: includes/admin/meta-boxes.php:120
 msgid "Zones justes de l’image"
 msgstr "Zone corrette dell’immagine"
 
-#: includes/admin/meta-boxes.php:119
+#: includes/admin/meta-boxes.php:120
 msgid "Dessinez la zone en faisant glisser sur l’image principale (enregistrez d’abord l’image principale). Valeurs en % de l’image."
 msgstr "Disegna la zona trascinando sull’immagine principale (salva prima l’immagine principale). Valori in % dell’immagine."
 
-#: includes/admin/meta-boxes.php:128
+#: includes/admin/meta-boxes.php:129
 #: includes/helpers.php:278
 msgid "Réponse numérique"
 msgstr "Risposta numerica"
 
-#: includes/admin/meta-boxes.php:129
+#: includes/admin/meta-boxes.php:130
 msgid "Valeur"
 msgstr "Valore"
 
-#: includes/admin/meta-boxes.php:130
+#: includes/admin/meta-boxes.php:131
 msgid "Tolérance ±"
 msgstr "Tolleranza ±"
 
-#: includes/admin/meta-boxes.php:131
+#: includes/admin/meta-boxes.php:132
 msgid "Unité"
 msgstr "Unità"
 
-#: includes/admin/meta-boxes.php:136
+#: includes/admin/meta-boxes.php:137
 msgid "Source réglementaire"
 msgstr "Fonte normativa"
 
-#: includes/admin/meta-boxes.php:137
+#: includes/admin/meta-boxes.php:138
 msgid "Code de la route, article R415-5"
 msgstr "Code de la route, articolo R415-5"
 
-#: includes/admin/meta-boxes.php:140
+#: includes/admin/meta-boxes.php:141
 msgid "Identifiant officiel"
 msgstr "Identificativo ufficiale"
 
-#: includes/admin/meta-boxes.php:144
+#: includes/admin/meta-boxes.php:145
 msgid "Dernière vérification réglementaire"
 msgstr "Ultima verifica normativa"
 
-#: includes/admin/meta-boxes.php:148
+#: includes/admin/meta-boxes.php:149
 msgid "Difficulté"
 msgstr "Difficoltà"
 
-#: includes/admin/meta-boxes.php:151
+#: includes/admin/meta-boxes.php:152
 msgid "Facile"
 msgstr "Facile"
 
-#: includes/admin/meta-boxes.php:152
+#: includes/admin/meta-boxes.php:153
 msgid "Moyenne"
 msgstr "Media"
 
-#: includes/admin/meta-boxes.php:153
+#: includes/admin/meta-boxes.php:154
 msgid "Difficile"
 msgstr "Difficile"
 
-#: includes/admin/meta-boxes.php:155
+#: includes/admin/meta-boxes.php:156
 msgid "Question éliminatoire"
 msgstr "Domanda eliminatoria"
 
-#: includes/admin/meta-boxes.php:159
+#: includes/admin/meta-boxes.php:160
 msgid "Fiche liée"
 msgstr "Scheda collegata"
 
-#: includes/admin/meta-boxes.php:163
+#: includes/admin/meta-boxes.php:164
 msgid "Leçon de révision"
 msgstr "Lezione di ripasso"
 
-#: includes/admin/meta-boxes.php:164
+#: includes/admin/meta-boxes.php:165
 msgid "Par défaut : la première leçon du même thème."
 msgstr "Predefinita: la prima lezione dello stesso argomento."
 
-#: includes/admin/meta-boxes.php:170
+#: includes/admin/meta-boxes.php:171
 msgid "Signalements des apprenants"
 msgstr "Segnalazioni degli allievi"
 
-#: includes/admin/meta-boxes.php:179
+#: includes/admin/meta-boxes.php:180
 msgid "%1$d réponses, %2$d %% de réussite."
 msgstr "%1$d risposte, %2$d %% di risposte corrette."
 
-#: includes/admin/meta-boxes.php:223
+#: includes/admin/meta-boxes.php:224
 msgid "Mode"
 msgstr "Modalità"
 
-#: includes/admin/meta-boxes.php:226
+#: includes/admin/meta-boxes.php:227
 msgid "Quiz thématique (correction immédiate)"
 msgstr "Quiz per argomento (correzione immediata)"
 
-#: includes/admin/meta-boxes.php:227
+#: includes/admin/meta-boxes.php:228
 msgid "Entraînement libre"
 msgstr "Allenamento libero"
 
-#: includes/admin/meta-boxes.php:228
+#: includes/admin/meta-boxes.php:229
 msgid "Examen blanc (conditions réelles, tirage aléatoire)"
 msgstr "Simulazione d’esame (condizioni reali, estrazione casuale)"
 
-#: includes/admin/meta-boxes.php:238
+#: includes/admin/meta-boxes.php:239
 msgid "Sans liste manuelle, le quiz pioche dans les %d questions publiées qui partagent ses pays, catégories et thèmes."
 msgstr "Senza un elenco manuale, il quiz pesca tra le %d domande pubblicate che condividono i suoi paesi, categorie e argomenti."
 
-#: includes/admin/meta-boxes.php:241
+#: includes/admin/meta-boxes.php:242
 msgid "Liste manuelle (ID séparés par des virgules, optionnel)"
 msgstr "Elenco manuale (ID separati da virgole, facoltativo)"
 
-#: includes/admin/meta-boxes.php:247
+#: includes/admin/meta-boxes.php:248
 msgid "Règles"
 msgstr "Regole"
 
-#: includes/admin/meta-boxes.php:248
+#: includes/admin/meta-boxes.php:249
 msgid "Laissez vide pour hériter des règles du pays et de la catégorie (valeur effective entre crochets)."
 msgstr "Lascia vuoto per ereditare le regole del paese e della categoria (valore effettivo tra parentesi quadre)."
 
-#: includes/admin/meta-boxes.php:265
+#: includes/admin/meta-boxes.php:266
 #: includes/classes.php:507
 msgid "oui"
 msgstr "sì"
 
-#: includes/admin/meta-boxes.php:265
+#: includes/admin/meta-boxes.php:266
 #: includes/classes.php:507
 msgid "non"
 msgstr "no"
 
-#: includes/admin/meta-boxes.php:277
-#: includes/admin/meta-boxes.php:300
-#: includes/admin/meta-boxes.php:316
+#: includes/admin/meta-boxes.php:278
+#: includes/admin/meta-boxes.php:301
+#: includes/admin/meta-boxes.php:317
 msgid "— hériter —"
 msgstr "— eredita —"
 
-#: includes/admin/meta-boxes.php:285
+#: includes/admin/meta-boxes.php:286
 msgid "Nombre de questions"
 msgstr "Numero di domande"
 
-#: includes/admin/meta-boxes.php:289
+#: includes/admin/meta-boxes.php:290
 msgid "Durée totale (secondes)"
 msgstr "Durata totale (secondi)"
 
-#: includes/admin/meta-boxes.php:293
+#: includes/admin/meta-boxes.php:294
 msgid "Temps par question (secondes)"
 msgstr "Tempo per domanda (secondi)"
 
-#: includes/admin/meta-boxes.php:297
+#: includes/admin/meta-boxes.php:298
 msgid "Seuil de réussite"
 msgstr "Soglia di superamento"
 
-#: includes/admin/meta-boxes.php:301
+#: includes/admin/meta-boxes.php:302
 msgid "Pourcentage minimum"
 msgstr "Percentuale minima"
 
-#: includes/admin/meta-boxes.php:302
+#: includes/admin/meta-boxes.php:303
 msgid "Bonnes réponses minimum"
 msgstr "Risposte corrette minime"
 
-#: includes/admin/meta-boxes.php:303
+#: includes/admin/meta-boxes.php:304
 msgid "Erreurs maximum"
 msgstr "Errori massimi"
 
-#: includes/admin/meta-boxes.php:309
+#: includes/admin/meta-boxes.php:310
 msgid "Points négatifs par erreur"
 msgstr "Punti negativi per errore"
 
-#: includes/admin/meta-boxes.php:313
+#: includes/admin/meta-boxes.php:314
 msgid "Retour arrière"
 msgstr "Torna indietro"
 
-#: includes/admin/meta-boxes.php:317
+#: includes/admin/meta-boxes.php:318
 msgid "Autorisé"
 msgstr "Consentito"
 
-#: includes/admin/meta-boxes.php:318
+#: includes/admin/meta-boxes.php:319
 msgid "Interdit"
 msgstr "Vietato"
 
-#: includes/admin/meta-boxes.php:336
+#: includes/admin/meta-boxes.php:337
 msgid "L’ordre des leçons suit l’attribut « Ordre »."
 msgstr "L’ordine delle lezioni segue l’attributo « Ordine »."
 
-#: includes/admin/meta-boxes.php:339
+#: includes/admin/meta-boxes.php:340
 #: blocks/sheet-meta/render.php:36
 msgid "Code officiel"
 msgstr "Codice ufficiale"
 
-#: includes/admin/meta-boxes.php:342
+#: includes/admin/meta-boxes.php:343
 msgid "Synonymes"
 msgstr "Sinonimi"
 
-#: includes/admin/meta-boxes.php:342
+#: includes/admin/meta-boxes.php:343
 msgid "Séparés par des virgules, liés automatiquement dans les textes."
 msgstr "Separati da virgole, collegati automaticamente nei testi."
 
-#: includes/admin/meta-boxes.php:345
+#: includes/admin/meta-boxes.php:346
 msgid "Ce qui a changé (historique visible)"
 msgstr "Cosa è cambiato (cronologia visibile)"
 
-#: includes/admin/meta-boxes.php:346
+#: includes/admin/meta-boxes.php:347
 msgid "Ex. : nouveau tarif de l’examen"
 msgstr "Es.: nuova tariffa dell’esame"
 
-#: includes/admin/meta-boxes.php:347
+#: includes/admin/meta-boxes.php:348
 msgid "Renseignez ce champ lors d’une mise à jour importante : la date et la note s’ajoutent à l’historique."
 msgstr "Compila questo campo in caso di aggiornamento importante: la data e la nota vengono aggiunte alla cronologia."
 
-#: includes/admin/meta-boxes.php:349
+#: includes/admin/meta-boxes.php:350
 msgid "Leçon « À réviser »"
 msgstr "Lezione « Da ripassare »"
 
-#: includes/admin/meta-boxes.php:366
+#: includes/admin/meta-boxes.php:367
 msgid "Hériter (catégorie, cours, réglage global)"
 msgstr "Eredita (categoria, corso, impostazione globale)"
 
-#: includes/admin/meta-boxes.php:367
+#: includes/admin/meta-boxes.php:368
 msgid "Gratuit, ouvert à tous"
 msgstr "Gratuito, aperto a tutti"
 
-#: includes/admin/meta-boxes.php:369
+#: includes/admin/meta-boxes.php:370
 msgid "Premium (offre payante)"
 msgstr "Premium (offerta a pagamento)"
 
-#: includes/admin/meta-boxes.php:377
+#: includes/admin/meta-boxes.php:378
 msgid "Règle effective : %s"
 msgstr "Regola effettiva: %s"
 
-#: includes/admin/meta-boxes.php:379
+#: includes/admin/meta-boxes.php:380
 msgid "Astuce : insérez un bloc « Lire la suite » pour garder le début de la leçon gratuit."
 msgstr "Suggerimento: inserisci un blocco « Leggi tutto » per mantenere gratuito l’inizio della lezione."
 
-#: includes/admin/meta-boxes.php:391
+#: includes/admin/meta-boxes.php:392
 msgid "Un plugin SEO est actif : titres et descriptions se règlent dans ce plugin. Les données structurées Learn & Drive y sont fusionnées automatiquement."
 msgstr "È attivo un plugin SEO: titoli e descrizioni si impostano in quel plugin. I dati strutturati di Learn & Drive vi vengono uniti automaticamente."
 
-#: includes/admin/meta-boxes.php:399
+#: includes/admin/meta-boxes.php:400
 msgid "Titre SEO"
 msgstr "Titolo SEO"
 
-#: includes/admin/meta-boxes.php:401
+#: includes/admin/meta-boxes.php:402
 msgid "Variables : {title} {track} {topic} {country} {site}. Visez 50 à 60 caractères."
 msgstr "Variabili: {title} {track} {topic} {country} {site}. Consigliati 50-60 caratteri."
 
-#: includes/admin/meta-boxes.php:404
+#: includes/admin/meta-boxes.php:405
 msgid "Titre de partage (Open Graph)"
 msgstr "Titolo di condivisione (Open Graph)"
 
-#: includes/admin/meta-boxes.php:408
+#: includes/admin/meta-boxes.php:409
 msgid "Meta description"
 msgstr "Meta description"
 
-#: includes/admin/meta-boxes.php:412
+#: includes/admin/meta-boxes.php:413
 msgid "Exclure des moteurs de recherche (noindex)"
 msgstr "Escludi dai motori di ricerca (noindex)"
 
-#: includes/admin/meta-boxes.php:416
+#: includes/admin/meta-boxes.php:417
 msgid "Quasi-doublon : question canonique (ID)"
 msgstr "Quasi duplicato: domanda canonica (ID)"
 
-#: includes/admin/meta-boxes.php:460
+#: includes/admin/meta-boxes.php:461
 #: includes/questions.php:209
 msgid "Vrai"
 msgstr "Vero"
 
-#: includes/admin/meta-boxes.php:464
+#: includes/admin/meta-boxes.php:465
 #: includes/questions.php:213
 msgid "Faux"
 msgstr "Falso"
 
-#: includes/admin/meta-boxes.php:575
+#: includes/admin/meta-boxes.php:576
 msgid "Couleur"
 msgstr "Colore"
 
-#: includes/admin/meta-boxes.php:579
+#: includes/admin/meta-boxes.php:580
 msgid "Accès par défaut"
 msgstr "Accesso predefinito"
 
-#: includes/admin/meta-boxes.php:585
+#: includes/admin/meta-boxes.php:586
 msgid "Hériter du réglage global"
 msgstr "Eredita l’impostazione globale"
 
-#: includes/admin/meta-boxes.php:597
+#: includes/admin/meta-boxes.php:598
 #: blocks/track-facts/render.php:24
 msgid "Âge minimum"
 msgstr "Età minima"
 
-#: includes/admin/meta-boxes.php:601
+#: includes/admin/meta-boxes.php:602
 msgid "Contenu de la page pilier"
 msgstr "Contenuto della pagina pilastro"
 
-#: includes/admin/meta-boxes.php:613
+#: includes/admin/meta-boxes.php:614
 msgid "Conditions d’inscription, déroulé de l’examen, FAQ éditoriale…"
 msgstr "Requisiti di iscrizione, svolgimento dell’esame, FAQ editoriali…"
 
-#: includes/admin/meta-boxes.php:620
+#: includes/admin/meta-boxes.php:618
+msgid "Équivalence entre pays"
+msgstr "Equivalenza tra paesi"
+
+#: includes/admin/meta-boxes.php:621
+msgid "Même clé pour les catégories équivalentes d’un pays à l’autre (ex. « b » pour patente B, permis B, permiso B) : les pages sont reliées pour Google (hreflang)."
+msgstr "Stessa chiave per le categorie equivalenti da un paese all’altro (es. «b» per patente B, permis B, permiso B): le pagine vengono collegate per Google (hreflang)."
+
+#: includes/admin/meta-boxes.php:631
 msgid "Règles de l’examen"
 msgstr "Regole dell’esame"
 
+#: includes/admin/meta-boxes.php:653
+msgid "Marché"
+msgstr "Mercato"
+
+#: includes/admin/meta-boxes.php:656
+msgid "Marché principal du site : toujours en ligne."
+msgstr "Mercato principale del sito: sempre online."
+
+#: includes/admin/meta-boxes.php:658
+msgid "En ligne"
+msgstr "Online"
+
+#: includes/admin/meta-boxes.php:659
+msgid "Décoché : marché en préparation. Ses contenus ne sont visibles que des éditeurs, jamais indexés ni présents dans les sitemaps."
+msgstr "Non selezionato: mercato in preparazione. I suoi contenuti sono visibili solo ai redattori, mai indicizzati né presenti nelle sitemap."
+
 #: includes/admin/meta-boxes.php:664
+msgid "Langue de l’interface"
+msgstr "Lingua dell’interfaccia"
+
+#: includes/admin/meta-boxes.php:667
+msgid "Langue du site"
+msgstr "Lingua del sito"
+
+#: includes/admin/meta-boxes.php:672
+msgid "Les pages de ce marché s’affichent dans cette langue (menus, boutons, dates) et sont reliées aux autres marchés pour Google (hreflang)."
+msgstr "Le pagine di questo mercato vengono mostrate in questa lingua (menu, pulsanti, date) e collegate agli altri mercati per Google (hreflang)."
+
+#: includes/admin/meta-boxes.php:676
+msgid "Adresse de l’accueil du marché"
+msgstr "Indirizzo della home del mercato"
+
+#: includes/admin/meta-boxes.php:679
+msgid "Ex. « fr » ou « permis » : page qui présente toutes les catégories et l’actualité du marché. Vide : adresse du pays."
+msgstr "Es. «patenti» o «fr»: pagina che presenta tutte le categorie e le notizie del mercato. Vuoto: indirizzo del paese."
+
+#: includes/admin/meta-boxes.php:683
+msgid "Segments d’URL"
+msgstr "Segmenti dell’URL"
+
+#: includes/admin/meta-boxes.php:702
+msgid "Dans la langue du marché (ex. « questions », « preguntas »). Vide : segment du site."
+msgstr "Nella lingua del mercato (es. «domande», «preguntas»). Vuoto: segmento del sito."
+
+#: includes/admin/meta-boxes.php:766
 msgid "Indexable"
 msgstr "Indicizzabile"
 
-#: includes/admin/meta-boxes.php:665
+#: includes/admin/meta-boxes.php:767
 msgid "Signalements"
 msgstr "Segnalazioni"
 
-#: includes/admin/meta-boxes.php:680
+#: includes/admin/meta-boxes.php:782
 msgid "Non"
 msgstr "No"
 
-#: includes/admin/meta-boxes.php:680
+#: includes/admin/meta-boxes.php:782
 msgid "Oui"
 msgstr "Sì"
 
@@ -1760,6 +1814,12 @@ msgstr "Origine"
 #: includes/admin/access-admin.php:152
 msgid "Aucun accès pour le moment."
 msgstr "Nessun accesso per il momento."
+
+#: includes/theme-bridge.php:284
+#: includes/post-types.php:202
+#: includes/post-types.php:202
+msgid "Pays"
+msgstr "Paese"
 
 #: includes/pwa.php:177
 msgid "Hors ligne"
@@ -1986,24 +2046,24 @@ msgstr[1] "massimo %d errori"
 msgid "%d %% de bonnes réponses"
 msgstr "%d %% di risposte corrette"
 
-#: includes/quizzes.php:549
+#: includes/quizzes.php:592
 msgid "Divers"
 msgstr "Varie"
 
-#: includes/import.php:170
+#: includes/import.php:195
 msgid "Titre (énoncé) manquant."
 msgstr "Titolo (testo della domanda) mancante."
 
-#: includes/import.php:178
-#: includes/import.php:189
+#: includes/import.php:203
+#: includes/import.php:214
 msgid "Propositions invalides : %s"
 msgstr "Opzioni non valide: %s"
 
-#: includes/import.php:328
+#: includes/import.php:355
 msgid "Fichier illisible."
 msgstr "File illeggibile."
 
-#: includes/import.php:346
+#: includes/import.php:373
 msgid "Ligne %1$d : %2$s"
 msgstr "Riga %1$d: %2$s"
 
@@ -2062,7 +2122,7 @@ msgid "Parcours complet par catégorie ou matière."
 msgstr "Percorso completo per categoria o materia."
 
 #: includes/post-types.php:97
-#: includes/blocks.php:539
+#: includes/blocks.php:542
 msgid "Leçon"
 msgstr "Lezione"
 
@@ -2071,7 +2131,7 @@ msgid "Unité de cours, théorique ou pratique."
 msgstr "Unità del corso, teorica o pratica."
 
 #: includes/post-types.php:115
-#: includes/blocks.php:540
+#: includes/blocks.php:543
 msgid "Question"
 msgstr "Domanda"
 
@@ -2088,7 +2148,7 @@ msgid "Fiche : panneau, manœuvre, notion, formule."
 msgstr "Scheda: segnale, manovra, nozione, formula."
 
 #: includes/post-types.php:167
-#: includes/blocks.php:543
+#: includes/blocks.php:546
 msgid "Info & démarche"
 msgstr "Guida e pratica"
 
@@ -2103,11 +2163,6 @@ msgstr "Definizione"
 #: includes/post-types.php:185
 msgid "Définitions courtes, liées automatiquement dans les textes."
 msgstr "Definizioni brevi, collegate automaticamente nei testi."
-
-#: includes/post-types.php:202
-#: includes/post-types.php:202
-msgid "Pays"
-msgstr "Paese"
 
 #: includes/post-types.php:203
 msgid "Pays ou juridiction : règles d’examen, format des questions."
@@ -2333,7 +2388,7 @@ msgstr "Invia"
 
 #: includes/render.php:396
 #: includes/blocks.php:322
-#: includes/blocks.php:336
+#: includes/blocks.php:339
 msgid "%d question"
 msgid_plural "%d questions"
 msgstr[0] "%d domanda"
@@ -2644,33 +2699,33 @@ msgstr "Vedi anche"
 msgid "Leçon à revoir"
 msgstr "Lezione da ripassare"
 
-#: includes/blocks.php:536
+#: includes/blocks.php:539
 msgid "Actualité"
 msgstr "Notizia"
 
-#: includes/blocks.php:537
+#: includes/blocks.php:540
 msgid "Page"
 msgstr "Pagina"
 
-#: includes/blocks.php:620
+#: includes/blocks.php:623
 msgid "%d min"
 msgstr "%d min"
 
-#: includes/blocks.php:623
+#: includes/blocks.php:626
 msgid "%d s / question"
 msgstr "%d s / domanda"
 
-#: includes/blocks.php:627
+#: includes/blocks.php:630
 msgid "%d erreur max"
 msgid_plural "%d erreurs max"
 msgstr[0] "max %d errore"
 msgstr[1] "max %d errori"
 
-#: includes/blocks.php:630
+#: includes/blocks.php:633
 msgid "%1$d/%2$d pour réussir"
 msgstr "%1$d/%2$d per superare"
 
-#: includes/blocks.php:636
+#: includes/blocks.php:639
 msgid "dès %s ans"
 msgstr "da %s anni"
 
@@ -2813,13 +2868,13 @@ msgctxt "block description"
 msgid "Cartes des catégories (permis, matières) avec les règles de l’examen, le nombre de leçons et de quiz, et un accès direct à l’examen blanc."
 msgstr "Riquadri delle categorie (patenti, materie) con le regole dell’esame, il numero di lezioni e di quiz e un accesso diretto alla simulazione d’esame."
 
-#: blocks/track-cards/render.php:48
+#: blocks/track-cards/render.php:56
 msgid "%d leçon"
 msgid_plural "%d leçons"
 msgstr[0] "%d lezione"
 msgstr[1] "%d lezioni"
 
-#: blocks/track-cards/render.php:52
+#: blocks/track-cards/render.php:60
 msgid "%d quiz"
 msgid_plural "%d quiz"
 msgstr[0] "%d quiz"

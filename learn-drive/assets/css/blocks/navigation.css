@@ -45,3 +45,79 @@
 	color: var(--wp--preset--color--base);
 	text-decoration: none;
 }
+
+/* Sous-menu « catégories de permis » : panneau clair à deux colonnes, nom et description. */
+@media (min-width: 600px) {
+	.wp-block-navigation .ld-menu-group > .wp-block-navigation__submenu-container {
+		display: grid !important;
+		grid-template-columns: repeat(2, minmax(13rem, 1fr));
+		gap: 0.15rem;
+		min-width: 30rem !important;
+		padding: 0.6rem;
+		background: var(--wp--preset--color--base) !important;
+		color: var(--wp--preset--color--contrast) !important;
+	}
+
+	.wp-block-navigation .ld-menu-group .wp-block-navigation__submenu-container .wp-block-navigation-item__content {
+		display: block;
+		padding: 0.55rem 0.7rem;
+		border-radius: calc(var(--ld-radius, 8px) - 2px);
+		color: inherit;
+	}
+
+	.wp-block-navigation .ld-menu-group .wp-block-navigation__submenu-container .wp-block-navigation-item__content:hover,
+	.wp-block-navigation .ld-menu-group .wp-block-navigation__submenu-container .wp-block-navigation-item__content:focus-visible {
+		background: var(--wp--preset--color--surface);
+	}
+}
+
+.wp-block-navigation .ld-menu-group .wp-block-navigation-item__label {
+	font-weight: 700;
+}
+
+.wp-block-navigation .ld-menu-group .wp-block-navigation-item__description {
+	display: block;
+	margin-top: 0.15rem;
+	font-size: 0.8rem;
+	font-weight: 400;
+	line-height: 1.35;
+	color: var(--wp--preset--color--muted, currentColor);
+	opacity: 0.85;
+}
+
+/* Menu mobile plein écran : les sous-menus sont des listes simples, sans cadre. */
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__submenu-container {
+	border: 0 !important;
+	box-shadow: none;
+	padding: 0 0 0 1rem;
+	min-width: 0 !important;
+	background: transparent !important;
+}
+
+.wp-block-navigation__responsive-container.is-menu-open {
+	--navigation-layout-justification-setting: flex-start;
+	--navigation-layout-justify: flex-start;
+	padding: 1.25rem 1.5rem 2rem;
+}
+
+.wp-block-navigation__responsive-container.is-menu-open :is(.wp-block-navigation__responsive-container-content, .wp-block-navigation__container, .wp-block-navigation-item, .wp-block-navigation__submenu-container) {
+	align-items: flex-start !important;
+	justify-content: flex-start !important;
+	text-align: left;
+}
+
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__container {
+	gap: 0.9rem;
+}
+
+.wp-block-navigation__responsive-container.is-menu-open .ld-menu-group > .wp-block-navigation__submenu-container {
+	margin: 0.4rem 0 0.6rem;
+	padding: 0 0 0.6rem 1rem !important;
+	border-left: 2px solid var(--wp--preset--color--accent) !important;
+	border-radius: 0;
+	gap: 0.4rem;
+}
+
+.wp-block-navigation__responsive-container.is-menu-open .ld-menu-group .wp-block-navigation-item__label {
+	font-weight: 600;
+}

@@ -126,9 +126,10 @@ add_action( 'wp_head', __NAMESPACE__ . '\\page_accent', 20 );
  */
 function front_country_query( $query, $block ) {
 	unset( $block );
-	$country = (string) setting( 'default_country' );
+	// Accueil du site ou hub d'un marché : contenus de ce marché (ou communs).
+	$country = \LearnDrive\Core\Markets\current();
 	$types   = (array) ( $query['post_type'] ?? 'post' );
-	if ( '' === $country || ! is_front_page() || ! array_intersect( $types, array( 'post', PT_GUIDE ) ) || ! empty( $query['tax_query'] ) ) {
+	if ( '' === $country || ! ( is_front_page() || is_tax( \LearnDrive\Core\TAX_COUNTRY ) ) || ! array_intersect( $types, array( 'post', PT_GUIDE ) ) || ! empty( $query['tax_query'] ) ) {
 		return $query;
 	}
 	$query['tax_query'] = array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
@@ -199,6 +200,65 @@ function nav_items( $items ) {
 	return array_values( array_filter( $items, static fn( $item ) => ! in_array( untrailingslashit( (string) $item[1] ), $empty, true ) ) );
 }
 add_filter( 'learn_drive_nav_items', __NAMESPACE__ . '\\nav_items' );
+
+/**
+ * Catégories de permis d'un marché, dans l'ordre éditorial (méta ld_order,
+ * puis nom), pour un menu : [nom, adresse, description courte].
+ *
+ * @param string $country Marché (vide = marché de la page, sinon marché principal).
+ * @return array<int,array{0:string,1:string,2:string}>
+ */
+function track_menu( $country = '' ) {
+	$country = $country ? $country : \LearnDrive\Core\Markets\current();
+	$country = $country ? $country : \LearnDrive\Core\Markets\default_market();
+	$args    = array(
+		'taxonomy'   => TAX_TRACK,
+		'hide_empty' => false,
+	);
+	if ( $country ) {
+		$args['meta_query'] = array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+			array(
+				'key'   => 'ld_country',
+				'value' => $country,
+			),
+		);
+	}
+	$terms = get_terms( $args );
+	if ( ! $terms || is_wp_error( $terms ) ) {
+		return array();
+	}
+	usort(
+		$terms,
+		static function ( $a, $b ) {
+			$order = (int) get_term_meta( $a->term_id, 'ld_order', true ) <=> (int) get_term_meta( $b->term_id, 'ld_order', true );
+			return $order ? $order : strnatcasecmp( $a->name, $b->name );
+		}
+	);
+	$items = array();
+	foreach ( $terms as $term ) {
+		$items[] = array( $term->name, get_term_link( $term ), (string) get_term_meta( $term->term_id, 'ld_short', true ) );
+	}
+	return $items;
+}
+
+/**
+ * Menu : un sous-menu des catégories de permis du marché, s'il y en a plusieurs.
+ *
+ * @param array $items Liens.
+ * @return array
+ */
+function nav_tracks( $items ) {
+	$tracks = track_menu();
+	if ( count( $tracks ) < 2 ) {
+		return $items;
+	}
+	$market = \LearnDrive\Core\Markets\current();
+	$hub    = \LearnDrive\Core\Markets\get( $market ? $market : \LearnDrive\Core\Markets\default_market() );
+	$link   = $hub ? get_term_link( $hub['term_id'], \LearnDrive\Core\TAX_COUNTRY ) : '';
+	array_unshift( $items, array( (string) setting( 'label_track_pl' ), is_wp_error( $link ) ? '' : $link, $tracks ) );
+	return $items;
+}
+add_filter( 'learn_drive_nav_items', __NAMESPACE__ . '\\nav_tracks', 5 );
 add_filter( 'learn_drive_hero_chips', __NAMESPACE__ . '\\nav_items', 30 );
 
 /**
@@ -211,3 +271,18 @@ function footer_columns( $columns ) {
 	return array_map( __NAMESPACE__ . '\\nav_items', (array) $columns );
 }
 add_filter( 'learn_drive_footer_columns', __NAMESPACE__ . '\\footer_columns' );
+
+/**
+ * Pied de page : sélecteur de marché dès que plusieurs pays sont en ligne.
+ *
+ * @param array $columns Titre => liens.
+ * @return array
+ */
+function footer_markets( $columns ) {
+	$markets = \LearnDrive\Core\Markets\switcher();
+	if ( $markets ) {
+		$columns[ __( 'Pays', 'learn-drive-core' ) ] = $markets;
+	}
+	return $columns;
+}
+add_filter( 'learn_drive_footer_columns', __NAMESPACE__ . '\\footer_markets', 30 );

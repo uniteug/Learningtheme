@@ -339,7 +339,7 @@ function canonical() {
 		$type  = get_query_var( 'post_type' );
 		$type  = is_array( $type ) ? reset( $type ) : $type;
 		$track = get_query_var( TAX_TRACK );
-		$url   = $track ? home_url( user_trailingslashit( $track . '/' . ( \LearnDrive\Core\Permalinks\silo_types()[ $type ] ?? '' ) ) ) : get_post_type_archive_link( $type );
+		$url   = $track ? home_url( user_trailingslashit( $track . '/' . ( \LearnDrive\Core\Permalinks\silo_types( (string) ( \LearnDrive\Core\Permalinks\track_markets()[ $track ] ?? '' ) )[ $type ] ?? '' ) ) ) : get_post_type_archive_link( $type );
 	} elseif ( is_author() ) {
 		$url = get_author_posts_url( get_queried_object_id() );
 	}

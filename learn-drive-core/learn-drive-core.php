@@ -29,6 +29,7 @@ define( 'LEARN_DRIVE_CORE_URL', plugin_dir_url( __FILE__ ) );
 $learn_drive_core_files = array(
 	'includes/helpers.php',
 	'includes/post-types.php',
+	'includes/markets.php',
 	'includes/permalinks.php',
 	'includes/questions.php',
 	'includes/quizzes.php',

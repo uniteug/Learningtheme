@@ -457,6 +457,75 @@ $args = LearnDrive\Core\SEO\Index\sitemap_terms( array(), 'post_tag' );
 check( 'Sitemap : étiquettes minces retirées', in_array( $lonely_tag['term_id'], $args['exclude'] ?? array(), true ) );
 
 /* ------------------------------------------------------------------ */
+section( 'Marchés (pays, langue, hreflang, mise en ligne)' );
+
+use LearnDrive\Core\Markets;
+use LearnDrive\Core\Permalinks;
+
+$default_market = Markets\default_market();
+$other_market   = 'france' === $default_market ? 'italie' : 'france';
+$market_terms   = array(
+	$default_market => get_term_by( 'slug', $default_market, 'ld_country' ),
+	$other_market   => get_term_by( 'slug', $other_market, 'ld_country' ),
+);
+$track_b        = array( 'france' => get_term_by( 'slug', 'permis-b', 'ld_track' ), 'italie' => get_term_by( 'slug', 'patente-b', 'ld_track' ) );
+$market_meta    = array();
+foreach ( array_merge( array_values( $market_terms ), array_values( $track_b ) ) as $t ) {
+	$market_meta[ $t->term_id ] = get_term_meta( $t->term_id );
+}
+$cleanup[] = static function () use ( $market_meta ) {
+	foreach ( $market_meta as $id => $meta ) {
+		foreach ( array( 'ld_locale', 'ld_active', 'ld_hub', 'ld_slugs', 'ld_equivalent' ) as $key ) {
+			delete_term_meta( $id, $key );
+			if ( isset( $meta[ $key ][0] ) ) {
+				update_term_meta( $id, $key, maybe_unserialize( $meta[ $key ][0] ) );
+			}
+		}
+	}
+	delete_option( 'ld_track_slugs' );
+	Markets\all( true );
+	flush_rewrite_rules( false );
+};
+
+check( 'Marché principal toujours en ligne, pays sans réglage en ligne (compatibilité)', Markets\is_active( $default_market ) && Markets\is_active( $other_market ) && Markets\is_active( '' ) );
+
+update_term_meta( $market_terms['italie']->term_id, 'ld_locale', 'it_IT' );
+update_term_meta( $market_terms['italie']->term_id, 'ld_slugs', array( 'slug_question' => 'domande', 'slug_exam' => 'simulazione-esame' ) );
+update_term_meta( $market_terms['france']->term_id, 'ld_locale', 'fr_FR' );
+update_term_meta( $track_b['france']->term_id, 'ld_equivalent', 'b' );
+update_term_meta( $track_b['italie']->term_id, 'ld_equivalent', 'b' );
+Markets\all( true );
+delete_option( 'ld_track_slugs' );
+
+check( 'Segment d’URL propre au marché, segment du site sinon', 'domande' === Markets\segment( 'slug_question', 'italie' ) && LearnDrive\Core\setting( 'slug_question' ) === Markets\segment( 'slug_question', 'france' ) );
+check( 'Catégorie rattachée à son marché', 'italie' === ( Permalinks\track_markets()['patente-b'] ?? '' ) && 'france' === ( Permalinks\track_markets()['permis-b'] ?? '' ) );
+
+$it_question = get_posts( array( 'post_type' => 'ld_question', 'posts_per_page' => 1, 'tax_query' => array( array( 'taxonomy' => 'ld_track', 'field' => 'slug', 'terms' => 'patente-b' ) ) ) );
+$fr_question = get_posts( array( 'post_type' => 'ld_question', 'posts_per_page' => 1, 'tax_query' => array( array( 'taxonomy' => 'ld_track', 'field' => 'slug', 'terms' => 'permis-b' ) ) ) );
+check( 'Adresse d’une question italienne avec le segment italien', $it_question && str_contains( get_permalink( $it_question[0] ), '/patente-b/domande/' ) );
+check( 'Adresse d’une question française inchangée', $fr_question && str_contains( get_permalink( $fr_question[0] ), '/permis-b/' . LearnDrive\Core\setting( 'slug_question' ) . '/' ) );
+check( 'Marché d’une question : celui de sa catégorie', $it_question && 'italie' === Markets\of_post( $it_question[0] ) );
+
+Permalinks\add_rules();
+flush_rewrite_rules( false );
+$market_rules = array_filter( array_keys( (array) get_option( 'rewrite_rules' ) ), static fn( $rule ) => str_contains( $rule, 'patente\\-b' ) && str_contains( $rule, '/domande/([^/]+)' ) );
+check( 'Règles de réécriture par marché', (bool) $market_rules );
+
+$GLOBALS['wp_query'] = $GLOBALS['wp_the_query'] = new WP_Query( array( 'ld_track' => 'permis-b' ) );
+$alternates = Markets\alternates();
+check( 'hreflang entre catégories équivalentes (fr-FR, it-IT, x-default)', isset( $alternates['fr-FR'], $alternates['it-IT'], $alternates['x-default'] ) && str_contains( $alternates['it-IT'], '/patente-b/' ) );
+check( 'Marché de la page : celui de la catégorie', 'france' === Markets\current() );
+
+update_term_meta( $market_terms[ $other_market ]->term_id, 'ld_active', '0' );
+Markets\all( true );
+$alternates = Markets\alternates();
+check( 'Marché en préparation : retiré des hreflang', ! isset( $alternates[ 'italie' === $other_market ? 'it-IT' : 'fr-FR' ] ) );
+check( 'Marché en préparation : hors sitemap (contenus et catégories)', in_array( $other_market, ( Markets\sitemap_posts( array() )['tax_query'][0]['terms'] ?? array() ), true ) && in_array( $track_b[ $other_market ]->term_id, Markets\inactive_term_ids(), true ) );
+$GLOBALS['wp_query'] = $GLOBALS['wp_the_query'] = new WP_Query( array( 'ld_track' => 'italie' === $other_market ? 'patente-b' : 'permis-b' ) );
+check( 'Marché en préparation : page jamais indexée', true === apply_filters( 'learn_drive_noindex', false ) );
+$GLOBALS['wp_query'] = $GLOBALS['wp_the_query'] = new WP_Query();
+
+/* ------------------------------------------------------------------ */
 foreach ( array_reverse( $cleanup ) as $fn ) {
 	$fn();
 }

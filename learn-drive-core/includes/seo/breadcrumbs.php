@@ -89,7 +89,7 @@ function trail() {
 					'label' => $track->name,
 					'url'   => get_term_link( $track ),
 				);
-				$segment = Permalinks\silo_types()[ $type ] ?? '';
+				$segment = Permalinks\silo_types( (string) ( Permalinks\track_markets()[ $track->slug ] ?? '' ) )[ $type ] ?? '';
 				$object  = get_post_type_object( $type );
 				$is_exam = PT_QUIZ === $type && Permalinks\exam_for_track( $track ) === $post->ID;
 				if ( $segment && $object && ! $is_exam ) {

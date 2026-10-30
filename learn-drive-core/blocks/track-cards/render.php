@@ -13,13 +13,12 @@ use const LearnDrive\Core\TAX_TRACK;
 
 defined( 'ABSPATH' ) || exit;
 
-$learn_drive_country = '' !== $attributes['country'] ? $attributes['country'] : (string) setting( 'default_country' );
+// Pays : réglage du bloc, sinon le marché de la page (hub d'un pays), sinon le marché principal.
+$learn_drive_country = '' !== $attributes['country'] ? $attributes['country'] : \LearnDrive\Core\Markets\current();
+$learn_drive_country = $learn_drive_country ? $learn_drive_country : (string) setting( 'default_country' );
 $learn_drive_args    = array(
 	'taxonomy'   => TAX_TRACK,
 	'hide_empty' => false,
-	'number'     => max( 1, min( 24, (int) $attributes['count'] ) ),
-	'orderby'    => 'count',
-	'order'      => 'DESC',
 );
 if ( $learn_drive_country && 'all' !== $learn_drive_country ) {
 	$learn_drive_args['meta_query'] = array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
@@ -33,6 +32,15 @@ $learn_drive_terms = get_terms( $learn_drive_args );
 if ( ! $learn_drive_terms || is_wp_error( $learn_drive_terms ) ) {
 	return;
 }
+// Ordre éditorial (méta ld_order), puis les catégories les plus fournies.
+usort(
+	$learn_drive_terms,
+	static function ( $a, $b ) {
+		$order = (int) get_term_meta( $a->term_id, 'ld_order', true ) <=> (int) get_term_meta( $b->term_id, 'ld_order', true );
+		return $order ? $order : $b->count <=> $a->count;
+	}
+);
+$learn_drive_terms = array_slice( $learn_drive_terms, 0, max( 1, min( 24, (int) $attributes['count'] ) ) );
 
 $learn_drive_items = '';
 foreach ( $learn_drive_terms as $learn_drive_term ) {

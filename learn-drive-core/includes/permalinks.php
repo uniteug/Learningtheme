@@ -18,6 +18,8 @@
 
 namespace LearnDrive\Core\Permalinks;
 
+use LearnDrive\Core\Markets;
+
 use function LearnDrive\Core\setting;
 use function LearnDrive\Core\primary_term;
 use const LearnDrive\Core\PT_COURSE;
@@ -30,17 +32,44 @@ use const LearnDrive\Core\TAX_TOPIC;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Types de contenus rangés dans le silo d'une catégorie, avec leur segment d'URL.
+ * Types de contenus rangés dans le silo d'une catégorie, avec leur segment
+ * d'URL (traduit par marché : « domande », « questions », « preguntas »…).
  *
+ * @param string $country Marché (vide = segments du site).
  * @return array<string,string>
  */
-function silo_types() {
+function silo_types( $country = '' ) {
 	return array(
-		PT_LESSON   => setting( 'slug_lesson' ),
-		PT_COURSE   => setting( 'slug_course' ),
-		PT_QUIZ     => setting( 'slug_quiz' ),
-		PT_QUESTION => setting( 'slug_question' ),
+		PT_LESSON   => Markets\segment( 'slug_lesson', $country ),
+		PT_COURSE   => Markets\segment( 'slug_course', $country ),
+		PT_QUIZ     => Markets\segment( 'slug_quiz', $country ),
+		PT_QUESTION => Markets\segment( 'slug_question', $country ),
 	);
+}
+
+/**
+ * Catégories (racines de silo) et leur marché.
+ *
+ * @return array<string,string> Slug => pays.
+ */
+function track_markets() {
+	$map = get_option( 'ld_track_slugs' );
+
+	if ( ! is_array( $map ) || ( $map && array_is_list( $map ) ) ) {
+		$terms = get_terms(
+			array(
+				'taxonomy'   => TAX_TRACK,
+				'hide_empty' => false,
+			)
+		);
+		$map   = array();
+		foreach ( is_wp_error( $terms ) ? array() : $terms as $term ) {
+			$map[ $term->slug ] = Markets\of_term( $term );
+		}
+		update_option( 'ld_track_slugs', $map, true );
+	}
+
+	return $map;
 }
 
 /**
@@ -49,21 +78,7 @@ function silo_types() {
  * @return string[]
  */
 function track_slugs() {
-	$slugs = get_option( 'ld_track_slugs' );
-
-	if ( ! is_array( $slugs ) ) {
-		$slugs = get_terms(
-			array(
-				'taxonomy'   => TAX_TRACK,
-				'hide_empty' => false,
-				'fields'     => 'slugs',
-			)
-		);
-		$slugs = is_wp_error( $slugs ) ? array() : array_values( $slugs );
-		update_option( 'ld_track_slugs', $slugs, true );
-	}
-
-	return $slugs;
+	return array_map( 'strval', array_keys( track_markets() ) );
 }
 
 /**
@@ -77,22 +92,25 @@ function add_rules() {
 	add_rewrite_rule( "^{$family}/([^/]+)/?$", 'index.php?' . \LearnDrive\Core\TAX_FAMILY . '=$matches[1]', 'top' );
 	add_rewrite_rule( "^{$family}/([^/]+)/page/([0-9]{1,})/?$", 'index.php?' . \LearnDrive\Core\TAX_FAMILY . '=$matches[1]&paged=$matches[2]', 'top' );
 
-	$slugs = track_slugs();
-	if ( ! $slugs ) {
-		return;
+	// Une série de règles par marché : chacun a ses propres segments d'URL.
+	$markets = array();
+	foreach ( track_markets() as $slug => $country ) {
+		$markets[ (string) $country ][] = (string) $slug;
 	}
 
-	$group = '(' . implode( '|', array_map( 'preg_quote', $slugs ) ) . ')';
+	foreach ( $markets as $country => $slugs ) {
+		$group = '(' . implode( '|', array_map( 'preg_quote', $slugs ) ) . ')';
 
-	add_rewrite_rule( "^{$group}/?$", 'index.php?' . TAX_TRACK . '=$matches[1]', 'top' );
-	add_rewrite_rule( "^{$group}/page/([0-9]{1,})/?$", 'index.php?' . TAX_TRACK . '=$matches[1]&paged=$matches[2]', 'top' );
-	add_rewrite_rule( "^{$group}/" . preg_quote( setting( 'slug_exam' ), '#' ) . '/?$', 'index.php?ld_exam_track=$matches[1]', 'top' );
+		add_rewrite_rule( "^{$group}/?$", 'index.php?' . TAX_TRACK . '=$matches[1]', 'top' );
+		add_rewrite_rule( "^{$group}/page/([0-9]{1,})/?$", 'index.php?' . TAX_TRACK . '=$matches[1]&paged=$matches[2]', 'top' );
+		add_rewrite_rule( "^{$group}/" . preg_quote( Markets\segment( 'slug_exam', $country ), '#' ) . '/?$', 'index.php?ld_exam_track=$matches[1]', 'top' );
 
-	foreach ( silo_types() as $post_type => $segment ) {
-		$segment = preg_quote( $segment, '#' );
-		add_rewrite_rule( "^{$group}/{$segment}/?$", "index.php?post_type={$post_type}&" . TAX_TRACK . '=$matches[1]', 'top' );
-		add_rewrite_rule( "^{$group}/{$segment}/page/([0-9]{1,})/?$", "index.php?post_type={$post_type}&" . TAX_TRACK . '=$matches[1]&paged=$matches[2]', 'top' );
-		add_rewrite_rule( "^{$group}/{$segment}/([^/]+)/?$", "index.php?{$post_type}=\$matches[2]", 'top' );
+		foreach ( silo_types( $country ) as $post_type => $segment ) {
+			$segment = preg_quote( $segment, '#' );
+			add_rewrite_rule( "^{$group}/{$segment}/?$", "index.php?post_type={$post_type}&" . TAX_TRACK . '=$matches[1]', 'top' );
+			add_rewrite_rule( "^{$group}/{$segment}/page/([0-9]{1,})/?$", "index.php?post_type={$post_type}&" . TAX_TRACK . '=$matches[1]&paged=$matches[2]', 'top' );
+			add_rewrite_rule( "^{$group}/{$segment}/([^/]+)/?$", "index.php?{$post_type}=\$matches[2]", 'top' );
+		}
 	}
 }
 add_action( 'init', __NAMESPACE__ . '\\add_rules', 20 );
@@ -202,22 +220,22 @@ add_filter( 'request', __NAMESPACE__ . '\\resolve_exam_request' );
  * @return string
  */
 function post_link( $link, $post ) {
-	$types = silo_types();
-
-	if ( ! isset( $types[ $post->post_type ] ) || ! in_array( $post->post_status, array( 'publish', 'private', 'future' ), true ) || ! $post->post_name ) {
+	if ( ! isset( silo_types()[ $post->post_type ] ) || ! in_array( $post->post_status, array( 'publish', 'private', 'future' ), true ) || ! $post->post_name ) {
 		return $link;
 	}
 
-	$track = primary_term( $post->ID, TAX_TRACK );
-	if ( ! $track || ! in_array( $track->slug, track_slugs(), true ) ) {
+	$track   = primary_term( $post->ID, TAX_TRACK );
+	$markets = track_markets();
+	if ( ! $track || ! isset( $markets[ $track->slug ] ) ) {
 		return $link;
 	}
+	$country = (string) $markets[ $track->slug ];
 
 	if ( PT_QUIZ === $post->post_type && 'exam' === get_post_meta( $post->ID, '_ld_mode', true ) && exam_for_track( $track ) === $post->ID ) {
-		return home_url( user_trailingslashit( $track->slug . '/' . setting( 'slug_exam' ) ) );
+		return home_url( user_trailingslashit( $track->slug . '/' . Markets\segment( 'slug_exam', $country ) ) );
 	}
 
-	return home_url( user_trailingslashit( $track->slug . '/' . $types[ $post->post_type ] . '/' . $post->post_name ) );
+	return home_url( user_trailingslashit( $track->slug . '/' . silo_types( $country )[ $post->post_type ] . '/' . $post->post_name ) );
 }
 add_filter( 'post_type_link', __NAMESPACE__ . '\\post_link', 10, 2 );
 

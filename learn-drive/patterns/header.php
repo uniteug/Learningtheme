@@ -26,9 +26,17 @@ $learn_drive_links = learn_drive_links();
 
 		<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|30"}},"layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"center","justifyContent":"right"}} -->
 		<div class="wp-block-group">
-			<!-- wp:navigation {"overlayMenu":"mobile","layout":{"type":"flex","justifyContent":"right"},"style":{"spacing":{"blockGap":"1.25rem"}}} -->
+			<!-- wp:navigation {"overlayMenu":"mobile","showSubmenuIcon":true,"openSubmenusOnClick":false,"layout":{"type":"flex","justifyContent":"right"},"style":{"spacing":{"blockGap":"1.25rem"}}} -->
 			<?php foreach ( $learn_drive_items as $learn_drive_item ) : ?>
-				<!-- wp:navigation-link {"label":"<?php echo esc_attr( $learn_drive_item[0] ); ?>","url":"<?php echo esc_url( $learn_drive_item[1] ); ?>","kind":"custom","isTopLevelLink":true} /-->
+				<?php if ( ! empty( $learn_drive_item[2] ) ) : ?>
+					<!-- wp:navigation-submenu {"label":"<?php echo esc_attr( $learn_drive_item[0] ); ?>","url":"<?php echo esc_url( $learn_drive_item[1] ); ?>","kind":"custom","className":"ld-menu-group"} -->
+					<?php foreach ( $learn_drive_item[2] as $learn_drive_child ) : ?>
+						<!-- wp:navigation-link {"label":"<?php echo esc_attr( $learn_drive_child[0] ); ?>","url":"<?php echo esc_url( $learn_drive_child[1] ); ?>","kind":"custom"<?php echo empty( $learn_drive_child[2] ) ? '' : ',"description":' . wp_json_encode( (string) $learn_drive_child[2] ); ?>} /-->
+					<?php endforeach; ?>
+					<!-- /wp:navigation-submenu -->
+				<?php else : ?>
+					<!-- wp:navigation-link {"label":"<?php echo esc_attr( $learn_drive_item[0] ); ?>","url":"<?php echo esc_url( $learn_drive_item[1] ); ?>","kind":"custom","isTopLevelLink":true} /-->
+				<?php endif; ?>
 			<?php endforeach; ?>
 			<!-- /wp:navigation -->
 

@@ -954,6 +954,17 @@ video {
 	backdrop-filter: saturate(1.6) blur(14px);
 }
 
+/*
+ * Le flou crée un bloc conteneur pour les éléments « fixed » : le menu mobile
+ * plein écran resterait enfermé dans l'en-tête. On le retire menu ouvert.
+ */
+.has-modal-open .ld-header,
+.ld-header:has(.wp-block-navigation__responsive-container.is-menu-open) {
+	-webkit-backdrop-filter: none;
+	backdrop-filter: none;
+	background: var(--wp--preset--color--base);
+}
+
 .ld-header .wp-block-navigation-item__content {
 	font-weight: 600;
 	text-decoration: none;
