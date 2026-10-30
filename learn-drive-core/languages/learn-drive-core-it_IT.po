@@ -320,7 +320,7 @@ msgstr "Quiz"
 
 #: includes/admin/settings.php:153
 #: includes/admin/meta-boxes.php:691
-#: blocks/track-cards/render.php:72
+#: blocks/track-cards/render.php:86
 msgid "Examen blanc"
 msgstr "Simulazione d’esame"
 
@@ -463,164 +463,168 @@ msgid "Donner une image à la une (titre et rubrique) aux articles qui n’en on
 msgstr "Dare un’immagine in evidenza (titolo e rubrica) agli articoli che non ce l’hanno"
 
 #: includes/admin/settings.php:198
+msgid "Adresses des articles par rubrique (/news/article/), anciennes adresses redirigées"
+msgstr "Indirizzi degli articoli per rubrica (/news/articolo/), vecchi indirizzi reindirizzati"
+
+#: includes/admin/settings.php:199
 msgid "Notifier IndexNow (Bing, Yandex) à chaque publication"
 msgstr "Notifica IndexNow (Bing, Yandex) a ogni pubblicazione"
 
-#: includes/admin/settings.php:199
+#: includes/admin/settings.php:200
 msgid "Publier /llms.txt (pages piliers pour les assistants IA)"
 msgstr "Pubblica /llms.txt (pagine pilastro per gli assistenti IA)"
 
-#: includes/admin/settings.php:200
+#: includes/admin/settings.php:201
 msgid "Bloquer ces robots d’IA dans robots.txt"
 msgstr "Blocca questi bot IA in robots.txt"
 
-#: includes/admin/settings.php:201
+#: includes/admin/settings.php:202
 msgid "Journaliser les erreurs 404"
 msgstr "Registra gli errori 404"
 
-#: includes/admin/settings.php:205
+#: includes/admin/settings.php:206
 msgid "Performance et médias"
 msgstr "Prestazioni e media"
 
-#: includes/admin/settings.php:209
+#: includes/admin/settings.php:210
 msgid "Format des images générées"
 msgstr "Formato delle immagini generate"
 
-#: includes/admin/settings.php:213
+#: includes/admin/settings.php:214
 msgid "Format d’origine"
 msgstr "Formato originale"
 
-#: includes/admin/settings.php:216
+#: includes/admin/settings.php:217
 msgid "Qualité (40 à 95)"
 msgstr "Qualità (da 40 a 95)"
 
-#: includes/admin/settings.php:217
+#: includes/admin/settings.php:218
 msgid "Ne générer que les tailles utiles"
 msgstr "Genera solo le dimensioni utili"
 
-#: includes/admin/settings.php:218
+#: includes/admin/settings.php:219
 msgid "Renommer les fichiers envoyés (minuscules, sans accents, titre du contenu)"
 msgstr "Rinomina i file caricati (minuscole, senza accenti, titolo del contenuto)"
 
-#: includes/admin/settings.php:219
+#: includes/admin/settings.php:220
 msgid "Façade vidéo (YouTube / Vimeo chargés au clic)"
 msgstr "Facciata video (YouTube / Vimeo caricati al clic)"
 
-#: includes/admin/settings.php:220
+#: includes/admin/settings.php:221
 msgid "Supprimer le script des émojis"
 msgstr "Rimuovi lo script delle emoji"
 
-#: includes/admin/settings.php:221
+#: includes/admin/settings.php:222
 msgid "Avatars locaux (aucune requête vers Gravatar)"
 msgstr "Avatar locali (nessuna richiesta a Gravatar)"
 
-#: includes/admin/settings.php:222
+#: includes/admin/settings.php:223
 msgid "Révision hors ligne (application installable, pages consultées gardées sur l’appareil)"
 msgstr "Ripasso offline (app installabile, pagine consultate salvate sul dispositivo)"
 
-#: includes/admin/settings.php:223
+#: includes/admin/settings.php:224
 msgid "URL du CDN d’images"
 msgstr "URL del CDN delle immagini"
 
-#: includes/admin/settings.php:227
+#: includes/admin/settings.php:228
 msgid "API et intégrations"
 msgstr "API e integrazioni"
 
-#: includes/admin/settings.php:229
+#: includes/admin/settings.php:230
 msgid "Clés d’API (application, sites clients)"
 msgstr "Chiavi API (app, siti clienti)"
 
-#: includes/admin/settings.php:229
+#: includes/admin/settings.php:230
 msgid "Une clé par ligne, 20 caractères minimum. En-tête HTTP : X-Learn-Key."
 msgstr "Una chiave per riga, minimo 20 caratteri. Intestazione HTTP: X-Learn-Key."
 
-#: includes/admin/settings.php:230
+#: includes/admin/settings.php:231
 msgid "Requêtes par minute et par visiteur"
 msgstr "Richieste al minuto per visitatore"
 
-#: includes/admin/settings.php:231
+#: includes/admin/settings.php:232
 msgid "URL du webhook (CRM, e-mailing)"
 msgstr "URL del webhook (CRM, e-mail marketing)"
 
-#: includes/admin/settings.php:232
+#: includes/admin/settings.php:233
 msgid "Secret de signature (HMAC SHA-256)"
 msgstr "Segreto di firma (HMAC SHA-256)"
 
-#: includes/admin/settings.php:250
+#: includes/admin/settings.php:251
 msgid "Learn & Drive — Réglages"
 msgstr "Learn & Drive — Impostazioni"
 
-#: includes/admin/settings.php:252
+#: includes/admin/settings.php:253
 msgid "Un plugin SEO est actif : Learn & Drive lui laisse les balises meta et fusionne ses données structurées dans son graphe."
 msgstr "È attivo un plugin SEO: Learn & Drive gli lascia i meta tag e unisce i propri dati strutturati al suo grafo."
 
-#: includes/admin/settings.php:321
+#: includes/admin/settings.php:322
 msgid "Learn & Drive — Import, export, démo"
 msgstr "Learn & Drive — Importazione, esportazione, demo"
 
-#: includes/admin/settings.php:328
+#: includes/admin/settings.php:329
 msgid "Importer des questions"
 msgstr "Importa domande"
 
-#: includes/admin/settings.php:329
+#: includes/admin/settings.php:330
 msgid "CSV (séparateur virgule ou point-virgule), JSON ou JSON Lines. Les questions existantes (même slug ou identifiant officiel) sont mises à jour."
 msgstr "CSV (separatore virgola o punto e virgola), JSON o JSON Lines. Le domande esistenti (stesso slug o identificativo ufficiale) vengono aggiornate."
 
-#: includes/admin/settings.php:334
+#: includes/admin/settings.php:335
 msgid "Simulation (aucune écriture)"
 msgstr "Simulazione (nessuna scrittura)"
 
-#: includes/admin/settings.php:335
+#: includes/admin/settings.php:336
 msgid "Importer"
 msgstr "Importa"
 
-#: includes/admin/settings.php:337
+#: includes/admin/settings.php:338
 msgid "Pour plusieurs milliers de questions avec images, préférez WP-CLI : wp learn import fichier.csv"
 msgstr "Per diverse migliaia di domande con immagini, è preferibile WP-CLI: wp learn import fichier.csv"
 
-#: includes/admin/settings.php:340
+#: includes/admin/settings.php:341
 msgid "Exporter les questions"
 msgstr "Esporta le domande"
 
-#: includes/admin/settings.php:345
+#: includes/admin/settings.php:346
 msgid "Télécharger"
 msgstr "Scarica"
 
-#: includes/admin/settings.php:349
+#: includes/admin/settings.php:350
 msgid "Contenu de démonstration"
 msgstr "Contenuti dimostrativi"
 
-#: includes/admin/settings.php:350
+#: includes/admin/settings.php:351
 msgid "2 pays, 5 catégories, 120 questions, quiz, examens blancs, leçons, panneaux, actualités et guides. Définit aussi la page d’accueil et la page des actualités."
 msgstr "2 paesi, 5 categorie, 120 domande, quiz, simulazioni d’esame, lezioni, segnali stradali, notizie e guide. Imposta anche la home page e la pagina delle notizie."
 
-#: includes/admin/settings.php:352
+#: includes/admin/settings.php:353
 msgid "Déjà importé : relancer met les contenus à jour sans doublon."
 msgstr "Già importata: rilanciarla aggiorna i contenuti senza duplicati."
 
-#: includes/admin/settings.php:357
+#: includes/admin/settings.php:358
 msgid "Importer la démo"
 msgstr "Importa la demo"
 
-#: includes/admin/settings.php:370
-#: includes/admin/settings.php:407
-#: includes/admin/settings.php:428
+#: includes/admin/settings.php:371
+#: includes/admin/settings.php:408
+#: includes/admin/settings.php:429
 msgid "Action non autorisée."
 msgstr "Azione non consentita."
 
-#: includes/admin/settings.php:375
+#: includes/admin/settings.php:376
 msgid "Aucun fichier reçu."
 msgstr "Nessun file ricevuto."
 
-#: includes/admin/settings.php:381
+#: includes/admin/settings.php:382
 msgid "Format non pris en charge."
 msgstr "Formato non supportato."
 
-#: includes/admin/settings.php:392
+#: includes/admin/settings.php:393
 msgid "Import terminé : %1$d créées, %2$d mises à jour, %3$d erreurs."
 msgstr "Importazione completata: %1$d create, %2$d aggiornate, %3$d errori."
 
-#: includes/admin/settings.php:436
+#: includes/admin/settings.php:437
 msgid "Démo importée (%d questions)."
 msgstr "Demo importata (%d domande)."
 
@@ -1371,7 +1375,7 @@ msgid "Dessinez la zone en faisant glisser sur l’image principale (enregistrez
 msgstr "Disegna la zona trascinando sull’immagine principale (salva prima l’immagine principale). Valori in % dell’immagine."
 
 #: includes/admin/meta-boxes.php:129
-#: includes/helpers.php:279
+#: includes/helpers.php:280
 msgid "Réponse numérique"
 msgstr "Risposta numerica"
 
@@ -2220,41 +2224,41 @@ msgstr "Nessun termine trovato."
 msgid "← Retour"
 msgstr "← Indietro"
 
-#: includes/helpers.php:276
+#: includes/helpers.php:277
 msgid "Vrai / faux"
 msgstr "Vero / falso"
 
-#: includes/helpers.php:277
+#: includes/helpers.php:278
 msgid "Choix unique"
 msgstr "Risposta singola"
 
-#: includes/helpers.php:278
+#: includes/helpers.php:279
 msgid "Choix multiple"
 msgstr "Risposta multipla"
 
-#: includes/helpers.php:280
+#: includes/helpers.php:281
 msgid "Remettre dans l’ordre"
 msgstr "Riordina"
 
-#: includes/helpers.php:281
+#: includes/helpers.php:282
 msgid "Association"
 msgstr "Abbinamento"
 
-#: includes/helpers.php:282
+#: includes/helpers.php:283
 msgid "Image cliquable"
 msgstr "Immagine cliccabile"
 
-#: includes/helpers.php:283
+#: includes/helpers.php:284
 msgid "Carte mémoire"
 msgstr "Flashcard"
 
-#: includes/helpers.php:298
+#: includes/helpers.php:299
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d minuto"
 msgstr[1] "%d minuti"
 
-#: includes/helpers.php:301
+#: includes/helpers.php:302
 msgid "%d seconde"
 msgid_plural "%d secondes"
 msgstr[0] "%d secondo"
@@ -2741,6 +2745,14 @@ msgstr "Video"
 msgid "Lire la vidéo : %s"
 msgstr "Guarda il video: %s"
 
+#: includes/post-sections.php:226
+msgid "Segment d’URL des articles"
+msgstr "Segmento dell’URL degli articoli"
+
+#: includes/post-sections.php:229
+msgid "Court et parlant (ex. « news », « guide ») : les articles de la rubrique ont pour adresse /segment/article/. Vide : slug de la rubrique. Actif si « Adresses des articles par rubrique » est coché dans les réglages."
+msgstr "Breve e chiaro (es. «news», «guide»): gli articoli della rubrica hanno indirizzo /segmento/articolo/. Vuoto: slug della rubrica. Attivo se «Indirizzi degli articoli per rubrica» è selezionato nelle impostazioni."
+
 #: blocks/archive-intro/block.json
 msgctxt "block title"
 msgid "Introduction d'archive"
@@ -2869,20 +2881,28 @@ msgstr "Programmi principali"
 
 #: blocks/track-cards/block.json
 msgctxt "block description"
-msgid "Cartes des catégories (permis, matières) avec les règles de l’examen, le nombre de leçons et de quiz, et un accès direct à l’examen blanc."
-msgstr "Riquadri delle categorie (patenti, materie) con le regole dell’esame, il numero di lezioni e di quiz e un accesso diretto alla simulazione d’esame."
+msgid "Cartes des catégories (permis, matières) avec les règles de l’examen, le nombre de leçons et de quiz, et un accès direct à l’examen blanc. Mode « examens » : choix de l’examen blanc à passer."
+msgstr "Riquadri delle categorie (patenti, materie) con le regole dell’esame, il numero di lezioni e di quiz e un accesso diretto alla simulazione d’esame. Modalità «esami»: scelta della simulazione da fare."
 
-#: blocks/track-cards/render.php:56
+#: blocks/track-cards/render.php:70
 msgid "%d leçon"
 msgid_plural "%d leçons"
 msgstr[0] "%d lezione"
 msgstr[1] "%d lezioni"
 
-#: blocks/track-cards/render.php:60
+#: blocks/track-cards/render.php:74
 msgid "%d quiz"
 msgid_plural "%d quiz"
 msgstr[0] "%d quiz"
 msgstr[1] "%d quiz"
+
+#: blocks/track-cards/render.php:86
+msgid "Commencer l’examen blanc"
+msgstr "Inizia la simulazione"
+
+#: blocks/track-cards/render.php:95
+msgid "Examens blancs en préparation :"
+msgstr "Simulazioni in preparazione:"
 
 #: blocks/question/block.json
 msgctxt "block title"

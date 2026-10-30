@@ -96,6 +96,7 @@ function defaults() {
 		'glossary_max'     => 8,
 		'og_images'        => 1,
 		'auto_featured'    => 1,
+		'post_sections'    => 0,
 		'log_404'          => 1,
 		// Performance & médias.
 		'image_format'     => 'webp',

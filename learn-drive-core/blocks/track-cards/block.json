@@ -5,7 +5,7 @@
 	"title": "Programmes phares",
 	"category": "learn-drive",
 	"icon": "awards",
-	"description": "Cartes des catégories (permis, matières) avec les règles de l’examen, le nombre de leçons et de quiz, et un accès direct à l’examen blanc.",
+	"description": "Cartes des catégories (permis, matières) avec les règles de l’examen, le nombre de leçons et de quiz, et un accès direct à l’examen blanc. Mode « examens » : choix de l’examen blanc à passer.",
 	"textdomain": "learn-drive-core",
 	"attributes": {
 		"country": {
@@ -23,6 +23,14 @@
 		"count": {
 			"type": "integer",
 			"default": 8
+		},
+		"mode": {
+			"type": "string",
+			"enum": [
+				"all",
+				"exams"
+			],
+			"default": "all"
 		}
 	},
 	"supports": {

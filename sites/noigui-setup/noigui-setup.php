@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Noigui — configurazione del sito
  * Description:       Configura Learn & Drive per noigui.com: patente italiana, banca ufficiale dei quiz ministeriali (listato «Patente AB», 7.020 affermazioni), argomenti con le quote d'esame, simulazione d'esame, menu e collegamenti all'app. Le spiegazioni già scritte negli articoli «Quiz Patente B» vengono collegate alle affermazioni corrispondenti.
- * Version:           1.1.1
+ * Version:           1.2.1
  * Requires at least: 6.9
  * Requires PHP:      8.1
  * Requires Plugins:  learn-drive-core
@@ -25,7 +25,7 @@ use const LearnDrive\Core\TAX_TOPIC;
 
 defined( 'ABSPATH' ) || exit;
 
-const VERSION = '1.1.1';
+const VERSION = '1.2.1';
 const DIR     = __DIR__ . '/';
 
 /**
@@ -209,10 +209,33 @@ function setup() {
 		if ( 'exam' !== $quiz['mode'] ) {
 			update_post_meta( $id, '_ld_rules', array( 'count' => (int) $quiz['count'] ) );
 		}
-		wp_set_object_terms( $id, array( 'patente-b' ), TAX_TRACK );
+		wp_set_object_terms( $id, array( $quiz['track'] ?? 'patente-b' ), TAX_TRACK );
 		wp_set_object_terms( $id, array( 'italia' ), TAX_COUNTRY );
 		wp_set_object_terms( $id, $quiz['topic'] ? array( $quiz['topic'] ) : array(), TAX_TOPIC );
 	}
+
+	// Indirizzi degli articoli per rubrica: /news/…, /guide/…, /quiz-commentati/….
+	foreach ( array(
+		'news-patente'   => 'news',
+		'guide-patente'  => 'guide',
+		'quiz-patente-b' => 'quiz-commentati',
+	) as $slug => $base ) {
+		$category = get_term_by( 'slug', $slug, 'category' );
+		if ( $category ) {
+			update_term_meta( $category->term_id, 'ld_url_base', $base );
+		}
+	}
+
+	// Scelta dell'esame da simulare (/simulazione-esame/).
+	upsert(
+		'page',
+		array(
+			'post_name'    => 'simulazione-esame',
+			'post_title'   => 'Simulazione d’esame',
+			'post_excerpt' => 'Scegli la patente e fai la simulazione dell’esame di teoria con le domande del listato ministeriale.',
+			'post_content' => exam_picker_content(),
+		)
+	);
 
 	// Area personale.
 	$account = upsert(
@@ -445,6 +468,7 @@ function links( $links ) {
 		array(
 			'news'        => $news ? get_term_link( $news ) : $links['news'],
 			'guides'      => $guides ? get_term_link( $guides ) : $links['guides'],
+			'exam'        => home_url( '/simulazione-esame/' ),
 			'about'       => home_url( '/about/' ),
 			'editorial'   => home_url( '/about/' ),
 			'contact'     => home_url( '/contact/' ),
@@ -511,7 +535,21 @@ function article_styles() {
 		'noigui-articles',
 		'.noigui-leggi-anche{margin:2rem 0;padding:1.25rem 1.5rem;border:1px solid var(--wp--preset--color--border,#dfe5ee);border-left:4px solid var(--wp--preset--color--primary,#0a6e9e);border-radius:12px;background:var(--wp--preset--color--surface,#f5f8fc)}'
 		. '.noigui-leggi-anche h3{margin:0 0 .5rem;font-size:1.05rem}.noigui-leggi-anche ul{margin:0;padding-left:1.1rem}.noigui-leggi-anche li{margin:.3rem 0}'
-		. '.nqz-q{border-color:var(--wp--preset--color--border,#dcdcec)!important}.nqz-b:focus-visible{outline:3px solid var(--wp--preset--color--primary,#0a6e9e);outline-offset:2px}'
+		// Quiz e soluzioni degli articoli: colori del tema, leggibili in modalità chiara e scura.
+		. 'body .nqz-q{background:var(--wp--preset--color--base)!important;border-color:var(--wp--preset--color--border)!important;color:var(--wp--preset--color--contrast)!important}'
+		. 'body .nqz-s{color:inherit!important}'
+		. 'body .nqz-b{background:transparent!important;color:var(--wp--preset--color--primary)!important;border-color:currentColor!important}'
+		. 'body .nqz-b:hover{background:var(--wp--preset--color--surface)!important}'
+		. 'body .nqz-b.ok{background:#0a8f4f!important;border-color:#0a8f4f!important;color:#fff!important}'
+		. 'body .nqz-b.ko{background:#c81e24!important;border-color:#c81e24!important;color:#fff!important}'
+		. 'body .nqz-b:focus-visible{outline:3px solid var(--wp--preset--color--primary);outline-offset:2px}'
+		. 'body .nqz-e{background:var(--wp--preset--color--surface)!important;color:inherit!important}'
+		. 'body .nqz-e.good{background:color-mix(in srgb,#0a8f4f 16%,var(--wp--preset--color--base))!important}'
+		. 'body .nqz-e.bad{background:color-mix(in srgb,#c81e24 14%,var(--wp--preset--color--base))!important}'
+		. 'body .nqz-score{background:var(--wp--preset--color--surface)!important;color:var(--wp--preset--color--contrast)!important}'
+		. 'body .ngsol{border-left-color:var(--wp--preset--color--primary)!important}'
+		. 'body .ngsol h3{color:var(--wp--preset--color--contrast)!important}'
+		. 'body .ngsol .r{color:var(--wp--preset--color--primary)!important}'
 	);
 }
 add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\\article_styles' );

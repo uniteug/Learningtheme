@@ -47,6 +47,7 @@ function settings() {
 		'slug_country'    => 'paese',
 		'offline'         => 1,
 		'index_policy'    => 1,
+		'post_sections'   => 1,
 	);
 }
 
@@ -495,6 +496,17 @@ function quizzes() {
 			'topic'   => '',
 			'order'   => 0,
 		),
+		array(
+			'slug'    => 'simulazione-esame-patente-a',
+			'title'   => 'Simulazione d’esame patente A',
+			'excerpt' => 'L’esame di teoria delle patenti A1, A2 e A: 30 affermazioni vero/falso del listato «Patente AB», 20 minuti, massimo 3 errori.',
+			'content' => p( 'La teoria delle patenti per moto (A1, A2 e A) usa lo stesso listato ministeriale della patente B. Questa simulazione riproduce l’esame in Motorizzazione: 30 affermazioni vero/falso con le quote ufficiali per argomento, 20 minuti di tempo, promosso con al massimo 3 errori.' ),
+			'mode'    => 'exam',
+			'count'   => 30,
+			'topic'   => '',
+			'order'   => 1,
+			'track'   => 'patente-a',
+		),
 	);
 	foreach ( meta()['topics'] ?? array() as $index => $topic ) {
 		$list[] = array(
@@ -530,4 +542,22 @@ function hub_content() {
 	return h2( 'Come scegliere la patente giusta' )
 		. p( 'In Italia le patenti sono divise per tipo di veicolo: ciclomotori e motocicli (AM, A1, A2, A), autovetture (B e BE), autocarri (C1, C, CE) e autobus (D1, D, DE). Ogni categoria ha un’età minima, un esame di teoria e una prova pratica; per guidare per lavoro camion e autobus serve anche la Carta di qualificazione del conducente (CQC).' )
 		. p( 'Le categorie superiori si conseguono partendo dalla patente B. Per ogni patente trovi requisiti, svolgimento degli esami e le guide pratiche della redazione, con i quiz ministeriali dove disponibili.' );
+}
+
+/**
+ * Pagina «Simulazione d’esame»: si sceglie l’esame da simulare.
+ *
+ * @return string
+ */
+function exam_picker_content() {
+	return p( 'Scegli la patente per cui ti stai preparando: ogni simulazione riproduce l’esame di teoria della Motorizzazione, con le domande del listato ministeriale, lo stesso tempo e la stessa soglia di errori. Ogni volta la scheda è diversa.' )
+		. "<!-- wp:learn-drive/track-cards {\"mode\":\"exams\",\"count\":24} /-->\n\n"
+		. h2( 'Come funziona la simulazione' )
+		. ul(
+			array(
+				'Le domande sono estratte dal listato ufficiale con le stesse quote per argomento della scheda d’esame.',
+				'Puoi tornare indietro e cambiare le risposte fino alla consegna o allo scadere del tempo, come all’esame.',
+				'Alla fine trovi il risultato e la spiegazione di ogni errore, per ripassare gli argomenti più deboli.',
+			)
+		);
 }

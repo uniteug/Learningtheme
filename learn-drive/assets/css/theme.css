@@ -1477,6 +1477,12 @@ video {
 	color: #fff;
 }
 
+/* Choix de l'examen blanc : catégories dont la simulation est en préparation. */
+.ld-tracks__pending {
+	margin-top: var(--wp--preset--spacing--40);
+	color: var(--wp--preset--color--muted, currentColor);
+}
+
 /* Carrousels : rangées défilantes (scroll-snap). */
 .ld-carousel,
 :where(.ld-rail, .is-style-carousel) :where(.wp-block-post-template, .wp-block-term-template) {

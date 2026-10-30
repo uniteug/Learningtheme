@@ -475,6 +475,33 @@ if ( function_exists( 'imagettftext' ) ) {
 }
 
 /* ------------------------------------------------------------------ */
+section( 'Adresses des articles par rubrique' );
+
+$sec_parent = wp_insert_term( 'Rubrique adresses test', 'category', array( 'slug' => 'rubrique-adresses-test' ) );
+$sec_child  = wp_insert_term( 'Sous-rubrique adresses test', 'category', array( 'slug' => 'sous-rubrique-adresses-test', 'parent' => $sec_parent['term_id'] ) );
+update_term_meta( $sec_parent['term_id'], 'ld_url_base', 'infos-test' );
+$sec_post  = wp_insert_post( array( 'post_type' => 'post', 'post_status' => 'publish', 'post_title' => 'Article rangé par rubrique', 'post_name' => 'article-range-par-rubrique', 'post_category' => array( $sec_child['term_id'] ), 'post_content' => '<!-- wp:paragraph --><p>Texte.</p><!-- /wp:paragraph -->' ) );
+$sec_opts  = get_option( 'learn_drive_core' );
+$cleanup[] = static function () use ( $sec_parent, $sec_child, $sec_post, $sec_opts ) {
+	$thumb = get_post_thumbnail_id( $sec_post );
+	if ( $thumb ) {
+		wp_delete_attachment( $thumb, true );
+	}
+	wp_delete_post( $sec_post, true );
+	wp_delete_term( $sec_child['term_id'], 'category' );
+	wp_delete_term( $sec_parent['term_id'], 'category' );
+	update_option( 'learn_drive_core', $sec_opts );
+};
+check( 'Désactivé par défaut : adresse de WordPress inchangée', ! str_contains( get_permalink( $sec_post ), '/infos-test/' ) );
+update_option( 'learn_drive_core', array_merge( (array) $sec_opts, array( 'post_sections' => 1 ) ) );
+check( 'Article : /segment-de-rubrique/article/', str_ends_with( get_permalink( $sec_post ), '/infos-test/article-range-par-rubrique/' ) );
+check( 'Rubrique : /segment/, sous-rubrique : /segment/sous-rubrique/', str_ends_with( get_term_link( $sec_parent['term_id'], 'category' ), '/infos-test/' ) && str_ends_with( get_term_link( $sec_child['term_id'], 'category' ), '/infos-test/sous-rubrique-adresses-test/' ) );
+$sec_vars = LearnDrive\Core\PostSections\resolve( array( 'ld_section' => $sec_parent['term_id'], 'name' => 'sous-rubrique-adresses-test' ) );
+check( '/segment/{x}/ : sous-rubrique quand aucun article ne porte ce nom', 'sous-rubrique-adresses-test' === ( $sec_vars['category_name'] ?? '' ) && ! isset( $sec_vars['name'] ) );
+$sec_vars = LearnDrive\Core\PostSections\resolve( array( 'ld_section' => $sec_parent['term_id'], 'name' => 'article-range-par-rubrique' ) );
+check( '/segment/{x}/ : article quand il existe', 'article-range-par-rubrique' === ( $sec_vars['name'] ?? '' ) );
+
+/* ------------------------------------------------------------------ */
 section( 'Marchés (pays, langue, hreflang, mise en ligne)' );
 
 use LearnDrive\Core\Markets;

@@ -40,6 +40,20 @@ usort(
 		return $order ? $order : $b->count <=> $a->count;
 	}
 );
+// Mode « examens » : seulement les catégories qui ont un examen blanc ; les autres sont annoncées à part.
+$learn_drive_exams   = 'exams' === ( $attributes['mode'] ?? 'all' );
+$learn_drive_pending = array();
+if ( $learn_drive_exams ) {
+	$learn_drive_with = array();
+	foreach ( $learn_drive_terms as $learn_drive_term ) {
+		if ( \LearnDrive\Core\Permalinks\exam_for_track( $learn_drive_term ) ) {
+			$learn_drive_with[] = $learn_drive_term;
+		} else {
+			$learn_drive_pending[] = sprintf( '<a href="%s">%s</a>', esc_url( get_term_link( $learn_drive_term ) ), esc_html( $learn_drive_term->name ) );
+		}
+	}
+	$learn_drive_terms = $learn_drive_with;
+}
 $learn_drive_terms = array_slice( $learn_drive_terms, 0, max( 1, min( 24, (int) $attributes['count'] ) ) );
 
 $learn_drive_items = '';
@@ -69,13 +83,14 @@ foreach ( $learn_drive_terms as $learn_drive_term ) {
 		$learn_drive_term->description ? '<p class="ld-track__desc">' . esc_html( wp_trim_words( $learn_drive_term->description, 22 ) ) . '</p>' : '',
 		$learn_drive_facts ? '<ul class="ld-track__facts">' . $learn_drive_facts . '</ul>' : '',
 		$learn_drive_stats ? '<p class="ld-track__stats">' . esc_html( implode( ' · ', $learn_drive_stats ) ) . '</p>' : '',
-		$learn_drive_summary['exam'] ? '<a class="ld-track__exam" href="' . esc_url( get_permalink( $learn_drive_summary['exam'] ) ) . '">' . esc_html__( 'Examen blanc', 'learn-drive-core' ) . '<span aria-hidden="true"> →</span></a>' : ''
+		$learn_drive_summary['exam'] ? '<a class="ld-track__exam" href="' . esc_url( get_permalink( $learn_drive_summary['exam'] ) ) . '">' . ( $learn_drive_exams ? esc_html__( 'Commencer l’examen blanc', 'learn-drive-core' ) : esc_html__( 'Examen blanc', 'learn-drive-core' ) ) . '<span aria-hidden="true"> →</span></a>' : ''
 	);
 }
 
 printf(
-	'<div %1$s><ul class="ld-tracks__list%2$s">%3$s</ul></div>',
+	'<div %1$s><ul class="ld-tracks__list%2$s">%3$s</ul>%4$s</div>',
 	get_block_wrapper_attributes( array( 'class' => 'ld-tracks is-' . esc_attr( $attributes['layout'] ) ) ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	'carousel' === $attributes['layout'] ? ' ld-carousel' : '',
-	$learn_drive_items // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- échappé à la construction.
+	$learn_drive_items, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- échappé à la construction.
+	$learn_drive_pending ? '<p class="ld-tracks__pending">' . esc_html__( 'Examens blancs en préparation :', 'learn-drive-core' ) . ' ' . implode( ', ', $learn_drive_pending ) . '</p>' : '' // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- liens échappés à la construction.
 );
