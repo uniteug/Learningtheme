@@ -96,7 +96,7 @@ function backfill() {
 	if ( ! setting( 'auto_featured' ) ) {
 		return;
 	}
-	$ids = get_posts(
+	$ids  = get_posts(
 		array(
 			'post_type'      => post_types(),
 			'post_status'    => 'publish',

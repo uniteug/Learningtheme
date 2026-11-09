@@ -120,6 +120,7 @@
 	[
 		'quiz',
 		'question',
+		'question-group',
 		'question-of-the-day',
 		'related',
 		'toc',

@@ -731,7 +731,7 @@ function save_term( $term_id ) {
 		update_term_meta( $term_id, 'ld_equivalent', sanitize_key( wp_unslash( $_POST['ld_equivalent'] ) ) );
 	}
 	if ( isset( $_POST['ld_locale'] ) ) {
-		$term = get_term( $term_id );
+		$term   = get_term( $term_id );
 		$locale = preg_replace( '/[^A-Za-z_]/', '', sanitize_text_field( wp_unslash( $_POST['ld_locale'] ) ) );
 		update_term_meta( $term_id, 'ld_locale', $locale );
 		// Paquet de langue de WordPress pour ce marché (dates, textes du cœur).

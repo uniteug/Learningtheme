@@ -246,3 +246,111 @@ function save_term_field( $term_id ) {
 	update_term_meta( $term_id, 'ld_url_base', sanitize_title( wp_unslash( $_POST['ld_url_base'] ) ) );
 }
 add_action( 'edited_category', __NAMESPACE__ . '\\save_term_field' );
+
+/*
+ * Liens internes : les contenus qui pointent encore vers l'ancienne adresse
+ * d'un article (/article/) sont réécrits vers la nouvelle (/rubrique/article/),
+ * par lots en arrière-plan, pour éviter une redirection à chaque lien.
+ */
+
+/**
+ * Anciennes adresses → nouvelles (articles dont l'adresse a changé).
+ *
+ * @return array<string,string> Slug => nouvelle adresse.
+ */
+function moved_posts() {
+	global $wpdb;
+	$map = array();
+	// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- lecture unique de quelques centaines de lignes.
+	$ids = $wpdb->get_col( "SELECT ID FROM {$wpdb->posts} WHERE post_type = 'post' AND post_status = 'publish'" );
+	foreach ( $ids as $id ) {
+		$post = get_post( (int) $id );
+		$new  = get_permalink( $post );
+		if ( $post && $new && untrailingslashit( (string) wp_parse_url( $new, PHP_URL_PATH ) ) !== '/' . $post->post_name ) {
+			$map[ $post->post_name ] = $new;
+		}
+	}
+	return $map;
+}
+
+/**
+ * Réécrit les liens d'un lot de contenus.
+ */
+function migrate_links_batch() {
+	if ( ! enabled() ) {
+		return;
+	}
+	global $wpdb;
+	$state = get_option( 'ld_links_migration', array( 'last' => 0 ) );
+	$map   = moved_posts();
+	if ( ! $map ) {
+		update_option(
+			'ld_links_migration',
+			array(
+				'last'    => 0,
+				'done'    => LEARN_DRIVE_CORE_VERSION,
+				'changed' => 0,
+			),
+			false
+		);
+		return;
+	}
+	$host = preg_quote( (string) wp_parse_url( home_url(), PHP_URL_HOST ), '#' );
+	$slug = implode( '|', array_map( static fn( $s ) => preg_quote( $s, '#' ), array_keys( $map ) ) );
+	$re   = '#(href=["\'])(?:https?://(?:www\.)?' . $host . '(?::\d+)?)?/(' . $slug . ')/?(?=["\'\#?])#';
+
+	// phpcs:disable WordPress.DB.DirectDatabaseQuery -- réécriture en lot, sans révisions ni filtrage du HTML existant.
+	$rows    = $wpdb->get_results(
+		$wpdb->prepare(
+			"SELECT ID, post_content FROM {$wpdb->posts} WHERE ID > %d AND post_status IN ( 'publish', 'draft', 'future', 'private' ) AND post_type NOT IN ( 'revision', 'attachment', 'nav_menu_item' ) AND post_content LIKE %s ORDER BY ID ASC LIMIT 40",
+			(int) $state['last'],
+			'%href=%'
+		)
+	);
+	$changed = (int) ( $state['changed'] ?? 0 );
+	foreach ( $rows as $row ) {
+		$content = preg_replace_callback( $re, static fn( $m ) => $m[1] . $map[ $m[2] ], $row->post_content );
+		if ( null !== $content && $content !== $row->post_content ) {
+			$wpdb->update( $wpdb->posts, array( 'post_content' => $content ), array( 'ID' => $row->ID ) );
+			clean_post_cache( (int) $row->ID );
+			++$changed;
+		}
+		$state['last'] = (int) $row->ID;
+	}
+	// phpcs:enable WordPress.DB.DirectDatabaseQuery
+
+	if ( count( $rows ) === 40 ) {
+		update_option(
+			'ld_links_migration',
+			array(
+				'last'    => $state['last'],
+				'changed' => $changed,
+			),
+			false
+		);
+		wp_schedule_single_event( time() + 20, 'learn_drive_links_migration' );
+	} else {
+		update_option(
+			'ld_links_migration',
+			array(
+				'last'    => 0,
+				'done'    => LEARN_DRIVE_CORE_VERSION,
+				'changed' => $changed,
+			),
+			false
+		);
+	}
+}
+add_action( 'learn_drive_links_migration', __NAMESPACE__ . '\\migrate_links_batch' );
+
+/**
+ * Lance la réécriture une fois par version, quand les adresses par rubrique sont actives.
+ */
+function schedule_links_migration() {
+	$state = get_option( 'ld_links_migration', array() );
+	if ( enabled() && ( $state['done'] ?? '' ) !== LEARN_DRIVE_CORE_VERSION && ! wp_next_scheduled( 'learn_drive_links_migration' ) ) {
+		wp_schedule_single_event( time() + 10, 'learn_drive_links_migration' );
+	}
+}
+add_action( 'admin_init', __NAMESPACE__ . '\\schedule_links_migration' );
+add_action( 'rest_api_init', __NAMESPACE__ . '\\schedule_links_migration' );

@@ -139,9 +139,9 @@ function generate( $post_id ) {
 	$regular = LEARN_DRIVE_CORE_DIR . 'assets/fonts/atkinson-hyperlegible-400.ttf';
 	$image   = imagecreatetruecolor( 1200, 630 );
 
-	$hex        = ltrim( color(), '#' );
-	$track      = $post_id ? primary_term( $post_id, TAX_TRACK ) : null;
-	$term       = $track ? $track : ( $post_id ? primary_term( $post_id, TAX_TOPIC ) : null );
+	$hex   = ltrim( color(), '#' );
+	$track = $post_id ? primary_term( $post_id, TAX_TRACK ) : null;
+	$term  = $track ? $track : ( $post_id ? primary_term( $post_id, TAX_TOPIC ) : null );
 	if ( ! $term && $post_id && 'post' === get_post_type( $post_id ) ) {
 		$term = primary_category( $post_id ); // Actualités et guides : leur rubrique.
 	}

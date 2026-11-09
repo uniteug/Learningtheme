@@ -441,7 +441,7 @@ function is_thin( $post_id ) {
 	if ( '' === $words ) {
 		$words = word_count( get_post_field( 'post_content', $post_id ) );
 	}
-	return (int) $words < (int) setting( 'thin_words' );
+	return (int) $words < (int) setting( 'thin_words' ) && count( group_ids( $post_id ) ) < 3;
 }
 
 /**
@@ -457,7 +457,8 @@ function update_seo_flags( $post_id ) {
 	$words = word_count( get_post_field( 'post_content', $post_id ) );
 	update_post_meta( $post_id, '_ld_words', $words );
 
-	$thin   = $words < (int) setting( 'thin_words' );
+	// Une question de série officielle (même figure, réponses) s'affiche en fiche complète : indexable.
+	$thin   = $words < (int) setting( 'thin_words' ) && count( group_ids( $post_id ) ) < 3;
 	$manual = (bool) get_post_meta( $post_id, '_ld_seo_noindex', true );
 
 	if ( $thin || $manual || get_post_meta( $post_id, '_ld_canonical', true ) ) {
@@ -692,4 +693,59 @@ function shuffled_indexes( array $question ) {
 		$indexes = array_reverse( $indexes );
 	}
 	return $indexes;
+}
+
+/**
+ * Réponse correcte d'une question, en texte (« Vrai », « Faux », la bonne
+ * proposition…), vide pour les formats sans réponse unique.
+ *
+ * @param int|\WP_Post $post Question.
+ * @return string
+ */
+function correct_answer( $post ) {
+	$question = get( $post );
+	if ( ! $question || ! in_array( $question['format'], array( 'tf', 'single' ), true ) ) {
+		return '';
+	}
+	foreach ( $question['answers'] as $answer ) {
+		if ( $answer['correct'] ) {
+			return $answer['text'];
+		}
+	}
+	return '';
+}
+
+/**
+ * Questions de la même série officielle (même quesito, même figure : méta
+ * « _ld_group »), dans l'ordre des numéros officiels.
+ *
+ * @param int $post_id Question.
+ * @return int[] Questions de la série, celle-ci comprise (vide si pas de série).
+ */
+function group_ids( $post_id ) {
+	$group = (string) get_post_meta( $post_id, '_ld_group', true );
+	if ( '' === $group ) {
+		return array();
+	}
+	$key = 'ld_group_' . md5( $group ) . '_' . wp_cache_get_last_changed( 'posts' );
+	$ids = wp_cache_get( $key, 'learn-drive' );
+	if ( ! is_array( $ids ) ) {
+		$ids = array_map(
+			'intval',
+			get_posts(
+				array(
+					'post_type'      => PT_QUESTION,
+					'post_status'    => 'publish',
+					'posts_per_page' => 60,
+					'fields'         => 'ids',
+					'meta_key'       => '_ld_group', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+					'meta_value'     => $group, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
+					'orderby'        => 'ID',
+					'order'          => 'ASC',
+				)
+			)
+		);
+		wp_cache_set( $key, $ids, 'learn-drive', HOUR_IN_SECONDS );
+	}
+	return $ids;
 }

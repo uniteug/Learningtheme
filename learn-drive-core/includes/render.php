@@ -191,7 +191,7 @@ function question_item( array $question, $index, array $args ) {
 
 	$stem = esc_html( $question['title'] );
 	if ( $args['link_stems'] ) {
-		$stem = sprintf( '<a class="ld-q__link" href="%s">%s</a>', esc_url( $question['url'] ), $stem );
+		$stem = sprintf( '<a class="ld-q__link" href="%s"%s>%s</a>', esc_url( $question['url'] ), \LearnDrive\Core\SEO\Index\questions_crawlable() ? '' : ' rel="nofollow"', $stem );
 	}
 
 	$heading_tag = $args['heading_level'] ? 'h' . (int) $args['heading_level'] : 'p';

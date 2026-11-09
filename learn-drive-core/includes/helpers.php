@@ -97,6 +97,7 @@ function defaults() {
 		'og_images'        => 1,
 		'auto_featured'    => 1,
 		'post_sections'    => 0,
+		'crawl_questions'  => 1,
 		'log_404'          => 1,
 		// Performance & médias.
 		'image_format'     => 'webp',

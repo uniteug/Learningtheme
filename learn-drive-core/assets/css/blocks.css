@@ -502,3 +502,52 @@
 .ld-term-content > :first-child {
 	margin-top: 0;
 }
+
+/* Série officielle d'une question : toutes les affirmations de la même figure, avec leur réponse. */
+.ld-group__heading {
+	margin: 0 0 0.35rem;
+	font-size: var(--wp--preset--font-size--large, 1.25rem);
+}
+
+.ld-group__intro {
+	margin: 0 0 1rem;
+	color: var(--wp--preset--color--muted, currentColor);
+}
+
+.ld-group__table {
+	overflow-x: auto;
+	border: 1px solid var(--wp--preset--color--border, #d5dde8);
+	border-radius: var(--wp--custom--radius--card, 12px);
+}
+
+.ld-group table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 0.95rem;
+}
+
+.ld-group :where(th, td) {
+	padding: 0.65rem 0.9rem;
+	border-bottom: 1px solid var(--wp--preset--color--border, #d5dde8);
+	text-align: left;
+	vertical-align: top;
+}
+
+.ld-group tr:last-child td {
+	border-bottom: 0;
+}
+
+.ld-group th {
+	background: var(--wp--preset--color--surface, #f3f6fb);
+	font-weight: 700;
+}
+
+.ld-group .ld-group__answer {
+	width: 6.5rem;
+	font-weight: 700;
+	white-space: nowrap;
+}
+
+.ld-group tr.is-current td {
+	background: color-mix(in srgb, var(--wp--preset--color--primary, #0a6e9e) 10%, transparent);
+}

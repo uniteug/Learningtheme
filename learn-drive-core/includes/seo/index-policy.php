@@ -91,6 +91,12 @@ function is_thin_post( $post ) {
 		return count( \LearnDrive\Core\Quizzes\question_ids( $post->ID ) ) < 5;
 	}
 
+	// Une question officielle s'affiche avec toute sa série (même figure, réponses) :
+	// sa page est une fiche complète, à indexer pour les recherches sur l'énoncé.
+	if ( PT_QUESTION === $post->post_type && count( \LearnDrive\Core\Questions\group_ids( $post->ID ) ) >= 3 ) {
+		return false;
+	}
+
 	// Un cours se juge aussi sur son programme : ses leçons s'affichent sur sa page.
 	if ( PT_COURSE === $post->post_type && count( \LearnDrive\Core\Blocks\course_lessons( $post->ID ) ) >= 3 ) {
 		return false;
@@ -110,6 +116,10 @@ function is_thin_post( $post ) {
  * @param int $post_id Contenu.
  */
 function update_flag( $post_id ) {
+	if ( PT_QUESTION === get_post_type( $post_id ) ) {
+		\LearnDrive\Core\Questions\update_seo_flags( $post_id ); // Règle propre aux questions.
+		return;
+	}
 	$post = get_post( $post_id );
 	if ( ! $post || wp_is_post_revision( $post_id ) || 'publish' !== $post->post_status || ! in_array( $post->post_type, array_merge( array_keys( min_words() ), array( PT_QUIZ ) ), true ) ) {
 		return;
@@ -133,19 +143,30 @@ add_action( 'save_post', __NAMESPACE__ . '\\update_flag', 30 );
  * @return int Nombre de contenus exclus.
  */
 function recompute() {
-	$types = array_merge( array_keys( min_words() ), array( PT_QUIZ ) );
-	$ids   = get_posts(
+	// Par lots (une banque officielle compte des milliers de questions).
+	$types  = array_merge( array_keys( min_words() ), array( PT_QUIZ, PT_QUESTION ) );
+	$offset = (int) get_option( 'ld_index_recompute_offset', 0 );
+	$ids    = get_posts(
 		array(
 			'post_type'      => $types,
 			'post_status'    => 'publish',
-			'posts_per_page' => -1, // phpcs:ignore WordPress.WP.PostsPerPage.posts_per_page_posts_per_page -- tâche ponctuelle d'administration.
+			'posts_per_page' => 400,
+			'offset'         => $offset,
+			'orderby'        => 'ID',
+			'order'          => 'ASC',
 			'fields'         => 'ids',
 		)
 	);
-	$count = 0;
+	$count  = 0;
 	foreach ( $ids as $id ) {
 		update_flag( $id );
 		$count += (int) (bool) get_post_meta( $id, '_ld_thin', true );
+	}
+	if ( count( $ids ) === 400 ) {
+		update_option( 'ld_index_recompute_offset', $offset + 400, false );
+		wp_schedule_single_event( time() + 15, 'learn_drive_index_recompute' );
+	} else {
+		delete_option( 'ld_index_recompute_offset' );
 	}
 	return $count;
 }
@@ -443,3 +464,85 @@ function yoast_exclude_authors( $users ) {
 	return array_values( array_filter( $users, static fn( $user ) => ! ( $user instanceof \WP_User && is_thin_author( $user->ID ) ) ) );
 }
 add_filter( 'wpseo_sitemap_exclude_author', __NAMESPACE__ . '\\yoast_exclude_authors' );
+
+/*
+ * Banques de questions officielles (milliers d'affirmations d'une phrase) :
+ * leurs pages servent aux élèves, pas à Google. Réglage « crawl_questions »
+ * désactivé : exploration interdite (robots.txt), hors sitemaps, et plus de
+ * listes de liens vers elles. Le budget d'exploration va aux pages utiles.
+ */
+
+/**
+ * Les pages question peuvent-elles être explorées ?
+ *
+ * @return bool
+ */
+function questions_crawlable() {
+	return (bool) setting( 'crawl_questions' );
+}
+
+/**
+ * Segments d'URL des questions (site et marchés).
+ *
+ * @return string[]
+ */
+function question_segments() {
+	$segments = array( (string) setting( 'slug_question' ) );
+	if ( function_exists( 'LearnDrive\Core\Markets\all' ) ) {
+		foreach ( \LearnDrive\Core\Markets\all() as $market ) {
+			if ( ! empty( $market['slugs']['slug_question'] ) ) {
+				$segments[] = $market['slugs']['slug_question'];
+			}
+		}
+	}
+	return array_values( array_unique( array_filter( $segments ) ) );
+}
+
+/**
+ * Fichier robots.txt : pages question non explorées (si le réglage le demande).
+ *
+ * @param string $output    Contenu.
+ * @param bool   $is_public Site public.
+ * @return string
+ */
+function robots_questions( $output, $is_public ) {
+	if ( ! $is_public || questions_crawlable() ) {
+		return $output;
+	}
+	$rules = '';
+	foreach ( question_segments() as $segment ) {
+		$rules .= "Disallow: /{$segment}/\nDisallow: /*/{$segment}/\n";
+	}
+	// Ajouté au groupe « User-agent: * » de WordPress.
+	if ( str_contains( $output, "User-agent: *\n" ) ) {
+		return preg_replace( "/User-agent: \*\n/", "User-agent: *\n" . $rules, $output, 1 );
+	}
+	return "User-agent: *\n" . $rules . "\n" . $output;
+}
+add_filter( 'robots_txt', __NAMESPACE__ . '\\robots_questions', 5, 2 );
+
+/**
+ * Sitemaps de WordPress : pas de sitemap des questions.
+ *
+ * @param array $types Types.
+ * @return array
+ */
+function sitemap_no_questions( $types ) {
+	if ( ! questions_crawlable() ) {
+		unset( $types[ \LearnDrive\Core\PT_QUESTION ] );
+	}
+	return $types;
+}
+add_filter( 'wp_sitemaps_post_types', __NAMESPACE__ . '\\sitemap_no_questions', 20 );
+
+/**
+ * Yoast SEO : pas de sitemap des questions.
+ *
+ * @param bool   $excluded  Exclu.
+ * @param string $post_type Type.
+ * @return bool
+ */
+function yoast_no_questions( $excluded, $post_type ) {
+	return $excluded || ( \LearnDrive\Core\PT_QUESTION === $post_type && ! questions_crawlable() );
+}
+add_filter( 'wpseo_sitemap_exclude_post_type', __NAMESPACE__ . '\\yoast_no_questions', 10, 2 );

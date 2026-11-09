@@ -475,6 +475,37 @@ if ( function_exists( 'imagettftext' ) ) {
 }
 
 /* ------------------------------------------------------------------ */
+section( 'Questions officielles : série et indexation' );
+
+$grp_ids = array();
+foreach ( array( 'Le panneau A indique un danger', 'Le panneau A indique une interdiction', 'Le panneau A se trouve sur autoroute' ) as $i => $grp_title ) {
+	$grp_ids[] = Import\import_question(
+		array(
+			'title'   => $grp_title,
+			'slug'    => 'serie-test-' . $i,
+			'format'  => 'tf',
+			'answers' => 0 === $i ? 'Vrai*|Faux' : 'Vrai|Faux*',
+			'group'   => 'serie-test-integration',
+		)
+	);
+}
+$grp_alone = Import\import_question( array( 'title' => 'Question isolée sans explication', 'slug' => 'question-isolee-test', 'format' => 'tf', 'answers' => 'Vrai*|Faux' ) );
+$cleanup[] = static function () use ( $grp_ids, $grp_alone ) {
+	foreach ( array_merge( $grp_ids, array( $grp_alone ) ) as $id ) {
+		if ( is_int( $id ) ) {
+			wp_delete_post( $id, true );
+		}
+	}
+};
+check( 'Série officielle retrouvée (même groupe)', is_int( $grp_ids[0] ) && 3 === count( LearnDrive\Core\Questions\group_ids( $grp_ids[0] ) ) );
+check( 'Bonne réponse en texte', 'Vrai' === LearnDrive\Core\Questions\correct_answer( $grp_ids[0] ) && 'Faux' === LearnDrive\Core\Questions\correct_answer( $grp_ids[1] ) );
+LearnDrive\Core\Questions\update_seo_flags( $grp_ids[0] );
+LearnDrive\Core\Questions\update_seo_flags( $grp_alone );
+check( 'Question d’une série sans explication : indexable (fiche complète)', ! get_post_meta( $grp_ids[0], '_ld_noindex', true ) );
+check( 'Question isolée sans explication : non indexée', (bool) get_post_meta( $grp_alone, '_ld_noindex', true ) );
+check( 'Pages question explorables par défaut (robots.txt inchangé)', LearnDrive\Core\SEO\Index\questions_crawlable() && ! str_contains( LearnDrive\Core\SEO\Index\robots_questions( "User-agent: *\n", true ), 'Disallow' ) );
+
+/* ------------------------------------------------------------------ */
 section( 'Adresses des articles par rubrique' );
 
 $sec_parent = wp_insert_term( 'Rubrique adresses test', 'category', array( 'slug' => 'rubrique-adresses-test' ) );

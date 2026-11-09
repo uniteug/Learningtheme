@@ -342,7 +342,7 @@ msgstr "Guides & procedures"
 
 #: includes/admin/settings.php:157
 #: includes/post-types.php:184
-#: includes/blocks.php:547
+#: includes/blocks.php:552
 msgid "Lexique"
 msgstr "Glossary"
 
@@ -463,168 +463,172 @@ msgid "Donner une image à la une (titre et rubrique) aux articles qui n’en on
 msgstr "Give a featured image (title and section) to articles that have none"
 
 #: includes/admin/settings.php:198
+msgid "Laisser Google explorer les pages question (décocher pour une grande banque de questions officielles : exploration interdite, hors sitemaps)"
+msgstr "Let Google crawl question pages (uncheck to block crawling and remove them from sitemaps)"
+
+#: includes/admin/settings.php:199
 msgid "Adresses des articles par rubrique (/news/article/), anciennes adresses redirigées"
 msgstr "Article URLs by section (/news/article/), old URLs redirected"
 
-#: includes/admin/settings.php:199
+#: includes/admin/settings.php:200
 msgid "Notifier IndexNow (Bing, Yandex) à chaque publication"
 msgstr "Notify IndexNow (Bing, Yandex) on every publication"
 
-#: includes/admin/settings.php:200
+#: includes/admin/settings.php:201
 msgid "Publier /llms.txt (pages piliers pour les assistants IA)"
 msgstr "Publish /llms.txt (pillar pages for AI assistants)"
 
-#: includes/admin/settings.php:201
+#: includes/admin/settings.php:202
 msgid "Bloquer ces robots d’IA dans robots.txt"
 msgstr "Block these AI bots in robots.txt"
 
-#: includes/admin/settings.php:202
+#: includes/admin/settings.php:203
 msgid "Journaliser les erreurs 404"
 msgstr "Log 404 errors"
 
-#: includes/admin/settings.php:206
+#: includes/admin/settings.php:207
 msgid "Performance et médias"
 msgstr "Performance and media"
 
-#: includes/admin/settings.php:210
+#: includes/admin/settings.php:211
 msgid "Format des images générées"
 msgstr "Generated image format"
 
-#: includes/admin/settings.php:214
+#: includes/admin/settings.php:215
 msgid "Format d’origine"
 msgstr "Original format"
 
-#: includes/admin/settings.php:217
+#: includes/admin/settings.php:218
 msgid "Qualité (40 à 95)"
 msgstr "Quality (40 to 95)"
 
-#: includes/admin/settings.php:218
+#: includes/admin/settings.php:219
 msgid "Ne générer que les tailles utiles"
 msgstr "Only generate useful sizes"
 
-#: includes/admin/settings.php:219
+#: includes/admin/settings.php:220
 msgid "Renommer les fichiers envoyés (minuscules, sans accents, titre du contenu)"
 msgstr "Rename uploaded files (lowercase, no accents, content title)"
 
-#: includes/admin/settings.php:220
+#: includes/admin/settings.php:221
 msgid "Façade vidéo (YouTube / Vimeo chargés au clic)"
 msgstr "Video facade (YouTube / Vimeo loaded on click)"
 
-#: includes/admin/settings.php:221
+#: includes/admin/settings.php:222
 msgid "Supprimer le script des émojis"
 msgstr "Remove the emoji script"
 
-#: includes/admin/settings.php:222
+#: includes/admin/settings.php:223
 msgid "Avatars locaux (aucune requête vers Gravatar)"
 msgstr "Local avatars (no requests to Gravatar)"
 
-#: includes/admin/settings.php:223
+#: includes/admin/settings.php:224
 msgid "Révision hors ligne (application installable, pages consultées gardées sur l’appareil)"
 msgstr "Offline study (installable app, viewed pages kept on the device)"
 
-#: includes/admin/settings.php:224
+#: includes/admin/settings.php:225
 msgid "URL du CDN d’images"
 msgstr "Image CDN URL"
 
-#: includes/admin/settings.php:228
+#: includes/admin/settings.php:229
 msgid "API et intégrations"
 msgstr "API and integrations"
 
-#: includes/admin/settings.php:230
+#: includes/admin/settings.php:231
 msgid "Clés d’API (application, sites clients)"
 msgstr "API keys (app, client sites)"
 
-#: includes/admin/settings.php:230
+#: includes/admin/settings.php:231
 msgid "Une clé par ligne, 20 caractères minimum. En-tête HTTP : X-Learn-Key."
 msgstr "One key per line, at least 20 characters. HTTP header: X-Learn-Key."
 
-#: includes/admin/settings.php:231
+#: includes/admin/settings.php:232
 msgid "Requêtes par minute et par visiteur"
 msgstr "Requests per minute per visitor"
 
-#: includes/admin/settings.php:232
+#: includes/admin/settings.php:233
 msgid "URL du webhook (CRM, e-mailing)"
 msgstr "Webhook URL (CRM, email marketing)"
 
-#: includes/admin/settings.php:233
+#: includes/admin/settings.php:234
 msgid "Secret de signature (HMAC SHA-256)"
 msgstr "Signing secret (HMAC SHA-256)"
 
-#: includes/admin/settings.php:251
+#: includes/admin/settings.php:252
 msgid "Learn & Drive — Réglages"
 msgstr "Learn & Drive — Settings"
 
-#: includes/admin/settings.php:253
+#: includes/admin/settings.php:254
 msgid "Un plugin SEO est actif : Learn & Drive lui laisse les balises meta et fusionne ses données structurées dans son graphe."
 msgstr "An SEO plugin is active: Learn & Drive leaves the meta tags to it and merges its structured data into that plugin’s graph."
 
-#: includes/admin/settings.php:322
+#: includes/admin/settings.php:323
 msgid "Learn & Drive — Import, export, démo"
 msgstr "Learn & Drive — Import, export, demo"
 
-#: includes/admin/settings.php:329
+#: includes/admin/settings.php:330
 msgid "Importer des questions"
 msgstr "Import questions"
 
-#: includes/admin/settings.php:330
+#: includes/admin/settings.php:331
 msgid "CSV (séparateur virgule ou point-virgule), JSON ou JSON Lines. Les questions existantes (même slug ou identifiant officiel) sont mises à jour."
 msgstr "CSV (comma or semicolon separator), JSON or JSON Lines. Existing questions (same slug or official ID) are updated."
 
-#: includes/admin/settings.php:335
+#: includes/admin/settings.php:336
 msgid "Simulation (aucune écriture)"
 msgstr "Dry run (nothing is written)"
 
-#: includes/admin/settings.php:336
+#: includes/admin/settings.php:337
 msgid "Importer"
 msgstr "Import"
 
-#: includes/admin/settings.php:338
+#: includes/admin/settings.php:339
 msgid "Pour plusieurs milliers de questions avec images, préférez WP-CLI : wp learn import fichier.csv"
 msgstr "For several thousand questions with images, use WP-CLI instead: wp learn import file.csv"
 
-#: includes/admin/settings.php:341
+#: includes/admin/settings.php:342
 msgid "Exporter les questions"
 msgstr "Export questions"
 
-#: includes/admin/settings.php:346
+#: includes/admin/settings.php:347
 msgid "Télécharger"
 msgstr "Download"
 
-#: includes/admin/settings.php:350
+#: includes/admin/settings.php:351
 msgid "Contenu de démonstration"
 msgstr "Demo content"
 
-#: includes/admin/settings.php:351
+#: includes/admin/settings.php:352
 msgid "2 pays, 5 catégories, 120 questions, quiz, examens blancs, leçons, panneaux, actualités et guides. Définit aussi la page d’accueil et la page des actualités."
 msgstr "2 countries, 5 categories, 120 questions, quizzes, mock exams, lessons, road signs, news and guides. Also sets the home page and the news page."
 
-#: includes/admin/settings.php:353
+#: includes/admin/settings.php:354
 msgid "Déjà importé : relancer met les contenus à jour sans doublon."
 msgstr "Already imported: running it again updates the content without duplicates."
 
-#: includes/admin/settings.php:358
+#: includes/admin/settings.php:359
 msgid "Importer la démo"
 msgstr "Import the demo"
 
-#: includes/admin/settings.php:371
-#: includes/admin/settings.php:408
-#: includes/admin/settings.php:429
+#: includes/admin/settings.php:372
+#: includes/admin/settings.php:409
+#: includes/admin/settings.php:430
 msgid "Action non autorisée."
 msgstr "Unauthorized action."
 
-#: includes/admin/settings.php:376
+#: includes/admin/settings.php:377
 msgid "Aucun fichier reçu."
 msgstr "No file received."
 
-#: includes/admin/settings.php:382
+#: includes/admin/settings.php:383
 msgid "Format non pris en charge."
 msgstr "Unsupported format."
 
-#: includes/admin/settings.php:393
+#: includes/admin/settings.php:394
 msgid "Import terminé : %1$d créées, %2$d mises à jour, %3$d erreurs."
 msgstr "Import complete: %1$d created, %2$d updated, %3$d errors."
 
-#: includes/admin/settings.php:437
+#: includes/admin/settings.php:438
 msgid "Démo importée (%d questions)."
 msgstr "Demo imported (%d questions)."
 
@@ -1375,7 +1379,7 @@ msgid "Dessinez la zone en faisant glisser sur l’image principale (enregistrez
 msgstr "Draw the area by dragging over the main image (save the main image first). Values in % denote positions relative to the image."
 
 #: includes/admin/meta-boxes.php:129
-#: includes/helpers.php:280
+#: includes/helpers.php:281
 msgid "Réponse numérique"
 msgstr "Numeric answer"
 
@@ -1941,7 +1945,7 @@ msgstr "Driving school classes"
 msgid "la zone surlignée sur l’image"
 msgstr "the highlighted area in the image"
 
-#: includes/questions.php:485
+#: includes/questions.php:486
 msgid "Rédigez l’explication de la question (dans le contenu) avant de la publier."
 msgstr "Write the question’s explanation (in the content) before publishing it."
 
@@ -1959,7 +1963,7 @@ msgid "Accueil"
 msgstr "Home"
 
 #: includes/demo.php:640
-#: includes/seo/context.php:218
+#: includes/seo/context.php:221
 #: includes/seo/breadcrumbs.php:36
 msgid "Actualités"
 msgstr "News"
@@ -2130,7 +2134,7 @@ msgid "Parcours complet par catégorie ou matière."
 msgstr "Complete track by category or subject."
 
 #: includes/post-types.php:97
-#: includes/blocks.php:542
+#: includes/blocks.php:547
 msgid "Leçon"
 msgstr "Lesson"
 
@@ -2139,7 +2143,7 @@ msgid "Unité de cours, théorique ou pratique."
 msgstr "Course unit, theory or practical."
 
 #: includes/post-types.php:115
-#: includes/blocks.php:543
+#: includes/blocks.php:548
 msgid "Question"
 msgstr "Question"
 
@@ -2156,7 +2160,7 @@ msgid "Fiche : panneau, manœuvre, notion, formule."
 msgstr "Fact sheet: road sign, maneuver, concept, formula."
 
 #: includes/post-types.php:167
-#: includes/blocks.php:546
+#: includes/blocks.php:551
 msgid "Info & démarche"
 msgstr "Guide & procedure"
 
@@ -2224,41 +2228,41 @@ msgstr "No terms found."
 msgid "← Retour"
 msgstr "← Back"
 
-#: includes/helpers.php:277
+#: includes/helpers.php:278
 msgid "Vrai / faux"
 msgstr "True / false"
 
-#: includes/helpers.php:278
+#: includes/helpers.php:279
 msgid "Choix unique"
 msgstr "Single choice"
 
-#: includes/helpers.php:279
+#: includes/helpers.php:280
 msgid "Choix multiple"
 msgstr "Multiple choice"
 
-#: includes/helpers.php:281
+#: includes/helpers.php:282
 msgid "Remettre dans l’ordre"
 msgstr "Put in order"
 
-#: includes/helpers.php:282
+#: includes/helpers.php:283
 msgid "Association"
 msgstr "Matching"
 
-#: includes/helpers.php:283
+#: includes/helpers.php:284
 msgid "Image cliquable"
 msgstr "Clickable image"
 
-#: includes/helpers.php:284
+#: includes/helpers.php:285
 msgid "Carte mémoire"
 msgstr "Flashcard"
 
-#: includes/helpers.php:299
+#: includes/helpers.php:300
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d minute"
 msgstr[1] "%d minutes"
 
-#: includes/helpers.php:302
+#: includes/helpers.php:303
 msgid "%d seconde"
 msgid_plural "%d secondes"
 msgstr[0] "%d second"
@@ -2268,28 +2272,32 @@ msgstr[1] "%d seconds"
 msgid "Quiz %2$s : %1$s"
 msgstr "%2$s quiz: %1$s"
 
-#: includes/seo/context.php:136
+#: includes/seo/context.php:138
+msgid "Réponse : %s."
+msgstr "Answer: %s."
+
+#: includes/seo/context.php:138
 msgid "Réponse et explication détaillée."
 msgstr "Answer and detailed explanation."
 
-#: includes/seo/context.php:231
+#: includes/seo/context.php:234
 msgid "Recherche : %s"
 msgstr "Search: %s"
 
-#: includes/seo/context.php:235
+#: includes/seo/context.php:238
 #: includes/seo/breadcrumbs.php:186
 msgid "Page introuvable"
 msgstr "Page not found"
 
-#: includes/seo/context.php:249
+#: includes/seo/context.php:252
 msgid "Page %d"
 msgstr "Page %d"
 
-#: includes/seo/context.php:277
+#: includes/seo/context.php:280
 msgid "Actualités de %1$s : %2$s."
 msgstr "%1$s news: %2$s."
 
-#: includes/seo/context.php:284
+#: includes/seo/context.php:287
 msgid "Actualités « %1$s » sur %2$s : les dernières informations, expliquées et reliées aux cours et quiz."
 msgstr "“%1$s” news on %2$s: the latest updates, explained and linked to courses and quizzes."
 
@@ -2396,7 +2404,7 @@ msgstr "Send"
 
 #: includes/render.php:396
 #: includes/blocks.php:322
-#: includes/blocks.php:339
+#: includes/blocks.php:344
 msgid "%d question"
 msgid_plural "%d questions"
 msgstr[0] "%d question"
@@ -2707,33 +2715,33 @@ msgstr "See also"
 msgid "Leçon à revoir"
 msgstr "Lesson to review"
 
-#: includes/blocks.php:539
+#: includes/blocks.php:544
 msgid "Actualité"
 msgstr "News"
 
-#: includes/blocks.php:540
+#: includes/blocks.php:545
 msgid "Page"
 msgstr "Page"
 
-#: includes/blocks.php:623
+#: includes/blocks.php:628
 msgid "%d min"
 msgstr "%d min"
 
-#: includes/blocks.php:626
+#: includes/blocks.php:631
 msgid "%d s / question"
 msgstr "%d s / question"
 
-#: includes/blocks.php:630
+#: includes/blocks.php:635
 msgid "%d erreur max"
 msgid_plural "%d erreurs max"
 msgstr[0] "%d mistake max"
 msgstr[1] "%d mistakes max"
 
-#: includes/blocks.php:633
+#: includes/blocks.php:638
 msgid "%1$d/%2$d pour réussir"
 msgstr "%1$d/%2$d to pass"
 
-#: includes/blocks.php:639
+#: includes/blocks.php:644
 msgid "dès %s ans"
 msgstr "from age %s"
 
@@ -2745,11 +2753,11 @@ msgstr "Video"
 msgid "Lire la vidéo : %s"
 msgstr "Play the video: %s"
 
-#: includes/post-sections.php:226
+#: includes/post-sections.php:227
 msgid "Segment d’URL des articles"
 msgstr "Article URL segment"
 
-#: includes/post-sections.php:229
+#: includes/post-sections.php:230
 msgid "Court et parlant (ex. « news », « guide ») : les articles de la rubrique ont pour adresse /segment/article/. Vide : slug de la rubrique. Actif si « Adresses des articles par rubrique » est coché dans les réglages."
 msgstr "Short and meaningful (e.g. “news”, “guide”): articles in the section have the URL /segment/article/. Empty: the section slug. Active if “Article URLs by section” is checked in the settings."
 
@@ -3291,6 +3299,34 @@ msgstr "Download my data"
 #: blocks/dashboard/render.php:214
 msgid "Supprimer ma progression"
 msgstr "Delete my progress"
+
+#: blocks/question-group/block.json
+msgctxt "block title"
+msgid "Série de la question"
+msgstr "Question set"
+
+#: blocks/question-group/block.json
+msgctxt "block description"
+msgid "Toutes les affirmations de la même série officielle (même figure, même thème) avec leur réponse : la page d'une question devient une fiche complète."
+msgstr "All statements in the same official set (same figure, same topic) with their answers: a question page becomes a complete study sheet."
+
+#: blocks/question-group/render.php:39
+msgid "Les autres affirmations de cette série"
+msgstr "Other statements in this set"
+
+#: blocks/question-group/render.php:41
+msgid "%d affirmation sur la même figure et le même sujet, avec la bonne réponse : à l’examen, n’importe laquelle peut tomber."
+msgid_plural "%d affirmations sur la même figure et le même sujet, avec la bonne réponse : à l’examen, n’importe laquelle peut tomber."
+msgstr[0] "%d statement about the same figure and topic, with the correct answer: any of them can come up in the exam."
+msgstr[1] "%d statements about the same figure and topic, with the correct answer: any of them can come up in the exam."
+
+#: blocks/question-group/render.php:42
+msgid "Affirmation"
+msgstr "Statement"
+
+#: blocks/question-group/render.php:43
+msgid "Réponse"
+msgstr "Answer"
 
 #: blocks/topic-progress/block.json
 msgctxt "block title"

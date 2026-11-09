@@ -26,6 +26,12 @@ function boot() {
 	add_filter( 'rank_math/frontend/robots', __NAMESPACE__ . '\\third_party_robots' );
 
 	if ( seo_plugin_active() ) {
+		// Yoast : titres et descriptions des contenus d'apprentissage générés par le plugin
+		// quand l'éditeur n'en a pas saisi (questions : énoncé, « vrai ou faux », réponse).
+		add_filter( 'wpseo_title', __NAMESPACE__ . '\\yoast_title' );
+		add_filter( 'wpseo_opengraph_title', __NAMESPACE__ . '\\yoast_title' );
+		add_filter( 'wpseo_metadesc', __NAMESPACE__ . '\\yoast_description' );
+		add_filter( 'wpseo_opengraph_desc', __NAMESPACE__ . '\\yoast_description' );
 		return;
 	}
 
@@ -154,4 +160,40 @@ function head() {
 
 	tag( 'name', 'twitter:card', $image && $image['width'] >= 600 ? 'summary_large_image' : 'summary' );
 	echo "<!-- / Learn & Drive SEO -->\n";
+}
+
+/**
+ * Contenu d'apprentissage sans titre ni description saisis dans Yoast ?
+ *
+ * @param string $field title|metadesc.
+ * @return int ID du contenu, 0 sinon.
+ */
+function yoast_generated( $field ) {
+	if ( ! is_singular( array( \LearnDrive\Core\PT_QUESTION, \LearnDrive\Core\PT_QUIZ ) ) ) {
+		return 0;
+	}
+	$id = get_queried_object_id();
+	return '' === (string) get_post_meta( $id, '_yoast_wpseo_' . $field, true ) ? $id : 0;
+}
+
+/**
+ * Titre Yoast d'une question ou d'un quiz.
+ *
+ * @param string $title Titre de Yoast.
+ * @return string
+ */
+function yoast_title( $title ) {
+	$id = yoast_generated( 'title' );
+	return $id ? SEO\post_title( $id ) : $title;
+}
+
+/**
+ * Description Yoast d'une question ou d'un quiz.
+ *
+ * @param string $description Description de Yoast.
+ * @return string
+ */
+function yoast_description( $description ) {
+	$id = yoast_generated( 'metadesc' );
+	return $id ? SEO\post_description( $id ) : $description;
 }

@@ -83,7 +83,7 @@ function all( $refresh = false ) {
 		)
 	);
 	foreach ( is_wp_error( $terms ) ? array() : $terms as $term ) {
-		$slugs                 = get_term_meta( $term->term_id, 'ld_slugs', true );
+		$slugs                = get_term_meta( $term->term_id, 'ld_slugs', true );
 		$cache[ $term->slug ] = array(
 			'slug'    => $term->slug,
 			'name'    => $term->name,

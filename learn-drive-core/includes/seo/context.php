@@ -131,9 +131,12 @@ function post_description( $post_id ) {
 		$question = Questions\get( $post );
 		$vars     = template_vars( $post_id );
 		/* translators: 1: question, 2: category */
-		$intro = $vars['{track}'] ? sprintf( __( 'Quiz %2$s : %1$s', 'learn-drive-core' ), $question['title'], $vars['{track}'] ) : $question['title'];
-		$first = first_sentence( $post->post_content );
-		return truncate( $excerpt ? $excerpt : $intro . ' ' . __( 'Réponse et explication détaillée.', 'learn-drive-core' ) . ( $first ? ' ' . $first : '' ) );
+		$intro  = $vars['{track}'] ? sprintf( __( 'Quiz %2$s : %1$s', 'learn-drive-core' ), $question['title'], $vars['{track}'] ) : $question['title'];
+		$first  = first_sentence( $post->post_content );
+		$answer = Questions\correct_answer( $post );
+		/* translators: %s: correct answer (True / False…) */
+		$lead = $answer ? sprintf( __( 'Réponse : %s.', 'learn-drive-core' ), $answer ) : __( 'Réponse et explication détaillée.', 'learn-drive-core' );
+		return truncate( $excerpt ? $excerpt : $intro . ' — ' . $lead . ( $first ? ' ' . $first : '' ) );
 	}
 
 	if ( '' === trim( $excerpt ) ) {

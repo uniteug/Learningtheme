@@ -323,6 +323,11 @@ function render_list( array $ids, $layout, $heading, $classes = '' ) {
 			} elseif ( 'post' === get_post_type( $id ) ) {
 				$meta = '<span class="ld-related__meta">' . esc_html( get_the_date( '', $id ) ) . '</span>';
 			}
+			if ( PT_QUESTION === get_post_type( $id ) && ! \LearnDrive\Core\SEO\Index\questions_crawlable() ) {
+				// Banque de questions non explorée : l'énoncé, sans lien vers sa page.
+				$items .= sprintf( '<li>%s</li>', esc_html( $title ) );
+				continue;
+			}
 			$items .= sprintf( '<li><a href="%s">%s</a>%s</li>', esc_url( $url ), esc_html( $title ), $meta );
 			continue;
 		}

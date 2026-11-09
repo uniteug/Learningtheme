@@ -48,6 +48,8 @@ function settings() {
 		'offline'         => 1,
 		'index_policy'    => 1,
 		'post_sections'   => 1,
+		'crawl_questions' => 1,
+		'tpl_question'    => '{title} – Vero o falso? | {site}',
 	);
 }
 
@@ -105,7 +107,9 @@ function faq( $question, $answer ) {
 function read_more( array $links ) {
 	$items = array();
 	foreach ( $links as $title => $path ) {
-		$items[] = '<a href="' . esc_url( home_url( $path ) ) . '">' . $title . '</a>';
+		// Indirizzo attuale dell'articolo (es. /guide/…), anche se cambia rubrica.
+		$post    = get_page_by_path( trim( $path, '/' ), OBJECT, 'post' );
+		$items[] = '<a href="' . esc_url( $post ? get_permalink( $post ) : home_url( $path ) ) . '">' . $title . '</a>';
 	}
 	return h2( 'Approfondisci' ) . ul( $items );
 }
