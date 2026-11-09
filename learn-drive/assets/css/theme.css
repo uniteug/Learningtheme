@@ -192,6 +192,72 @@ video {
 	background: var(--wp--preset--color--surface);
 }
 
+/* Sélecteur de langue (Polylang). */
+.ld-lang {
+	position: relative;
+}
+
+.ld-lang summary {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.25rem;
+	height: 44px;
+	padding: 0 0.6rem;
+	border-radius: 999px;
+	color: var(--wp--preset--color--contrast);
+	font-size: var(--wp--preset--font-size--small);
+	font-weight: 600;
+	letter-spacing: 0.02em;
+	list-style: none;
+	cursor: pointer;
+}
+
+.ld-lang summary::-webkit-details-marker {
+	display: none;
+}
+
+.ld-lang summary:hover,
+.ld-lang[open] summary {
+	background: var(--wp--preset--color--surface);
+}
+
+.ld-lang summary svg {
+	width: 20px;
+	height: 20px;
+}
+
+.ld-lang ul {
+	position: absolute;
+	top: calc(100% + 0.35rem);
+	right: 0;
+	z-index: 30;
+	min-width: 10rem;
+	margin: 0;
+	padding: 0.35rem;
+	border: 1px solid var(--wp--preset--color--border);
+	border-radius: 12px;
+	background: var(--wp--preset--color--base);
+	box-shadow: 0 12px 32px rgb(15 23 42 / 0.12);
+	list-style: none;
+}
+
+.ld-lang a {
+	display: block;
+	padding: 0.5rem 0.75rem;
+	border-radius: 8px;
+	color: var(--wp--preset--color--contrast);
+	text-decoration: none;
+}
+
+.ld-lang a:hover,
+.ld-lang a:focus-visible {
+	background: var(--wp--preset--color--surface);
+}
+
+.ld-lang a[aria-current="true"] {
+	font-weight: 700;
+}
+
 .ld-theme-toggle svg {
 	width: 22px;
 	height: 22px;
@@ -2202,6 +2268,7 @@ video {
 	.ld-roadline,
 	.ld-ad-slot,
 	.ld-theme-toggle,
+	.ld-lang,
 	.wp-block-search {
 		display: none !important;
 	}

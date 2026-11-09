@@ -73,6 +73,9 @@ function sanitize( $input ) {
 
 		if ( in_array( $key, $checkboxes, true ) ) {
 			$clean[ $key ] = empty( $value ) ? 0 : 1;
+		} elseif ( 'published_languages' === $key ) {
+			\LearnDrive\Core\Multilingual\apply_published( array_map( 'sanitize_key', (array) $value ) );
+			unset( $clean[ $key ] );
 		} elseif ( 'ai_block' === $key ) {
 			$clean[ $key ] = array_values( array_intersect( (array) $value, array_keys( AI\bots() ) ) );
 		} elseif ( in_array( $key, array( 'org_same_as', 'api_keys', 'home_lead' ), true ) ) {
@@ -163,17 +166,17 @@ function tabs() {
 		'seo'    => array(
 			'label'  => __( 'SEO', 'learn-drive-core' ),
 			'fields' => array(
-				'seo_titles'      => array( 'checkbox', __( 'Gérer les titres et descriptions', 'learn-drive-core' ), __( 'Désactivé automatiquement si Yoast, Rank Math, SEOPress, AIOSEO ou The SEO Framework est actif.', 'learn-drive-core' ) ),
-				'title_sep'       => array( 'text', __( 'Séparateur', 'learn-drive-core' ) ),
-				'tpl_question'    => array( 'text', __( 'Modèle de titre — question', 'learn-drive-core' ), '{title} {track} {topic} {country} {site}' ),
-				'tpl_quiz'        => array( 'text', __( 'Modèle de titre — quiz', 'learn-drive-core' ) ),
-				'tpl_lesson'      => array( 'text', __( 'Modèle de titre — leçon et cours', 'learn-drive-core' ) ),
-				'tpl_sheet'       => array( 'text', __( 'Modèle de titre — fiche', 'learn-drive-core' ) ),
-				'tpl_guide'       => array( 'text', __( 'Modèle de titre — info & démarche', 'learn-drive-core' ) ),
-				'tpl_post'        => array( 'text', __( 'Modèle de titre — actualité', 'learn-drive-core' ) ),
-				'tpl_glossary'    => array( 'text', __( 'Modèle de titre — lexique', 'learn-drive-core' ) ),
-				'tpl_track'       => array( 'text', __( 'Modèle de titre — page pilier', 'learn-drive-core' ) ),
-				'org_type'        => array(
+				'seo_titles'          => array( 'checkbox', __( 'Gérer les titres et descriptions', 'learn-drive-core' ), __( 'Désactivé automatiquement si Yoast, Rank Math, SEOPress, AIOSEO ou The SEO Framework est actif.', 'learn-drive-core' ) ),
+				'title_sep'           => array( 'text', __( 'Séparateur', 'learn-drive-core' ) ),
+				'tpl_question'        => array( 'text', __( 'Modèle de titre — question', 'learn-drive-core' ), '{title} {track} {topic} {country} {site}' ),
+				'tpl_quiz'            => array( 'text', __( 'Modèle de titre — quiz', 'learn-drive-core' ) ),
+				'tpl_lesson'          => array( 'text', __( 'Modèle de titre — leçon et cours', 'learn-drive-core' ) ),
+				'tpl_sheet'           => array( 'text', __( 'Modèle de titre — fiche', 'learn-drive-core' ) ),
+				'tpl_guide'           => array( 'text', __( 'Modèle de titre — info & démarche', 'learn-drive-core' ) ),
+				'tpl_post'            => array( 'text', __( 'Modèle de titre — actualité', 'learn-drive-core' ) ),
+				'tpl_glossary'        => array( 'text', __( 'Modèle de titre — lexique', 'learn-drive-core' ) ),
+				'tpl_track'           => array( 'text', __( 'Modèle de titre — page pilier', 'learn-drive-core' ) ),
+				'org_type'            => array(
 					'select',
 					__( 'Type d’organisation', 'learn-drive-core' ),
 					array(
@@ -183,24 +186,25 @@ function tabs() {
 						'NewsMediaOrganization'   => 'NewsMediaOrganization',
 					),
 				),
-				'org_name'        => array( 'text', __( 'Nom de l’organisation', 'learn-drive-core' ) ),
-				'org_logo'        => array( 'number', __( 'Logo (ID du média, sinon logo du site)', 'learn-drive-core' ) ),
-				'org_same_as'     => array( 'textarea', __( 'Profils officiels (sameAs)', 'learn-drive-core' ), __( 'Une URL par ligne.', 'learn-drive-core' ) ),
-				'news_name'       => array( 'text', __( 'Nom de publication Google News', 'learn-drive-core' ) ),
-				'thin_words'      => array( 'number', __( 'Mots minimum d’une explication indexable', 'learn-drive-core' ) ),
-				'index_policy'    => array( 'checkbox', __( 'Ne pas indexer les pages minces ou inutiles (contenus courts, rubriques presque vides, auteurs sans biographie, archives par date, fichiers joints, flux)', 'learn-drive-core' ) ),
-				'index_min_words' => array( 'number', __( 'Mots minimum d’un article, guide ou leçon indexable (pages : 60 %, fiches : 30 %, lexique : 20 %)', 'learn-drive-core' ) ),
-				'index_min_items' => array( 'number', __( 'Contenus minimum d’une rubrique, d’un thème ou d’un auteur indexable (sauf page pilier rédigée)', 'learn-drive-core' ) ),
-				'glossary_links'  => array( 'checkbox', __( 'Liens automatiques du lexique (première occurrence)', 'learn-drive-core' ) ),
-				'glossary_max'    => array( 'number', __( 'Liens du lexique par page (maximum)', 'learn-drive-core' ) ),
-				'og_images'       => array( 'checkbox', __( 'Générer les images de partage des quiz et questions', 'learn-drive-core' ) ),
-				'auto_featured'   => array( 'checkbox', __( 'Donner une image à la une (titre et rubrique) aux articles qui n’en ont pas', 'learn-drive-core' ) ),
-				'crawl_questions' => array( 'checkbox', __( 'Laisser Google explorer les pages question (décocher pour une grande banque de questions officielles : exploration interdite, hors sitemaps)', 'learn-drive-core' ) ),
-				'post_sections'   => array( 'checkbox', __( 'Adresses des articles par rubrique (/news/article/), anciennes adresses redirigées', 'learn-drive-core' ) ),
-				'indexnow'        => array( 'checkbox', __( 'Notifier IndexNow (Bing, Yandex) à chaque publication', 'learn-drive-core' ) ),
-				'llms_txt'        => array( 'checkbox', __( 'Publier /llms.txt (pages piliers pour les assistants IA)', 'learn-drive-core' ) ),
-				'ai_block'        => array( 'bots', __( 'Bloquer ces robots d’IA dans robots.txt', 'learn-drive-core' ) ),
-				'log_404'         => array( 'checkbox', __( 'Journaliser les erreurs 404', 'learn-drive-core' ) ),
+				'org_name'            => array( 'text', __( 'Nom de l’organisation', 'learn-drive-core' ) ),
+				'org_logo'            => array( 'number', __( 'Logo (ID du média, sinon logo du site)', 'learn-drive-core' ) ),
+				'org_same_as'         => array( 'textarea', __( 'Profils officiels (sameAs)', 'learn-drive-core' ), __( 'Une URL par ligne.', 'learn-drive-core' ) ),
+				'news_name'           => array( 'text', __( 'Nom de publication Google News', 'learn-drive-core' ) ),
+				'thin_words'          => array( 'number', __( 'Mots minimum d’une explication indexable', 'learn-drive-core' ) ),
+				'index_policy'        => array( 'checkbox', __( 'Ne pas indexer les pages minces ou inutiles (contenus courts, rubriques presque vides, auteurs sans biographie, archives par date, fichiers joints, flux)', 'learn-drive-core' ) ),
+				'index_min_words'     => array( 'number', __( 'Mots minimum d’un article, guide ou leçon indexable (pages : 60 %, fiches : 30 %, lexique : 20 %)', 'learn-drive-core' ) ),
+				'index_min_items'     => array( 'number', __( 'Contenus minimum d’une rubrique, d’un thème ou d’un auteur indexable (sauf page pilier rédigée)', 'learn-drive-core' ) ),
+				'glossary_links'      => array( 'checkbox', __( 'Liens automatiques du lexique (première occurrence)', 'learn-drive-core' ) ),
+				'glossary_max'        => array( 'number', __( 'Liens du lexique par page (maximum)', 'learn-drive-core' ) ),
+				'og_images'           => array( 'checkbox', __( 'Générer les images de partage des quiz et questions', 'learn-drive-core' ) ),
+				'auto_featured'       => array( 'checkbox', __( 'Donner une image à la une (titre et rubrique) aux articles qui n’en ont pas', 'learn-drive-core' ) ),
+				'crawl_questions'     => array( 'checkbox', __( 'Laisser Google explorer les pages question (décocher pour une grande banque de questions officielles : exploration interdite, hors sitemaps)', 'learn-drive-core' ) ),
+				'post_sections'       => array( 'checkbox', __( 'Adresses des articles par rubrique (/news/article/), anciennes adresses redirigées', 'learn-drive-core' ) ),
+				'published_languages' => array( 'languages', __( 'Langues publiées (Polylang)', 'learn-drive-core' ), __( 'Une langue décochée reste en préparation : invisible des visiteurs (404), jamais indexée, absente des hreflang, du sélecteur de langue et des sitemaps. Cochez-la quand ses traductions sont prêtes.', 'learn-drive-core' ) ),
+				'indexnow'            => array( 'checkbox', __( 'Notifier IndexNow (Bing, Yandex) à chaque publication', 'learn-drive-core' ) ),
+				'llms_txt'            => array( 'checkbox', __( 'Publier /llms.txt (pages piliers pour les assistants IA)', 'learn-drive-core' ) ),
+				'ai_block'            => array( 'bots', __( 'Bloquer ces robots d’IA dans robots.txt', 'learn-drive-core' ) ),
+				'log_404'             => array( 'checkbox', __( 'Journaliser les erreurs 404', 'learn-drive-core' ) ),
 			),
 		),
 		'media'  => array(
@@ -286,6 +290,13 @@ function render() {
 								</select>
 							<?php elseif ( 'textarea' === $type ) : ?>
 								<textarea class="large-text" rows="4" id="ld-<?php echo esc_attr( $key ); ?>" name="<?php echo esc_attr( $name ); ?>"><?php echo esc_textarea( (string) $value ); ?></textarea>
+								<p class="description"><?php echo esc_html( $extra ); ?></p>
+							<?php elseif ( 'languages' === $type ) : ?>
+								<fieldset id="ld-<?php echo esc_attr( $key ); ?>">
+									<?php foreach ( \LearnDrive\Core\Multilingual\languages() as $language ) : ?>
+										<label><input type="checkbox" name="<?php echo esc_attr( $name ); ?>[]" value="<?php echo esc_attr( $language['slug'] ); ?>" <?php checked( $language['active'] ); ?> <?php disabled( $language['default'] ); ?>> <?php echo esc_html( $language['name'] ); ?> <code><?php echo esc_html( $language['slug'] ); ?></code></label><br>
+									<?php endforeach; ?>
+								</fieldset>
 								<p class="description"><?php echo esc_html( $extra ); ?></p>
 							<?php elseif ( 'bots' === $type ) : ?>
 								<fieldset id="ld-<?php echo esc_attr( $key ); ?>">

@@ -602,6 +602,65 @@ check( 'Marché en préparation : page jamais indexée', true === apply_filters(
 $GLOBALS['wp_query'] = $GLOBALS['wp_the_query'] = new WP_Query();
 
 /* ------------------------------------------------------------------ */
+section( 'Titres traduits, flux et langues en préparation (Polylang)' );
+
+$settings_before = get_option( 'learn_drive_core' );
+$cleanup[]       = static function () use ( $settings_before ) {
+	update_option( 'learn_drive_core', $settings_before );
+};
+$track_default = LearnDrive\Core\defaults()['tpl_track'];
+update_option( 'learn_drive_core', array_merge( (array) $settings_before, array( 'tpl_track' => $track_default ) ) );
+$ml_locales = static fn( $languages ) => array_unique( array_merge( (array) $languages, array( 'it_IT' ) ) );
+add_filter( 'get_available_languages', $ml_locales );
+$GLOBALS['wp_locale_switcher'] = new WP_Locale_Switcher();
+$GLOBALS['wp_locale_switcher']->init();
+switch_to_locale( 'it_IT' );
+check( 'Modèle de titre par défaut traduit dans la langue de la page', str_contains( SEO\title_template( 'tpl_track' ), 'teoria' ) );
+restore_previous_locale();
+remove_filter( 'get_available_languages', $ml_locales );
+update_option( 'learn_drive_core', array_merge( (array) $settings_before, array( 'tpl_track' => '{title} – perso | {site}' ) ) );
+check( 'Modèle de titre personnalisé utilisé tel quel', '{title} – perso | {site}' === SEO\title_template( 'tpl_track' ) );
+update_option( 'learn_drive_core', $settings_before );
+
+$GLOBALS['wp_query'] = $GLOBALS['wp_the_query'] = new WP_Query( array( 'feed' => 'rss2' ) );
+check( 'Titre d’un flux sans récursion (flux RSS en 200)', is_string( SEO\page_title() ) );
+$GLOBALS['wp_query'] = $GLOBALS['wp_the_query'] = new WP_Query();
+
+if ( LearnDrive\Core\Multilingual\polylang() ) {
+	$ml_default = pll_default_language();
+	$ml_other   = current( array_diff( array_keys( LearnDrive\Core\Multilingual\languages() ), array( $ml_default ) ) );
+	$ml_was     = LearnDrive\Core\Multilingual\languages()[ $ml_other ]['active'];
+	$cleanup[]  = static function () use ( $ml_other, $ml_was ) {
+		LearnDrive\Core\Multilingual\set_active( $ml_other, $ml_was );
+	};
+
+	LearnDrive\Core\Multilingual\set_active( $ml_other, false );
+	check( 'Langue mise en préparation (indicateur de Polylang)', in_array( $ml_other, LearnDrive\Core\Multilingual\inactive(), true ) );
+	check( 'Langue par défaut jamais en préparation', ! LearnDrive\Core\Multilingual\set_active( $ml_default, false ) && ! in_array( $ml_default, LearnDrive\Core\Multilingual\inactive(), true ) );
+	check( 'Langue en préparation : ni hreflang ni sélecteur', null === LearnDrive\Core\Multilingual\translation_url( home_url( '/x/' ), $ml_other ) && home_url( '/x/' ) === LearnDrive\Core\Multilingual\translation_url( home_url( '/x/' ), $ml_default ) );
+
+	$ml_lang = static fn( $lang ) => static fn( $args ) => array_merge( $args, array( 'lang' => $lang ) );
+	$ml_hook = $ml_lang( $ml_other );
+	add_filter( 'wp_sitemaps_posts_query_args', $ml_hook, 99 );
+	check( 'Langue en préparation : sous-sitemaps vides (absents de l’index)', 0 === LearnDrive\Core\Multilingual\sitemap_posts_pages( null ) && array() === LearnDrive\Core\Multilingual\sitemap_posts_list( null ) );
+	remove_filter( 'wp_sitemaps_posts_query_args', $ml_hook, 99 );
+	$ml_hook = $ml_lang( $ml_default );
+	add_filter( 'wp_sitemaps_posts_query_args', $ml_hook, 99 );
+	check( 'Langue publiée : sous-sitemaps intacts', null === LearnDrive\Core\Multilingual\sitemap_posts_pages( null ) );
+	remove_filter( 'wp_sitemaps_posts_query_args', $ml_hook, 99 );
+
+	LearnDrive\Core\Multilingual\set_active( $ml_other, true );
+	check( 'Langue publiée depuis les réglages', ! in_array( $ml_other, LearnDrive\Core\Multilingual\inactive(), true ) );
+
+	flush_rewrite_rules( false );
+	$ml_rules = array_filter( (array) get_option( 'rewrite_rules' ), static fn( $query, $rule ) => str_starts_with( $rule, '^(' ) && str_contains( $query, 'lang=$matches[1]&' ) && str_ends_with( $rule, '/([^/]+)/?$' ) && str_contains( $query, '=$matches[3]' ), ARRAY_FILTER_USE_BOTH );
+	check( 'Règles des silos doublées avec le préfixe de langue (/en/…)', (bool) $ml_rules );
+	check( 'Sélecteur de langue vide sans traduction de la page', array() === LearnDrive\Core\Multilingual\switcher() );
+} else {
+	echo "  (Polylang absent : vérifications des langues ignorées)\n";
+}
+
+/* ------------------------------------------------------------------ */
 foreach ( array_reverse( $cleanup ) as $fn ) {
 	$fn();
 }

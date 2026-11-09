@@ -172,6 +172,18 @@ function learn_drive_drop_empty_sections( $content, $block ) {
 add_filter( 'render_block_core/group', 'learn_drive_drop_empty_sections', 10, 2 );
 
 /**
+ * Langues de la page affichée pour le sélecteur de l'en-tête (fournies par
+ * Learn & Drive Core avec Polylang) : seulement les langues publiées qui ont
+ * une traduction de cette page, et au moins deux.
+ *
+ * @return array<int,array{code:string,name:string,url:string,current:bool}>
+ */
+function learn_drive_languages() {
+	$items = apply_filters( 'learn_drive_languages', array() );
+	return is_array( $items ) && count( $items ) > 1 ? $items : array();
+}
+
+/**
  * Liens du menu principal (en-tête). Un élément peut porter un sous-menu :
  * [libellé, adresse, [[libellé, adresse, description], …]].
  *

@@ -90,8 +90,8 @@ function add_rules() {
 
 	// Familles de fiches (/panneaux/famille/danger/) avant les règles des fiches elles-mêmes.
 	$family = preg_quote( setting( 'slug_sheet' ) . '/' . setting( 'slug_family' ), '#' );
-	add_rewrite_rule( "^{$family}/([^/]+)/?$", 'index.php?' . \LearnDrive\Core\TAX_FAMILY . '=$matches[1]', 'top' );
-	add_rewrite_rule( "^{$family}/([^/]+)/page/([0-9]{1,})/?$", 'index.php?' . \LearnDrive\Core\TAX_FAMILY . '=$matches[1]&paged=$matches[2]', 'top' );
+	\LearnDrive\Core\Multilingual\add_rule( "^{$family}/([^/]+)/?$", 'index.php?' . \LearnDrive\Core\TAX_FAMILY . '=$matches[1]', 'top' );
+	\LearnDrive\Core\Multilingual\add_rule( "^{$family}/([^/]+)/page/([0-9]{1,})/?$", 'index.php?' . \LearnDrive\Core\TAX_FAMILY . '=$matches[1]&paged=$matches[2]', 'top' );
 
 	// Une série de règles par marché : chacun a ses propres segments d'URL.
 	$markets = array();
@@ -102,15 +102,15 @@ function add_rules() {
 	foreach ( $markets as $country => $slugs ) {
 		$group = '(' . implode( '|', array_map( 'preg_quote', $slugs ) ) . ')';
 
-		add_rewrite_rule( "^{$group}/?$", 'index.php?' . TAX_TRACK . '=$matches[1]', 'top' );
-		add_rewrite_rule( "^{$group}/page/([0-9]{1,})/?$", 'index.php?' . TAX_TRACK . '=$matches[1]&paged=$matches[2]', 'top' );
-		add_rewrite_rule( "^{$group}/" . preg_quote( Markets\segment( 'slug_exam', $country ), '#' ) . '/?$', 'index.php?ld_exam_track=$matches[1]', 'top' );
+		\LearnDrive\Core\Multilingual\add_rule( "^{$group}/?$", 'index.php?' . TAX_TRACK . '=$matches[1]', 'top' );
+		\LearnDrive\Core\Multilingual\add_rule( "^{$group}/page/([0-9]{1,})/?$", 'index.php?' . TAX_TRACK . '=$matches[1]&paged=$matches[2]', 'top' );
+		\LearnDrive\Core\Multilingual\add_rule( "^{$group}/" . preg_quote( Markets\segment( 'slug_exam', $country ), '#' ) . '/?$', 'index.php?ld_exam_track=$matches[1]', 'top' );
 
 		foreach ( silo_types( $country ) as $post_type => $segment ) {
 			$segment = preg_quote( $segment, '#' );
-			add_rewrite_rule( "^{$group}/{$segment}/?$", "index.php?post_type={$post_type}&" . TAX_TRACK . '=$matches[1]', 'top' );
-			add_rewrite_rule( "^{$group}/{$segment}/page/([0-9]{1,})/?$", "index.php?post_type={$post_type}&" . TAX_TRACK . '=$matches[1]&paged=$matches[2]', 'top' );
-			add_rewrite_rule( "^{$group}/{$segment}/([^/]+)/?$", "index.php?{$post_type}=\$matches[2]", 'top' );
+			\LearnDrive\Core\Multilingual\add_rule( "^{$group}/{$segment}/?$", "index.php?post_type={$post_type}&" . TAX_TRACK . '=$matches[1]', 'top' );
+			\LearnDrive\Core\Multilingual\add_rule( "^{$group}/{$segment}/page/([0-9]{1,})/?$", "index.php?post_type={$post_type}&" . TAX_TRACK . '=$matches[1]&paged=$matches[2]', 'top' );
+			\LearnDrive\Core\Multilingual\add_rule( "^{$group}/{$segment}/([^/]+)/?$", "index.php?{$post_type}=\$matches[2]", 'top' );
 		}
 	}
 }

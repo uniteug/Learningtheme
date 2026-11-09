@@ -87,6 +87,14 @@
 			<key name="label_sheet_pl" />
 			<key name="account_url" />
 			<key name="premium_url" />
+			<key name="tpl_question" />
+			<key name="tpl_quiz" />
+			<key name="tpl_lesson" />
+			<key name="tpl_sheet" />
+			<key name="tpl_guide" />
+			<key name="tpl_post" />
+			<key name="tpl_glossary" />
+			<key name="tpl_track" />
 		</key>
 	</admin-texts>
 </wpml-config>

@@ -88,10 +88,10 @@ function add_rules() {
 			continue;
 		}
 		$quoted = preg_quote( $base, '#' );
-		add_rewrite_rule( "^{$quoted}/?$", 'index.php?category_name=' . $term->slug, 'top' );
-		add_rewrite_rule( "^{$quoted}/page/([0-9]{1,})/?$", 'index.php?category_name=' . $term->slug . '&paged=$matches[1]', 'top' );
-		add_rewrite_rule( "^{$quoted}/([^/]+)/page/([0-9]{1,})/?$", 'index.php?ld_section=' . $term_id . '&ld_section_child=$matches[1]&paged=$matches[2]', 'top' );
-		add_rewrite_rule( "^{$quoted}/([^/]+)/?$", 'index.php?ld_section=' . $term_id . '&name=$matches[1]', 'top' );
+		\LearnDrive\Core\Multilingual\add_rule( "^{$quoted}/?$", 'index.php?category_name=' . $term->slug, 'top' );
+		\LearnDrive\Core\Multilingual\add_rule( "^{$quoted}/page/([0-9]{1,})/?$", 'index.php?category_name=' . $term->slug . '&paged=$matches[1]', 'top' );
+		\LearnDrive\Core\Multilingual\add_rule( "^{$quoted}/([^/]+)/page/([0-9]{1,})/?$", 'index.php?ld_section=' . $term_id . '&ld_section_child=$matches[1]&paged=$matches[2]', 'top' );
+		\LearnDrive\Core\Multilingual\add_rule( "^{$quoted}/([^/]+)/?$", 'index.php?ld_section=' . $term_id . '&name=$matches[1]', 'top' );
 	}
 }
 add_action( 'init', __NAMESPACE__ . '\\add_rules', 22 );

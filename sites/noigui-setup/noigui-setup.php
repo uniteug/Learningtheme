@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Noigui — configurazione del sito
  * Description:       Configura Learn & Drive per noigui.com: patente italiana, banca ufficiale dei quiz ministeriali (listato «Patente AB», 7.020 affermazioni), argomenti con le quote d'esame, simulazione d'esame, menu e collegamenti all'app. Le spiegazioni già scritte negli articoli «Quiz Patente B» vengono collegate alle affermazioni corrispondenti.
- * Version:           1.3.1
+ * Version:           1.4.0
  * Requires at least: 6.9
  * Requires PHP:      8.1
  * Requires Plugins:  learn-drive-core
@@ -25,7 +25,7 @@ use const LearnDrive\Core\TAX_TOPIC;
 
 defined( 'ABSPATH' ) || exit;
 
-const VERSION = '1.3.1';
+const VERSION = '1.4.0';
 const DIR     = __DIR__ . '/';
 
 /**
@@ -51,6 +51,87 @@ function maybe_setup() {
 	}
 }
 add_action( 'init', __NAMESPACE__ . '\\maybe_setup', 40 );
+
+/**
+ * Polylang : italiano lingua principale (indirizzi invariati, senza /it/),
+ * francese (/fr/) e inglese (/en/) in preparazione finché le traduzioni non
+ * sono pronte (Learn & Drive › Impostazioni › SEO › Lingue pubblicate).
+ * Tutti i contenuti esistenti passano all'italiano. Una sola volta : le
+ * impostazioni cambiate poi in Lingue › Impostazioni restano.
+ */
+function polylang_setup() {
+	if ( ! function_exists( 'PLL' ) || ! PLL() || ! isset( PLL()->model->languages ) || PLL()->model->has_languages() ) {
+		return;
+	}
+	if ( get_transient( 'noigui_polylang_lock' ) ) {
+		return;
+	}
+	set_transient( 'noigui_polylang_lock', 1, 5 * MINUTE_IN_SECONDS );
+
+	$model     = PLL()->model;
+	$languages = array(
+		array( 'it_IT', 'it', 'Italiano', 'it', true ),
+		array( 'fr_FR', 'fr', 'Français', 'fr', false ),
+		array( 'en_US', 'en', 'English', 'gb', false ),
+	);
+	foreach ( $languages as $order => $language ) {
+		$active = static function ( $add ) use ( $language ) {
+			$add['active'] = $language[4];
+			return $add;
+		};
+		add_filter( 'pll_language_metas', $active );
+		$model->languages->add(
+			array(
+				'locale'     => $language[0],
+				'slug'       => $language[1],
+				'name'       => $language[2],
+				'flag'       => $language[3],
+				'rtl'        => false,
+				'term_group' => $order,
+			)
+		);
+		remove_filter( 'pll_language_metas', $active );
+	}
+
+	$options = PLL()->options;
+	$wanted  = array(
+		'default_lang'  => 'it',
+		'hide_default'  => true,  // Italiano senza /it/ : nessun indirizzo cambia.
+		'force_lang'    => 1,     // Lingua nella cartella : /fr/, /en/.
+		'rewrite'       => true,  // /fr/ e non /language/fr/.
+		'redirect_lang' => false,
+		'browser'       => false, // Nessun reindirizzamento secondo il browser (Google vede sempre la stessa pagina).
+		'media_support' => false,
+	);
+	foreach ( $wanted as $key => $value ) {
+		$options->set( $key, $value );
+	}
+	$options->save();
+	$model->clean_languages_cache();
+
+	// Contenuti e termini esistenti : italiano.
+	$model->set_language_in_mass();
+
+	delete_transient( 'noigui_polylang_lock' );
+	update_option( 'ld_flush_rewrite', 1 );
+	do_action( 'learn_drive_purge_cache' );
+
+	// Pacchetto di lingua francese di WordPress (date, testi del nucleo). Mai bloccante.
+	if ( ! in_array( 'fr_FR', get_available_languages(), true ) ) {
+		try {
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+			require_once ABSPATH . 'wp-admin/includes/misc.php';
+			require_once ABSPATH . 'wp-admin/includes/translation-install.php';
+			if ( wp_can_install_language_pack() ) {
+				wp_download_language_pack( 'fr_FR' );
+			}
+		} catch ( \Throwable $error ) {
+			unset( $error ); // Il pacchetto si installa anche da Bacheca › Aggiornamenti.
+		}
+	}
+}
+add_action( 'admin_init', __NAMESPACE__ . '\\polylang_setup', 30 );
+add_action( 'rest_api_init', __NAMESPACE__ . '\\polylang_setup', 30 );
 
 /**
  * Metadati del listato (argomenti e quote).

@@ -9,13 +9,13 @@ msgstr ""
 "X-Domain: learn-drive\n"
 
 #: patterns/footer-compact.php:19
-#: inc/presentation.php:250
+#: inc/presentation.php:262
 msgid "Mentions légales"
 msgstr "Legal notice"
 
 #: patterns/footer-compact.php:20
 #: patterns/footer-minimal.php:16
-#: inc/presentation.php:251
+#: inc/presentation.php:263
 msgid "Confidentialité"
 msgstr "Privacy"
 
@@ -82,7 +82,7 @@ msgid "Les pays couverts (drapeau, catégories, nombre de questions) et l'accès
 msgstr "Covered countries (flag, categories, number of questions) and access to guides on driving abroad."
 
 #: patterns/home-steps.php:14
-#: inc/presentation.php:237
+#: inc/presentation.php:249
 msgid "Apprendre"
 msgstr "Learn"
 
@@ -165,7 +165,7 @@ msgid "Chaque leçon explique une règle avec des schémas, puis vous fait véri
 msgstr "Each lesson explains a rule with diagrams, then has you check that you understood it."
 
 #: patterns/home-theory-practice.php:38
-#: inc/presentation.php:238
+#: inc/presentation.php:250
 msgid "Tous les cours"
 msgstr "All courses"
 
@@ -642,7 +642,7 @@ msgid "Accès rapides"
 msgstr "Quick links"
 
 #: patterns/home-hero.php:80
-#: inc/presentation.php:215
+#: inc/presentation.php:227
 msgid "Examen blanc"
 msgstr "Mock exam"
 
@@ -718,7 +718,7 @@ msgstr "Content written by driving instructors and re-checked whenever the regul
 
 #: patterns/home-testimonials.php:45
 #: patterns/editorial-policy.php:16
-#: inc/presentation.php:247
+#: inc/presentation.php:259
 msgid "Comment nous vérifions nos contenus"
 msgstr "How we check our content"
 
@@ -836,24 +836,24 @@ msgid "Bandeau court qui mène à l'offre premium."
 msgstr "Short banner leading to the premium offer."
 
 #: patterns/header-centered.php:14
-#: inc/presentation.php:183
+#: inc/presentation.php:195
 msgid "Cours"
 msgstr "Courses"
 
 #: patterns/header-centered.php:15
-#: inc/presentation.php:184
+#: inc/presentation.php:196
 msgid "Quiz"
 msgstr "Quizzes"
 
 #: patterns/header-centered.php:16
-#: inc/presentation.php:185
-#: inc/presentation.php:216
+#: inc/presentation.php:197
+#: inc/presentation.php:228
 msgid "Panneaux"
 msgstr "Road signs"
 
 #: patterns/header-centered.php:18
 #: patterns/home-guides.php:33
-#: inc/presentation.php:187
+#: inc/presentation.php:199
 msgid "Infos & démarches"
 msgstr "Guides & procedures"
 
@@ -916,11 +916,19 @@ msgctxt "Pattern title"
 msgid "Aucun résultat"
 msgstr "No results"
 
-#: patterns/header.php:45
+#: patterns/header.php:47
 msgid "Rechercher une question, un panneau…"
 msgstr "Search for a question, a road sign…"
 
-#: patterns/header.php:54
+#: patterns/header.php:52
+msgid "Langue"
+msgstr "Language"
+
+#: patterns/header.php:52
+msgid "Choisir la langue"
+msgstr "Choose language"
+
+#: patterns/header.php:69
 msgid "Mon espace"
 msgstr "My account"
 
@@ -1415,35 +1423,35 @@ msgstr "Learn, practice, pass your exam"
 msgid "Des cours clairs, des questions corrigées et expliquées, des examens blancs aux conditions réelles et toute l’actualité de votre formation, sur mobile comme sur ordinateur."
 msgstr "Clear courses, questions with answers and explanations, mock exams under real conditions and all the news about your training, on mobile and desktop alike."
 
-#: inc/presentation.php:217
+#: inc/presentation.php:229
 msgid "Démarches"
 msgstr "Procedures"
 
-#: inc/presentation.php:218
-#: inc/presentation.php:241
+#: inc/presentation.php:230
+#: inc/presentation.php:253
 msgid "Lexique"
 msgstr "Glossary"
 
-#: inc/presentation.php:239
+#: inc/presentation.php:251
 msgid "Quiz par thème"
 msgstr "Quizzes by topic"
 
-#: inc/presentation.php:240
+#: inc/presentation.php:252
 msgid "Panneaux de signalisation"
 msgstr "Road signs"
 
-#: inc/presentation.php:243
+#: inc/presentation.php:255
 msgid "S'informer"
 msgstr "Stay informed"
 
-#: inc/presentation.php:246
+#: inc/presentation.php:258
 msgid "Qui sommes-nous"
 msgstr "About us"
 
-#: inc/presentation.php:249
+#: inc/presentation.php:261
 msgid "Informations"
 msgstr "Information"
 
-#: inc/presentation.php:252
+#: inc/presentation.php:264
 msgid "Contact"
 msgstr "Contact"

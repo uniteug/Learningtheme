@@ -77,6 +77,33 @@ function fill_template( $template, array $vars ) {
 }
 
 /**
+ * Modèle de titre SEO. Un modèle laissé à sa valeur par défaut est traduit
+ * dans la langue de la page (site italien, anglais, version française…) ;
+ * un modèle personnalisé est utilisé tel quel (traduisible par Polylang ou
+ * WPML via wpml-config.xml).
+ *
+ * @param string $key Clé du réglage (tpl_*).
+ * @return string
+ */
+function title_template( $key ) {
+	$value    = (string) setting( $key );
+	$defaults = \LearnDrive\Core\defaults();
+	if ( ! isset( $defaults[ $key ] ) || $value !== $defaults[ $key ] ) {
+		return $value;
+	}
+
+	$translated = array(
+		'tpl_question' => __( '{title} – Quiz {track} {country} | {site}', 'learn-drive-core' ),
+		'tpl_quiz'     => __( '{title} – {track} | {site}', 'learn-drive-core' ),
+		'tpl_lesson'   => __( '{title} – Cours {track} | {site}', 'learn-drive-core' ),
+		'tpl_sheet'    => __( '{title} : signification et règles | {site}', 'learn-drive-core' ),
+		'tpl_glossary' => __( '{title} : définition | {site}', 'learn-drive-core' ),
+		'tpl_track'    => __( '{title} : cours, quiz et examen blanc | {site}', 'learn-drive-core' ),
+	);
+	return $translated[ $key ] ?? $value;
+}
+
+/**
  * Titre SEO d'un contenu.
  *
  * @param int $post_id Contenu.
@@ -99,7 +126,7 @@ function post_title( $post_id ) {
 		'post'      => 'tpl_post',
 	);
 	$type = get_post_type( $post_id );
-	$tpl  = isset( $map[ $type ] ) ? (string) setting( $map[ $type ] ) : '{title} | {site}';
+	$tpl  = isset( $map[ $type ] ) ? title_template( $map[ $type ] ) : '{title} | {site}';
 	$vars = template_vars( $post_id );
 
 	// Pas de répétition : « Examen blanc — permis B – Permis B ».
@@ -198,7 +225,7 @@ function page_title() {
 	if ( is_tax( TAX_TRACK ) ) {
 		$term = get_queried_object();
 		return fill_template(
-			(string) setting( 'tpl_track' ),
+			title_template( 'tpl_track' ),
 			array(
 				'{title}' => $term->name,
 				'{site}'  => $site,
@@ -238,7 +265,16 @@ function page_title() {
 		return __( 'Page introuvable', 'learn-drive-core' ) . $sep . $site;
 	}
 
-	return wp_get_document_title();
+	// Autres pages (flux…) : titre du cœur. Garde-fou : ce calcul repasse
+	// par le filtre pre_get_document_title, qui rappelle cette fonction.
+	static $resolving = false;
+	if ( $resolving ) {
+		return '';
+	}
+	$resolving = true;
+	$title     = wp_get_document_title();
+	$resolving = false;
+	return $title;
 }
 
 /**

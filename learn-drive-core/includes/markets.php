@@ -450,7 +450,7 @@ function add_hub_rules() {
 	foreach ( all() as $market ) {
 		if ( '' !== $market['hub'] ) {
 			$hub = preg_quote( $market['hub'], '#' );
-			add_rewrite_rule( "^{$hub}/?$", 'index.php?' . TAX_COUNTRY . '=' . $market['slug'], 'top' );
+			\LearnDrive\Core\Multilingual\add_rule( "^{$hub}/?$", 'index.php?' . TAX_COUNTRY . '=' . $market['slug'], 'top' );
 		}
 	}
 }
