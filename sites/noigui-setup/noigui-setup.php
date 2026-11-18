@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Noigui — configurazione del sito
  * Description:       Configura Learn & Drive per noigui.com: patente italiana, banca ufficiale dei quiz ministeriali (listato «Patente AB», 7.020 affermazioni), argomenti con le quote d'esame, simulazione d'esame, menu e collegamenti all'app. Le spiegazioni già scritte negli articoli «Quiz Patente B» vengono collegate alle affermazioni corrispondenti.
- * Version:           1.5.0
+ * Version:           1.6.0
  * Requires at least: 6.9
  * Requires PHP:      8.1
  * Requires Plugins:  learn-drive-core
@@ -25,7 +25,7 @@ use const LearnDrive\Core\TAX_TOPIC;
 
 defined( 'ABSPATH' ) || exit;
 
-const VERSION = '1.5.0';
+const VERSION = '1.6.0';
 const DIR     = __DIR__ . '/';
 
 /**
@@ -337,6 +337,9 @@ function setup() {
 
 	// Pagine di servizio fuori dall'indice e dalle sitemap.
 	mark_utility_pages();
+
+	// Articoli doppi (stesse affermazioni, testo in gran parte identico) : fusi nell'originale.
+	merge_duplicates();
 
 	// Colori del marchio Noigui (blu del logo), contrasto AA sul bianco.
 	brand_styles();
@@ -730,6 +733,117 @@ function mark_utility_pages() {
 			update_post_meta( $page->ID, '_ld_noindex', 1 );
 		}
 	}
+}
+
+/**
+ * Articoli « Quiz interattivo … vero o falso » del 7 luglio: copie più corte degli
+ * articoli « Quiz patente … » del 6 luglio, sulle stesse 10 affermazioni (100 %)
+ * con il 69–73 % di testo identico (modello comune escluso). Verificato che ogni
+ * informazione della copia è già nell'originale (una frase aggiunta qui sotto).
+ *
+ * @return array<string,string> Copia => originale.
+ */
+function duplicate_articles() {
+	return array(
+		'quiz-interattivo-su-alcol-e-guida-vero-o-falso'                      => 'quiz-patente-alcol-e-guida',
+		'quiz-interattivo-sulluso-delle-luci-e-dei-proiettori-vero-o-falso'   => 'quiz-patente-luci-anabbaglianti-abbaglianti',
+		'quiz-interattivo-su-fermata-sosta-e-arresto-vero-o-falso'            => 'quiz-patente-fermata-sosta-arresto',
+		'quiz-interattivo-sulla-precedenza-agli-incroci-vero-o-falso'         => 'quiz-patente-precedenze-incroci',
+		'quiz-interattivo-sul-sorpasso-vero-o-falso'                          => 'quiz-patente-sorpasso',
+		'quiz-interattivo-sulla-distanza-di-sicurezza-vero-o-falso'           => 'quiz-patente-distanza-di-sicurezza',
+		'quiz-interattivo-sui-limiti-di-velocita-vero-o-falso'                => 'quiz-patente-limiti-di-velocita',
+		'quiz-interattivo-sui-segnali-di-divieto-vero-o-falso'                => 'quiz-patente-segnali-di-divieto',
+		'quiz-interattivo-sui-segnali-di-pericolo-vero-o-falso'               => 'quiz-patente-segnali-di-pericolo',
+	);
+}
+
+/**
+ * Fusione reversibile : la copia passa in bozza (contenuto conservato), i suoi
+ * indirizzi (nuovo e vecchio) vanno in 301 verso l'originale, i link interni
+ * puntano all'originale.
+ */
+function merge_duplicates() {
+	global $wpdb;
+	foreach ( duplicate_articles() as $copy_slug => $original_slug ) {
+		$original = get_page_by_path( $original_slug, OBJECT, 'post' );
+		if ( ! $original || 'publish' !== $original->post_status ) {
+			continue; // Mai reindirizzare verso un articolo assente.
+		}
+		$target = get_permalink( $original );
+		$copy   = get_page_by_path( $copy_slug, OBJECT, 'post' );
+		$from   = array( '/' . $copy_slug . '/' );
+		if ( $copy ) {
+			$from[] = wp_parse_url( get_permalink( $copy ), PHP_URL_PATH );
+		}
+		foreach ( array_unique( $from ) as $path ) {
+			\LearnDrive\Core\SEO\Redirects\add( $path, $target );
+		}
+		if ( $copy && 'publish' === $copy->post_status ) {
+			update_post_meta( $copy->ID, '_noigui_merged_into', $original->ID );
+			wp_update_post(
+				array(
+					'ID'          => $copy->ID,
+					'post_status' => 'draft',
+				)
+			);
+		}
+
+		// Link interni verso la copia : verso l'originale (un solo elemento per lista).
+		$like = '%' . $wpdb->esc_like( $copy_slug ) . '%';
+		$ids  = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM {$wpdb->posts} WHERE post_status = 'publish' AND post_content LIKE %s", $like ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+		foreach ( $ids as $id ) {
+			$content = (string) get_post_field( 'post_content', (int) $id );
+			$new     = preg_replace( '#https?://[^"\'\s]*/' . preg_quote( $copy_slug, '#' ) . '/?#', $target, $content );
+			$new     = dedupe_list_links( (string) $new, $target );
+			if ( $new !== $content ) {
+				$wpdb->update( $wpdb->posts, array( 'post_content' => $new ), array( 'ID' => (int) $id ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+				clean_post_cache( (int) $id );
+			}
+		}
+	}
+
+	// Unica informazione della copia assente dall'originale : come si riconoscono i due segnali.
+	$divieto = get_page_by_path( 'quiz-patente-segnali-di-divieto', OBJECT, 'post' );
+	$phrase  = 'Si riconoscono anche dal disegno: una sola barra rossa obliqua';
+	if ( $divieto && ! str_contains( $divieto->post_content, $phrase ) ) {
+		$needle = 'e tra divieto di sosta (fermata consentita) e divieto di fermata (tutto vietato).';
+		if ( str_contains( $divieto->post_content, $needle ) ) {
+			$wpdb->update( // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+				$wpdb->posts,
+				array( 'post_content' => str_replace( $needle, $needle . ' ' . $phrase . ' sul fondo blu per il divieto di sosta, una croce rossa (due barre incrociate) per il divieto di fermata.', $divieto->post_content ) ),
+				array( 'ID' => $divieto->ID )
+			);
+			clean_post_cache( $divieto->ID );
+		}
+	}
+}
+
+/**
+ * Dopo la sostituzione, una stessa lista può contenere due volte lo stesso link : si tiene il primo.
+ *
+ * @param string $content Contenuto.
+ * @param string $target  Indirizzo.
+ * @return string
+ */
+function dedupe_list_links( $content, $target ) {
+	return (string) preg_replace_callback(
+		'#<(ul|ol)\b[^>]*>.*?</\1>#s',
+		static function ( $list ) use ( $target ) {
+			$seen = false;
+			return (string) preg_replace_callback(
+				'#<li\b[^>]*>(?:(?!</li>).)*?href="' . preg_quote( $target, '#' ) . '"(?:(?!</li>).)*?</li>\s*#s',
+				static function ( $item ) use ( &$seen ) {
+					if ( $seen ) {
+						return '';
+					}
+					$seen = true;
+					return $item[0];
+				},
+				$list[0]
+			);
+		},
+		$content
+	);
 }
 
 /**
