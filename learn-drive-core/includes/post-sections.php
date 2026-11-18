@@ -90,6 +90,8 @@ function add_rules() {
 		$quoted = preg_quote( $base, '#' );
 		\LearnDrive\Core\Multilingual\add_rule( "^{$quoted}/?$", 'index.php?category_name=' . $term->slug, 'top' );
 		\LearnDrive\Core\Multilingual\add_rule( "^{$quoted}/page/([0-9]{1,})/?$", 'index.php?category_name=' . $term->slug . '&paged=$matches[1]', 'top' );
+		\LearnDrive\Core\Multilingual\add_rule( "^{$quoted}/(?:feed/)?(feed|rdf|rss|rss2|atom)/?$", 'index.php?category_name=' . $term->slug . '&feed=$matches[1]', 'top' );
+		\LearnDrive\Core\Multilingual\add_rule( "^{$quoted}/([^/]+)/(?:feed/)?(feed|rdf|rss|rss2|atom)/?$", 'index.php?category_name=$matches[1]&feed=$matches[2]', 'top' );
 		\LearnDrive\Core\Multilingual\add_rule( "^{$quoted}/([^/]+)/page/([0-9]{1,})/?$", 'index.php?ld_section=' . $term_id . '&ld_section_child=$matches[1]&paged=$matches[2]', 'top' );
 		\LearnDrive\Core\Multilingual\add_rule( "^{$quoted}/([^/]+)/?$", 'index.php?ld_section=' . $term_id . '&name=$matches[1]', 'top' );
 	}
@@ -183,13 +185,17 @@ add_filter( 'term_link', __NAMESPACE__ . '\\term_link', 10, 3 );
  * Anciennes adresses (/{article}/, /category/…) : 301 vers la nouvelle.
  */
 function redirect_old() {
-	if ( ! enabled() || is_admin() || is_preview() || ! empty( $_GET ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- lecture seule.
+	if ( ! enabled() || is_admin() || is_preview() || is_feed() || ! empty( $_GET ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- lecture seule.
 		return;
 	}
 	if ( is_singular( 'post' ) ) {
 		$target = get_permalink( get_queried_object_id() );
-	} elseif ( is_category() && ! is_paged() ) {
+	} elseif ( is_category() ) {
 		$target = get_term_link( get_queried_object() );
+		$paged  = (int) get_query_var( 'paged' );
+		if ( is_string( $target ) && $paged > 1 ) {
+			$target = user_trailingslashit( trailingslashit( $target ) . 'page/' . $paged );
+		}
 	} else {
 		return;
 	}

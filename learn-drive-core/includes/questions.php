@@ -441,7 +441,60 @@ function is_thin( $post_id ) {
 	if ( '' === $words ) {
 		$words = word_count( get_post_field( 'post_content', $post_id ) );
 	}
-	return (int) $words < (int) setting( 'thin_words' ) && count( group_ids( $post_id ) ) < 3;
+	return (int) $words < min_words();
+}
+
+/**
+ * Mots d'explication propre en dessous desquels une question n'est pas
+ * indexée. L'énoncé, la réponse et le tableau de la série (répété sur chaque
+ * affirmation) ne comptent pas : seule l'explication rédigée est propre à la page.
+ *
+ * @return int
+ */
+function min_words() {
+	return max( (int) setting( 'thin_words' ), (int) setting( 'question_min_words' ) );
+}
+
+/**
+ * Décision à l'affichage (sans attendre le recalcul des indicateurs).
+ *
+ * @param bool $noindex Décision précédente.
+ * @return bool
+ */
+function noindex_thin( $noindex ) {
+	return $noindex || ( is_singular( PT_QUESTION ) && is_thin( get_queried_object_id() ) );
+}
+add_filter( 'learn_drive_noindex', __NAMESPACE__ . '\\noindex_thin' );
+
+/**
+ * Nombre de questions publiées assez rédigées pour être indexées (sitemaps).
+ *
+ * @return int
+ */
+function indexable_count() {
+	$key   = 'ld_indexable_questions_' . min_words();
+	$count = get_transient( $key );
+	if ( false === $count ) {
+		$query = new \WP_Query(
+			array(
+				'post_type'      => PT_QUESTION,
+				'post_status'    => 'publish',
+				'posts_per_page' => 1,
+				'fields'         => 'ids',
+				'meta_query'     => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+					array(
+						'key'     => '_ld_words',
+						'value'   => min_words(),
+						'compare' => '>=',
+						'type'    => 'NUMERIC',
+					),
+				),
+			)
+		);
+		$count = (int) $query->found_posts;
+		set_transient( $key, $count, 6 * HOUR_IN_SECONDS );
+	}
+	return (int) $count;
 }
 
 /**
@@ -457,8 +510,8 @@ function update_seo_flags( $post_id ) {
 	$words = word_count( get_post_field( 'post_content', $post_id ) );
 	update_post_meta( $post_id, '_ld_words', $words );
 
-	// Une question de série officielle (même figure, réponses) s'affiche en fiche complète : indexable.
-	$thin   = $words < (int) setting( 'thin_words' ) && count( group_ids( $post_id ) ) < 3;
+	// Seule l'explication rédigée est propre à la page (le tableau de la série se répète).
+	$thin   = $words < min_words();
 	$manual = (bool) get_post_meta( $post_id, '_ld_seo_noindex', true );
 
 	if ( $thin || $manual || get_post_meta( $post_id, '_ld_canonical', true ) ) {

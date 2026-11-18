@@ -80,7 +80,7 @@ function sanitize( $input ) {
 			$clean[ $key ] = array_values( array_intersect( (array) $value, array_keys( AI\bots() ) ) );
 		} elseif ( in_array( $key, array( 'org_same_as', 'api_keys', 'home_lead' ), true ) ) {
 			$clean[ $key ] = sanitize_textarea_field( (string) $value );
-		} elseif ( in_array( $key, array( 'image_quality', 'thin_words', 'glossary_max', 'rate_limit', 'org_logo', 'index_min_words', 'index_min_items' ), true ) ) {
+		} elseif ( in_array( $key, array( 'image_quality', 'thin_words', 'question_min_words', 'glossary_max', 'rate_limit', 'org_logo', 'index_min_words', 'index_min_items' ), true ) ) {
 			$clean[ $key ] = absint( $value );
 		} elseif ( str_starts_with( $key, 'slug_' ) ) {
 			$slug          = sanitize_title( (string) $value );
@@ -198,6 +198,7 @@ function tabs() {
 				'glossary_max'        => array( 'number', __( 'Liens du lexique par page (maximum)', 'learn-drive-core' ) ),
 				'og_images'           => array( 'checkbox', __( 'Générer les images de partage des quiz et questions', 'learn-drive-core' ) ),
 				'auto_featured'       => array( 'checkbox', __( 'Donner une image à la une (titre et rubrique) aux articles qui n’en ont pas', 'learn-drive-core' ) ),
+				'question_min_words'  => array( 'number', __( 'Mots d’explication rédigée pour indexer une question', 'learn-drive-core' ), __( 'En dessous, la page question reste en noindex et hors sitemap (l’énoncé, la réponse et le tableau de la série ne comptent pas).', 'learn-drive-core' ) ),
 				'crawl_questions'     => array( 'checkbox', __( 'Laisser Google explorer les pages question (décocher pour une grande banque de questions officielles : exploration interdite, hors sitemaps)', 'learn-drive-core' ) ),
 				'post_sections'       => array( 'checkbox', __( 'Adresses des articles par rubrique (/news/article/), anciennes adresses redirigées', 'learn-drive-core' ) ),
 				'published_languages' => array( 'languages', __( 'Langues publiées (Polylang)', 'learn-drive-core' ), __( 'Une langue décochée reste en préparation : invisible des visiteurs (404), jamais indexée, absente des hreflang, du sélecteur de langue et des sitemaps. Cochez-la quand ses traductions sont prêtes.', 'learn-drive-core' ) ),

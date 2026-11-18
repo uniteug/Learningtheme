@@ -214,6 +214,10 @@ function page_title() {
 	$sep  = ' ' . setting( 'title_sep' ) . ' ';
 
 	if ( is_front_page() ) {
+		$headline = trim( wp_strip_all_tags( (string) setting( 'home_title' ) ) );
+		if ( '' !== $headline ) {
+			return $headline . $sep . $site;
+		}
 		$tagline = get_bloginfo( 'description' );
 		return $tagline ? $site . $sep . $tagline : $site;
 	}
@@ -295,6 +299,10 @@ function page_suffix() {
  */
 function page_description() {
 	if ( is_front_page() ) {
+		$lead = trim( wp_strip_all_tags( (string) setting( 'home_lead' ) ) );
+		if ( '' !== $lead ) {
+			return truncate( $lead );
+		}
 		$front = (int) get_option( 'page_on_front' );
 		if ( $front ) {
 			$desc = post_description( $front );

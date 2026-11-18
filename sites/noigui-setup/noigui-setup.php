@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Noigui — configurazione del sito
  * Description:       Configura Learn & Drive per noigui.com: patente italiana, banca ufficiale dei quiz ministeriali (listato «Patente AB», 7.020 affermazioni), argomenti con le quote d'esame, simulazione d'esame, menu e collegamenti all'app. Le spiegazioni già scritte negli articoli «Quiz Patente B» vengono collegate alle affermazioni corrispondenti.
- * Version:           1.4.0
+ * Version:           1.5.0
  * Requires at least: 6.9
  * Requires PHP:      8.1
  * Requires Plugins:  learn-drive-core
@@ -25,7 +25,7 @@ use const LearnDrive\Core\TAX_TOPIC;
 
 defined( 'ABSPATH' ) || exit;
 
-const VERSION = '1.4.0';
+const VERSION = '1.5.0';
 const DIR     = __DIR__ . '/';
 
 /**
@@ -334,6 +334,9 @@ function setup() {
 
 	// Doppioni lasciati da un lotto d'importazione interrotto.
 	dedupe_questions();
+
+	// Pagine di servizio fuori dall'indice e dalle sitemap.
+	mark_utility_pages();
 
 	// Colori del marchio Noigui (blu del logo), contrasto AA sul bianco.
 	brand_styles();
@@ -703,9 +706,31 @@ add_filter( 'learn_drive_query_args', __NAMESPACE__ . '\\query_args', 20, 2 );
  * @return bool
  */
 function app_pages_noindex( $noindex ) {
-	return $noindex || is_page( array( 'auth-confirm', 'delete-account-request' ) );
+	return $noindex || is_page( utility_pages() );
 }
 add_filter( 'learn_drive_noindex', __NAMESPACE__ . '\\app_pages_noindex' );
+
+/**
+ * Pagine di servizio (app, informative legali, contatti) : mai nell'indice né nelle sitemap.
+ *
+ * @return string[]
+ */
+function utility_pages() {
+	return array( 'auth-confirm', 'delete-account-request', 'privacy-policy', 'term-condition', 'contact' );
+}
+
+/**
+ * Le stesse pagine marcate noindex (escluse così anche dalle sitemap di Yoast).
+ */
+function mark_utility_pages() {
+	foreach ( utility_pages() as $slug ) {
+		$page = get_page_by_path( $slug );
+		if ( $page ) {
+			update_post_meta( $page->ID, '_ld_seo_noindex', 1 );
+			update_post_meta( $page->ID, '_ld_noindex', 1 );
+		}
+	}
+}
 
 /**
  * Pagina di stato dell'importazione (Strumenti › Noigui).

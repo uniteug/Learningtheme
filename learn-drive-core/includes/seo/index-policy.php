@@ -91,10 +91,9 @@ function is_thin_post( $post ) {
 		return count( \LearnDrive\Core\Quizzes\question_ids( $post->ID ) ) < 5;
 	}
 
-	// Une question officielle s'affiche avec toute sa série (même figure, réponses) :
-	// sa page est une fiche complète, à indexer pour les recherches sur l'énoncé.
-	if ( PT_QUESTION === $post->post_type && count( \LearnDrive\Core\Questions\group_ids( $post->ID ) ) >= 3 ) {
-		return false;
+	// Une question se juge sur son explication rédigée (règle propre aux questions).
+	if ( PT_QUESTION === $post->post_type ) {
+		return \LearnDrive\Core\Questions\is_thin( $post->ID );
 	}
 
 	// Un cours se juge aussi sur son programme : ses leçons s'affichent sur sa page.
@@ -205,11 +204,48 @@ function is_thin_term( $term ) {
 	if ( ! $term instanceof \WP_Term || ! enabled() ) {
 		return false;
 	}
+	// Pages de liste sans texte propre (thèmes, sous-rubriques) : indexées
+	// seulement avec une vraie introduction rédigée, quel que soit le nombre de contenus.
+	if ( TAX_TOPIC === $term->taxonomy || ( 'category' === $term->taxonomy && $term->parent ) ) {
+		return term_words( $term ) < listing_min_words();
+	}
 	$min_items = max( 1, (int) setting( 'index_min_items' ) );
 	if ( 'post_tag' === $term->taxonomy ) {
 		$min_items *= 2;
 	}
 	return term_count( $term ) < $min_items && term_words( $term ) < 120;
+}
+
+/**
+ * Mots d'introduction rédigée exigés d'une page de liste (thème, sous-rubrique,
+ * archive de quiz) pour être indexée.
+ *
+ * @return int
+ */
+function listing_min_words() {
+	/**
+	 * Mots d'introduction exigés d'une page de liste pour être indexée.
+	 *
+	 * @param int $words Mots.
+	 */
+	return (int) apply_filters( 'learn_drive_listing_min_words', 300 );
+}
+
+/**
+ * Archive de questions ou de quiz (globale : /quiz/, ou par catégorie :
+ * /patente-b/quiz/, /patente-b/domande/) : une liste de liens, sans texte
+ * propre — la page de la catégorie et les quiz eux-mêmes portent le contenu.
+ * Une archive de quiz avec une introduction rédigée reste indexable.
+ *
+ * @return bool
+ */
+function is_listing_archive() {
+	$type = get_query_var( 'post_type' );
+	$type = is_array( $type ) ? reset( $type ) : (string) $type;
+	if ( ! in_array( $type, array( PT_QUESTION, PT_QUIZ ), true ) || ! ( is_post_type_archive() || is_tax( TAX_TRACK ) ) ) {
+		return false;
+	}
+	return PT_QUESTION === $type || word_count( (string) get_option( 'ld_archive_intro_' . PT_QUIZ ) ) < listing_min_words();
 }
 
 /**
@@ -278,6 +314,9 @@ function current_page( $noindex ) {
 	if ( is_singular() && ! is_singular( PT_QUESTION ) ) {
 		return (bool) get_post_meta( get_queried_object_id(), '_ld_thin', true ) || is_thin_post( get_queried_object() );
 	}
+	if ( is_listing_archive() ) {
+		return true;
+	}
 	if ( is_category() || is_tag() || is_tax( taxonomies() ) ) {
 		return is_thin_term( get_queried_object() );
 	}
@@ -285,6 +324,11 @@ function current_page( $noindex ) {
 		return is_thin_author( get_queried_object_id() );
 	}
 	if ( is_post_type_archive() && ! have_posts() ) {
+		return true;
+	}
+	// Archives des questions et des quiz (globales ou par catégorie) : des listes
+	// de liens. Les quiz eux-mêmes et la page de la catégorie portent le texte.
+	if ( is_listing_archive() ) {
 		return true;
 	}
 	return $noindex;
@@ -439,6 +483,59 @@ function yoast_exclude_terms( $ids ) {
 add_filter( 'wpseo_exclude_from_sitemap_by_term_ids', __NAMESPACE__ . '\\yoast_exclude_terms' );
 
 /**
+ * Yoast SEO : pas de sitemap pour une taxonomie dont aucun terme n'est
+ * indexable (un sitemap vide ou fait de pages noindex est une erreur dans
+ * la Search Console).
+ *
+ * @param bool   $excluded Exclue.
+ * @param string $taxonomy Taxonomie.
+ * @return bool
+ */
+function yoast_exclude_taxonomy( $excluded, $taxonomy ) {
+	if ( $excluded || ! enabled() || ! in_array( $taxonomy, taxonomies(), true ) ) {
+		return $excluded;
+	}
+	$terms = get_terms(
+		array(
+			'taxonomy'   => $taxonomy,
+			'hide_empty' => false,
+		)
+	);
+	if ( is_wp_error( $terms ) || ! $terms ) {
+		return $excluded;
+	}
+	foreach ( $terms as $term ) {
+		if ( ! is_thin_term( $term ) ) {
+			return false;
+		}
+	}
+	return true;
+}
+add_filter( 'wpseo_sitemap_exclude_taxonomy', __NAMESPACE__ . '\\yoast_exclude_taxonomy', 10, 2 );
+
+/**
+ * Yoast SEO : pas d'archive noindex (questions, quiz sans introduction) dans
+ * les sitemaps.
+ *
+ * @param string|false $link      Adresse de l'archive.
+ * @param string       $post_type Type.
+ * @return string|false
+ */
+function yoast_archive_link( $link, $post_type ) {
+	if ( ! enabled() ) {
+		return $link;
+	}
+	if ( PT_QUESTION === $post_type ) {
+		return false;
+	}
+	if ( PT_QUIZ === $post_type && word_count( (string) get_option( 'ld_archive_intro_' . PT_QUIZ ) ) < listing_min_words() ) {
+		return false;
+	}
+	return $link;
+}
+add_filter( 'wpseo_sitemap_post_type_archive_link', __NAMESPACE__ . '\\yoast_archive_link', 10, 2 );
+
+/**
  * Yoast SEO masque les termes sans contenu direct, dont les rubriques parentes
  * qui rangent tout dans leurs sous-rubriques : la règle des termes minces
  * (sous-termes compris) décide à sa place.
@@ -479,6 +576,17 @@ add_filter( 'wpseo_sitemap_exclude_author', __NAMESPACE__ . '\\yoast_exclude_aut
  */
 function questions_crawlable() {
 	return (bool) setting( 'crawl_questions' );
+}
+
+/**
+ * Les pages question vont-elles dans les sitemaps ? Seulement si elles sont
+ * explorables et qu'au moins une est assez rédigée pour être indexée : un
+ * sitemap ne doit lister que des pages indexables.
+ *
+ * @return bool
+ */
+function questions_in_sitemap() {
+	return questions_crawlable() && \LearnDrive\Core\Questions\indexable_count() > 0;
 }
 
 /**
@@ -528,7 +636,7 @@ add_filter( 'robots_txt', __NAMESPACE__ . '\\robots_questions', 5, 2 );
  * @return array
  */
 function sitemap_no_questions( $types ) {
-	if ( ! questions_crawlable() ) {
+	if ( ! questions_in_sitemap() ) {
 		unset( $types[ \LearnDrive\Core\PT_QUESTION ] );
 	}
 	return $types;
@@ -543,6 +651,6 @@ add_filter( 'wp_sitemaps_post_types', __NAMESPACE__ . '\\sitemap_no_questions', 
  * @return bool
  */
 function yoast_no_questions( $excluded, $post_type ) {
-	return $excluded || ( \LearnDrive\Core\PT_QUESTION === $post_type && ! questions_crawlable() );
+	return $excluded || ( \LearnDrive\Core\PT_QUESTION === $post_type && ! questions_in_sitemap() );
 }
 add_filter( 'wpseo_sitemap_exclude_post_type', __NAMESPACE__ . '\\yoast_no_questions', 10, 2 );

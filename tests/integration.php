@@ -286,7 +286,8 @@ $cleanup[] = static function () use ( $imported, $csv ) {
 	@unlink( $csv );
 };
 check( 'Import CSV (séparateur ;) : 1 créée, 1 erreur', 1 === $report['created'] && 1 === count( $report['errors'] ) );
-check( 'Question importée correcte', $imported && Questions\grade( Questions\get( $imported ), 0 ) && ! get_post_meta( $imported->ID, '_ld_noindex', true ) );
+check( 'Question importée correcte', $imported && Questions\grade( Questions\get( $imported ), 0 ) );
+check( 'Explication courte (< seuil des questions) : question non indexée', $imported && get_post_meta( $imported->ID, '_ld_noindex', true ) );
 $report2 = Import\import_file( $csv );
 check( 'Réimport : mise à jour sans doublon', 1 === $report2['updated'] && 0 === $report2['created'] );
 
@@ -501,7 +502,32 @@ check( 'Série officielle retrouvée (même groupe)', is_int( $grp_ids[0] ) && 3
 check( 'Bonne réponse en texte', 'Vrai' === LearnDrive\Core\Questions\correct_answer( $grp_ids[0] ) && 'Faux' === LearnDrive\Core\Questions\correct_answer( $grp_ids[1] ) );
 LearnDrive\Core\Questions\update_seo_flags( $grp_ids[0] );
 LearnDrive\Core\Questions\update_seo_flags( $grp_alone );
-check( 'Question d’une série sans explication : indexable (fiche complète)', ! get_post_meta( $grp_ids[0], '_ld_noindex', true ) );
+check( 'Question d’une série sans explication : non indexée (le tableau de la série ne compte pas)', (bool) get_post_meta( $grp_ids[0], '_ld_noindex', true ) );
+$long_q = Import\import_question( array( 'title' => 'Question longuement expliquée', 'slug' => 'question-longue-test', 'format' => 'tf', 'answers' => 'Vrai*|Faux', 'explanation' => str_repeat( 'La règle du code s’applique ici parce que le conducteur doit adapter sa conduite aux circonstances. ', 12 ) ) );
+$cleanup[] = static function () use ( $long_q ) {
+	if ( is_int( $long_q ) ) {
+		wp_delete_post( $long_q, true );
+	}
+};
+if ( is_int( $long_q ) ) {
+	LearnDrive\Core\Questions\update_seo_flags( $long_q );
+}
+check( 'Question avec une vraie explication (≥ seuil) : indexable', is_int( $long_q ) && ! get_post_meta( $long_q, '_ld_noindex', true ) && ! LearnDrive\Core\Questions\is_thin( $long_q ) );
+check( 'Questions hors sitemap tant qu’aucune n’est indexable', ( LearnDrive\Core\Questions\indexable_count() > 0 ) === LearnDrive\Core\SEO\Index\questions_in_sitemap() || ! LearnDrive\Core\SEO\Index\questions_crawlable() );
+$topic_any = get_terms( array( 'taxonomy' => 'ld_topic', 'hide_empty' => false, 'number' => 1 ) );
+if ( $topic_any && ! is_wp_error( $topic_any ) ) {
+	$topic_term = $topic_any[0];
+	$topic_was  = (string) get_term_meta( $topic_term->term_id, 'ld_content', true );
+	update_term_meta( $topic_term->term_id, 'ld_content', '' );
+	clean_term_cache( $topic_term->term_id );
+	$thin_topic = LearnDrive\Core\SEO\Index\is_thin_term( get_term( $topic_term->term_id ) );
+	update_term_meta( $topic_term->term_id, 'ld_content', str_repeat( 'Introduzione rédigée sur ce thème du code, avec les règles et les pièges. ', 30 ) );
+	clean_term_cache( $topic_term->term_id );
+	$rich_topic = ! LearnDrive\Core\SEO\Index\is_thin_term( get_term( $topic_term->term_id ) );
+	update_term_meta( $topic_term->term_id, 'ld_content', $topic_was );
+	check( 'Thème sans introduction rédigée : non indexé, même avec beaucoup de questions', $thin_topic && $rich_topic );
+}
+check( 'Archives des questions et des quiz hors sitemap Yoast', false === LearnDrive\Core\SEO\Index\yoast_archive_link( 'https://x/', 'ld_question' ) && false === LearnDrive\Core\SEO\Index\yoast_archive_link( 'https://x/', 'ld_quiz' ) && 'https://x/' === LearnDrive\Core\SEO\Index\yoast_archive_link( 'https://x/', 'post' ) );
 check( 'Question isolée sans explication : non indexée', (bool) get_post_meta( $grp_alone, '_ld_noindex', true ) );
 check( 'Pages question explorables par défaut (robots.txt inchangé)', LearnDrive\Core\SEO\Index\questions_crawlable() && ! str_contains( LearnDrive\Core\SEO\Index\robots_questions( "User-agent: *\n", true ), 'Disallow' ) );
 

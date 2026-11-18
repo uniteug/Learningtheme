@@ -733,8 +733,42 @@ add_action( 'wp_head', __NAMESPACE__ . '\\output', 30 );
  * @return array
  */
 function yoast_graph( $graph ) {
-	return array_merge( $graph, main_nodes( page_url() ) );
+	$nodes = main_nodes( page_url() );
+	// Article : Yoast fournit déjà le nœud de l'article et son auteur. Un second
+	// nœud Article/NewsArticle (autre @id) donnait deux articles pour une page.
+	if ( is_singular( 'post' ) ) {
+		$nodes = array_filter(
+			$nodes,
+			static function ( $node ) {
+				$types = (array) ( $node['@type'] ?? array() );
+				return ! array_intersect( $types, array( 'Article', 'NewsArticle', 'Person' ) );
+			}
+		);
+	}
+	return array_merge( $graph, array_values( $nodes ) );
 }
+
+/**
+ * Yoast : NewsArticle pour les actualités, Article pour le reste (guides,
+ * quiz commentés).
+ *
+ * @param string|string[]                       $type      Type de Yoast.
+ * @param \Yoast\WP\SEO\Models\Indexable|object $indexable Contenu.
+ * @return string|string[]
+ */
+function yoast_article_type( $type, $indexable ) {
+	if ( 'post' !== ( $indexable->object_sub_type ?? '' ) || 'Article' !== $type || ! function_exists( '\LearnDrive\Core\PostSections\section_of' ) ) {
+		return $type;
+	}
+	$post    = get_post( (int) $indexable->object_id );
+	$section = $post ? \LearnDrive\Core\PostSections\section_of( $post ) : null;
+	if ( ! $section ) {
+		return $type;
+	}
+	$base = (string) get_term_meta( $section->term_id, 'ld_url_base', true );
+	return preg_match( '/news|actu|notizie|noticias/', $base . ' ' . $section->slug ) ? 'NewsArticle' : $type;
+}
+add_filter( 'wpseo_schema_article_type', __NAMESPACE__ . '\\yoast_article_type', 10, 2 );
 add_filter( 'wpseo_schema_graph', __NAMESPACE__ . '\\yoast_graph' );
 
 /**

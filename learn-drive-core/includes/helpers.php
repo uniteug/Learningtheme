@@ -85,6 +85,7 @@ function defaults() {
 		'org_same_as'         => '',
 		'news_name'           => '',
 		'thin_words'          => 40,
+		'question_min_words'  => 150,
 		'index_policy'        => 1,
 		'index_min_words'     => 250,
 		'index_min_items'     => 3,

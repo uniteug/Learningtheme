@@ -32,6 +32,11 @@ function boot() {
 		add_filter( 'wpseo_opengraph_title', __NAMESPACE__ . '\\yoast_title' );
 		add_filter( 'wpseo_metadesc', __NAMESPACE__ . '\\yoast_description' );
 		add_filter( 'wpseo_opengraph_desc', __NAMESPACE__ . '\\yoast_description' );
+		// Archives de questions et de quiz (noindex) : ni canonical vers une autre
+		// page, ni rel prev/next vers des adresses redirigées.
+		add_filter( 'wpseo_canonical', __NAMESPACE__ . '\\yoast_archive_links' );
+		add_filter( 'wpseo_next_rel_link', __NAMESPACE__ . '\\yoast_archive_links' );
+		add_filter( 'wpseo_prev_rel_link', __NAMESPACE__ . '\\yoast_archive_links' );
 		return;
 	}
 
@@ -163,17 +168,31 @@ function head() {
 }
 
 /**
- * Contenu d'apprentissage sans titre ni description saisis dans Yoast ?
+ * Page dont Yoast n'a qu'un titre ou une description par défaut (rien de
+ * saisi) et que Learn & Drive sait mieux décrire : questions, quiz, accueil,
+ * catégories de permis, hub des marchés, thèmes, rubriques — à la place des
+ * « Home - Site » et « Patente B Archivi - Site » des modèles de Yoast.
  *
  * @param string $field title|metadesc.
- * @return int ID du contenu, 0 sinon.
+ * @return bool
  */
 function yoast_generated( $field ) {
-	if ( ! is_singular( array( \LearnDrive\Core\PT_QUESTION, \LearnDrive\Core\PT_QUIZ ) ) ) {
-		return 0;
+	if ( is_singular( array( \LearnDrive\Core\PT_QUESTION, \LearnDrive\Core\PT_QUIZ ) ) ) {
+		return '' === (string) get_post_meta( get_queried_object_id(), '_yoast_wpseo_' . $field, true );
 	}
-	$id = get_queried_object_id();
-	return '' === (string) get_post_meta( $id, '_yoast_wpseo_' . $field, true ) ? $id : 0;
+	if ( is_front_page() ) {
+		$front = (int) get_option( 'page_on_front' );
+		return ! $front || '' === (string) get_post_meta( $front, '_yoast_wpseo_' . $field, true );
+	}
+	if ( is_category() || is_tax( array( \LearnDrive\Core\TAX_TRACK, \LearnDrive\Core\TAX_COUNTRY, \LearnDrive\Core\TAX_TOPIC ) ) ) {
+		$term = get_queried_object();
+		if ( ! $term instanceof \WP_Term ) {
+			return false;
+		}
+		$custom = class_exists( '\WPSEO_Taxonomy_Meta' ) ? \WPSEO_Taxonomy_Meta::get_term_meta( $term, $term->taxonomy, 'metadesc' === $field ? 'desc' : 'title' ) : '';
+		return '' === (string) $custom;
+	}
+	return is_post_type_archive( array( \LearnDrive\Core\PT_QUESTION, \LearnDrive\Core\PT_QUIZ ) );
 }
 
 /**
@@ -183,8 +202,11 @@ function yoast_generated( $field ) {
  * @return string
  */
 function yoast_title( $title ) {
-	$id = yoast_generated( 'title' );
-	return $id ? SEO\post_title( $id ) : $title;
+	if ( ! yoast_generated( 'title' ) ) {
+		return $title;
+	}
+	$custom = is_singular() && ! is_front_page() ? SEO\post_title( get_queried_object_id() ) : SEO\page_title();
+	return '' !== $custom ? $custom : $title;
 }
 
 /**
@@ -194,6 +216,24 @@ function yoast_title( $title ) {
  * @return string
  */
 function yoast_description( $description ) {
-	$id = yoast_generated( 'metadesc' );
-	return $id ? SEO\post_description( $id ) : $description;
+	if ( ! yoast_generated( 'metadesc' ) ) {
+		return $description;
+	}
+	$custom = is_singular() && ! is_front_page() ? SEO\post_description( get_queried_object_id() ) : SEO\page_description();
+	return '' !== $custom ? $custom : $description;
+}
+
+/**
+ * Pas de canonical ni de rel prev/next sur les archives de questions et de
+ * quiz : Yoast y mettait la page de la catégorie (/patente-b/) et des pages
+ * redirigées, contradictoires avec leur noindex.
+ *
+ * @param string|false $value Valeur de Yoast.
+ * @return string|false
+ */
+function yoast_archive_links( $value ) {
+	if ( \LearnDrive\Core\SEO\Index\is_listing_archive() && SEO\is_noindex() ) {
+		return false;
+	}
+	return $value;
 }
