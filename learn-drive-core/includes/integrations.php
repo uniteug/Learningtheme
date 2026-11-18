@@ -415,6 +415,60 @@ add_action( 'admin_init', __NAMESPACE__ . '\\purge_after_update' );
 add_action( 'rest_api_init', __NAMESPACE__ . '\\purge_after_update' );
 
 /*
+ * Yoast SEO : adresses calculées à la volée.
+ *
+ * Yoast mémorise l'adresse de chaque contenu dans sa table d'« indexables »
+ * et s'en sert pour le canonical, og:url, le fil d'Ariane et les données
+ * structurées. Les adresses de Learn & Drive (silos par catégorie, articles
+ * par rubrique, hub des marchés) passent par des filtres : sans recalcul,
+ * Yoast garde l'ancienne adresse — canonical vers une URL redirigée en 301,
+ * ni l'ancienne ni la nouvelle page ne sont indexées.
+ */
+
+/**
+ * Canonical, og:url et données structurées depuis get_permalink() / get_term_link().
+ *
+ * @return bool
+ */
+function yoast_dynamic_permalinks() {
+	return true;
+}
+add_filter( 'wpseo_dynamic_permalinks_enabled', __NAMESPACE__ . '\\yoast_dynamic_permalinks' );
+
+/**
+ * Adresses mémorisées par Yoast remises à zéro (recalculées à la visite
+ * suivante, comme après un changement des réglages de permaliens) : une fois
+ * à la mise à jour, puis à chaque changement de nos règles d'adresses.
+ *
+ * @param bool $force Sans attendre un changement de version.
+ */
+function yoast_reset_permalinks( $force = false ) {
+	$marker = 'permalinks-1';
+	if ( ! $force && get_option( 'ld_yoast_permalinks' ) === $marker ) {
+		return;
+	}
+	if ( ! function_exists( 'YoastSEO' ) ) {
+		return;
+	}
+	try {
+		YoastSEO()->helpers->indexable->reset_permalink_indexables();
+		update_option( 'ld_yoast_permalinks', $marker, true );
+	} catch ( \Throwable $error ) {
+		unset( $error ); // Version de Yoast sans cette API : le filtre ci-dessus suffit pour l'affichage.
+	}
+}
+add_action( 'admin_init', __NAMESPACE__ . '\\yoast_reset_permalinks' );
+add_action( 'rest_api_init', __NAMESPACE__ . '\\yoast_reset_permalinks' );
+
+/**
+ * Nos règles d'adresses ont changé : Yoast recalcule les siennes.
+ */
+function yoast_permalinks_changed() {
+	yoast_reset_permalinks( true );
+}
+add_action( 'learn_drive_permalinks_changed', __NAMESPACE__ . '\\yoast_permalinks_changed' );
+
+/*
  * Polylang : types de contenus et taxonomies traduisibles (aussi déclarés
  * dans wpml-config.xml, lu par WPML et Polylang).
  */

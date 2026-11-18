@@ -135,6 +135,10 @@ function maybe_flush() {
 	if ( get_option( 'ld_flush_rewrite' ) ) {
 		delete_option( 'ld_flush_rewrite' );
 		flush_rewrite_rules( false );
+		/**
+		 * Les règles d'adresses ont été régénérées (silos, rubriques, hub).
+		 */
+		do_action( 'learn_drive_permalinks_changed' );
 	}
 }
 add_action( 'init', __NAMESPACE__ . '\\maybe_flush', 99 );
