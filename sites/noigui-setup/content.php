@@ -99,6 +99,75 @@ function faq( $question, $answer ) {
 }
 
 /**
+ * Testo di accompagnamento di un quiz (data/quiz-texts.json) : redatto a partire
+ * dalle sole affermazioni del listato ministeriale, citazioni verificate parola per
+ * parola. Restituisce stringa vuota se il quiz non ha ancora un testo.
+ *
+ * @param string $slug Quiz.
+ * @return string
+ */
+function quiz_text( $slug ) {
+	static $texts = null;
+	if ( null === $texts ) {
+		$file  = __DIR__ . '/data/quiz-texts.json';
+		$texts = is_readable( $file ) ? json_decode( (string) file_get_contents( $file ), true ) : array(); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+		$texts = is_array( $texts ) ? $texts : array();
+	}
+	$key = preg_replace( '/^quiz-/', '', $slug );
+	$key = isset( $texts[ $slug ] ) ? $slug : $key;
+	if ( empty( $texts[ $key ] ) || ! is_array( $texts[ $key ] ) ) {
+		return '';
+	}
+	$html = '';
+	foreach ( $texts[ $key ] as $block ) {
+		$text = wp_kses( (string) ( $block['text'] ?? '' ), array( 'strong' => array() ) );
+		switch ( $block['type'] ?? '' ) {
+			case 'h2':
+				$html .= h2( esc_html( wp_strip_all_tags( $text ) ) );
+				break;
+			case 'p':
+				$html .= p( $text );
+				break;
+			case 'ul':
+				$html .= ul( array_map( static fn( $item ) => wp_kses( (string) $item, array( 'strong' => array() ) ), (array) ( $block['items'] ?? array() ) ) );
+				break;
+			case 'faq':
+				$html .= faq( esc_html( (string) ( $block['q'] ?? '' ) ), wp_kses( (string) ( $block['a'] ?? '' ), array( 'strong' => array() ) ) );
+				break;
+		}
+	}
+	return $html;
+}
+
+/**
+ * Introduzioni delle tre rubriche principali (mostrate sotto l'elenco degli articoli,
+ * solo in prima pagina).
+ *
+ * @return array<string,string> Slug della rubrica => contenuto.
+ */
+function section_intros() {
+	$link = static function ( $slug, $label ) {
+		$term = get_term_by( 'slug', $slug, 'category' );
+		$url  = $term ? get_term_link( $term ) : '';
+		return is_string( $url ) && $url ? '<a href="' . esc_url( $url ) . '">' . $label . '</a>' : $label;
+	};
+	return array(
+		'news-patente'   => h2( 'Le notizie su patente e circolazione' )
+			. p( 'In questa rubrica raccogliamo le novità che cambiano qualcosa per chi studia per la patente e per chi guida già: modifiche al Codice della strada e alle sanzioni, novità sugli esami e sul foglio rosa, bollo, revisione, incentivi per l’auto e dati sulla sicurezza stradale. Gli articoli spiegano cosa cambia in concreto e per chi, e rimandano alle guide quando serve approfondire una procedura.' )
+			. p( 'Le notizie sono divise per tema: ' . $link( 'news-patente-esami', 'patente ed esami' ) . ', ' . $link( 'news-codice-strada-multe', 'Codice della strada e multe' ) . ', ' . $link( 'news-auto-bollo-incentivi', 'auto, bollo e incentivi' ) . ' e ' . $link( 'news-sicurezza-stradale', 'sicurezza stradale' ) . '. Attenzione alla differenza tra una regola annunciata o in discussione e una norma in vigore: all’esame conta sempre la norma in vigore.' )
+			. p( 'Se ti stai preparando alla teoria, le notizie servono a capire il contesto; per allenarti usa i quiz per argomento e la simulazione d’esame, costruiti sul listato ministeriale.' ),
+		'guide-patente'  => h2( 'Guide pratiche, passo per passo' )
+			. p( 'Le guide spiegano le procedure che accompagnano la patente dall’iscrizione al rinnovo: come ci si iscrive e come si svolgono gli esami, cosa cambia per i neopatentati, quali categorie esistono e cosa permettono di guidare, come funzionano punti, multe e ricorsi, quali documenti servono per guidare all’estero o rinnovare la patente.' )
+			. p( 'Sono organizzate per tema: ' . $link( 'guide-iscrizione-esami', 'iscrizione ed esami' ) . ', ' . $link( 'guide-neopatentati', 'neopatentati' ) . ', ' . $link( 'guide-categorie-patente', 'categorie di patente' ) . ', ' . $link( 'guide-patenti-professionali', 'patenti professionali' ) . ', ' . $link( 'guide-punti-multe-sanzioni', 'punti, multe e sanzioni' ) . ', ' . $link( 'guide-documenti-rinnovo-estero', 'documenti, rinnovo ed estero' ) . ', ' . $link( 'guide-auto-bollo-revisione-assicurazione', 'auto, bollo, revisione e assicurazione' ) . ', ' . $link( 'guide-circolazione-sicurezza', 'circolazione e sicurezza' ) . ' e ' . $link( 'guide-riforma-2026-foglio-rosa', 'riforma 2026 e foglio rosa' ) . '.' )
+			. p( 'Le guide partono dalla domanda concreta (quanto costa, a che età, cosa serve) e arrivano ai passaggi da fare. Per le regole su cui si basa l’esame di teoria, affianca le guide ai quiz per argomento.' ),
+		'quiz-patente-b' => h2( 'Quiz commentati: capire prima di memorizzare' )
+			. p( 'Qui le affermazioni vero/falso dell’esame di teoria vengono spiegate una per una: perché un’affermazione è vera, dove sta il tranello quando è falsa, quale regola del Codice della strada c’è dietro. È il complemento dei quiz per argomento e della simulazione d’esame: quando sbagli una domanda, qui trovi il ragionamento per non sbagliarla più.' )
+			. p( 'Gli articoli sono raccolti per tema: ' . $link( 'quiz-segnaletica-stradale', 'segnaletica' ) . ', ' . $link( 'quiz-precedenze-e-incroci', 'precedenze e incroci' ) . ', ' . $link( 'quiz-velocita-distanze-frenata', 'velocità, distanze e frenata' ) . ', ' . $link( 'quiz-sorpasso-manovre-corsie', 'sorpasso, manovre e corsie' ) . ', ' . $link( 'quiz-fermata-sosta-parcheggio', 'fermata e sosta' ) . ', ' . $link( 'quiz-luci-visibilita-meteo', 'luci, visibilità e meteo' ) . ', ' . $link( 'quiz-autostrade-tipi-di-strada', 'autostrade e tipi di strada' ) . ', ' . $link( 'quiz-sicurezza-comportamento', 'sicurezza e comportamento' ) . ', ' . $link( 'quiz-incidenti-guasti-primo-soccorso', 'incidenti, guasti e primo soccorso' ) . ', ' . $link( 'quiz-patente-documenti-assicurazione', 'patente, documenti e assicurazione' ) . ' e ' . $link( 'quiz-veicolo-meccanica-carico', 'veicolo, meccanica e carico' ) . '.' )
+			. p( 'Un buon metodo: fai prima il quiz dell’argomento, segna le affermazioni sbagliate, poi leggi il commento relativo e rifai il quiz qualche giorno dopo.' ),
+	);
+}
+
+/**
  * Elenco di link «Approfondisci» verso le guide già pubblicate su Noigui.
  *
  * @param array<string,string> $links Titolo => indirizzo relativo.
@@ -257,9 +326,15 @@ function tracks() {
 				'Patente B96 e patente BE: quando servono per rimorchio e caravan' => '/patente-b96-be-rimorchio/',
 			)
 		)
+		. h2( 'Codice 96 o patente BE: come scegliere' )
+		. p( 'Si decide sulle masse massime autorizzate scritte sulle carte di circolazione dell’auto e del rimorchio, non sul peso effettivo del carico. Si sommano le due masse: se il complesso resta entro 3.500 kg basta la patente B; se supera 3.500 kg ma non 4.250 kg serve il codice 96; oltre 4.250 kg, con un rimorchio fino a 3.500 kg, serve la patente BE. Conviene fare il conto prima di comprare o noleggiare una roulotte, un carrello per la barca o un rimorchio da lavoro.' )
+		. h2( 'La prova pratica' )
+		. p( 'Per la patente BE si sostiene solo la prova pratica con il complesso auto più rimorchio. Comprende le manovre di aggancio e sgancio del rimorchio e una parte di guida nel traffico che, secondo la direttiva europea sulle patenti (2006/126/CE), dura almeno 25 minuti.' )
+		. p( 'La patente BE ha le stesse scadenze della patente B: 10 anni, 5 dopo i 50 anni, 3 dopo i 70 e 2 dopo gli 80. Chi la possiede può guidare anche i veicoli delle categorie B, B1 e AM e i complessi del codice 96.' )
 		. h2( 'Domande frequenti' )
 		. faq( 'Per la patente BE c’è il quiz?', 'No: la BE si consegue con la sola prova pratica, con auto e rimorchio.' )
 		. faq( 'Che differenza c’è tra codice 96 e patente BE?', 'Il codice 96 copre complessi fino a 4.250 kg; la BE permette rimorchi fino a 3.500 kg, quindi complessi più pesanti.' )
+		. faq( 'Per trainare una roulotte serve la patente BE?', 'Dipende dalle masse massime autorizzate dell’auto e della roulotte: con un complesso fino a 3.500 kg basta la patente B, fino a 4.250 kg il codice 96, oltre serve la patente BE.' )
 		. sources_note();
 
 	$c = p( 'Le patenti C1 e C servono per guidare autocarri oltre 3,5 tonnellate; la CE per autotreni e autoarticolati. Si conseguono partendo dalla patente B e, per lavorare come autista, serve anche la CQC merci.' )
@@ -361,9 +436,14 @@ function tracks() {
 				'Patente D1: cosa si guida, a chi serve e quando ci vuole la CQC' => '/patente-d1-cosa-si-guida/',
 			)
 		)
+		. h2( 'L’esame unico dal 2019' )
+		. p( 'Dal 20 novembre 2019 l’esame della CQC è unico, secondo la circolare del Ministero delle infrastrutture e dei trasporti prot. 35677 del 19 novembre 2019. Oltre all’esame completo e all’estensione esistono due casi particolari: chi deve sostenere solo la parte comune risponde a 40 quesiti in 50 minuti, con un massimo di 4 errori; chi chiede insieme la CQC merci e la CQC persone risponde a 30 quesiti in più, quelli della seconda parte specialistica.' )
+		. p( 'Le domande vengono da un listato proprio della CQC, distinto da quello della patente B: il manuale aggiornato è stato pubblicato con la circolare MIT prot. 31895 del 15 ottobre 2021. Allenarsi sui quiz della patente B non basta, perché la parte comune e quelle specialistiche trattano argomenti propri del lavoro di autista.' )
 		. h2( 'Domande frequenti' )
 		. faq( 'Quante domande ci sono all’esame CQC?', '70 quesiti in 90 minuti, con un massimo di 7 errori: 40 sulla parte comune e 30 sulla parte specialistica.' )
 		. faq( 'Ogni quanto si rinnova la CQC?', 'Ogni 5 anni, con un corso di formazione periodica di 35 ore, senza esame.' )
+		. faq( 'La CQC è una patente?', 'No. È una qualificazione professionale che si aggiunge alla patente C o D ed è annotata sulla patente con il codice 95.' )
+		. faq( 'Si può passare dalla CQC merci alla CQC persone?', 'Sì, con un’estensione: si sostiene solo la parte specialistica dell’altra CQC, 30 quesiti in 40 minuti con al massimo 3 errori.' )
 		. sources_note();
 
 	$kb = p( 'Il Certificato di abilitazione professionale (CAP) serve per guidare taxi e veicoli a noleggio con conducente (NCC): il KA con le moto, il KB con le auto. Si consegue con un esame di teoria presso la Motorizzazione.' )
@@ -383,6 +463,9 @@ function tracks() {
 			)
 		)
 		. p( 'Per lavorare come tassista o autista NCC serve anche l’iscrizione al ruolo dei conducenti, con un esame distinto presso la Camera di commercio o la Regione.' )
+		. h2( 'Come si prepara l’esame' )
+		. p( 'Le domande vengono da un listato KA/KB pubblicato dal Ministero, diverso da quello della patente B. Con la formula in vigore dal 2 gennaio 2019 ogni domanda propone tre risposte e una sola è corretta: rispetto al vero/falso della patente B bisogna leggere con attenzione tutte e tre le alternative, che spesso differiscono per un dettaglio.' )
+		. p( 'Il CAP non va confuso con la CQC persone, che riguarda chi guida autobus per lavoro con le patenti della categoria D: il KA e il KB riguardano moto e auto usate per il servizio di taxi o di noleggio con conducente.' )
 		. h2( 'Domande frequenti' )
 		. faq( 'Come si svolge l’esame per il KB?', '20 domande a scelta multipla in 30 minuti, con un massimo di 2 errori. Non c’è prova pratica.' )
 		. faq( 'A che età si può prendere il KB?', 'A 21 anni, con la patente B.' )
@@ -524,6 +607,12 @@ function quizzes() {
 			'topic'   => $topic['slug'],
 			'order'   => $index + 1,
 		);
+	}
+	foreach ( $list as $index => $quiz ) {
+		$text = quiz_text( $quiz['slug'] );
+		if ( '' !== $text ) {
+			$list[ $index ]['content'] = $text;
+		}
 	}
 	return $list;
 }

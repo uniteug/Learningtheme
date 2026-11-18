@@ -7,8 +7,11 @@
 
 defined( 'ABSPATH' ) || exit;
 
-if ( ! is_tax() ) {
+if ( ! is_tax() && ! is_category() ) {
 	return;
+}
+if ( is_paged() ) {
+	return; // Introduzione solo in prima pagina.
 }
 
 $learn_drive_term    = get_queried_object();

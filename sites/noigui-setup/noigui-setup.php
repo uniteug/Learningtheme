@@ -304,6 +304,10 @@ function setup() {
 		$category = get_term_by( 'slug', $slug, 'category' );
 		if ( $category ) {
 			update_term_meta( $category->term_id, 'ld_url_base', $base );
+			$intro = section_intros()[ $slug ] ?? '';
+			if ( $intro ) {
+				update_term_meta( $category->term_id, 'ld_content', $intro );
+			}
 		}
 	}
 
