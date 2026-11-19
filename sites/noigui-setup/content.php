@@ -321,16 +321,16 @@ function tracks() {
 			)
 		)
 		. $validity_ab
-		. read_more(
-			array(
-				'Patente B96 e patente BE: quando servono per rimorchio e caravan' => '/patente-b96-be-rimorchio/',
-			)
-		)
 		. h2( 'Codice 96 o patente BE: come scegliere' )
 		. p( 'Si decide sulle masse massime autorizzate scritte sulle carte di circolazione dell’auto e del rimorchio, non sul peso effettivo del carico. Si sommano le due masse: se il complesso resta entro 3.500 kg basta la patente B; se supera 3.500 kg ma non 4.250 kg serve il codice 96; oltre 4.250 kg, con un rimorchio fino a 3.500 kg, serve la patente BE. Conviene fare il conto prima di comprare o noleggiare una roulotte, un carrello per la barca o un rimorchio da lavoro.' )
 		. h2( 'La prova pratica' )
 		. p( 'Per la patente BE si sostiene solo la prova pratica con il complesso auto più rimorchio. Comprende le manovre di aggancio e sgancio del rimorchio e una parte di guida nel traffico che, secondo la direttiva europea sulle patenti (2006/126/CE), dura almeno 25 minuti.' )
 		. p( 'La patente BE ha le stesse scadenze della patente B: 10 anni, 5 dopo i 50 anni, 3 dopo i 70 e 2 dopo gli 80. Chi la possiede può guidare anche i veicoli delle categorie B, B1 e AM e i complessi del codice 96.' )
+		. read_more(
+			array(
+				'Patente B96 e patente BE: quando servono per rimorchio e caravan' => '/patente-b96-be-rimorchio/',
+			)
+		)
 		. h2( 'Domande frequenti' )
 		. faq( 'Per la patente BE c’è il quiz?', 'No: la BE si consegue con la sola prova pratica, con auto e rimorchio.' )
 		. faq( 'Che differenza c’è tra codice 96 e patente BE?', 'Il codice 96 copre complessi fino a 4.250 kg; la BE permette rimorchi fino a 3.500 kg, quindi complessi più pesanti.' )
@@ -429,6 +429,9 @@ function tracks() {
 		)
 		. h2( 'Validità e rinnovo' )
 		. p( 'La CQC vale 5 anni. Si rinnova frequentando un corso di formazione periodica di 35 ore, senza esame finale.' )
+		. h2( 'L’esame unico dal 2019' )
+		. p( 'Dal 20 novembre 2019 l’esame della CQC è unico, secondo la circolare del Ministero delle infrastrutture e dei trasporti prot. 35677 del 19 novembre 2019. Oltre all’esame completo e all’estensione esistono due casi particolari: chi deve sostenere solo la parte comune risponde a 40 quesiti in 50 minuti, con un massimo di 4 errori; chi chiede insieme la CQC merci e la CQC persone risponde a 30 quesiti in più, quelli della seconda parte specialistica.' )
+		. p( 'Le domande vengono da un listato proprio della CQC, distinto da quello della patente B: il manuale aggiornato è stato pubblicato con la circolare MIT prot. 31895 del 15 ottobre 2021. Allenarsi sui quiz della patente B non basta, perché la parte comune e quelle specialistiche trattano argomenti propri del lavoro di autista.' )
 		. read_more(
 			array(
 				'Patente C: cosa si può guidare, età minima e requisiti' => '/patente-c-cosa-si-guida-requisiti/',
@@ -436,9 +439,6 @@ function tracks() {
 				'Patente D1: cosa si guida, a chi serve e quando ci vuole la CQC' => '/patente-d1-cosa-si-guida/',
 			)
 		)
-		. h2( 'L’esame unico dal 2019' )
-		. p( 'Dal 20 novembre 2019 l’esame della CQC è unico, secondo la circolare del Ministero delle infrastrutture e dei trasporti prot. 35677 del 19 novembre 2019. Oltre all’esame completo e all’estensione esistono due casi particolari: chi deve sostenere solo la parte comune risponde a 40 quesiti in 50 minuti, con un massimo di 4 errori; chi chiede insieme la CQC merci e la CQC persone risponde a 30 quesiti in più, quelli della seconda parte specialistica.' )
-		. p( 'Le domande vengono da un listato proprio della CQC, distinto da quello della patente B: il manuale aggiornato è stato pubblicato con la circolare MIT prot. 31895 del 15 ottobre 2021. Allenarsi sui quiz della patente B non basta, perché la parte comune e quelle specialistiche trattano argomenti propri del lavoro di autista.' )
 		. h2( 'Domande frequenti' )
 		. faq( 'Quante domande ci sono all’esame CQC?', '70 quesiti in 90 minuti, con un massimo di 7 errori: 40 sulla parte comune e 30 sulla parte specialistica.' )
 		. faq( 'Ogni quanto si rinnova la CQC?', 'Ogni 5 anni, con un corso di formazione periodica di 35 ore, senza esame.' )
